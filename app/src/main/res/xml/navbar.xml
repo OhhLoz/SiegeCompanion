@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+
+    <tab
+        id="@+id/navigation_home"
+        icon="@drawable/ic_home_black_24dp"
+        title="@string/title_home" />
+
+    <tab
+        id="@+id/navigation_stats"
+        icon="@drawable/ic_home_black_24dp"
+        title="@string/title_stats" />
+
+    <tab
+        id="@+id/navigation_saved"
+        icon="@drawable/ic_home_black_24dp"
+        title="@string/title_saved" />
+
+    <tab
+        id="@+id/navigation_history"
+        icon="@drawable/ic_home_black_24dp"
+        title="@string/title_history" />
+
+    <tab
+        id="@+id/navigation_profile"
+        icon="@drawable/ic_home_black_24dp"
+        title="@string/title_profile" />
+
+</tabs>

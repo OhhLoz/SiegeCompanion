@@ -7,14 +7,12 @@
     android:layout_height="match_parent"
     tools:context="productions.pudl.siege.Home">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
+        android:layout_height="50"
+        android:layout_alignParentBottom="true"
+        app:bb_tabXmlResource="@xml/navbar"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
