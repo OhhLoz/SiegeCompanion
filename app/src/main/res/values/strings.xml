@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Rainbow Six Siege: R6S Companion App</string>
+    <string name="app_name">R6S Companion</string>
     <string name="title_home">Home</string>
     <string name="title_stats">Stats</string>
     <string name="title_saved">Saved</string>
