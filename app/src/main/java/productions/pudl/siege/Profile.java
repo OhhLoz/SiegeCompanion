@@ -16,7 +16,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        BottomBar navigation = findViewById(R.id.profileBottomBar);
+        BottomBar navigation = findViewById(R.id.bottomBar);
 
         final Intent statsIntent = new Intent(this, Stats.class);
         final Intent historyIntent = new Intent(this, History.class);
