@@ -23,30 +23,30 @@ public class MainActivity extends AppCompatActivity
         {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.navigation_home) {
-                    Home home = new Home();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, home).commit();
-                    setTitle(R.string.title_home);
+                if (tabId == R.id.navigation_compare) {
+                    Compare compare = new Compare();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, compare).commit();
+                    setTitle(R.string.title_compare);
                 }
-                else if (tabId == R.id.navigation_history){
-                    History history = new History();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, history).commit();
-                    setTitle(R.string.title_history);
+                else if (tabId == R.id.navigation_operators){
+                    Operators operators = new Operators();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, operators).commit();
+                    setTitle(R.string.title_operators);
                 }
                 else if (tabId == R.id.navigation_profile) {
                     Profile profile = new Profile();
                     getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, profile).commit();
                     setTitle(R.string.title_profile);
                 }
-                else if (tabId == R.id.navigation_saved) {
-                    Saved saved = new Saved();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, saved).commit();
-                    setTitle(R.string.title_saved);
+                else if (tabId == R.id.navigation_search) {
+                    Search search = new Search();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, search).commit();
+                    setTitle(R.string.title_search);
                 }
-                else if (tabId == R.id.navigation_stats) {
-                    Stats stats = new Stats();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, stats).commit();
-                    setTitle(R.string.title_stats);
+                else if (tabId == R.id.navigation_more) {
+                    More more = new More();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, more).commit();
+                    setTitle(R.string.title_more);
                 }
             }
         });

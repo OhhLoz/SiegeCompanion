@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/container"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="productions.pudl.siege.Stats"
+    tools:context="productions.pudl.siege.Compare"
     >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/title_stats"
+        android:text="@string/title_compare"
         android:textStyle="bold"
         android:typeface="serif"
         android:textSize="36sp"

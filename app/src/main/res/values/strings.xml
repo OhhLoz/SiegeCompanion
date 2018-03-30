@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">R6S Companion</string>
-    <string name="title_home">Home</string>
-    <string name="title_stats">Stats</string>
-    <string name="title_saved">Saved</string>
-    <string name="title_history">History</string>
+    <string name="title_compare">Compare</string>
+    <string name="title_operators">Operators</string>
+    <string name="title_search">Search</string>
+    <string name="title_more">More</string>
     <string name="title_profile">Profile</string>
 </resources>

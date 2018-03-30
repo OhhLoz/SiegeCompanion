@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        id="@+id/navigation_home"
-        icon="@drawable/ic_home_black_24dp"
-        title="@string/title_home" />
+        id="@+id/navigation_compare"
+        icon="@drawable/ic_compare"
+        title="@string/title_compare"/>
+
 
     <tab
-        id="@+id/navigation_stats"
-        icon="@drawable/ic_stats"
-        title="@string/title_stats" />
+        id="@+id/navigation_operators"
+        icon="@drawable/ic_operators"
+        title="@string/title_operators"/>
 
-    <tab
-        id="@+id/navigation_saved"
-        icon="@drawable/ic_saved"
-        title="@string/title_saved" />
-
-    <tab
-        id="@+id/navigation_history"
-        icon="@drawable/ic_history"
-        title="@string/title_history" />
 
     <tab
         id="@+id/navigation_profile"
         icon="@drawable/ic_profile"
-        title="@string/title_profile" />
+        title="@string/title_profile"/>
 
+
+    <tab
+        id="@+id/navigation_search"
+        icon="@drawable/ic_search"
+        title="@string/title_search"/>
+
+
+    <tab
+        id="@+id/navigation_more"
+        icon="@drawable/ic_more"
+        title="@string/title_more"/>
 </tabs>

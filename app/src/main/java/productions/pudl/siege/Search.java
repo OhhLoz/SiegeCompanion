@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Stats extends Fragment
+public class Search extends Fragment
 {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.stats_fragment, container, false);
+        return inflater.inflate(R.layout.search_fragment, container, false);
     }
 }

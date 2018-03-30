@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="productions.pudl.siege.History"
+    tools:context="productions.pudl.siege.Search"
     >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/title_history"
+        android:text="@string/title_search"
         android:textStyle="bold"
         android:typeface="serif"
         android:textSize="36sp"
