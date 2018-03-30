@@ -3,13 +3,17 @@
     <tab
         id="@+id/navigation_compare"
         icon="@drawable/ic_compare"
-        title="@string/title_compare"/>
+        title="@string/title_compare"
+        barColorWhenSelected="@color/colorPrimary"
+        activeColor = "@color/colorPrimaryDark"/>
 
 
     <tab
         id="@+id/navigation_operators"
         icon="@drawable/ic_operators"
-        title="@string/title_operators"/>
+        title="@string/title_operators"
+        barColorWhenSelected="@color/colorPrimaryDark"
+        activeColor = "@color/colorPrimary"/>
 
 
     <tab
