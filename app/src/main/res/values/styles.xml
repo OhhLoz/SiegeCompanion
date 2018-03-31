@@ -6,6 +6,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeDark" parent="Theme.AppCompat">
+
+    </style>
+
     <!--        <item name="colorNavBarText">@color/colorNavBarText</item>
         <item name="colorCompareTab">@color/colorCompareTab</item>
         <item name="colorCompareText">@color/colorCompareText</item>
