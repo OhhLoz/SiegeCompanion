@@ -6,6 +6,7 @@
     <string name="title_more">More</string>
     <string name="title_profile">Profile</string>
     <string name="profileLogo">profilelogo</string>
+    <string name="search_hint">Enter Player Username Here…</string>
     <string-array name="platform_array">
         <item>uPlay</item>
         <item>Xbox</item>

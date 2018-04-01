@@ -24,11 +24,9 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.platform_array, android.R.layout.simple_spinner_item);
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, R.array.platform_array);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setPrompt("Platform");
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-//        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
-//        searchView.setQueryHint("Enter Player Username Here...");
 
         return view;
     }
