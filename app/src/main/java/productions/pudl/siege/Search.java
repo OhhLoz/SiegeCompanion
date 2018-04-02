@@ -1,7 +1,5 @@
 package productions.pudl.siege;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,21 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener
 {
     SearchView search;
     ListView list;
     ListViewAdapter adapter2;
-    String[] animalNameList;
-    ArrayList<AnimalNames> arraylist = new ArrayList<AnimalNames>();
+    String[] platformList;
+    String[] userNameList;
+    ArrayList<PreviousSearches> arraylist = new ArrayList<PreviousSearches>();
+
+    String currPlatformSelected = "";
+    String currUserNameSelected = "";
 
     @Nullable
     @Override
@@ -37,30 +36,35 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.platform_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setPrompt("Platform");
+        //spinner.setPrompt("Platform");
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        animalNameList = new String[]{"Lion", "Tiger", "Dog",
-                "Cat", "Tortoise", "Rat", "Elephant", "Fox",
-                "Cow","Donkey","Monkey", "X", "Y", "Z", "Q"};
+        userNameList = new String[]{"sallad_", "fork__", "KonoAma", "Darksubi_", "XboxTest", "PlaystationTest"};
 
-        // Locate the ListView in listview_main.xml
+        platformList = new String[] {"uPlay", "uPlay", "uPlay", "uPlay", "Xbox", "Playstation"};
+
         list = (ListView) view.findViewById(R.id.listview);
 
-        for (String anAnimalNameList : animalNameList) {
-            AnimalNames animalNames = new AnimalNames(anAnimalNameList);
-            // Binds all strings into an array
-            arraylist.add(animalNames);
+        // just for populating the arrays before implementing previous history
+        if (userNameList.length == 0 || platformList.length == 0)
+        {
+            PreviousSearches previousSearches = new PreviousSearches("No Results", "Please Search Usernames to populate");
+            arraylist.add(previousSearches);
+        }
+        else if (userNameList.length == platformList.length)
+        {
+            for (int i = 0; i < userNameList.length; i++)
+            {
+                PreviousSearches previousSearches = new PreviousSearches(platformList[i], userNameList[i]);
+                arraylist.add(previousSearches);
+            }
         }
 
-        // Pass results to ListViewAdapter Class
         adapter2 = new ListViewAdapter(getContext(), arraylist);
 
-        // Binds the Adapter to the ListView
         list.setAdapter(adapter2);
 
-        // Locate the EditText in listview_main.xml
         search = (SearchView) view.findViewById(R.id.searchView);
         search.setIconified(false);
         search.setIconifiedByDefault(false);
@@ -72,7 +76,9 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        Log.v("item", (String) adapterView.getItemAtPosition(i));
+        currPlatformSelected = (String) adapterView.getItemAtPosition(i);
+        adapter2.filter(currUserNameSelected, currPlatformSelected);
+        Log.v("item", (String) currPlatformSelected);
     }
 
     @Override
@@ -82,15 +88,20 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        search.setIconified(true); //minimise search field
+        search.setIconified(true);
+        search.setIconifiedByDefault(true);
         //display stats instead of listview
-        return false;
+        //add searched name and platform ONLY if exists in the API database
+        return true;
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        String text = newText;
-        adapter2.filter(text);
+    public boolean onQueryTextChange(String newText)
+    {
+        search.setIconified(false);
+        search.setIconifiedByDefault(false);
+        currUserNameSelected = newText;
+        adapter2.filter(currUserNameSelected, currPlatformSelected);
         return false;
     }
 }

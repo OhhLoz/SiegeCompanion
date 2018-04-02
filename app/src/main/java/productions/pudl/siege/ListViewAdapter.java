@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -16,29 +19,30 @@ public class ListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private List<AnimalNames> animalNamesList = null;
-    private ArrayList<AnimalNames> arraylist;
+    private List<PreviousSearches> previousSearchesList = null;
+    private ArrayList<PreviousSearches> arraylist;
 
-    public ListViewAdapter(Context context, List<AnimalNames> animalNamesList) {
+    public ListViewAdapter(Context context, List<PreviousSearches> previousSearchesList) {
         mContext = context;
-        this.animalNamesList = animalNamesList;
+        this.previousSearchesList = previousSearchesList;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<AnimalNames>();
-        this.arraylist.addAll(animalNamesList);
+        this.arraylist = new ArrayList<PreviousSearches>();
+        this.arraylist.addAll(previousSearchesList);
     }
 
     public class ViewHolder {
-        TextView name;
+        TextView userName;
+        TextView platformName;
     }
 
     @Override
     public int getCount() {
-        return animalNamesList.size();
+        return previousSearchesList.size();
     }
 
     @Override
-    public AnimalNames getItem(int position) {
-        return animalNamesList.get(position);
+    public PreviousSearches getItem(int position) {
+        return previousSearchesList.get(position);
     }
 
     @Override
@@ -51,28 +55,35 @@ public class ListViewAdapter extends BaseAdapter {
         if (view == null) {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.list_view_items, null);
-            // Locate the TextViews in listview_item.xml
-            holder.name = (TextView) view.findViewById(R.id.name);
+
+            holder.userName = (TextView) view.findViewById(R.id.userName);
+            holder.platformName = (TextView) view.findViewById(R.id.platformName);
             view.setTag(holder);
-        } else {
+        }
+        else
+        {
             holder = (ViewHolder) view.getTag();
         }
-        // Set the results into TextViews
-        holder.name.setText(animalNamesList.get(position).getAnimalName());
+        holder.userName.setText(previousSearchesList.get(position).getPlayerName());
+        holder.platformName.setText(previousSearchesList.get(position).getPlatform());
         return view;
     }
 
     // Filter Class
-    public void filter(String charText) {
-        charText = charText.toLowerCase(Locale.getDefault());
-        animalNamesList.clear();
-        if (charText.length() == 0) {
-            animalNamesList.addAll(arraylist);
-        } else {
-            for (AnimalNames wp : arraylist) {
-                if (wp.getAnimalName().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    animalNamesList.add(wp);
-                }
+    public void filter(String userName, String platformName)
+    {
+        userName = userName.toLowerCase(Locale.getDefault());
+        platformName = platformName.toLowerCase(Locale.getDefault());
+        previousSearchesList.clear();
+        for (PreviousSearches currPrevSearch : arraylist)
+        {
+            if (userName.length() == 0 && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
+            {
+                previousSearchesList.add(currPrevSearch);
+            }
+            else if (currPrevSearch.getPlayerName().toLowerCase(Locale.getDefault()).contains(userName) && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
+            {
+                previousSearchesList.add(currPrevSearch);
             }
         }
         notifyDataSetChanged();
