@@ -1,5 +1,7 @@
 package productions.pudl.siege;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.content.Context;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener
 {
@@ -27,6 +30,25 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         spinner.setPrompt("Platform");
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
+        searchView.setIconified(false);
+        searchView.setIconifiedByDefault(false);
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.requestFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         return view;
     }
