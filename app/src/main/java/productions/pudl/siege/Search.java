@@ -49,8 +49,10 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         // just for populating the arrays before implementing previous history
         if (userNameList.length == 0 || platformList.length == 0)
         {
-            PreviousSearches previousSearches = new PreviousSearches("No Results", "Please Search Usernames to populate");
-            arraylist.add(previousSearches);
+//            PreviousSearches previousSearches = new PreviousSearches("No Results", "Please Search Usernames to populate");
+//            arraylist.add(previousSearches);
+//            currUserNameSelected = "Please Search Usernames to populate";
+//            currPlatformSelected = "No Results";
         }
         else if (userNameList.length == platformList.length)
         {
@@ -62,12 +64,12 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         }
 
         adapter2 = new ListViewAdapter(getContext(), arraylist);
-
         list.setAdapter(adapter2);
+        //adapter2.filter(currUserNameSelected, currPlatformSelected);
 
         search = (SearchView) view.findViewById(R.id.searchView);
         search.setIconified(false);
-        search.setIconifiedByDefault(false);
+        //search.setIconifiedByDefault(false);
         search.setOnQueryTextListener(this);
 
         return view;
@@ -89,7 +91,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public boolean onQueryTextSubmit(String query) {
         search.setIconified(true);
-        search.setIconifiedByDefault(true);
+        //search.setIconifiedByDefault(true);
         //display stats instead of listview
         //add searched name and platform ONLY if exists in the API database
         return true;
@@ -99,7 +101,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public boolean onQueryTextChange(String newText)
     {
         search.setIconified(false);
-        search.setIconifiedByDefault(false);
+        //search.setIconifiedByDefault(false);
         currUserNameSelected = newText;
         adapter2.filter(currUserNameSelected, currPlatformSelected);
         return false;
