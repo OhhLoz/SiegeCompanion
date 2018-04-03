@@ -117,7 +117,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         suggestions.saveRecentQuery(query, null);
 
         Log.v("JSON", "starting json import");
-        JSONAdapter jsonAdapter = new JSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
+        JSONAdapter jsonAdapter = new JSONAdapter("sallad_", "uplay", mQueue);
         Log.v("JSON", "finished json import");
         //searchView.setIconifiedByDefault(true);
         //display stats instead of listview
