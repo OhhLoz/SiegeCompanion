@@ -1,4 +1,4 @@
-package productions.pudl.siege;
+package productions.pudl.siege.Data;
 
 public class User
 {
@@ -29,26 +29,21 @@ public class User
 
     public void getProfilePic()
     {
-
     }
 
     public void getCasualStats()
     {
-
     }
 
     public void getRankedStats()
     {
-
     }
 
     public void getTerroristHuntStats()
     {
-
     }
 
     public void getOperatorStats()
     {
-        
     }
 }

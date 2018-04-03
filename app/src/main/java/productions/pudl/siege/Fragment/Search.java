@@ -1,4 +1,4 @@
-package productions.pudl.siege;
+package productions.pudl.siege.Fragment;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -17,6 +17,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+
+import productions.pudl.siege.Adapter.ListViewAdapter;
+import productions.pudl.siege.R;
+import productions.pudl.siege.SearchFragmentProvider;
+import productions.pudl.siege.Data.User;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, View.OnClickListener, SearchView.OnCloseListener {
     SearchView searchView;
@@ -97,7 +102,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public boolean onQueryTextSubmit(String query) {
         searchView.setIconified(true);
-        SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(),SearchFragmentProvider.AUTHORITY, SearchFragmentProvider.MODE);
+        SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(), SearchFragmentProvider.AUTHORITY, SearchFragmentProvider.MODE);
         suggestions.saveRecentQuery(query, null);
         //searchView.setIconifiedByDefault(true);
         //display stats instead of listview

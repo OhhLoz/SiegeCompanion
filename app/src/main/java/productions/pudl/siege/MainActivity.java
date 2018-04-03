@@ -8,6 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import productions.pudl.siege.Fragment.Compare;
+import productions.pudl.siege.Fragment.More;
+import productions.pudl.siege.Fragment.Operators;
+import productions.pudl.siege.Fragment.Profile;
+import productions.pudl.siege.Fragment.Search;
+
 public class MainActivity extends AppCompatActivity
 {
     BottomBar bottomBar;

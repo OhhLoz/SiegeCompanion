@@ -1,4 +1,4 @@
-package productions.pudl.siege;
+package productions.pudl.siege.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import productions.pudl.siege.R;
+import productions.pudl.siege.Data.User;
 
 public class ListViewAdapter extends BaseAdapter {
 
