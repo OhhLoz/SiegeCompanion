@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,15 +17,15 @@ public class ListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private List<PreviousSearches> previousSearchesList = null;
-    private ArrayList<PreviousSearches> arraylist;
+    private List<User> userList = null;
+    private ArrayList<User> arraylist;
 
-    public ListViewAdapter(Context context, List<PreviousSearches> previousSearchesList) {
+    public ListViewAdapter(Context context, List<User> userList) {
         mContext = context;
-        this.previousSearchesList = previousSearchesList;
+        this.userList = userList;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<PreviousSearches>();
-        this.arraylist.addAll(previousSearchesList);
+        this.arraylist = new ArrayList<User>();
+        this.arraylist.addAll(userList);
     }
 
     public class ViewHolder {
@@ -37,12 +35,12 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return previousSearchesList.size();
+        return userList.size();
     }
 
     @Override
-    public PreviousSearches getItem(int position) {
-        return previousSearchesList.get(position);
+    public User getItem(int position) {
+        return userList.get(position);
     }
 
     @Override
@@ -64,8 +62,8 @@ public class ListViewAdapter extends BaseAdapter {
         {
             holder = (ViewHolder) view.getTag();
         }
-        holder.userName.setText(previousSearchesList.get(position).getPlayerName());
-        holder.platformName.setText(previousSearchesList.get(position).getPlatform());
+        holder.userName.setText(userList.get(position).getPlayerName());
+        holder.platformName.setText(userList.get(position).getPlatform());
         return view;
     }
 
@@ -74,16 +72,16 @@ public class ListViewAdapter extends BaseAdapter {
     {
         userName = userName.toLowerCase(Locale.getDefault());
         platformName = platformName.toLowerCase(Locale.getDefault());
-        previousSearchesList.clear();
-        for (PreviousSearches currPrevSearch : arraylist)
+        userList.clear();
+        for (User currPrevSearch : arraylist)
         {
             if (userName.length() == 0 && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
             {
-                previousSearchesList.add(currPrevSearch);
+                userList.add(currPrevSearch);
             }
             else if (currPrevSearch.getPlayerName().toLowerCase(Locale.getDefault()).contains(userName) && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
             {
-                previousSearchesList.add(currPrevSearch);
+                userList.add(currPrevSearch);
             }
         }
         notifyDataSetChanged();

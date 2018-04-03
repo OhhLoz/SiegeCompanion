@@ -1,5 +1,8 @@
 package productions.pudl.siege;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,14 +18,13 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener
-{
-    SearchView search;
+public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, View.OnClickListener, SearchView.OnCloseListener {
+    SearchView searchView;
     ListView list;
     ListViewAdapter adapter2;
     String[] platformList;
     String[] userNameList;
-    ArrayList<PreviousSearches> arraylist = new ArrayList<PreviousSearches>();
+    ArrayList<User> arraylist = new ArrayList<User>();
 
     String currPlatformSelected = "";
     String currUserNameSelected = "";
@@ -40,6 +42,15 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) view.findViewById(R.id.searchView);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setIconified(false);
+        searchView.setIconifiedByDefault(true);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnSearchClickListener(this);
+        searchView.setOnCloseListener(this);
+
         userNameList = new String[]{"sallad_", "fork__", "KonoAma", "Darksubi_", "XboxTest", "PlaystationTest"};
 
         platformList = new String[] {"uPlay", "uPlay", "uPlay", "uPlay", "Xbox", "Playstation"};
@@ -49,7 +60,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         // just for populating the arrays before implementing previous history
         if (userNameList.length == 0 || platformList.length == 0)
         {
-//            PreviousSearches previousSearches = new PreviousSearches("No Results", "Please Search Usernames to populate");
+//            User previousSearches = new User("No Results", "Please Search Usernames to populate");
 //            arraylist.add(previousSearches);
 //            currUserNameSelected = "Please Search Usernames to populate";
 //            currPlatformSelected = "No Results";
@@ -58,19 +69,14 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         {
             for (int i = 0; i < userNameList.length; i++)
             {
-                PreviousSearches previousSearches = new PreviousSearches(platformList[i], userNameList[i]);
-                arraylist.add(previousSearches);
+                User user = new User(platformList[i], userNameList[i]);
+                arraylist.add(user);
             }
         }
 
         adapter2 = new ListViewAdapter(getContext(), arraylist);
         list.setAdapter(adapter2);
         //adapter2.filter(currUserNameSelected, currPlatformSelected);
-
-        search = (SearchView) view.findViewById(R.id.searchView);
-        search.setIconified(false);
-        //search.setIconifiedByDefault(false);
-        search.setOnQueryTextListener(this);
 
         return view;
     }
@@ -90,7 +96,9 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        search.setIconified(true);
+        searchView.setIconified(true);
+        SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(),SearchFragmentProvider.AUTHORITY, SearchFragmentProvider.MODE);
+        suggestions.saveRecentQuery(query, null);
         //search.setIconifiedByDefault(true);
         //display stats instead of listview
         //add searched name and platform ONLY if exists in the API database
@@ -100,10 +108,22 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public boolean onQueryTextChange(String newText)
     {
-        search.setIconified(false);
+        //search.setIconified(false);
         //search.setIconifiedByDefault(false);
         currUserNameSelected = newText;
         adapter2.filter(currUserNameSelected, currPlatformSelected);
+        return false;
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+
+    }
+
+    @Override
+    public boolean onClose()
+    {
         return false;
     }
 }
