@@ -46,7 +46,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         searchView = (SearchView) view.findViewById(R.id.searchView);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setIconified(false);
-        searchView.setIconifiedByDefault(true);
+        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
         searchView.setOnSearchClickListener(this);
         searchView.setOnCloseListener(this);
@@ -99,7 +99,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         searchView.setIconified(true);
         SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(),SearchFragmentProvider.AUTHORITY, SearchFragmentProvider.MODE);
         suggestions.saveRecentQuery(query, null);
-        //search.setIconifiedByDefault(true);
+        //searchView.setIconifiedByDefault(true);
         //display stats instead of listview
         //add searched name and platform ONLY if exists in the API database
         return true;
@@ -108,8 +108,8 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public boolean onQueryTextChange(String newText)
     {
-        //search.setIconified(false);
-        //search.setIconifiedByDefault(false);
+        //searchView.setIconified(false);
+        //searchView.setIconifiedByDefault(false);
         currUserNameSelected = newText;
         adapter2.filter(currUserNameSelected, currPlatformSelected);
         return false;
@@ -118,12 +118,13 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public void onClick(View view)
     {
-
+        searchView.setIconified(true);
     }
 
     @Override
     public boolean onClose()
     {
+        searchView.setIconified(true);
         return false;
     }
 }
