@@ -16,8 +16,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Locale;
+
+import productions.pudl.siege.Adapter.JSONAdapter;
 import productions.pudl.siege.Adapter.ListViewAdapter;
 import productions.pudl.siege.R;
 import productions.pudl.siege.SearchFragmentProvider;
@@ -31,13 +44,14 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     String[] userNameList;
     ArrayList<User> arraylist = new ArrayList<User>();
 
+    private RequestQueue mQueue;
+
     String currPlatformSelected = "";
     String currUserNameSelected = "";
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
 
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
@@ -57,23 +71,19 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         searchView.setOnCloseListener(this);
 
         userNameList = new String[]{"sallad_", "fork__", "KonoAma", "Darksubi_", "XboxTest", "PlaystationTest"};
-
-        platformList = new String[] {"uPlay", "uPlay", "uPlay", "uPlay", "Xbox", "Playstation"};
+        platformList = new String[]{"uPlay", "uPlay", "uPlay", "uPlay", "Xbox", "Playstation"};
 
         list = (ListView) view.findViewById(R.id.listview);
+        mQueue = Volley.newRequestQueue(getContext());
 
         // just for populating the arrays before implementing previous history
-        if (userNameList.length == 0 || platformList.length == 0)
-        {
-//            User previousSearches = new User("No Results", "Please Search Usernames to populate");
-//            arraylist.add(previousSearches);
-//            currUserNameSelected = "Please Search Usernames to populate";
-//            currPlatformSelected = "No Results";
-        }
-        else if (userNameList.length == platformList.length)
-        {
-            for (int i = 0; i < userNameList.length; i++)
-            {
+        if (userNameList.length == 0 || platformList.length == 0) {
+            //User previousSearches = new User("No Results", "Please Search Usernames to populate");
+            //arraylist.add(previousSearches);
+            //currUserNameSelected = "Please Search Usernames to populate";
+            //currPlatformSelected = "No Results";
+        } else if (userNameList.length == platformList.length) {
+            for (int i = 0; i < userNameList.length; i++) {
                 User user = new User(platformList[i], userNameList[i]);
                 arraylist.add(user);
             }
@@ -87,7 +97,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) // Spinner Select
     {
         currPlatformSelected = (String) adapterView.getItemAtPosition(i);
         adapter2.filter(currUserNameSelected, currPlatformSelected);
@@ -95,15 +105,20 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView)
+    public void onNothingSelected(AdapterView<?> adapterView) // on no spinner select
     {
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
+    public boolean onQueryTextSubmit(String query) // on SearchView text submit
+    {
         searchView.setIconified(true);
         SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(), SearchFragmentProvider.AUTHORITY, SearchFragmentProvider.MODE);
         suggestions.saveRecentQuery(query, null);
+
+        Log.v("JSON", "starting json import");
+        JSONAdapter jsonAdapter = new JSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
+        Log.v("JSON", "finished json import");
         //searchView.setIconifiedByDefault(true);
         //display stats instead of listview
         //add searched name and platform ONLY if exists in the API database
@@ -111,7 +126,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     }
 
     @Override
-    public boolean onQueryTextChange(String newText)
+    public boolean onQueryTextChange(String newText) // on SearchView text change
     {
         //searchView.setIconified(false);
         //searchView.setIconifiedByDefault(false);
@@ -121,13 +136,13 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     }
 
     @Override
-    public void onClick(View view)
+    public void onClick(View view) // on Searchview Click
     {
         searchView.setIconified(true);
     }
 
     @Override
-    public boolean onClose()
+    public boolean onClose() // on Searchview Close
     {
         searchView.setIconified(true);
         return false;
