@@ -7,8 +7,8 @@ public class User
 
     public User(String platformName, String userName)
     {
-        this.userName = userName;
-        this.platformName = platformName;
+        setUserName(userName);
+        setPlatformName(platformName);
     }
 
     public String getPlayerName()
@@ -19,6 +19,16 @@ public class User
     public String getPlatform()
     {
         return this.platformName;
+    }
+
+    public void setUserName(String user)
+    {
+        this.userName = user;
+    }
+
+    public void setPlatformName(String platform)
+    {
+        this.platformName = platform;
     }
     
     public boolean checkValidName()

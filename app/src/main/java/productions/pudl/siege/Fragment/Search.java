@@ -16,33 +16,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Locale;
 
-import productions.pudl.siege.Adapter.JSONAdapter;
+import productions.pudl.siege.Adapter.R6StatsJSONAdapter;
 import productions.pudl.siege.Adapter.ListViewAdapter;
 import productions.pudl.siege.R;
-import productions.pudl.siege.SearchFragmentProvider;
 import productions.pudl.siege.Data.User;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, View.OnClickListener, SearchView.OnCloseListener {
     SearchView searchView;
     ListView list;
-    ListViewAdapter adapter2;
+    ListViewAdapter listViewAdapter;
     String[] platformList;
     String[] userNameList;
     ArrayList<User> arraylist = new ArrayList<User>();
+    ArrayAdapter<CharSequence> spinnerAdapter;
 
     private RequestQueue mQueue;
 
@@ -55,10 +46,10 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         View view = inflater.inflate(R.layout.search_fragment, container, false);
 
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.platform_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.platform_array, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //spinner.setPrompt("Platform");
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
@@ -89,9 +80,9 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
             }
         }
 
-        adapter2 = new ListViewAdapter(getContext(), arraylist);
-        list.setAdapter(adapter2);
-        //adapter2.filter(currUserNameSelected, currPlatformSelected);
+        listViewAdapter = new ListViewAdapter(getContext(), arraylist);
+        list.setAdapter(listViewAdapter);
+        //listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
 
         return view;
     }
@@ -100,7 +91,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) // Spinner Select
     {
         currPlatformSelected = (String) adapterView.getItemAtPosition(i);
-        adapter2.filter(currUserNameSelected, currPlatformSelected);
+        listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
         Log.v("item", (String) currPlatformSelected);
     }
 
@@ -113,11 +104,10 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public boolean onQueryTextSubmit(String query) // on SearchView text submit
     {
         searchView.setIconified(true);
-        SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(), SearchFragmentProvider.AUTHORITY, SearchFragmentProvider.MODE);
-        suggestions.saveRecentQuery(query, null);
+        currUserNameSelected = query;
 
         Log.v("JSON", "starting json import");
-        JSONAdapter jsonAdapter = new JSONAdapter("sallad_", "uplay", mQueue);
+        R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
         Log.v("JSON", "finished json import");
         //searchView.setIconifiedByDefault(true);
         //display stats instead of listview
@@ -131,7 +121,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         //searchView.setIconified(false);
         //searchView.setIconifiedByDefault(false);
         currUserNameSelected = newText;
-        adapter2.filter(currUserNameSelected, currPlatformSelected);
+        listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
         return false;
     }
 
