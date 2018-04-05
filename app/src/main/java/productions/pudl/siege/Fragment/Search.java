@@ -106,11 +106,11 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         searchView.setIconified(true);
         currUserNameSelected = query;
 
-        Log.v("JSON", "starting json import");
+        Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
         R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
         Log.v("JSON", "finished json import");
         //searchView.setIconifiedByDefault(true);
-        //display stats instead of listview
+        //display stats instead of listview maybe using another fragment or do it where submit shows all results for a user and onclick adds it to the database
         //add searched name and platform ONLY if exists in the API database
         return true;
     }

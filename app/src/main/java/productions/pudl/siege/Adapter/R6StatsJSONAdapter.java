@@ -28,7 +28,7 @@ public class R6StatsJSONAdapter
         ParsePlatform();
         ParseGeneral();
         //ParseOperators();
-        //ParseSeasons();
+        ParseSeasons();
     }
 
     private void ParsePlatform()
@@ -108,6 +108,7 @@ public class R6StatsJSONAdapter
                         int xp = progressionArray.getInt("xp");
 
                         // Do something with data i.e store elsewhere
+                        // Store in Object
                     }
                     catch (JSONException e)
                     {
@@ -123,6 +124,94 @@ public class R6StatsJSONAdapter
                     error.printStackTrace();
                 }
             });
+
+        getmQueue().add(request);
+    }
+
+    private void ParseSeasons()
+    {
+        String URL = "https://api.r6stats.com/api/v1/players/"+getUserName()+"/seasons?platform="+getPlatformName();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            JSONObject seasonsArray = response.getJSONObject("seasons");
+
+                            for (int i = 1; i < 10; i++)
+                            {
+                                JSONObject season = seasonsArray.getJSONObject(String.valueOf(i));
+
+                                JSONObject apac = season.getJSONObject("apac");
+
+                                int apacWins = apac.getInt("wins");
+                                int apacLosses = apac.getInt("losses");
+                                int apacAbandons = apac.getInt("abandons");
+                                int apacSeason = apac.getInt("season");
+
+                                JSONObject apacRanking = apac.getJSONObject("ranking");
+
+                                double apacRating = apacRanking.getDouble("rating");
+                                double apacNextRating = apacRanking.getDouble("next_rating");
+                                double apacPrevRating = apacRanking.getDouble("prev_rating");
+                                double apacMean = apacRanking.getDouble("mean");
+                                int apacStdDev = apacRanking.getInt("stdev");
+                                int apacRank = apacRanking.getInt("rank");
+
+                                JSONObject emea = season.getJSONObject("emea");
+
+                                int emeaWins = emea.getInt("wins");
+                                int emeaLosses = emea.getInt("losses");
+                                int emeaAbandons = emea.getInt("abandons");
+                                int emeaSeason = emea.getInt("season");
+
+                                JSONObject emeaRanking = emea.getJSONObject("ranking");
+
+                                double emeaRating = emeaRanking.getDouble("rating");
+                                double emeaNextRating = emeaRanking.getDouble("next_rating");
+                                double emeaPrevRating = emeaRanking.getDouble("prev_rating");
+                                double emeaMean = emeaRanking.getDouble("mean");
+                                int emeaStdDev = emeaRanking.getInt("stdev");
+                                int emeaRank = emeaRanking.getInt("rank");
+
+                                JSONObject ncsa = season.getJSONObject("ncsa");
+
+                                int ncsaWins = ncsa.getInt("wins");
+                                int ncsaLosses = ncsa.getInt("losses");
+                                int ncsaAbandons = ncsa.getInt("abandons");
+                                int ncsaSeason = ncsa.getInt("season");
+
+                                JSONObject ncsaRanking = ncsa.getJSONObject("ranking");
+
+                                double ncsaRating = ncsaRanking.getDouble("rating");
+                                double ncsaNextRating = ncsaRanking.getDouble("next_rating");
+                                double ncsaPrevRating = ncsaRanking.getDouble("prev_rating");
+                                double ncsaMean = ncsaRanking.getDouble("mean");
+                                int ncsaStdDev = ncsaRanking.getInt("stdev");
+                                int ncsaRank = ncsaRanking.getInt("rank");
+
+                                // store in another object
+                            }
+                            // Do something with data i.e store elsewhere
+                            // Store in Object
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                });
 
         getmQueue().add(request);
     }
