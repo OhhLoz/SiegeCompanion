@@ -4,8 +4,8 @@
         id="@+id/navigation_compare"
         icon="@drawable/ic_compare"
         title="@string/title_compare"
-        barColorWhenSelected="@color/colorCompareTab"
-        activeColor = "@color/colorCompareText"
+        barColorWhenSelected="@color/colorNavBar"
+        activeColor = "@color/colorPrimary"
         inactiveColor = "@color/colorNavBarText"/>
 
 
@@ -13,8 +13,8 @@
         id="@+id/navigation_operators"
         icon="@drawable/ic_operators"
         title="@string/title_operators"
-        barColorWhenSelected="@color/colorOperatorTab"
-        activeColor = "@color/colorOperatorText"
+        barColorWhenSelected="@color/colorNavBar"
+        activeColor = "@color/colorPrimary"
         inactiveColor = "@color/colorNavBarText"/>
 
 
@@ -22,16 +22,16 @@
         id="@+id/navigation_profile"
         icon="@drawable/ic_profile"
         title="@string/title_profile"
-        barColorWhenSelected="@color/colorProfileTab"
-        activeColor = "@color/colorProfileText"
+        barColorWhenSelected="@color/colorNavBar"
+        activeColor = "@color/colorPrimary"
         inactiveColor = "@color/colorNavBarText"/>
 
     <tab
         id="@+id/navigation_search"
         icon="@drawable/ic_search"
         title="@string/title_search"
-        barColorWhenSelected="@color/colorSearchTab"
-        activeColor = "@color/colorSearchText"
+        barColorWhenSelected="@color/colorNavBar"
+        activeColor = "@color/colorPrimary"
         inactiveColor = "@color/colorNavBarText"/>
 
 
@@ -39,7 +39,7 @@
         id="@+id/navigation_more"
         icon="@drawable/ic_more"
         title="@string/title_more"
-        barColorWhenSelected="@color/colorMoreTab"
-        activeColor = "@color/colorMoreText"
+        barColorWhenSelected="@color/colorNavBar"
+        activeColor = "@color/colorPrimary"
         inactiveColor = "@color/colorNavBarText"/>
 </tabs>

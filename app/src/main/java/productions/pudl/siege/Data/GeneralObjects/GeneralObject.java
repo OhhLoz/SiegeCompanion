@@ -2,53 +2,69 @@ package productions.pudl.siege.Data.GeneralObjects;
 
 public class GeneralObject
 {
-    private String userName;
-    private String platformName;
-    private String ubisoftID;
-    private String indexedAt;
+    private String id;
+    private String userID;
+    private String platform;
+    private int level;
+    private String createdAt;
     private String updatedAt;
-    private GeneralStatObject statObject;
+    private GeneralLastPlayedObject lastPlayedObject;
+    private String name;
+    private GeneralRanksObject ranksObject;
+    private GeneralAliasesObject aliasesObject;
 
-    public GeneralObject(String userName, String platform, String ubisoftID, String indexedAt, String updatedAt, GeneralStatObject statObject)
+    public GeneralObject(String id, String userID, String platform, int level, String createdAt, String updatedAt, GeneralLastPlayedObject lastPlayedObject, String name, GeneralRanksObject ranksObject, GeneralAliasesObject aliasesObject)
     {
-        setUserName(userName);
-        setPlatformName(platform);
-        setUbisoftID(ubisoftID);
-        setIndexedAt(indexedAt);
+        setId(id);
+        setUserID(userID);
+        setPlatform(platform);
+        setLevel(level);
+        setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
-        setStatObject(statObject);
+        setLastPlayedObject(lastPlayedObject);
+        setName(name);
+        setRanksObject(ranksObject);
+        setAliasesObject(aliasesObject);
     }
 
-    public String getUserName() {
-        return userName;
+    public String getId() {
+        return id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getPlatformName() {
-        return platformName;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setPlatformName(String platformName) {
-        this.platformName = platformName;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
-    public String getUbisoftID() {
-        return ubisoftID;
+    public String getPlatform() {
+        return platform;
     }
 
-    public void setUbisoftID(String ubisoftID) {
-        this.ubisoftID = ubisoftID;
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 
-    public String getIndexedAt() {
-        return indexedAt;
+    public int getLevel() {
+        return level;
     }
 
-    public void setIndexedAt(String indexedAt) {
-        this.indexedAt = indexedAt;
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getUpdatedAt() {
@@ -59,11 +75,35 @@ public class GeneralObject
         this.updatedAt = updatedAt;
     }
 
-    public GeneralStatObject getStatObject() {
-        return statObject;
+    public GeneralLastPlayedObject getLastPlayedObject() {
+        return lastPlayedObject;
     }
 
-    public void setStatObject(GeneralStatObject statObject) {
-        this.statObject = statObject;
+    public void setLastPlayedObject(GeneralLastPlayedObject lastPlayedObject) {
+        this.lastPlayedObject = lastPlayedObject;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public GeneralRanksObject getRanksObject() {
+        return ranksObject;
+    }
+
+    public void setRanksObject(GeneralRanksObject ranksObject) {
+        this.ranksObject = ranksObject;
+    }
+
+    public GeneralAliasesObject getAliasesObject() {
+        return aliasesObject;
+    }
+
+    public void setAliasesObject(GeneralAliasesObject aliasesObject) {
+        this.aliasesObject = aliasesObject;
     }
 }
