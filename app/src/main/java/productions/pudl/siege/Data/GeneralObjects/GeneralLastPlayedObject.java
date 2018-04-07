@@ -1,6 +1,6 @@
 package productions.pudl.siege.Data.GeneralObjects;
 
-class GeneralLastPlayedObject
+public class GeneralLastPlayedObject
 {
     private int casual;
     private int ranked;
@@ -35,5 +35,11 @@ class GeneralLastPlayedObject
 
     public void setLastPlayed(String lastPlayed) {
         this.lastPlayed = lastPlayed;
+    }
+
+    @Override
+    public String toString()
+    {
+        return ('"' + "lastplayed" + '"' + ":{" + '"' + "casual" + '"' + ":" + String.valueOf(getCasual()) + "," + '"' + "ranked" + '"' + ":" + String.valueOf(getRanked()) + "," + '"' + "last_played" + '"' + ":" + getLastPlayed() + "}");
     }
 }

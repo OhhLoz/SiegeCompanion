@@ -1,6 +1,6 @@
 package productions.pudl.siege.Data.GeneralObjects;
 
-class GeneralAliasesObject
+public class GeneralAliasesObject
 {
     String name;
     String createdAt;

@@ -1,6 +1,6 @@
 package productions.pudl.siege.Data.GeneralObjects;
 
-class GeneralRanksObject
+public class GeneralRanksObject
 {
     private GeneralRankObject APAC;
     private GeneralRankObject EMEA;
@@ -35,5 +35,11 @@ class GeneralRanksObject
 
     public void setNCSA(GeneralRankObject NCSA) {
         this.NCSA = NCSA;
+    }
+
+    @Override
+    public String toString()
+    {
+        return ('"' + "ranks" + '"' + ":{" + getAPAC().toString() + "," + getEMEA().toString() + "," + getNCSA().toString());
     }
 }

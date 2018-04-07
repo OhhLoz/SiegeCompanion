@@ -8,8 +8,8 @@
     <string name="profileLogo">profilelogo</string>
     <string name="search_hint">Enter Username…</string>
     <string-array name="platform_array">
-        <item>uPlay</item>
+        <item>PC</item>
         <item>Xbox</item>
-        <item>Playstation</item>
+        <item>PS4</item>
     </string-array>
 </resources>

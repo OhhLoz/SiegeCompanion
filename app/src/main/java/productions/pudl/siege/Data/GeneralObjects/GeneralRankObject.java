@@ -36,4 +36,10 @@ public class GeneralRankObject
     public void setRank(int rank) {
         this.rank = rank;
     }
+
+    @Override
+    public String toString()
+    {
+        return ('"' + getRegion() + '"' + ":{" + '"' + "mmr" + '"' + ":" + String.valueOf(getMMR()) + "," + '"' + "rank" + '"' + ":" + String.valueOf(getRank()) + "}");
+    }
 }

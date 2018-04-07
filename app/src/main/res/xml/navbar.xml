@@ -6,7 +6,7 @@
         title="@string/title_compare"
         barColorWhenSelected="@color/colorNavBar"
         activeColor = "@color/colorPrimary"
-        inactiveColor = "@color/colorNavBarText"/>
+        inactiveColor = "@color/colorNavBarText" />
 
 
     <tab

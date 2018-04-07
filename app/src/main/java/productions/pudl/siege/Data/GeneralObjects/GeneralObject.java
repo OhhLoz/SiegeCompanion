@@ -1,5 +1,7 @@
 package productions.pudl.siege.Data.GeneralObjects;
 
+import java.util.ArrayList;
+
 public class GeneralObject
 {
     private String id;
@@ -11,9 +13,9 @@ public class GeneralObject
     private GeneralLastPlayedObject lastPlayedObject;
     private String name;
     private GeneralRanksObject ranksObject;
-    private GeneralAliasesObject aliasesObject;
+    private ArrayList<GeneralAliasesObject> aliasesObjectArrayList;
 
-    public GeneralObject(String id, String userID, String platform, int level, String createdAt, String updatedAt, GeneralLastPlayedObject lastPlayedObject, String name, GeneralRanksObject ranksObject, GeneralAliasesObject aliasesObject)
+    public GeneralObject(String id, String userID, String platform, int level, String createdAt, String updatedAt, GeneralLastPlayedObject lastPlayedObject, String name, GeneralRanksObject ranksObject, ArrayList<GeneralAliasesObject> aliasesObjectArrayList)
     {
         setId(id);
         setUserID(userID);
@@ -24,7 +26,7 @@ public class GeneralObject
         setLastPlayedObject(lastPlayedObject);
         setName(name);
         setRanksObject(ranksObject);
-        setAliasesObject(aliasesObject);
+        setAliasesObjectArrayList(aliasesObjectArrayList);
     }
 
     public String getId() {
@@ -99,11 +101,11 @@ public class GeneralObject
         this.ranksObject = ranksObject;
     }
 
-    public GeneralAliasesObject getAliasesObject() {
-        return aliasesObject;
+    public ArrayList<GeneralAliasesObject> getAliasesObjectArrayList() {
+        return aliasesObjectArrayList;
     }
 
-    public void setAliasesObject(GeneralAliasesObject aliasesObject) {
-        this.aliasesObject = aliasesObject;
+    public void setAliasesObjectArrayList(ArrayList<GeneralAliasesObject> aliasesObjectArrayList) {
+        this.aliasesObjectArrayList = aliasesObjectArrayList;
     }
 }
