@@ -8,28 +8,37 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import productions.pudl.siege.Data.GeneralObjects.GeneralAliasesObject;
+import productions.pudl.siege.Data.GeneralObjects.GeneralLastPlayedObject;
+import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
+import productions.pudl.siege.Data.GeneralObjects.GeneralRankObject;
+import productions.pudl.siege.Data.GeneralObjects.GeneralRanksObject;
 
 public class R6DBJSONAdapter
 {
     protected String userName;
     protected String platformName;
     private RequestQueue mQueue;
+    private ArrayList<GeneralObject> searchResult = new ArrayList<>();
 
     public R6DBJSONAdapter(String currUserNameSelected, String currPlatformSelected, RequestQueue mQueue)
     {
         setUserName(currUserNameSelected);
         setPlatformName(currPlatformSelected);
         setmQueue(mQueue);
-        ParsePlatform();
-        ParseGeneral();
+        //ParsePlatform();
+        //ParseGeneral();
         //ParseOperators();
         //ParseSeasons();
     }
@@ -49,7 +58,7 @@ public class R6DBJSONAdapter
         }
     }
 
-    private void ParseGeneral()
+    public void ParseGeneral()
     {
         String URL = "https://r6db.com/api/v2/players?name="+getUserName()+"&platform="+getPlatformName();
 
@@ -61,8 +70,8 @@ public class R6DBJSONAdapter
                     try
                     {
                         Log.v("JSONArray", response.toString());
-                        //JSONArray jsonArray = new JSONArray(response);
-                        //JSONArray jsonArray = response.getJSONArray(0);
+                        //ArrayList<GeneralObject> generalObjectArrayList = new ArrayList<>();
+
                         for (int i = 0; i < response.length(); i++)
                         {
                             JSONObject currObject = response.getJSONObject(i);
@@ -75,9 +84,11 @@ public class R6DBJSONAdapter
                             String updatedAt = currObject.getString("updated_at");
 
                             JSONObject lastPlayed = currObject.getJSONObject("lastPlayed");
-                            long casual = lastPlayed.getLong("casual");
-                            long ranked = lastPlayed.getLong("ranked");
+                            int casual = lastPlayed.getInt("casual");
+                            int ranked = lastPlayed.getInt("ranked");
                             String lastplayed = lastPlayed.getString("last_played");
+
+                            GeneralLastPlayedObject lastPlayedObject = new GeneralLastPlayedObject(casual, ranked, lastplayed);
 
                             String name = currObject.getString("name");
 
@@ -87,18 +98,27 @@ public class R6DBJSONAdapter
                             int apacMMR = apac.getInt("mmr");
                             int apacRank = apac.getInt("rank");
 
+                            GeneralRankObject apacObject = new GeneralRankObject("apac", apacMMR, apacRank);
+
                             JSONObject emea = ranks.getJSONObject("emea");
 
-                            int emeaMMR = apac.getInt("mmr");
-                            int emeaRank = apac.getInt("rank");
+                            int emeaMMR = emea.getInt("mmr");
+                            int emeaRank = emea.getInt("rank");
+
+                            GeneralRankObject emeaObject = new GeneralRankObject("emea", emeaMMR, emeaRank);
 
                             JSONObject ncsa = ranks.getJSONObject("ncsa");
 
-                            int ncsaMMR = apac.getInt("mmr");
-                            int ncsaRank = apac.getInt("rank");
+                            int ncsaMMR = ncsa.getInt("mmr");
+                            int ncsaRank = ncsa.getInt("rank");
+
+                            GeneralRankObject ncsaObject = new GeneralRankObject("ncsa", ncsaMMR, ncsaRank);
+
+                            GeneralRanksObject ranksObject = new GeneralRanksObject(apacObject, emeaObject, ncsaObject);
 
                             JSONArray aliases = currObject.getJSONArray("aliases");
 
+                            ArrayList<GeneralAliasesObject> aliasArrayList = new ArrayList<>();
                             for (int j = 0; j < aliases.length(); j++)
                             {
                                 JSONObject currAlias = aliases.getJSONObject(j);
@@ -106,12 +126,15 @@ public class R6DBJSONAdapter
                                 String aliasName = currAlias.getString("name");
                                 String aliasCreatedAt = currObject.getString("created_at");
 
+                                aliasArrayList.add(new GeneralAliasesObject(aliasName, aliasCreatedAt));
                                 //Add to list of aliases
                             }
+
+                            GeneralObject generalObject = new GeneralObject(id, userId, platform, level, createdAt, updatedAt, lastPlayedObject, name, ranksObject, aliasArrayList);
+                            searchResult.add(generalObject);
                         }
+                        Log.v("JSON", "Reached end of parsing!");
                         // Add to list of R6DBUsers
-
-
                         // Do something with data i.e store elsewhere
                     }
                     catch (JSONException e)
@@ -160,16 +183,19 @@ public class R6DBJSONAdapter
         this.userName = user;
     }
 
-    public RequestQueue getmQueue()
+    private RequestQueue getmQueue()
     {
         return mQueue;
     }
 
-    public void setmQueue(RequestQueue mQueue)
+    private void setmQueue(RequestQueue mQueue)
     {
         this.mQueue = mQueue;
     }
 
-
+    public ArrayList<GeneralObject> getSearchResult()
+    {
+        return this.searchResult;
+    }
 }
 
