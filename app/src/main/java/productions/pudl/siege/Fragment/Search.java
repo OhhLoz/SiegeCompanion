@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,14 +23,14 @@ import java.util.ArrayList;
 
 import productions.pudl.siege.Adapter.R6DBJSONAdapter;
 import productions.pudl.siege.Adapter.ListViewAdapter;
+import productions.pudl.siege.Adapter.RecyclerViewAdapter;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
-
-public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, ListView.OnItemClickListener, SearchView.OnCloseListener {
+public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, SearchView.OnCloseListener {
     SearchView searchView;
-    ListView listView;
-    ListViewAdapter listViewAdapter;
+    RecyclerView recyclerView;
+    RecyclerViewAdapter recyclerViewAdapter;
     String[] platformList;
     String[] userNameList;
     ArrayList<User> userList = new ArrayList<User>();
@@ -61,7 +62,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         userNameList = new String[]{"sallad_", "fork__", "KonoAma", "Darksubi_", "XboxTest", "PlaystationTest"};
         platformList = new String[]{"PC", "PC", "PC", "PC", "Xbox", "PS4"};
 
-        listView = (ListView) view.findViewById(R.id.listview);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         mQueue = Volley.newRequestQueue(getContext());
 
         // just for populating the arrays before implementing previous history
@@ -81,9 +82,8 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         }
 
         //if i replace the below userList with searchResults it doesn't work as it isnt populated yet
-        listViewAdapter = new ListViewAdapter(getContext(), userList);
-        listView.setOnItemClickListener(this);
-        listView.setAdapter(listViewAdapter);
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext(), userList);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
         return view;
     }
@@ -102,7 +102,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) // Spinner Select
     {
         currPlatformSelected = (String) adapterView.getItemAtPosition(i);
-        listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
+        recyclerViewAdapter.filter(currUserNameSelected, currPlatformSelected);
         Log.v("item", (String) currPlatformSelected);
     }
 
@@ -130,7 +130,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public boolean onQueryTextChange(String newText) // on SearchView text change
     {
         currUserNameSelected = newText;
-        listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
+        recyclerViewAdapter.filter(currUserNameSelected, currPlatformSelected);
         return false;
     }
 
@@ -139,11 +139,5 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     {
         setupSearchView();
         return true;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-    {
-        Log.v("Item", "Item Clicked");
     }
 }
