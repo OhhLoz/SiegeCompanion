@@ -24,10 +24,11 @@ public class GeneralAliasesObject
     {
         String result = '"' + "aliases" + '"' + ":[";
         StringBuilder str = new StringBuilder(result);
-        for(GeneralAliasObject curr : getAliasObjects())
+        for(int i = 0; i < getAliasObjects().size(); i++)
         {
-            str.append(curr.toString());
-            str.append(",");
+            str.append(getAliasObjects().get(i).toString());
+            if (i != getAliasObjects().size()-1)
+                str.append(",");
         }
         str.append("]");
 

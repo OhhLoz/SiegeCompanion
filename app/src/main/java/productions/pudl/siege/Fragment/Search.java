@@ -26,7 +26,7 @@ import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
 
-public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, View.OnClickListener, SearchView.OnCloseListener {
+public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, ListView.OnItemClickListener, SearchView.OnCloseListener {
     SearchView searchView;
     ListView listView;
     ListViewAdapter listViewAdapter;
@@ -34,7 +34,6 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     String[] userNameList;
     ArrayList<User> userList = new ArrayList<User>();
     ArrayList<GeneralObject> searchResults = new ArrayList<>();
-    ArrayList<GeneralObject> filteredSearchResults = new ArrayList<>();
     ArrayAdapter<CharSequence> spinnerAdapter;
 
     private RequestQueue mQueue;
@@ -83,6 +82,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
         //if i replace the below userList with searchResults it doesn't work as it isnt populated yet
         listViewAdapter = new ListViewAdapter(getContext(), userList);
+        listView.setOnItemClickListener(this);
         listView.setAdapter(listViewAdapter);
 
         return view;
@@ -90,12 +90,12 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
     private void setupSearchView()
     {
-        searchView.setIconified(true);
-        searchView.setIconifiedByDefault(true);
+        searchView.setIconified(false);
+        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
-        searchView.setOnSearchClickListener(this);
         searchView.setOnCloseListener(this);
         searchView.setQueryHint("Enter Username...");
+        searchView.clearFocus();
     }
 
     @Override
@@ -129,22 +129,21 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public boolean onQueryTextChange(String newText) // on SearchView text change
     {
-        //searchView.setIconified(false);
-        //searchView.setIconifiedByDefault(false);
         currUserNameSelected = newText;
         listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
         return false;
     }
 
     @Override
-    public void onClick(View view) // on Searchview Click
+    public boolean onClose() // on Searchview Close
     {
-        //searchView.setIconified(false);
+        setupSearchView();
+        return true;
     }
 
     @Override
-    public boolean onClose() // on Searchview Close
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
-        return false;
+        Log.v("Item", "Item Clicked");
     }
 }

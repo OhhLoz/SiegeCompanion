@@ -68,6 +68,7 @@ public class R6DBJSONAdapter
                 {
                     try
                     {
+                        searchResult.clear();
                         Log.v("JSONArray", response.toString());
                         //ArrayList<GeneralObject> generalObjectArrayList = new ArrayList<>();
 
