@@ -13,33 +13,33 @@ public class GeneralRanksObject
         setNCSA(NCSA);
     }
 
-    public GeneralRankObject getAPAC() {
+    private GeneralRankObject getAPAC() {
         return APAC;
     }
 
-    public void setAPAC(GeneralRankObject APAC) {
+    private void setAPAC(GeneralRankObject APAC) {
         this.APAC = APAC;
     }
 
-    public GeneralRankObject getEMEA() {
+    private GeneralRankObject getEMEA() {
         return EMEA;
     }
 
-    public void setEMEA(GeneralRankObject EMEA) {
+    private void setEMEA(GeneralRankObject EMEA) {
         this.EMEA = EMEA;
     }
 
-    public GeneralRankObject getNCSA() {
+    private GeneralRankObject getNCSA() {
         return NCSA;
     }
 
-    public void setNCSA(GeneralRankObject NCSA) {
+    private void setNCSA(GeneralRankObject NCSA) {
         this.NCSA = NCSA;
     }
 
     @Override
     public String toString()
     {
-        return ('"' + "ranks" + '"' + ":{" + getAPAC().toString() + "," + getEMEA().toString() + "," + getNCSA().toString());
+        return ('"' + "ranks" + '"' + ":{" + getAPAC().toString() + "," + getEMEA().toString() + "," + getNCSA().toString() + "}");
     }
 }

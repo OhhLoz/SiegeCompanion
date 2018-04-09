@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import productions.pudl.siege.R;
 import productions.pudl.siege.Data.User;
+import productions.pudl.siege.R;
 
 public class ListViewAdapter extends BaseAdapter {
 

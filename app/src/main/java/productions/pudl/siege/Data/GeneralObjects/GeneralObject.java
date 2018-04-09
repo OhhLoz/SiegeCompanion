@@ -13,9 +13,9 @@ public class GeneralObject
     private GeneralLastPlayedObject lastPlayedObject;
     private String name;
     private GeneralRanksObject ranksObject;
-    private ArrayList<GeneralAliasesObject> aliasesObjectArrayList;
+    private GeneralAliasesObject aliasesObject;
 
-    public GeneralObject(String id, String userID, String platform, int level, String createdAt, String updatedAt, GeneralLastPlayedObject lastPlayedObject, String name, GeneralRanksObject ranksObject, ArrayList<GeneralAliasesObject> aliasesObjectArrayList)
+    public GeneralObject(String id, String userID, String platform, int level, String createdAt, String updatedAt, GeneralLastPlayedObject lastPlayedObject, String name, GeneralRanksObject ranksObject, GeneralAliasesObject aliasesObject)
     {
         setId(id);
         setUserID(userID);
@@ -26,86 +26,92 @@ public class GeneralObject
         setLastPlayedObject(lastPlayedObject);
         setName(name);
         setRanksObject(ranksObject);
-        setAliasesObjectArrayList(aliasesObjectArrayList);
+        setAliasesObject(aliasesObject);
     }
 
-    public String getId() {
+    private String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    private void setId(String id) {
         this.id = id;
     }
 
-    public String getUserID() {
+    private String getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    private void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public String getPlatform() {
+    private String getPlatform() {
         return platform;
     }
 
-    public void setPlatform(String platform) {
+    private void setPlatform(String platform) {
         this.platform = platform;
     }
 
-    public int getLevel() {
+    private int getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    private void setLevel(int level) {
         this.level = level;
     }
 
-    public String getCreatedAt() {
+    private String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    private void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    private String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    private void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public GeneralLastPlayedObject getLastPlayedObject() {
+    private GeneralLastPlayedObject getLastPlayedObject() {
         return lastPlayedObject;
     }
 
-    public void setLastPlayedObject(GeneralLastPlayedObject lastPlayedObject) {
+    private void setLastPlayedObject(GeneralLastPlayedObject lastPlayedObject) {
         this.lastPlayedObject = lastPlayedObject;
     }
 
-    public String getName() {
+    private String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
-    public GeneralRanksObject getRanksObject() {
+    private GeneralRanksObject getRanksObject() {
         return ranksObject;
     }
 
-    public void setRanksObject(GeneralRanksObject ranksObject) {
+    private void setRanksObject(GeneralRanksObject ranksObject) {
         this.ranksObject = ranksObject;
     }
 
-    public ArrayList<GeneralAliasesObject> getAliasesObjectArrayList() {
-        return aliasesObjectArrayList;
+    private GeneralAliasesObject getAliasesObject() {
+        return aliasesObject;
     }
 
-    public void setAliasesObjectArrayList(ArrayList<GeneralAliasesObject> aliasesObjectArrayList) {
-        this.aliasesObjectArrayList = aliasesObjectArrayList;
+    private void setAliasesObject(GeneralAliasesObject aliasesObject) {
+        this.aliasesObject = aliasesObject;
+    }
+
+    @Override
+    public String toString()
+    {
+        return ("{" + '"' + "id" + '"' + ":" + '"' + getId() + '"' + "," + '"' + "userId" + '"' + ":" + '"' + getUserID() + '"' + "," + '"' + "platform" + '"' + ":" + '"' + getPlatform() + '"' + "," + '"' + "level" + '"' + ":" + '"' + String.valueOf(getLevel()) + '"' + "," + '"' + "created_at" + '"' + ":" + '"' + getCreatedAt() + '"' + "," + '"' + "updated_at" + '"' + ":" + '"' + getUpdatedAt() + '"' + "," + getLastPlayedObject().toString() + "," + '"' + "name" + '"' + ":" + '"' + getName() + '"' + "," + getRanksObject().toString() + "," + getAliasesObject().toString() + "}");
     }
 }

@@ -2,9 +2,9 @@ package productions.pudl.siege.Data.GeneralObjects;
 
 public class GeneralRankObject
 {
-    String region;
-    double mmr;
-    int rank;
+    private String region;
+    private double mmr;
+    private int rank;
 
     public GeneralRankObject(String region, double mmr, int rank)
     {
@@ -13,27 +13,27 @@ public class GeneralRankObject
         setRank(rank);
     }
 
-    public String getRegion() {
+    private String getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
+    private void setRegion(String region) {
         this.region = region;
     }
 
-    public double getMMR() {
+    private double getMMR() {
         return mmr;
     }
 
-    public void setMMR(double mmr) {
+    private void setMMR(double mmr) {
         this.mmr = mmr;
     }
 
-    public int getRank() {
+    private int getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    private void setRank(int rank) {
         this.rank = rank;
     }
 

@@ -13,12 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import productions.pudl.siege.Data.GeneralObjects.GeneralAliasObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralAliasesObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralLastPlayedObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
@@ -118,7 +117,7 @@ public class R6DBJSONAdapter
 
                             JSONArray aliases = currObject.getJSONArray("aliases");
 
-                            ArrayList<GeneralAliasesObject> aliasArrayList = new ArrayList<>();
+                            ArrayList<GeneralAliasObject> aliasArrayList = new ArrayList<>();
                             for (int j = 0; j < aliases.length(); j++)
                             {
                                 JSONObject currAlias = aliases.getJSONObject(j);
@@ -126,12 +125,15 @@ public class R6DBJSONAdapter
                                 String aliasName = currAlias.getString("name");
                                 String aliasCreatedAt = currObject.getString("created_at");
 
-                                aliasArrayList.add(new GeneralAliasesObject(aliasName, aliasCreatedAt));
+                                aliasArrayList.add(new GeneralAliasObject(aliasName, aliasCreatedAt));
                                 //Add to list of aliases
                             }
 
-                            GeneralObject generalObject = new GeneralObject(id, userId, platform, level, createdAt, updatedAt, lastPlayedObject, name, ranksObject, aliasArrayList);
+                            GeneralAliasesObject generalAliasesObject = new GeneralAliasesObject(aliasArrayList);
+
+                            GeneralObject generalObject = new GeneralObject(id, userId, platform, level, createdAt, updatedAt, lastPlayedObject, name, ranksObject, generalAliasesObject);
                             searchResult.add(generalObject);
+                            Log.v("JSONArrayResult", generalObject.toString());
                         }
                         Log.v("JSON", "Reached end of parsing!");
                         // Add to list of R6DBUsers
@@ -193,7 +195,7 @@ public class R6DBJSONAdapter
         this.mQueue = mQueue;
     }
 
-    public ArrayList<GeneralObject> getSearchResult()
+    public ArrayList<GeneralObject> getSearchResults()
     {
         return this.searchResult;
     }

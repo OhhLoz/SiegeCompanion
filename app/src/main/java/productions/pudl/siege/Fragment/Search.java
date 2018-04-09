@@ -21,18 +21,20 @@ import com.android.volley.toolbox.Volley;
 import java.util.ArrayList;
 
 import productions.pudl.siege.Adapter.R6DBJSONAdapter;
-import productions.pudl.siege.Adapter.R6StatsJSONAdapter;
 import productions.pudl.siege.Adapter.ListViewAdapter;
-import productions.pudl.siege.R;
+import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
+import productions.pudl.siege.R;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, View.OnClickListener, SearchView.OnCloseListener {
     SearchView searchView;
-    ListView list;
+    ListView listView;
     ListViewAdapter listViewAdapter;
     String[] platformList;
     String[] userNameList;
-    ArrayList<User> arraylist = new ArrayList<User>();
+    ArrayList<User> userList = new ArrayList<User>();
+    ArrayList<GeneralObject> searchResults = new ArrayList<>();
+    ArrayList<GeneralObject> filteredSearchResults = new ArrayList<>();
     ArrayAdapter<CharSequence> spinnerAdapter;
 
     private RequestQueue mQueue;
@@ -55,36 +57,45 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        searchView.setIconified(false);
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnSearchClickListener(this);
-        searchView.setOnCloseListener(this);
+        setupSearchView();
 
         userNameList = new String[]{"sallad_", "fork__", "KonoAma", "Darksubi_", "XboxTest", "PlaystationTest"};
-        platformList = new String[]{"uPlay", "uPlay", "uPlay", "uPlay", "Xbox", "Playstation"};
+        platformList = new String[]{"PC", "PC", "PC", "PC", "Xbox", "PS4"};
 
-        list = (ListView) view.findViewById(R.id.listview);
+        listView = (ListView) view.findViewById(R.id.listview);
         mQueue = Volley.newRequestQueue(getContext());
 
         // just for populating the arrays before implementing previous history
-        if (userNameList.length == 0 || platformList.length == 0) {
-            //User previousSearches = new User("No Results", "Please Search Usernames to populate");
-            //arraylist.add(previousSearches);
-            //currUserNameSelected = "Please Search Usernames to populate";
-            //currPlatformSelected = "No Results";
-        } else if (userNameList.length == platformList.length) {
+        if (userNameList.length == 0 || platformList.length == 0)  // if no hardcoded values given
+        {
+            User previousSearches = new User("No Results", "Please Search Usernames to populate");
+            userList.add(previousSearches);
+            currUserNameSelected = "Please Search Usernames to populate";
+            currPlatformSelected = "No Results";
+        }
+        else if (userNameList.length == platformList.length) // if there are equal matching pairs in the hardcoded string arrays
+        {
             for (int i = 0; i < userNameList.length; i++) {
                 User user = new User(platformList[i], userNameList[i]);
-                arraylist.add(user);
+                userList.add(user);
             }
         }
 
-        listViewAdapter = new ListViewAdapter(getContext(), arraylist);
-        list.setAdapter(listViewAdapter);
-        //listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
+        //if i replace the below userList with searchResults it doesn't work as it isnt populated yet
+        listViewAdapter = new ListViewAdapter(getContext(), userList);
+        listView.setAdapter(listViewAdapter);
 
         return view;
+    }
+
+    private void setupSearchView()
+    {
+        searchView.setIconified(true);
+        searchView.setIconifiedByDefault(true);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnSearchClickListener(this);
+        searchView.setOnCloseListener(this);
+        searchView.setQueryHint("Enter Username...");
     }
 
     @Override
@@ -103,16 +114,15 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public boolean onQueryTextSubmit(String query) // on SearchView text submit
     {
-        searchView.setIconified(true);
+        //searchView.setIconified(true);
         currUserNameSelected = query;
 
         Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
         //R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
         R6DBJSONAdapter r6DBJsonAdapter = new R6DBJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
+        r6DBJsonAdapter.ParseGeneral();
+        searchResults = r6DBJsonAdapter.getSearchResults();
         Log.v("JSON", "finished json import");
-        //searchView.setIconifiedByDefault(true);
-        //display stats instead of listview maybe using another fragment or do it where submit shows all results for a user and onclick adds it to the database
-        //add searched name and platform ONLY if exists in the API database
         return true;
     }
 
@@ -129,13 +139,12 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     @Override
     public void onClick(View view) // on Searchview Click
     {
-        searchView.setIconified(true);
+        //searchView.setIconified(false);
     }
 
     @Override
     public boolean onClose() // on Searchview Close
     {
-        searchView.setIconified(true);
         return false;
     }
 }

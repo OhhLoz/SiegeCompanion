@@ -13,27 +13,27 @@ public class GeneralLastPlayedObject
         setLastPlayed(lastPlayed);
     }
 
-    public int getCasual() {
+    private int getCasual() {
         return casual;
     }
 
-    public void setCasual(int casual) {
+    private void setCasual(int casual) {
         this.casual = casual;
     }
 
-    public int getRanked() {
+    private int getRanked() {
         return ranked;
     }
 
-    public void setRanked(int ranked) {
+    private void setRanked(int ranked) {
         this.ranked = ranked;
     }
 
-    public String getLastPlayed() {
+    private String getLastPlayed() {
         return lastPlayed;
     }
 
-    public void setLastPlayed(String lastPlayed) {
+    private void setLastPlayed(String lastPlayed) {
         this.lastPlayed = lastPlayed;
     }
 

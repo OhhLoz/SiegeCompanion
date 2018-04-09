@@ -1,29 +1,36 @@
 package productions.pudl.siege.Data.GeneralObjects;
 
+import java.util.ArrayList;
+
 public class GeneralAliasesObject
 {
-    String name;
-    String createdAt;
+    private ArrayList<GeneralAliasObject> aliasObjects = new ArrayList<>();
 
-    public GeneralAliasesObject(String name, String createdAt)
+    public GeneralAliasesObject(ArrayList<GeneralAliasObject> inputArrayList)
     {
-        setName(name);
-        setCreatedAt(createdAt);
+        setAliasObjects(inputArrayList);
     }
 
-    public String getName() {
-        return name;
+    private ArrayList<GeneralAliasObject> getAliasObjects() {
+        return aliasObjects;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private void setAliasObjects(ArrayList<GeneralAliasObject> aliasObjects) {
+        this.aliasObjects = aliasObjects;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
+    @Override
+    public String toString()
+    {
+        String result = '"' + "aliases" + '"' + ":[";
+        StringBuilder str = new StringBuilder(result);
+        for(GeneralAliasObject curr : getAliasObjects())
+        {
+            str.append(curr.toString());
+            str.append(",");
+        }
+        str.append("]");
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+        return str.toString();
     }
 }
