@@ -1,6 +1,7 @@
 package productions.pudl.siege.Adapter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -87,8 +88,8 @@ public class R6DBJSONAdapter
                             String updatedAt = currObject.getString("updated_at");
 
                             JSONObject lastPlayed = currObject.getJSONObject("lastPlayed");
-                            int casual = lastPlayed.getInt("casual");
-                            int ranked = lastPlayed.getInt("ranked");
+                            String casual = lastPlayed.getString("casual");
+                            String ranked = lastPlayed.getString("ranked");
                             String lastplayed = lastPlayed.getString("last_played");
 
                             GeneralLastPlayedObject lastPlayedObject = new GeneralLastPlayedObject(casual, ranked, lastplayed);

@@ -2,30 +2,30 @@ package productions.pudl.siege.Data.GeneralObjects;
 
 public class GeneralLastPlayedObject
 {
-    private int casual;
-    private int ranked;
+    private String casual;
+    private String ranked;
     private String lastPlayed;
 
-    public GeneralLastPlayedObject(int casual, int ranked, String lastPlayed)
+    public GeneralLastPlayedObject(String casual, String ranked, String lastPlayed)
     {
         setCasual(casual);
         setRanked(ranked);
         setLastPlayed(lastPlayed);
     }
 
-    private int getCasual() {
+    private String getCasual() {
         return casual;
     }
 
-    private void setCasual(int casual) {
+    private void setCasual(String casual) {
         this.casual = casual;
     }
 
-    private int getRanked() {
+    private String getRanked() {
         return ranked;
     }
 
-    private void setRanked(int ranked) {
+    private void setRanked(String ranked) {
         this.ranked = ranked;
     }
 

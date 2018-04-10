@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -121,6 +122,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
         //R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
         R6DBJSONAdapter r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
+        Toast.makeText(getContext(), "Searching Data...", Toast.LENGTH_SHORT).show();
         r6DBJsonAdapter.ParseGeneral();
         searchResults = r6DBJsonAdapter.getSearchResults();
         //listViewAdapter.updateSearchList(searchResults);
@@ -156,5 +158,6 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void updateListView(ArrayList<GeneralObject> newArrayList)
     {
         listViewAdapter.updateSearchList(newArrayList);
+        Toast.makeText(getContext(), "Search Complete!", Toast.LENGTH_SHORT).show();
     }
 }
