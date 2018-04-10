@@ -1,6 +1,10 @@
 package productions.pudl.siege.Adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -9,11 +13,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,16 +36,16 @@ import productions.pudl.siege.Data.GeneralObjects.GeneralRankObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralRanksObject;
 import productions.pudl.siege.Fragment.Search;
 
-public class R6DBJSONAdapter
-{
+import static com.android.volley.VolleyLog.TAG;
+
+public class R6DBJSONAdapter {
     protected String userName;
     protected String platformName;
     private Search search;
     private RequestQueue mQueue;
     private ArrayList<GeneralObject> searchResult = new ArrayList<>();
 
-    public R6DBJSONAdapter(Search search, String currUserNameSelected, String currPlatformSelected, RequestQueue mQueue)
-    {
+    public R6DBJSONAdapter(Search search, String currUserNameSelected, String currPlatformSelected, RequestQueue mQueue) {
         this.search = search;
         setUserName(currUserNameSelected);
         setPlatformName(currPlatformSelected);
@@ -46,10 +56,8 @@ public class R6DBJSONAdapter
         //ParseSeasons();
     }
 
-    private void ParsePlatform()
-    {
-        switch(getPlatformName())
-        {
+    private void ParsePlatform() {
+        switch (getPlatformName()) {
             case "uPlay":
                 setPlatformName("pc");
                 break;
@@ -61,150 +69,136 @@ public class R6DBJSONAdapter
         }
     }
 
-    public void ParseGeneral()
-    {
-        String URL = "https://r6db.com/api/v2/players?name="+getUserName()+"&platform="+getPlatformName();
+    public void ParseGeneral() {
+        String URL = "https://r6db.com/api/v2/players?name=" + getUserName() + "&platform=" + getPlatformName();
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL, null,
-            new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response)
-                {
-                    try
-                    {
-                        searchResult.clear();
-                        Log.v("JSONArray", response.toString());
-                        //ArrayList<GeneralObject> generalObjectArrayList = new ArrayList<>();
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            searchResult.clear();
+                            Log.v("JSONArray", response.toString());
+                            //ArrayList<GeneralObject> generalObjectArrayList = new ArrayList<>();
 
-                        for (int i = 0; i < response.length(); i++)
-                        {
-                            JSONObject currObject = response.getJSONObject(i);
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject currObject = response.getJSONObject(i);
 
-                            String id = currObject.getString("id");
-                            String userId = currObject.getString("userId");
-                            String platform = currObject.getString("platform");
-                            int level = currObject.getInt("level");
-                            String createdAt = currObject.getString("created_at");
-                            String updatedAt = currObject.getString("updated_at");
+                                String id = currObject.getString("id");
+                                String userId = currObject.getString("userId");
 
-                            JSONObject lastPlayed = currObject.getJSONObject("lastPlayed");
-                            String casual = lastPlayed.getString("casual");
-                            String ranked = lastPlayed.getString("ranked");
-                            String lastplayed = lastPlayed.getString("last_played");
+                                String platform = currObject.getString("platform");
+                                int level = currObject.getInt("level");
+                                String createdAt = currObject.getString("created_at");
+                                String updatedAt = currObject.getString("updated_at");
 
-                            GeneralLastPlayedObject lastPlayedObject = new GeneralLastPlayedObject(casual, ranked, lastplayed);
+                                JSONObject lastPlayed = currObject.getJSONObject("lastPlayed");
+                                String casual = lastPlayed.getString("casual");
+                                String ranked = lastPlayed.getString("ranked");
+                                String lastplayed = lastPlayed.getString("last_played");
 
-                            String name = currObject.getString("name");
+                                GeneralLastPlayedObject lastPlayedObject = new GeneralLastPlayedObject(casual, ranked, lastplayed);
 
-                            JSONObject ranks = currObject.getJSONObject("ranks");
-                            JSONObject apac = ranks.getJSONObject("apac");
+                                String name = currObject.getString("name");
 
-                            int apacMMR = apac.getInt("mmr");
-                            int apacRank = apac.getInt("rank");
+                                JSONObject ranks = currObject.getJSONObject("ranks");
+                                JSONObject apac = ranks.getJSONObject("apac");
 
-                            GeneralRankObject apacObject = new GeneralRankObject("apac", apacMMR, apacRank);
+                                int apacMMR = apac.getInt("mmr");
+                                int apacRank = apac.getInt("rank");
 
-                            JSONObject emea = ranks.getJSONObject("emea");
+                                GeneralRankObject apacObject = new GeneralRankObject("apac", apacMMR, apacRank);
 
-                            int emeaMMR = emea.getInt("mmr");
-                            int emeaRank = emea.getInt("rank");
+                                JSONObject emea = ranks.getJSONObject("emea");
 
-                            GeneralRankObject emeaObject = new GeneralRankObject("emea", emeaMMR, emeaRank);
+                                int emeaMMR = emea.getInt("mmr");
+                                int emeaRank = emea.getInt("rank");
 
-                            JSONObject ncsa = ranks.getJSONObject("ncsa");
+                                GeneralRankObject emeaObject = new GeneralRankObject("emea", emeaMMR, emeaRank);
 
-                            int ncsaMMR = ncsa.getInt("mmr");
-                            int ncsaRank = ncsa.getInt("rank");
+                                JSONObject ncsa = ranks.getJSONObject("ncsa");
 
-                            GeneralRankObject ncsaObject = new GeneralRankObject("ncsa", ncsaMMR, ncsaRank);
+                                int ncsaMMR = ncsa.getInt("mmr");
+                                int ncsaRank = ncsa.getInt("rank");
 
-                            GeneralRanksObject ranksObject = new GeneralRanksObject(apacObject, emeaObject, ncsaObject);
+                                GeneralRankObject ncsaObject = new GeneralRankObject("ncsa", ncsaMMR, ncsaRank);
 
-                            JSONArray aliases = currObject.getJSONArray("aliases");
+                                GeneralRanksObject ranksObject = new GeneralRanksObject(apacObject, emeaObject, ncsaObject);
 
-                            ArrayList<GeneralAliasObject> aliasArrayList = new ArrayList<>();
-                            for (int j = 0; j < aliases.length(); j++)
-                            {
-                                JSONObject currAlias = aliases.getJSONObject(j);
+                                JSONArray aliases = currObject.getJSONArray("aliases");
 
-                                String aliasName = currAlias.getString("name");
-                                String aliasCreatedAt = currObject.getString("created_at");
+                                ArrayList<GeneralAliasObject> aliasArrayList = new ArrayList<>();
+                                for (int j = 0; j < aliases.length(); j++) {
+                                    JSONObject currAlias = aliases.getJSONObject(j);
 
-                                aliasArrayList.add(new GeneralAliasObject(aliasName, aliasCreatedAt));
-                                //Add to list of aliases
+                                    String aliasName = currAlias.getString("name");
+                                    String aliasCreatedAt = currObject.getString("created_at");
+
+                                    aliasArrayList.add(new GeneralAliasObject(aliasName, aliasCreatedAt));
+                                    //Add to list of aliases
+                                }
+
+                                GeneralAliasesObject generalAliasesObject = new GeneralAliasesObject(aliasArrayList);
+
+                                GeneralObject generalObject = new GeneralObject(id, userId, platform, level, createdAt, updatedAt, lastPlayedObject, name, ranksObject, generalAliasesObject);
+                                searchResult.add(generalObject);
+                                Log.v("JSONArrayResult", generalObject.toString());
                             }
+                            Log.v("JSON", "Reached end of parsing!");
 
-                            GeneralAliasesObject generalAliasesObject = new GeneralAliasesObject(aliasArrayList);
-
-                            GeneralObject generalObject = new GeneralObject(id, userId, platform, level, createdAt, updatedAt, lastPlayedObject, name, ranksObject, generalAliasesObject);
-                            searchResult.add(generalObject);
-                            Log.v("JSONArrayResult", generalObject.toString());
+                            search.updateListView(searchResult);
+                            // Add to list of R6DBUsers
+                            // Do something with data i.e store elsewhere
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        Log.v("JSON", "Reached end of parsing!");
-
-                        search.updateListView(searchResult);
-                        // Add to list of R6DBUsers
-                        // Do something with data i.e store elsewhere
                     }
-                    catch (JSONException e)
-                    {
-                        e.printStackTrace();
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
                     }
-                }
-            },
-            new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse(VolleyError error)
-                {
-                    error.printStackTrace();
-                }
-            }){
+                }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json");
                 headers.put("x-app-id", "175980a6-8ce2-449c-976b-e8cd9c05d86b");
                 return headers;
-            }};
+            }
+        };
 
         getmQueue().add(request);
     }
 
-    public String getPlatformName()
-    {
+    public String getPlatformName() {
         return this.platformName;
     }
 
-    public void setPlatformName(String platform)
-    {
+    public void setPlatformName(String platform) {
         this.platformName = platform;
     }
 
-    public String getUserName()
-    {
+    public String getUserName() {
         return this.userName;
     }
 
-    public void setUserName(String user)
-    {
+    public void setUserName(String user) {
         this.userName = user;
     }
 
-    private RequestQueue getmQueue()
-    {
+    private RequestQueue getmQueue() {
         return mQueue;
     }
 
-    private void setmQueue(RequestQueue mQueue)
-    {
+    private void setmQueue(RequestQueue mQueue) {
         this.mQueue = mQueue;
     }
 
-    public ArrayList<GeneralObject> getSearchResults()
-    {
+    public ArrayList<GeneralObject> getSearchResults() {
         return this.searchResult;
     }
+
 }
 

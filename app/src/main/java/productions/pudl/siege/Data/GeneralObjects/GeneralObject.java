@@ -1,5 +1,10 @@
 package productions.pudl.siege.Data.GeneralObjects;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class GeneralObject
@@ -107,6 +112,11 @@ public class GeneralObject
 
     private void setAliasesObject(GeneralAliasesObject aliasesObject) {
         this.aliasesObject = aliasesObject;
+    }
+
+    public void getUserPicture(ImageView imgView)
+    {
+        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + getUserID() + "/default_146_146.png").into(imgView);
     }
 
     @Override
