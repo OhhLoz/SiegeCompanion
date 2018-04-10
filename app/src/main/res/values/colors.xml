@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorNavBarText">#EEEEEE</color>
+    <color name="colorNavBar">#222222</color>
     <color name="colorCompareTab">#E91E63</color>
     <color name="colorCompareText">#FF80AB</color>
     <color name="colorOperatorTab">#F44336</color>
