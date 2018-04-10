@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
 
@@ -20,14 +21,14 @@ public class ListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private List<User> userList = null;
-    private ArrayList<User> arraylist;
+    private ArrayList<GeneralObject> generalObjectsArrayList = null;
+    private ArrayList<GeneralObject> arraylist;
 
-    public ListViewAdapter(Context context, List<User> userList) {
+    public ListViewAdapter(Context context, ArrayList<GeneralObject> userList) {
         mContext = context;
-        this.userList = userList;
+        this.generalObjectsArrayList = userList;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<User>();
+        this.arraylist = new ArrayList<GeneralObject>();
         this.arraylist.addAll(userList);
     }
 
@@ -38,12 +39,12 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return userList.size();
+        return generalObjectsArrayList.size();
     }
 
     @Override
-    public User getItem(int position) {
-        return userList.get(position);
+    public GeneralObject getItem(int position) {
+        return generalObjectsArrayList.get(position);
     }
 
     @Override
@@ -56,7 +57,6 @@ public class ListViewAdapter extends BaseAdapter {
         if (view == null) {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.list_view_items, null);
-
             holder.userName = (TextView) view.findViewById(R.id.userName);
             holder.platformName = (TextView) view.findViewById(R.id.platformName);
             view.setTag(holder);
@@ -65,9 +65,15 @@ public class ListViewAdapter extends BaseAdapter {
         {
             holder = (ViewHolder) view.getTag();
         }
-        holder.userName.setText(userList.get(position).getPlayerName());
-        holder.platformName.setText(userList.get(position).getPlatform());
+        holder.userName.setText(generalObjectsArrayList.get(position).getName());
+        holder.platformName.setText(generalObjectsArrayList.get(position).getPlatform());
         return view;
+    }
+
+    public void updateSearchList(ArrayList<GeneralObject> newArrayList)
+    {
+        this.generalObjectsArrayList = newArrayList;
+        this.notifyDataSetChanged();
     }
 
     // Filter Class
@@ -75,16 +81,16 @@ public class ListViewAdapter extends BaseAdapter {
     {
         userName = userName.toLowerCase(Locale.getDefault());
         platformName = platformName.toLowerCase(Locale.getDefault());
-        userList.clear();
-        for (User currPrevSearch : arraylist)
+        generalObjectsArrayList.clear();
+        for (GeneralObject currPrevSearch : arraylist)
         {
             if (userName.length() == 0 && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
             {
-                userList.add(currPrevSearch);
+                generalObjectsArrayList.add(currPrevSearch);
             }
-            else if (currPrevSearch.getPlayerName().toLowerCase(Locale.getDefault()).contains(userName) && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
+            else if (currPrevSearch.getName().toLowerCase(Locale.getDefault()).contains(userName) && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
             {
-                userList.add(currPrevSearch);
+                generalObjectsArrayList.add(currPrevSearch);
             }
         }
         notifyDataSetChanged();

@@ -23,16 +23,19 @@ import productions.pudl.siege.Data.GeneralObjects.GeneralLastPlayedObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralRankObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralRanksObject;
+import productions.pudl.siege.Fragment.Search;
 
 public class R6DBJSONAdapter
 {
     protected String userName;
     protected String platformName;
+    private Search search;
     private RequestQueue mQueue;
     private ArrayList<GeneralObject> searchResult = new ArrayList<>();
 
-    public R6DBJSONAdapter(String currUserNameSelected, String currPlatformSelected, RequestQueue mQueue)
+    public R6DBJSONAdapter(Search search, String currUserNameSelected, String currPlatformSelected, RequestQueue mQueue)
     {
+        this.search = search;
         setUserName(currUserNameSelected);
         setPlatformName(currPlatformSelected);
         setmQueue(mQueue);
@@ -137,6 +140,8 @@ public class R6DBJSONAdapter
                             Log.v("JSONArrayResult", generalObject.toString());
                         }
                         Log.v("JSON", "Reached end of parsing!");
+
+                        search.updateListView(searchResult);
                         // Add to list of R6DBUsers
                         // Do something with data i.e store elsewhere
                     }

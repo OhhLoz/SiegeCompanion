@@ -33,7 +33,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     String[] platformList;
     String[] userNameList;
     ArrayList<User> userList = new ArrayList<User>();
-    ArrayList<GeneralObject> searchResults = new ArrayList<>();
+    public static ArrayList<GeneralObject> searchResults;
     ArrayAdapter<CharSequence> spinnerAdapter;
 
     private RequestQueue mQueue;
@@ -62,26 +62,27 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         platformList = new String[]{"PC", "PC", "PC", "PC", "Xbox", "PS4"};
 
         listView = (ListView) view.findViewById(R.id.listview);
-        mQueue = Volley.newRequestQueue(getContext());
+        mQueue = Volley.newRequestQueue(view.getContext());
 
-        // just for populating the arrays before implementing previous history
-        if (userNameList.length == 0 || platformList.length == 0)  // if no hardcoded values given
-        {
-            User previousSearches = new User("No Results", "Please Search Usernames to populate");
-            userList.add(previousSearches);
-            currUserNameSelected = "Please Search Usernames to populate";
-            currPlatformSelected = "No Results";
-        }
-        else if (userNameList.length == platformList.length) // if there are equal matching pairs in the hardcoded string arrays
-        {
-            for (int i = 0; i < userNameList.length; i++) {
-                User user = new User(platformList[i], userNameList[i]);
-                userList.add(user);
-            }
-        }
+//        // just for populating the arrays before implementing previous history
+//        if (userNameList.length == 0 || platformList.length == 0)  // if no hardcoded values given
+//        {
+//            User previousSearches = new User("No Results", "Please Search Usernames to populate");
+//            userList.add(previousSearches);
+//            currUserNameSelected = "Please Search Usernames to populate";
+//            currPlatformSelected = "No Results";
+//        }
+//        else if (userNameList.length == platformList.length) // if there are equal matching pairs in the hardcoded string arrays
+//        {
+//            for (int i = 0; i < userNameList.length; i++) {
+//                User user = new User(platformList[i], userNameList[i]);
+//                userList.add(user);
+//            }
+//        }
 
         //if i replace the below userList with searchResults it doesn't work as it isnt populated yet
-        listViewAdapter = new ListViewAdapter(getContext(), userList);
+        searchResults = new ArrayList<GeneralObject>();
+        listViewAdapter = new ListViewAdapter(view.getContext(), searchResults);
         listView.setOnItemClickListener(this);
         listView.setAdapter(listViewAdapter);
 
@@ -119,9 +120,14 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
         Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
         //R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
-        R6DBJSONAdapter r6DBJsonAdapter = new R6DBJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
+        R6DBJSONAdapter r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
         r6DBJsonAdapter.ParseGeneral();
         searchResults = r6DBJsonAdapter.getSearchResults();
+        //listViewAdapter.updateSearchList(searchResults);
+        Log.v("Test", "Updated Search Results");
+        searchView.clearFocus(); // removes the soft keyboard
+
+
         Log.v("JSON", "finished json import");
         return true;
     }
@@ -145,5 +151,10 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         Log.v("Item", "Item Clicked");
+    }
+
+    public void updateListView(ArrayList<GeneralObject> newArrayList)
+    {
+        listViewAdapter.updateSearchList(newArrayList);
     }
 }

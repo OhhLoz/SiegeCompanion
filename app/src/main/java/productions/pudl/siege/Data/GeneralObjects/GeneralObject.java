@@ -45,7 +45,7 @@ public class GeneralObject
         this.userID = userID;
     }
 
-    private String getPlatform() {
+    public String getPlatform() {
         return platform;
     }
 
@@ -85,7 +85,7 @@ public class GeneralObject
         this.lastPlayedObject = lastPlayedObject;
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
