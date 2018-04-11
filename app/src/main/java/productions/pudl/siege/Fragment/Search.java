@@ -1,7 +1,11 @@
 package productions.pudl.siege.Fragment;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -31,6 +37,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     SearchView searchView;
     ListView listView;
     ListViewAdapter listViewAdapter;
+    R6DBJSONAdapter r6DBJsonAdapter;
     String[] platformList;
     String[] userNameList;
     ArrayList<User> userList = new ArrayList<User>();
@@ -121,11 +128,10 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
         Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
         //R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
-        R6DBJSONAdapter r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
+        r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
         Toast.makeText(getContext(), "Searching Data...", Toast.LENGTH_SHORT).show();
         r6DBJsonAdapter.ParseGeneral();
         searchResults = r6DBJsonAdapter.getSearchResults();
-        //listViewAdapter.updateSearchList(searchResults);
         Log.v("Test", "Updated Search Results");
         searchView.clearFocus(); // removes the soft keyboard
 
@@ -153,11 +159,30 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         Log.v("Item", "Item Clicked");
+        GeneralObject currItem = listViewAdapter.getItem(i);
+        Log.v("CurrItem", currItem.getName() + ", " + currItem.getPlatform());
+        //r6DBJsonAdapter.ParseDetailed(currItem.getUserID());
+        //DetailedObject detail = r6DBJsonAdapter.getDetailedObject();
+        //ShowPopup(view, detail);
     }
 
     public void updateListView(ArrayList<GeneralObject> newArrayList)
     {
         listViewAdapter.updateSearchList(newArrayList);
         Toast.makeText(getContext(), "Search Complete!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void ShowPopup(View view, GeneralObject currItem)
+    {
+        Dialog myDialog = new Dialog(view.getContext());
+        ImageView imgView;
+        TextView userName;
+        myDialog.setContentView(R.layout.layout_stats);
+        imgView = (ImageView) myDialog.findViewById(R.id.profilePicture);
+        userName = (TextView) myDialog.findViewById(R.id.userName);
+        userName.setText(currItem.getName());
+        currItem.getUserPicture(imgView);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

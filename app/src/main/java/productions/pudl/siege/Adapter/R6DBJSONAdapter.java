@@ -13,6 +13,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -52,8 +53,7 @@ public class R6DBJSONAdapter {
         setmQueue(mQueue);
         //ParsePlatform();
         //ParseGeneral();
-        //ParseOperators();
-        //ParseSeasons();
+        //ParseDetailed();
     }
 
     private void ParsePlatform() {
@@ -149,6 +149,46 @@ public class R6DBJSONAdapter {
                             search.updateListView(searchResult);
                             // Add to list of R6DBUsers
                             // Do something with data i.e store elsewhere
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("x-app-id", "175980a6-8ce2-449c-976b-e8cd9c05d86b");
+                return headers;
+            }
+        };
+
+        getmQueue().add(request);
+    }
+
+    public void ParseDetailed(String id) {
+        String URL = "https://r6db.com/api/v2/players/"+id;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            searchResult.clear();
+                            Log.v("JSONArray", response.toString());
+
+                            String id = response.getString("id");
+
+                            Log.v("JSON", "Reached end of parsing!");
+
+                            search.updateListView(searchResult);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -42,7 +42,7 @@ public class GeneralObject
         this.id = id;
     }
 
-    private String getUserID() {
+    public String getUserID() {
         return userID;
     }
 
@@ -58,7 +58,7 @@ public class GeneralObject
         this.platform = platform;
     }
 
-    private int getLevel() {
+    public int getLevel() {
         return level;
     }
 
@@ -66,7 +66,7 @@ public class GeneralObject
         this.level = level;
     }
 
-    private String getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
@@ -74,7 +74,7 @@ public class GeneralObject
         this.createdAt = createdAt;
     }
 
-    private String getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
@@ -82,7 +82,7 @@ public class GeneralObject
         this.updatedAt = updatedAt;
     }
 
-    private GeneralLastPlayedObject getLastPlayedObject() {
+    public GeneralLastPlayedObject getLastPlayedObject() {
         return lastPlayedObject;
     }
 
@@ -98,7 +98,7 @@ public class GeneralObject
         this.name = name;
     }
 
-    private GeneralRanksObject getRanksObject() {
+    public GeneralRanksObject getRanksObject() {
         return ranksObject;
     }
 
@@ -106,7 +106,7 @@ public class GeneralObject
         this.ranksObject = ranksObject;
     }
 
-    private GeneralAliasesObject getAliasesObject() {
+    public GeneralAliasesObject getAliasesObject() {
         return aliasesObject;
     }
 
