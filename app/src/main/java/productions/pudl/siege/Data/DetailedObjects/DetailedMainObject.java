@@ -1,5 +1,9 @@
 package productions.pudl.siege.Data.DetailedObjects;
 
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import productions.pudl.siege.Data.GeneralObjects.GeneralAliasesObject;
@@ -21,11 +25,11 @@ public class DetailedMainObject
     private DetailedPlacementsObject placements;
     // Ignore 'Progressions' for now as its not needed in version 1 of the app
     private GeneralAliasesObject aliasesObject;
-    private int serverTime;
-    private int updateTime;
+    private String serverTime;
+    private String updateTime;
 
 
-    public DetailedMainObject(String id, String userID, String platform, int level, String createdAt, String updatedAt, GeneralLastPlayedObject lastPlayedObject, String name, DetailedRanksObject ranksObject, ArrayList<DetailedRanksObject> prevRanksObject, DetailedStatsObject stats, DetailedPlacementsObject placements, GeneralAliasesObject aliasesObject, int serverTime, int updateTime) {
+    public DetailedMainObject(String id, String userID, String platform, int level, String createdAt, String updatedAt, GeneralLastPlayedObject lastPlayedObject, String name, DetailedRanksObject ranksObject, ArrayList<DetailedRanksObject> prevRanksObject, DetailedStatsObject stats, DetailedPlacementsObject placements, GeneralAliasesObject aliasesObject, String serverTime, String updateTime) {
         setId(id);
         setUserID(userID);
         setPlatform(platform);
@@ -147,19 +151,24 @@ public class DetailedMainObject
         this.aliasesObject = aliasesObject;
     }
 
-    public int getServerTime() {
+    public String getServerTime() {
         return serverTime;
     }
 
-    public void setServerTime(int serverTime) {
+    public void setServerTime(String serverTime) {
         this.serverTime = serverTime;
     }
 
-    public int getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(int updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public void getUserPicture(ImageView imgView)
+    {
+        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + getUserID() + "/default_146_146.png").into(imgView);
     }
 }

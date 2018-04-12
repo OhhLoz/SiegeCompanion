@@ -12,4 +12,17 @@
         <item>Xbox</item>
         <item>PS4</item>
     </string-array>
+    <string name="statsGeneral">General</string>
+    <string name="statsKills">Kills</string>
+    <string name="statsDeaths">Deaths</string>
+    <string name="statsAssists">Assists</string>
+    <string name="statsKD">K/D</string>
+    <string name="statsWins">Wins</string>
+    <string name="statsLosses">Losses</string>
+    <string name="statsPlayed">Played</string>
+    <string name="statsWL">W/L</string>
+    <string name="statsRevives">Revives</string>
+    <string name="statsLevel">Level</string>
+    <string name="statsSuicides">Suicides</string>
+    <string name="statsTimePlayed">PlayTime</string>
 </resources>

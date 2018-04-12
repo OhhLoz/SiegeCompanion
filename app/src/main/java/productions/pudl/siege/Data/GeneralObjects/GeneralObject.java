@@ -122,6 +122,6 @@ public class GeneralObject
     @Override
     public String toString()
     {
-        return ("{" + '"' + "id" + '"' + ":" + '"' + getId() + '"' + "," + '"' + "userId" + '"' + ":" + '"' + getUserID() + '"' + "," + '"' + "platform" + '"' + ":" + '"' + getPlatform() + '"' + "," + '"' + "level" + '"' + ":" + '"' + String.valueOf(getLevel()) + '"' + "," + '"' + "created_at" + '"' + ":" + '"' + getCreatedAt() + '"' + "," + '"' + "updated_at" + '"' + ":" + '"' + getUpdatedAt() + '"' + "," + getLastPlayedObject().toString() + "," + '"' + "name" + '"' + ":" + '"' + getName() + '"' + "," + getRanksObject().toString() + "," + getAliasesObject().toString() + "}");
+        return ("{" + '"' + "id" + '"' + ":" + '"' + getId() + '"' + "," + '"' + "userId" + '"' + ":" + '"' + getUserID() + '"' + "," + '"' + "platform" + '"' + ":" + '"' + getPlatform() + '"' + "," + '"' + "level" + '"' + ":" + '"' + getLevel() + '"' + "," + '"' + "created_at" + '"' + ":" + '"' + getCreatedAt() + '"' + "," + '"' + "updated_at" + '"' + ":" + '"' + getUpdatedAt() + '"' + "," + getLastPlayedObject().toString() + "," + '"' + "name" + '"' + ":" + '"' + getName() + '"' + "," + getRanksObject().toString() + "," + getAliasesObject().toString() + "}");
     }
 }

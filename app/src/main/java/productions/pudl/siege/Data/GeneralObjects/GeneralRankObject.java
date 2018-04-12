@@ -40,6 +40,6 @@ public class GeneralRankObject
     @Override
     public String toString()
     {
-        return ('"' + getRegion() + '"' + ":{" + '"' + "mmr" + '"' + ":" + String.valueOf(getMMR()) + "," + '"' + "rank" + '"' + ":" + String.valueOf(getRank()) + "}");
+        return ('"' + getRegion() + '"' + ":{" + '"' + "mmr" + '"' + ":" + getMMR() + "," + '"' + "rank" + '"' + ":" + getRank() + "}");
     }
 }

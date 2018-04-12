@@ -2,6 +2,7 @@ package productions.pudl.siege.Fragment;
 
 import android.app.Dialog;
 import android.app.SearchManager;
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,10 +26,13 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import productions.pudl.siege.Adapter.R6DBJSONAdapter;
 import productions.pudl.siege.Adapter.ListViewAdapter;
+import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
@@ -42,6 +46,9 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     String[] userNameList;
     ArrayList<User> userList = new ArrayList<User>();
     public static ArrayList<GeneralObject> searchResults;
+    public static DetailedMainObject finalResult;
+    GeneralObject ItemClicked;
+    View ItemView;
     ArrayAdapter<CharSequence> spinnerAdapter;
 
     private RequestQueue mQueue;
@@ -159,9 +166,10 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         Log.v("Item", "Item Clicked");
-        GeneralObject currItem = listViewAdapter.getItem(i);
-        Log.v("CurrItem", currItem.getName() + ", " + currItem.getPlatform());
-        //r6DBJsonAdapter.ParseDetailed(currItem.getUserID());
+        ItemClicked = listViewAdapter.getItem(i);
+        ItemView = view;
+        Log.v("CurrItem", ItemClicked.getName() + ", " + ItemClicked.getPlatform());
+        r6DBJsonAdapter.ParseDetailed(ItemClicked.getUserID());
         //DetailedObject detail = r6DBJsonAdapter.getDetailedObject();
         //ShowPopup(view, detail);
     }
@@ -172,16 +180,87 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         Toast.makeText(getContext(), "Search Complete!", Toast.LENGTH_SHORT).show();
     }
 
-    private void ShowPopup(View view, GeneralObject currItem)
+    public void updateFinalResult(DetailedMainObject finalObject)
+    {
+        finalResult = finalObject;
+        Toast.makeText(getContext(), "Fetched all Data for User: " + finalResult.getName(), Toast.LENGTH_SHORT).show();
+        ShowPopup(ItemView, finalResult);
+        //listView.requestFocus();
+    }
+
+    private void ShowPopup(View view, DetailedMainObject currItem)
     {
         Dialog myDialog = new Dialog(view.getContext());
-        ImageView imgView;
+        ImageView profilePicture;
         TextView userName;
+        TextView platformName;
+        TextView generalKillsText;
+        TextView generalDeathsText;
+        TextView generalAssistsText;
+        TextView generalKDText;
+        TextView generalWinsText;
+        TextView generalLossesText;
+        TextView generalPlayedText;
+        TextView generalWLText;
+        TextView generalRevivesText ;
+        TextView generalSuicidesText;
+        TextView generalLevelText;
+        TextView generalTimePlayedText;
+
         myDialog.setContentView(R.layout.layout_stats);
-        imgView = (ImageView) myDialog.findViewById(R.id.profilePicture);
+        profilePicture = (ImageView) myDialog.findViewById(R.id.profilePicture);
         userName = (TextView) myDialog.findViewById(R.id.userName);
+        platformName = (TextView) myDialog.findViewById(R.id.platformName);
+        generalKillsText = (TextView) myDialog.findViewById(R.id.generalKillsText);
+        generalDeathsText = (TextView) myDialog.findViewById(R.id.generalDeathsText);
+        generalAssistsText = (TextView) myDialog.findViewById(R.id.generalAssistsText);
+        generalKDText = myDialog.findViewById(R.id.generalKDText);
+        generalWinsText = (TextView) myDialog.findViewById(R.id.generalWinsText);
+        generalLossesText = (TextView) myDialog.findViewById(R.id.generalLossesText);
+        generalPlayedText = (TextView) myDialog.findViewById(R.id.generalPlayedText);
+        generalWLText = (TextView) myDialog.findViewById(R.id.generalWLText);
+        generalRevivesText = (TextView) myDialog.findViewById(R.id.generalRevivesText);
+        generalSuicidesText = (TextView) myDialog.findViewById(R.id.generalSuicidesText);
+        generalLevelText = (TextView) myDialog.findViewById(R.id.generalLevelText);
+        generalTimePlayedText = (TextView) myDialog.findViewById(R.id.generalTimePlayedText);
+
+        int kills = currItem.getStats().getGeneral().getKills();
+        int deaths = currItem.getStats().getGeneral().getDeaths();
+        double KD = (double) kills /  (double) deaths;
+        KD = (double) Math.round(KD * 1000d) / 1000d;
+
+        int wins = currItem.getStats().getGeneral().getWon();
+        int losses = currItem.getStats().getGeneral().getLost();
+        double WL = (double) wins /  (double) losses;
+        WL = (double) Math.round(WL * 1000d) / 1000d;
+
+        int seconds = currItem.getStats().getGeneral().getTimePlayed();
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        seconds = (seconds % 3600) % 60;
+
+        StringBuilder timePlayed = new StringBuilder();
+        if(hours != 0)
+            timePlayed.append(String.valueOf(hours) + "H ");
+        if(minutes != 0)
+            timePlayed.append(String.valueOf(minutes) + "M");
+
+        currItem.getUserPicture(profilePicture);
         userName.setText(currItem.getName());
-        currItem.getUserPicture(imgView);
+        platformName.setText(currItem.getPlatform());
+        generalKillsText.setText(String.valueOf(kills));
+        generalDeathsText.setText(String.valueOf(deaths));
+        generalAssistsText.setText(String.valueOf(currItem.getStats().getGeneral().getAssists()));
+        generalKDText.setText(String.valueOf(KD));
+        generalWinsText.setText(String.valueOf(wins));
+        generalLossesText.setText(String.valueOf(losses));
+        generalPlayedText.setText(String.valueOf(currItem.getStats().getGeneral().getPlayed()));
+        generalWLText.setText(String.valueOf(WL));
+        generalRevivesText.setText(String.valueOf(currItem.getStats().getGeneral().getRevives()));
+        generalSuicidesText.setText(String.valueOf(currItem.getStats().getGeneral().getSuicides()));
+        generalLevelText.setText(String.valueOf(currItem.getLevel()));
+        generalTimePlayedText.setText(timePlayed.toString());
+
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
     }
