@@ -4,4 +4,5 @@
     <dimen name="statTextSize">15sp</dimen>
     <dimen name="statTitleSize">18sp</dimen>
     <dimen name="statsMargin">8dp</dimen>
+    <dimen name="statsSmallMargin">4dp</dimen>
 </resources>

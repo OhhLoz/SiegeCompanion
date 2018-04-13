@@ -45,6 +45,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
+
+    <View
+        android:id="@+id/uiview"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/statsSmallMargin"
+        android:layout_marginEnd="@dimen/statsSmallMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintTop_toTopOf="@id/level"
+        app:layout_constraintBottom_toBottomOf="@id/level"
+        app:layout_constraintStart_toEndOf="@id/level"
+        app:layout_constraintEnd_toStartOf="@id/platformName"/>
+
+    <TextView
         android:id="@+id/platformName"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -58,8 +79,22 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="@color/colorNavBarText"
+        android:background="@color/colorStatTitle"
         app:layout_constraintTop_toBottomOf="@id/profilePicture" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
 
     <TextView
         android:id="@+id/generalTitle"
@@ -68,7 +103,7 @@
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:text="@string/statsGeneral"
+        android:text="@string/generalTitle"
         android:textSize="@dimen/statSuperTitleSize"
         android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +117,7 @@
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:text="@string/statsKills"
+        android:text="@string/generalKills"
         android:textSize="@dimen/statTitleSize"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +143,7 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsDeaths"
+        android:text="@string/generalDeaths"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
@@ -134,7 +169,7 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsAssists"
+        android:text="@string/generalAssists"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
@@ -159,7 +194,7 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsKD"
+        android:text="@string/generalKD"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
@@ -175,7 +210,6 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generalKDTitle" />
 
     <TextView
@@ -185,7 +219,7 @@
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:text="@string/statsWins"
+        android:text="@string/generalWins"
         android:textSize="@dimen/statTitleSize"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
@@ -211,7 +245,7 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsLosses"
+        android:text="@string/generalLosses"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
@@ -236,7 +270,7 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsPlayed"
+        android:text="@string/generalPlayed"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
@@ -262,7 +296,7 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsWL"
+        android:text="@string/generalWL"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
@@ -287,7 +321,7 @@
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:text="@string/statsRevives"
+        android:text="@string/generalRevives"
         android:textSize="@dimen/statTitleSize"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
@@ -313,7 +347,7 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsSuicides"
+        android:text="@string/generalSuicides"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -332,21 +366,21 @@
         app:layout_constraintTop_toBottomOf="@+id/generalSuicidesTitle" />
 
     <TextView
-        android:id="@+id/generalLevelTitle"
+        android:id="@+id/generalMeleeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsLevel"
+        android:text="@string/generalMelee"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generalSuicidesText" />
 
     <TextView
-        android:id="@+id/generalLevelText"
+        android:id="@+id/generalMeleeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
@@ -354,7 +388,7 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generalLevelTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/generalMeleeTitle" />
 
     <TextView
         android:id="@+id/generalTimePlayedTitle"
@@ -364,11 +398,11 @@
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
-        android:text="@string/statsTimePlayed"
+        android:text="@string/generalTimePlayed"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generalLevelText" />
+        app:layout_constraintTop_toBottomOf="@+id/generalMeleeText" />
 
     <TextView
         android:id="@+id/generalTimePlayedText"
@@ -382,18 +416,232 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generalTimePlayedTitle" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/leftGuideline"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.33" />
+    <View
+        android:id="@+id/generalView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:orientation="horizontal"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintTop_toBottomOf="@id/generalTimePlayedText"/>
 
-    <android.support.constraint.Guideline
-        android:id="@+id/rightGuideline"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/casualTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:text="@string/casualTitle"
+        android:textSize="@dimen/statSuperTitleSize"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalView" />
+
+    <TextView
+        android:id="@+id/casualKillsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:text="@string/casualKills"
+        android:textSize="@dimen/statTitleSize"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualTitle" />
+
+    <TextView
+        android:id="@+id/casualKillsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualKillsTitle" />
+
+    <TextView
+        android:id="@+id/casualDeathsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualDeaths"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualKillsText" />
+
+    <TextView
+        android:id="@+id/casualDeathsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualDeathsTitle" />
+
+    <TextView
+        android:id="@+id/casualKDTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualKD"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualDeathsText" />
+
+    <TextView
+        android:id="@+id/casualKDText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualKDTitle" />
+
+    <TextView
+        android:id="@+id/casualWinsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:text="@string/casualWins"
+        android:textSize="@dimen/statTitleSize"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualTitle" />
+
+    <TextView
+        android:id="@+id/casualWinsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualWinsTitle" />
+
+    <TextView
+        android:id="@+id/casualLossesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualLosses"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualWinsText" />
+
+    <TextView
+        android:id="@+id/casualLossesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualLossesTitle" />
+
+    <TextView
+        android:id="@+id/casualWLTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualWL"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualLossesText" />
+
+    <TextView
+        android:id="@+id/casualWLText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/casualWLTitle" />
+
+    <TextView
+        android:id="@+id/casualPlayedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualPlayed"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/casualTitle" />
+
+    <TextView
+        android:id="@+id/casualPlayedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/casualPlayedTitle" />
+
+
+    <TextView
+        android:id="@+id/casualTimePlayedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualTimePlayed"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/casualPlayedText" />
+
+    <TextView
+        android:id="@+id/casualTimePlayedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/casualTimePlayedTitle" />
 
 </android.support.constraint.ConstraintLayout>

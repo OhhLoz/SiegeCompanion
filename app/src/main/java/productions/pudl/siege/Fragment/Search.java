@@ -194,6 +194,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         ImageView profilePicture;
         TextView userName;
         TextView platformName;
+        TextView level;
         TextView generalKillsText;
         TextView generalDeathsText;
         TextView generalAssistsText;
@@ -204,13 +205,24 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         TextView generalWLText;
         TextView generalRevivesText ;
         TextView generalSuicidesText;
-        TextView generalLevelText;
+        TextView generalMeleeKillsText;
         TextView generalTimePlayedText;
+        TextView casualKillsText;
+        TextView casualDeathsText;
+        TextView casualKDText;
+        TextView casualWinsText;
+        TextView casualLossesText;
+        TextView casualWLText;
+        TextView casualPlayedText;
+        TextView casualTimePlayedText;
 
         myDialog.setContentView(R.layout.layout_stats);
+
         profilePicture = (ImageView) myDialog.findViewById(R.id.profilePicture);
         userName = (TextView) myDialog.findViewById(R.id.userName);
         platformName = (TextView) myDialog.findViewById(R.id.platformName);
+        level = (TextView) myDialog.findViewById(R.id.level);
+
         generalKillsText = (TextView) myDialog.findViewById(R.id.generalKillsText);
         generalDeathsText = (TextView) myDialog.findViewById(R.id.generalDeathsText);
         generalAssistsText = (TextView) myDialog.findViewById(R.id.generalAssistsText);
@@ -221,8 +233,17 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         generalWLText = (TextView) myDialog.findViewById(R.id.generalWLText);
         generalRevivesText = (TextView) myDialog.findViewById(R.id.generalRevivesText);
         generalSuicidesText = (TextView) myDialog.findViewById(R.id.generalSuicidesText);
-        generalLevelText = (TextView) myDialog.findViewById(R.id.generalLevelText);
+        generalMeleeKillsText = (TextView) myDialog.findViewById(R.id.generalMeleeText);
         generalTimePlayedText = (TextView) myDialog.findViewById(R.id.generalTimePlayedText);
+
+        casualKillsText = (TextView) myDialog.findViewById(R.id.casualKillsText);
+        casualDeathsText = (TextView) myDialog.findViewById(R.id.casualDeathsText);
+        casualKDText = myDialog.findViewById(R.id.casualKDText);
+        casualWinsText = (TextView) myDialog.findViewById(R.id.casualWinsText);
+        casualLossesText = (TextView) myDialog.findViewById(R.id.casualLossesText);
+        casualWLText = (TextView) myDialog.findViewById(R.id.casualWLText);
+        casualPlayedText = (TextView) myDialog.findViewById(R.id.casualPlayedText);
+        casualTimePlayedText = (TextView) myDialog.findViewById(R.id.casualTimePlayedText);
 
         int kills = currItem.getStats().getGeneral().getKills();
         int deaths = currItem.getStats().getGeneral().getDeaths();
@@ -248,6 +269,8 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         currItem.getUserPicture(profilePicture);
         userName.setText(currItem.getName());
         platformName.setText(currItem.getPlatform());
+        level.setText(getString(R.string.level) + ": " + String.valueOf(currItem.getLevel()));
+
         generalKillsText.setText(String.valueOf(kills));
         generalDeathsText.setText(String.valueOf(deaths));
         generalAssistsText.setText(String.valueOf(currItem.getStats().getGeneral().getAssists()));
@@ -258,8 +281,38 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         generalWLText.setText(String.valueOf(WL));
         generalRevivesText.setText(String.valueOf(currItem.getStats().getGeneral().getRevives()));
         generalSuicidesText.setText(String.valueOf(currItem.getStats().getGeneral().getSuicides()));
-        generalLevelText.setText(String.valueOf(currItem.getLevel()));
+        generalMeleeKillsText.setText(String.valueOf(currItem.getStats().getGeneral().getMeleekills()));
         generalTimePlayedText.setText(timePlayed.toString());
+
+        kills = currItem.getStats().getCasual().getKills();
+        deaths = currItem.getStats().getCasual().getDeaths();
+        KD = (double) kills /  (double) deaths;
+        KD = (double) Math.round(KD * 1000d) / 1000d;
+
+        wins = currItem.getStats().getCasual().getWon();
+        losses = currItem.getStats().getCasual().getLost();
+        WL = (double) wins /  (double) losses;
+        WL = (double) Math.round(WL * 1000d) / 1000d;
+
+        seconds = currItem.getStats().getCasual().getTimePlayed();
+        hours = seconds / 3600;
+        minutes = (seconds % 3600) / 60;
+        seconds = (seconds % 3600) % 60;
+
+        timePlayed = new StringBuilder();
+        if(hours != 0)
+            timePlayed.append(String.valueOf(hours) + "H ");
+        if(minutes != 0)
+            timePlayed.append(String.valueOf(minutes) + "M");
+
+        casualKillsText.setText(String.valueOf(kills));
+        casualDeathsText.setText(String.valueOf(deaths));
+        casualKDText.setText(String.valueOf(KD));
+        casualWinsText.setText(String.valueOf(wins));
+        casualLossesText.setText(String.valueOf(losses));
+        casualWLText.setText(String.valueOf(WL));
+        casualPlayedText.setText(String.valueOf(currItem.getStats().getCasual().getPlayed()));
+        casualTimePlayedText.setText(timePlayed.toString());
 
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
