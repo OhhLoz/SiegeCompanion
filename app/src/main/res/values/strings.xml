@@ -12,4 +12,28 @@
         <item>Xbox</item>
         <item>PS4</item>
     </string-array>
+    <string name="level">Level</string>
+    <string name="generalTitle">General</string>
+    <string name="generalKills">Kills</string>
+    <string name="generalDeaths">Deaths</string>
+    <string name="generalAssists">Assists</string>
+    <string name="generalKD">K/D</string>
+    <string name="generalWins">Wins</string>
+    <string name="generalLosses">Losses</string>
+    <string name="generalPlayed">Played</string>
+    <string name="generalWL">W/L</string>
+    <string name="generalRevives">Revives</string>
+    <string name="generalSuicides">Suicides</string>
+    <string name="generalMelee">Melee Kills</string>
+    <string name="generalTimePlayed">Play Time</string>
+    <string name="casualTitle">Casual</string>
+    <string name="casualKills">Kills</string>
+    <string name="casualDeaths">Deaths</string>
+    <string name="casualKD">K/D</string>
+    <string name="casualWins">Wins</string>
+    <string name="casualLosses">Losses</string>
+    <string name="casualWL">W/L</string>
+    <string name="casualPlayed">Played</string>
+    <string name="casualLevel">Level</string>
+    <string name="casualTimePlayed">Play Time</string>
 </resources>

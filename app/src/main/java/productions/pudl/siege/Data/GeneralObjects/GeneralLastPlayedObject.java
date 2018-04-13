@@ -40,6 +40,6 @@ public class GeneralLastPlayedObject
     @Override
     public String toString()
     {
-        return ('"' + "lastplayed" + '"' + ":{" + '"' + "casual" + '"' + ":" + String.valueOf(getCasual()) + "," + '"' + "ranked" + '"' + ":" + String.valueOf(getRanked()) + "," + '"' + "last_played" + '"' + ":" + getLastPlayed() + "}");
+        return ('"' + "lastplayed" + '"' + ":{" + '"' + "casual" + '"' + ":" + getCasual() + "," + '"' + "ranked" + '"' + ":" + getRanked() + "," + '"' + "last_played" + '"' + ":" + getLastPlayed() + "}");
     }
 }

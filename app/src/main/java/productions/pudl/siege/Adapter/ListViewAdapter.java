@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ListViewAdapter extends BaseAdapter {
     public class ViewHolder {
         TextView userName;
         TextView platformName;
+        ImageView profilePicture;
     }
 
     @Override
@@ -59,6 +61,7 @@ public class ListViewAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.list_view_items, null);
             holder.userName = (TextView) view.findViewById(R.id.userName);
             holder.platformName = (TextView) view.findViewById(R.id.platformName);
+            holder.profilePicture = (ImageView) view.findViewById(R.id.imageView);
             view.setTag(holder);
         }
         else
@@ -67,6 +70,7 @@ public class ListViewAdapter extends BaseAdapter {
         }
         holder.userName.setText(generalObjectsArrayList.get(position).getName());
         holder.platformName.setText(generalObjectsArrayList.get(position).getPlatform());
+        generalObjectsArrayList.get(position).getUserPicture(holder.profilePicture);
         return view;
     }
 

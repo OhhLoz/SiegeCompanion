@@ -1,5 +1,10 @@
 package productions.pudl.siege.Data.GeneralObjects;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class GeneralObject
@@ -37,7 +42,7 @@ public class GeneralObject
         this.id = id;
     }
 
-    private String getUserID() {
+    public String getUserID() {
         return userID;
     }
 
@@ -53,7 +58,7 @@ public class GeneralObject
         this.platform = platform;
     }
 
-    private int getLevel() {
+    public int getLevel() {
         return level;
     }
 
@@ -61,7 +66,7 @@ public class GeneralObject
         this.level = level;
     }
 
-    private String getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
@@ -69,7 +74,7 @@ public class GeneralObject
         this.createdAt = createdAt;
     }
 
-    private String getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
@@ -77,7 +82,7 @@ public class GeneralObject
         this.updatedAt = updatedAt;
     }
 
-    private GeneralLastPlayedObject getLastPlayedObject() {
+    public GeneralLastPlayedObject getLastPlayedObject() {
         return lastPlayedObject;
     }
 
@@ -93,7 +98,7 @@ public class GeneralObject
         this.name = name;
     }
 
-    private GeneralRanksObject getRanksObject() {
+    public GeneralRanksObject getRanksObject() {
         return ranksObject;
     }
 
@@ -101,7 +106,7 @@ public class GeneralObject
         this.ranksObject = ranksObject;
     }
 
-    private GeneralAliasesObject getAliasesObject() {
+    public GeneralAliasesObject getAliasesObject() {
         return aliasesObject;
     }
 
@@ -109,9 +114,14 @@ public class GeneralObject
         this.aliasesObject = aliasesObject;
     }
 
+    public void getUserPicture(ImageView imgView)
+    {
+        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + getUserID() + "/default_146_146.png").into(imgView);
+    }
+
     @Override
     public String toString()
     {
-        return ("{" + '"' + "id" + '"' + ":" + '"' + getId() + '"' + "," + '"' + "userId" + '"' + ":" + '"' + getUserID() + '"' + "," + '"' + "platform" + '"' + ":" + '"' + getPlatform() + '"' + "," + '"' + "level" + '"' + ":" + '"' + String.valueOf(getLevel()) + '"' + "," + '"' + "created_at" + '"' + ":" + '"' + getCreatedAt() + '"' + "," + '"' + "updated_at" + '"' + ":" + '"' + getUpdatedAt() + '"' + "," + getLastPlayedObject().toString() + "," + '"' + "name" + '"' + ":" + '"' + getName() + '"' + "," + getRanksObject().toString() + "," + getAliasesObject().toString() + "}");
+        return ("{" + '"' + "id" + '"' + ":" + '"' + getId() + '"' + "," + '"' + "userId" + '"' + ":" + '"' + getUserID() + '"' + "," + '"' + "platform" + '"' + ":" + '"' + getPlatform() + '"' + "," + '"' + "level" + '"' + ":" + '"' + getLevel() + '"' + "," + '"' + "created_at" + '"' + ":" + '"' + getCreatedAt() + '"' + "," + '"' + "updated_at" + '"' + ":" + '"' + getUpdatedAt() + '"' + "," + getLastPlayedObject().toString() + "," + '"' + "name" + '"' + ":" + '"' + getName() + '"' + "," + getRanksObject().toString() + "," + getAliasesObject().toString() + "}");
     }
 }

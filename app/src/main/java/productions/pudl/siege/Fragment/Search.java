@@ -1,7 +1,12 @@
 package productions.pudl.siege.Fragment;
 
+import android.app.Dialog;
 import android.app.SearchManager;
+import android.content.ClipData;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,17 +17,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import productions.pudl.siege.Adapter.R6DBJSONAdapter;
 import productions.pudl.siege.Adapter.ListViewAdapter;
+import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
@@ -31,10 +41,14 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     SearchView searchView;
     ListView listView;
     ListViewAdapter listViewAdapter;
+    R6DBJSONAdapter r6DBJsonAdapter;
     String[] platformList;
     String[] userNameList;
     ArrayList<User> userList = new ArrayList<User>();
     public static ArrayList<GeneralObject> searchResults;
+    public static DetailedMainObject finalResult;
+    GeneralObject ItemClicked;
+    View ItemView;
     ArrayAdapter<CharSequence> spinnerAdapter;
 
     private RequestQueue mQueue;
@@ -121,11 +135,10 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
         Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
         //R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
-        R6DBJSONAdapter r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
+        r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
         Toast.makeText(getContext(), "Searching Data...", Toast.LENGTH_SHORT).show();
         r6DBJsonAdapter.ParseGeneral();
         searchResults = r6DBJsonAdapter.getSearchResults();
-        //listViewAdapter.updateSearchList(searchResults);
         Log.v("Test", "Updated Search Results");
         searchView.clearFocus(); // removes the soft keyboard
 
@@ -153,11 +166,155 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         Log.v("Item", "Item Clicked");
+        ItemClicked = listViewAdapter.getItem(i);
+        ItemView = view;
+        Log.v("CurrItem", ItemClicked.getName() + ", " + ItemClicked.getPlatform());
+        r6DBJsonAdapter.ParseDetailed(ItemClicked.getUserID());
+        //DetailedObject detail = r6DBJsonAdapter.getDetailedObject();
+        //ShowPopup(view, detail);
     }
 
     public void updateListView(ArrayList<GeneralObject> newArrayList)
     {
         listViewAdapter.updateSearchList(newArrayList);
         Toast.makeText(getContext(), "Search Complete!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateFinalResult(DetailedMainObject finalObject)
+    {
+        finalResult = finalObject;
+        Toast.makeText(getContext(), "Fetched all Data for User: " + finalResult.getName(), Toast.LENGTH_SHORT).show();
+        ShowPopup(ItemView, finalResult);
+        //listView.requestFocus();
+    }
+
+    private void ShowPopup(View view, DetailedMainObject currItem)
+    {
+        Dialog myDialog = new Dialog(view.getContext());
+        ImageView profilePicture;
+        TextView userName;
+        TextView platformName;
+        TextView level;
+        TextView generalKillsText;
+        TextView generalDeathsText;
+        TextView generalAssistsText;
+        TextView generalKDText;
+        TextView generalWinsText;
+        TextView generalLossesText;
+        TextView generalPlayedText;
+        TextView generalWLText;
+        TextView generalRevivesText ;
+        TextView generalSuicidesText;
+        TextView generalMeleeKillsText;
+        TextView generalTimePlayedText;
+        TextView casualKillsText;
+        TextView casualDeathsText;
+        TextView casualKDText;
+        TextView casualWinsText;
+        TextView casualLossesText;
+        TextView casualWLText;
+        TextView casualPlayedText;
+        TextView casualTimePlayedText;
+
+        myDialog.setContentView(R.layout.layout_stats);
+
+        profilePicture = (ImageView) myDialog.findViewById(R.id.profilePicture);
+        userName = (TextView) myDialog.findViewById(R.id.userName);
+        platformName = (TextView) myDialog.findViewById(R.id.platformName);
+        level = (TextView) myDialog.findViewById(R.id.level);
+
+        generalKillsText = (TextView) myDialog.findViewById(R.id.generalKillsText);
+        generalDeathsText = (TextView) myDialog.findViewById(R.id.generalDeathsText);
+        generalAssistsText = (TextView) myDialog.findViewById(R.id.generalAssistsText);
+        generalKDText = myDialog.findViewById(R.id.generalKDText);
+        generalWinsText = (TextView) myDialog.findViewById(R.id.generalWinsText);
+        generalLossesText = (TextView) myDialog.findViewById(R.id.generalLossesText);
+        generalPlayedText = (TextView) myDialog.findViewById(R.id.generalPlayedText);
+        generalWLText = (TextView) myDialog.findViewById(R.id.generalWLText);
+        generalRevivesText = (TextView) myDialog.findViewById(R.id.generalRevivesText);
+        generalSuicidesText = (TextView) myDialog.findViewById(R.id.generalSuicidesText);
+        generalMeleeKillsText = (TextView) myDialog.findViewById(R.id.generalMeleeText);
+        generalTimePlayedText = (TextView) myDialog.findViewById(R.id.generalTimePlayedText);
+
+        casualKillsText = (TextView) myDialog.findViewById(R.id.casualKillsText);
+        casualDeathsText = (TextView) myDialog.findViewById(R.id.casualDeathsText);
+        casualKDText = myDialog.findViewById(R.id.casualKDText);
+        casualWinsText = (TextView) myDialog.findViewById(R.id.casualWinsText);
+        casualLossesText = (TextView) myDialog.findViewById(R.id.casualLossesText);
+        casualWLText = (TextView) myDialog.findViewById(R.id.casualWLText);
+        casualPlayedText = (TextView) myDialog.findViewById(R.id.casualPlayedText);
+        casualTimePlayedText = (TextView) myDialog.findViewById(R.id.casualTimePlayedText);
+
+        int kills = currItem.getStats().getGeneral().getKills();
+        int deaths = currItem.getStats().getGeneral().getDeaths();
+        double KD = (double) kills /  (double) deaths;
+        KD = (double) Math.round(KD * 1000d) / 1000d;
+
+        int wins = currItem.getStats().getGeneral().getWon();
+        int losses = currItem.getStats().getGeneral().getLost();
+        double WL = (double) wins /  (double) losses;
+        WL = (double) Math.round(WL * 1000d) / 1000d;
+
+        int seconds = currItem.getStats().getGeneral().getTimePlayed();
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        seconds = (seconds % 3600) % 60;
+
+        StringBuilder timePlayed = new StringBuilder();
+        if(hours != 0)
+            timePlayed.append(String.valueOf(hours) + "H ");
+        if(minutes != 0)
+            timePlayed.append(String.valueOf(minutes) + "M");
+
+        currItem.getUserPicture(profilePicture);
+        userName.setText(currItem.getName());
+        platformName.setText(currItem.getPlatform());
+        level.setText(getString(R.string.level) + ": " + String.valueOf(currItem.getLevel()));
+
+        generalKillsText.setText(String.valueOf(kills));
+        generalDeathsText.setText(String.valueOf(deaths));
+        generalAssistsText.setText(String.valueOf(currItem.getStats().getGeneral().getAssists()));
+        generalKDText.setText(String.valueOf(KD));
+        generalWinsText.setText(String.valueOf(wins));
+        generalLossesText.setText(String.valueOf(losses));
+        generalPlayedText.setText(String.valueOf(currItem.getStats().getGeneral().getPlayed()));
+        generalWLText.setText(String.valueOf(WL));
+        generalRevivesText.setText(String.valueOf(currItem.getStats().getGeneral().getRevives()));
+        generalSuicidesText.setText(String.valueOf(currItem.getStats().getGeneral().getSuicides()));
+        generalMeleeKillsText.setText(String.valueOf(currItem.getStats().getGeneral().getMeleekills()));
+        generalTimePlayedText.setText(timePlayed.toString());
+
+        kills = currItem.getStats().getCasual().getKills();
+        deaths = currItem.getStats().getCasual().getDeaths();
+        KD = (double) kills /  (double) deaths;
+        KD = (double) Math.round(KD * 1000d) / 1000d;
+
+        wins = currItem.getStats().getCasual().getWon();
+        losses = currItem.getStats().getCasual().getLost();
+        WL = (double) wins /  (double) losses;
+        WL = (double) Math.round(WL * 1000d) / 1000d;
+
+        seconds = currItem.getStats().getCasual().getTimePlayed();
+        hours = seconds / 3600;
+        minutes = (seconds % 3600) / 60;
+        seconds = (seconds % 3600) % 60;
+
+        timePlayed = new StringBuilder();
+        if(hours != 0)
+            timePlayed.append(String.valueOf(hours) + "H ");
+        if(minutes != 0)
+            timePlayed.append(String.valueOf(minutes) + "M");
+
+        casualKillsText.setText(String.valueOf(kills));
+        casualDeathsText.setText(String.valueOf(deaths));
+        casualKDText.setText(String.valueOf(KD));
+        casualWinsText.setText(String.valueOf(wins));
+        casualLossesText.setText(String.valueOf(losses));
+        casualWLText.setText(String.valueOf(WL));
+        casualPlayedText.setText(String.valueOf(currItem.getStats().getCasual().getPlayed()));
+        casualTimePlayedText.setText(timePlayed.toString());
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }
