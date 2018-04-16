@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <TextView
+        android:id="@+id/weaponHSTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:text="@string/weaponHeadshot"
+        android:textSize="@dimen/statTitleSize"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/weaponHSText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponHSTitle" />
+
+    <TextView
+        android:id="@+id/weaponHSHitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/weaponHeadshotHit"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponHSText" />
+
+    <TextView
+        android:id="@+id/weaponHSHitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponHSHitTitle" />
+
+    <TextView
+        android:id="@+id/weaponHSKillsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/weaponHeadshotKills"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponHSHitText" />
+
+    <TextView
+        android:id="@+id/weaponHSKillsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponHSKillsTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/weaponBulletsHitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:text="@string/weaponBulletsHit"
+        android:textSize="@dimen/statTitleSize"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/weaponBulletsHitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponBulletsHitTitle" />
+
+    <TextView
+        android:id="@+id/weaponBulletsFiredTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/weaponBulletsFired"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponBulletsHitText" />
+
+    <TextView
+        android:id="@+id/weaponBulletsFiredText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponBulletsFiredTitle" />
+
+    <TextView
+        android:id="@+id/weaponAccuracyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/weaponAccuracy"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponBulletsFiredText" />
+
+    <TextView
+        android:id="@+id/weaponAccuracyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/weaponAccuracyTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/weaponMeleeKillsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/weaponMeleeKills"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/weaponMeleeKillsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weaponMeleeKillsTitle" />
+
+    <TextView
+        android:id="@+id/weaponPenetrationKillsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/weaponPenetrationKills"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weaponMeleeKillsText" />
+
+    <TextView
+        android:id="@+id/weaponPenetrationKillsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weaponPenetrationKillsTitle" />
+
+
+    <TextView
+        android:id="@+id/weaponAssistsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalAssists"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weaponPenetrationKillsText" />
+
+    <TextView
+        android:id="@+id/weaponAssistsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weaponAssistsTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

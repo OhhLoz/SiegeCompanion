@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <TextView
+        android:id="@+id/generalKillsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:text="@string/generalKills"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/generalKillsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalKillsTitle" />
+
+    <TextView
+        android:id="@+id/generalDeathsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalDeaths"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalKillsText" />
+
+    <TextView
+        android:id="@+id/generalDeathsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalDeathsTitle" />
+
+
+    <TextView
+        android:id="@+id/generalKDTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalKD"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalDeathsText" />
+
+    <TextView
+        android:id="@+id/generalKDText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalKDTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/generalWinsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:text="@string/generalWins"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/generalWinsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalWinsTitle" />
+
+    <TextView
+        android:id="@+id/generalLossesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalLosses"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalWinsText" />
+
+    <TextView
+        android:id="@+id/generalLossesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalLossesTitle" />
+
+    <TextView
+        android:id="@+id/generalWLTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalWL"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalPlayedText" />
+
+    <TextView
+        android:id="@+id/generalWLText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/generalWLTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/generalAssistsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalAssists"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/generalAssistsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generalAssistsTitle" />
+
+    <TextView
+        android:id="@+id/generalPlayedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalPlayed"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generalAssistsText" />
+
+    <TextView
+        android:id="@+id/generalPlayedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generalPlayedTitle" />
+
+    <TextView
+        android:id="@+id/generalTimePlayedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/generalTimePlayed"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generalPlayedText" />
+
+    <TextView
+        android:id="@+id/generalTimePlayedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generalTimePlayedTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
+import productions.pudl.siege.TabbedDialog;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, ListView.OnItemClickListener, SearchView.OnCloseListener {
     SearchView searchView;
@@ -184,137 +186,18 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     {
         finalResult = finalObject;
         Toast.makeText(getContext(), "Fetched all Data for User: " + finalResult.getName(), Toast.LENGTH_SHORT).show();
-        ShowPopup(ItemView, finalResult);
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+        if (prev != null)
+        {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        TabbedDialog dialogFragment = new TabbedDialog(finalResult);
+        //dialogFragment.currItem = finalResult;
+        dialogFragment.show(ft,"dialog");
         //listView.requestFocus();
-    }
-
-    private void ShowPopup(View view, DetailedMainObject currItem)
-    {
-        Dialog myDialog = new Dialog(view.getContext());
-        ImageView profilePicture;
-        TextView userName;
-        TextView platformName;
-        TextView level;
-        TextView generalKillsText;
-        TextView generalDeathsText;
-        TextView generalAssistsText;
-        TextView generalKDText;
-        TextView generalWinsText;
-        TextView generalLossesText;
-        TextView generalPlayedText;
-        TextView generalWLText;
-        TextView generalRevivesText ;
-        TextView generalSuicidesText;
-        TextView generalMeleeKillsText;
-        TextView generalTimePlayedText;
-        TextView casualKillsText;
-        TextView casualDeathsText;
-        TextView casualKDText;
-        TextView casualWinsText;
-        TextView casualLossesText;
-        TextView casualWLText;
-        TextView casualPlayedText;
-        TextView casualTimePlayedText;
-
-        myDialog.setContentView(R.layout.layout_stats);
-
-        profilePicture = (ImageView) myDialog.findViewById(R.id.profilePicture);
-        userName = (TextView) myDialog.findViewById(R.id.userName);
-        platformName = (TextView) myDialog.findViewById(R.id.platformName);
-        level = (TextView) myDialog.findViewById(R.id.level);
-
-        generalKillsText = (TextView) myDialog.findViewById(R.id.generalKillsText);
-        generalDeathsText = (TextView) myDialog.findViewById(R.id.generalDeathsText);
-        generalAssistsText = (TextView) myDialog.findViewById(R.id.generalAssistsText);
-        generalKDText = myDialog.findViewById(R.id.generalKDText);
-        generalWinsText = (TextView) myDialog.findViewById(R.id.generalWinsText);
-        generalLossesText = (TextView) myDialog.findViewById(R.id.generalLossesText);
-        generalPlayedText = (TextView) myDialog.findViewById(R.id.generalPlayedText);
-        generalWLText = (TextView) myDialog.findViewById(R.id.generalWLText);
-        generalRevivesText = (TextView) myDialog.findViewById(R.id.generalRevivesText);
-        generalSuicidesText = (TextView) myDialog.findViewById(R.id.generalSuicidesText);
-        generalMeleeKillsText = (TextView) myDialog.findViewById(R.id.generalMeleeText);
-        generalTimePlayedText = (TextView) myDialog.findViewById(R.id.generalTimePlayedText);
-
-        casualKillsText = (TextView) myDialog.findViewById(R.id.casualKillsText);
-        casualDeathsText = (TextView) myDialog.findViewById(R.id.casualDeathsText);
-        casualKDText = myDialog.findViewById(R.id.casualKDText);
-        casualWinsText = (TextView) myDialog.findViewById(R.id.casualWinsText);
-        casualLossesText = (TextView) myDialog.findViewById(R.id.casualLossesText);
-        casualWLText = (TextView) myDialog.findViewById(R.id.casualWLText);
-        casualPlayedText = (TextView) myDialog.findViewById(R.id.casualPlayedText);
-        casualTimePlayedText = (TextView) myDialog.findViewById(R.id.casualTimePlayedText);
-
-        int kills = currItem.getStats().getGeneral().getKills();
-        int deaths = currItem.getStats().getGeneral().getDeaths();
-        double KD = (double) kills /  (double) deaths;
-        KD = (double) Math.round(KD * 1000d) / 1000d;
-
-        int wins = currItem.getStats().getGeneral().getWon();
-        int losses = currItem.getStats().getGeneral().getLost();
-        double WL = (double) wins /  (double) losses;
-        WL = (double) Math.round(WL * 1000d) / 1000d;
-
-        int seconds = currItem.getStats().getGeneral().getTimePlayed();
-        int hours = seconds / 3600;
-        int minutes = (seconds % 3600) / 60;
-        seconds = (seconds % 3600) % 60;
-
-        StringBuilder timePlayed = new StringBuilder();
-        if(hours != 0)
-            timePlayed.append(String.valueOf(hours) + "H ");
-        if(minutes != 0)
-            timePlayed.append(String.valueOf(minutes) + "M");
-
-        currItem.getUserPicture(profilePicture);
-        userName.setText(currItem.getName());
-        platformName.setText(currItem.getPlatform());
-        level.setText(getString(R.string.level) + ": " + String.valueOf(currItem.getLevel()));
-
-        generalKillsText.setText(String.valueOf(kills));
-        generalDeathsText.setText(String.valueOf(deaths));
-        generalAssistsText.setText(String.valueOf(currItem.getStats().getGeneral().getAssists()));
-        generalKDText.setText(String.valueOf(KD));
-        generalWinsText.setText(String.valueOf(wins));
-        generalLossesText.setText(String.valueOf(losses));
-        generalPlayedText.setText(String.valueOf(currItem.getStats().getGeneral().getPlayed()));
-        generalWLText.setText(String.valueOf(WL));
-        generalRevivesText.setText(String.valueOf(currItem.getStats().getGeneral().getRevives()));
-        generalSuicidesText.setText(String.valueOf(currItem.getStats().getGeneral().getSuicides()));
-        generalMeleeKillsText.setText(String.valueOf(currItem.getStats().getGeneral().getMeleekills()));
-        generalTimePlayedText.setText(timePlayed.toString());
-
-        kills = currItem.getStats().getCasual().getKills();
-        deaths = currItem.getStats().getCasual().getDeaths();
-        KD = (double) kills /  (double) deaths;
-        KD = (double) Math.round(KD * 1000d) / 1000d;
-
-        wins = currItem.getStats().getCasual().getWon();
-        losses = currItem.getStats().getCasual().getLost();
-        WL = (double) wins /  (double) losses;
-        WL = (double) Math.round(WL * 1000d) / 1000d;
-
-        seconds = currItem.getStats().getCasual().getTimePlayed();
-        hours = seconds / 3600;
-        minutes = (seconds % 3600) / 60;
-        seconds = (seconds % 3600) % 60;
-
-        timePlayed = new StringBuilder();
-        if(hours != 0)
-            timePlayed.append(String.valueOf(hours) + "H ");
-        if(minutes != 0)
-            timePlayed.append(String.valueOf(minutes) + "M");
-
-        casualKillsText.setText(String.valueOf(kills));
-        casualDeathsText.setText(String.valueOf(deaths));
-        casualKDText.setText(String.valueOf(KD));
-        casualWinsText.setText(String.valueOf(wins));
-        casualLossesText.setText(String.valueOf(losses));
-        casualWLText.setText(String.valueOf(WL));
-        casualPlayedText.setText(String.valueOf(currItem.getStats().getCasual().getPlayed()));
-        casualTimePlayedText.setText(timePlayed.toString());
-
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
     }
 }

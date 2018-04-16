@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -80,7 +81,8 @@ public class R6DBJSONAdapter {
         }
     }
 
-    public void ParseGeneral() {
+    public void ParseGeneral()
+    {
         String URL = "https://r6db.com/api/v2/players?name=" + getUserName() + "&platform=" + getPlatformName();
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL, null,
@@ -340,7 +342,7 @@ public class R6DBJSONAdapter {
 
                             DetailedStatObject casual = new DetailedStatObject(deaths, kills, lost, played, timePlayed, won);
 
-                            JSONObject rankedObject = statsObject.getJSONObject("casual");
+                            JSONObject rankedObject = statsObject.getJSONObject("ranked");
                             deaths = rankedObject.getInt("deaths");
                             kills = rankedObject.getInt("kills");
                             lost = rankedObject.getInt("lost");

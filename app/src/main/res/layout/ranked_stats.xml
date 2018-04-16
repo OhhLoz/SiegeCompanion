@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <TextView
+        android:id="@+id/rankedKillsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:text="@string/casualKills"
+        android:textSize="@dimen/statTitleSize"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rankedKillsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedKillsTitle" />
+
+    <TextView
+        android:id="@+id/rankedDeathsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualDeaths"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedKillsText" />
+
+    <TextView
+        android:id="@+id/rankedDeathsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedDeathsTitle" />
+
+    <TextView
+        android:id="@+id/rankedKDTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:text="@string/casualKD"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rankedDeathsText" />
+
+    <TextView
+        android:id="@+id/rankedKDText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedKDTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/rankedWinsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:text="@string/casualWins"
+        android:textSize="@dimen/statTitleSize"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rankedWinsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedWinsTitle" />
+
+    <TextView
+        android:id="@+id/rankedLossesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualLosses"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedWinsText" />
+
+    <TextView
+        android:id="@+id/rankedLossesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedLossesTitle" />
+
+    <TextView
+        android:id="@+id/rankedWLTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualWL"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedLossesText" />
+
+    <TextView
+        android:id="@+id/rankedWLText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/leftGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/rankedWLTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/rankPicture"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/statsSmallMargin"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:contentDescription="@string/profileLogo"
+        android:src="@drawable/r6slogo"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintEnd_toStartOf="@id/rankedRankText"
+        app:layout_constraintTop_toTopOf="@id/rankedWinsTitle"
+        app:layout_constraintBottom_toBottomOf="@id/rankedWinsText">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/rankedRankText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rankPicture"
+        app:layout_constraintTop_toTopOf="@id/rankPicture"
+        app:layout_constraintBottom_toBottomOf="@id/rankPicture"/>
+
+    <TextView
+        android:id="@+id/rankedPlayedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualPlayed"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rankPicture" />
+
+    <TextView
+        android:id="@+id/rankedPlayedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rankedPlayedTitle" />
+
+
+    <TextView
+        android:id="@+id/rankedTimePlayedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTitleSize"
+        android:text="@string/casualTimePlayed"
+        android:textColor="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rankedPlayedText" />
+
+    <TextView
+        android:id="@+id/rankedTimePlayedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintStart_toStartOf="@id/rightGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rankedTimePlayedTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

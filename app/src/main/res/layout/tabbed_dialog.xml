@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/colorNavBar">
+
+    <ImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/profileLogo"
+        android:src="@drawable/r6slogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toStartOf="@+id/profilePicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
+
+    <View
+        android:id="@+id/uiview"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/statsSmallMargin"
+        android:layout_marginEnd="@dimen/statsSmallMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintTop_toTopOf="@id/level"
+        app:layout_constraintBottom_toBottomOf="@id/level"
+        app:layout_constraintStart_toEndOf="@id/level"
+        app:layout_constraintEnd_toStartOf="@id/platformName"/>
+
+    <TextView
+        android:id="@+id/platformName"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintTop_toBottomOf="@id/profilePicture" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        android:layout_gravity="center_horizontal"
+        app:tabMode="scrollable"/>
+
+    <view
+        android:id="@+id/masterViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="productions.pudl.siege.Adapter.WrapContentHeightViewPager"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

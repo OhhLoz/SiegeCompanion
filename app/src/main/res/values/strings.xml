@@ -21,7 +21,7 @@
     <string name="generalWins">Wins</string>
     <string name="generalLosses">Losses</string>
     <string name="generalPlayed">Played</string>
-    <string name="generalWL">W/L</string>
+    <string name="generalWL">Win%</string>
     <string name="generalRevives">Revives</string>
     <string name="generalSuicides">Suicides</string>
     <string name="generalMelee">Melee Kills</string>
@@ -32,8 +32,24 @@
     <string name="casualKD">K/D</string>
     <string name="casualWins">Wins</string>
     <string name="casualLosses">Losses</string>
-    <string name="casualWL">W/L</string>
+    <string name="casualWL">Win%</string>
     <string name="casualPlayed">Played</string>
     <string name="casualLevel">Level</string>
     <string name="casualTimePlayed">Play Time</string>
+    <string name="weaponHeadshot">Headshots</string>
+    <string name="weaponHeadshotHit">HS / Hit</string>
+    <string name="weaponHeadshotKills">HS / Kills</string>
+    <string name="weaponAccuracy">Accuracy</string>
+    <string name="weaponBulletsHit">Bullets Hit</string>
+    <string name="weaponBulletsFired">Bullets Fired</string>
+    <string name="weaponMeleeKills">Melee</string>
+    <string name="weaponPenetrationKills">Penetration Kills</string>
+    <string name="miscDBNO">DBNO</string>
+    <string name="miscDBNOAssists">DBNO Assist</string>
+    <string name="miscGadgetsDestroyed">Gadgets Destroyed</string>
+    <string name="miscRevives">Revives</string>
+    <string name="miscRevivesDenied">Revives Denied</string>
+    <string name="miscSuicides">Suicides</string>
+    <string name="miscRappelBreaches">Rappel Breaches</string>
+    <string name="miscBlindFires">Blind Kills</string>
 </resources>
