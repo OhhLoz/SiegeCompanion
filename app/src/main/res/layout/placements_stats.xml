@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/horizontalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/verticalGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:id="@+id/verticalView"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/horizontalView"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/placementsGlobalPicture"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/profileLogo"
+        android:src="@drawable/r6slogo"
+        app:layout_constraintBottom_toTopOf="@+id/placementsGlobalTitle"
+        app:layout_constraintEnd_toStartOf="@id/verticalGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/placementsGlobalTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placementsGlobal"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        app:layout_constraintBottom_toTopOf="@+id/placementsGlobalText"
+        app:layout_constraintEnd_toStartOf="@id/verticalGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placementsGlobalPicture" />
+
+    <TextView
+        android:id="@+id/placementsGlobalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintBottom_toTopOf="@id/horizontalGuideline"
+        app:layout_constraintEnd_toEndOf="@id/placementsGlobalTitle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/placementsGlobalTitle"
+        app:layout_constraintTop_toBottomOf="@+id/placementsGlobalTitle" />
+
+    <ImageView
+        android:id="@+id/placementsAPACPicture"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/profileLogo"
+        android:src="@drawable/r6slogo"
+        app:layout_constraintBottom_toTopOf="@+id/placementsAPACTitle"
+        app:layout_constraintEnd_toStartOf="@id/verticalGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalView"
+        app:layout_constraintVertical_chainStyle="packed">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/placementsAPACTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placementsAPAC"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        app:layout_constraintBottom_toTopOf="@+id/placementsAPACText"
+        app:layout_constraintEnd_toStartOf="@id/verticalGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placementsAPACPicture" />
+
+    <TextView
+        android:id="@+id/placementsAPACText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/placementsAPACTitle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/placementsAPACTitle"
+        app:layout_constraintTop_toBottomOf="@+id/placementsAPACTitle" />
+
+    <ImageView
+        android:id="@+id/placementsEMEAPicture"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/profileLogo"
+        android:src="@drawable/r6slogo"
+        app:layout_constraintBottom_toTopOf="@+id/placementsEMEATitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/verticalGuideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/placementsEMEATitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placementsEMEA"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        app:layout_constraintBottom_toTopOf="@+id/placementsEMEAText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/verticalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/placementsEMEAPicture" />
+
+    <TextView
+        android:id="@+id/placementsEMEAText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintBottom_toTopOf="@id/horizontalGuideline"
+        app:layout_constraintEnd_toEndOf="@+id/placementsEMEATitle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/placementsEMEATitle"
+        app:layout_constraintTop_toBottomOf="@+id/placementsEMEATitle" />
+
+    <ImageView
+        android:id="@+id/placementsNCSAPicture"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/profileLogo"
+        android:src="@drawable/r6slogo"
+        app:layout_constraintBottom_toTopOf="@+id/placementsNCSATitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/verticalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalView"
+        app:layout_constraintVertical_chainStyle="packed">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/placementsNCSATitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placementsNCSA"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        app:layout_constraintBottom_toTopOf="@+id/placementsNCSAText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/verticalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/placementsNCSAPicture" />
+
+    <TextView
+        android:id="@+id/placementsNCSAText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/placementsNCSATitle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/placementsNCSATitle"
+        app:layout_constraintTop_toBottomOf="@+id/placementsNCSATitle" />
+
+</android.support.constraint.ConstraintLayout>

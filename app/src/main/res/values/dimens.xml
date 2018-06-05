@@ -2,8 +2,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="statSuperTitleSize">20sp</dimen>
     <dimen name="statTextSize">15sp</dimen>
-    <dimen name="statTitleSize">18sp</dimen>
+    <dimen name="statTitleSize">16sp</dimen>
     <dimen name="statsLargeMargin">16dp</dimen>
     <dimen name="statsMargin">8dp</dimen>
     <dimen name="statsSmallMargin">4dp</dimen>
+    <dimen name="spinnerHeight">45dp</dimen>
 </resources>

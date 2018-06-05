@@ -9,14 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
-import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
 
-public class ListViewAdapter extends BaseAdapter {
+public class SearchListViewAdapter extends BaseAdapter {
 
     // Declare Variables
 
@@ -25,7 +23,7 @@ public class ListViewAdapter extends BaseAdapter {
     private ArrayList<GeneralObject> generalObjectsArrayList = null;
     private ArrayList<GeneralObject> arraylist;
 
-    public ListViewAdapter(Context context, ArrayList<GeneralObject> userList) {
+    public SearchListViewAdapter(Context context, ArrayList<GeneralObject> userList) {
         mContext = context;
         this.generalObjectsArrayList = userList;
         inflater = LayoutInflater.from(mContext);
@@ -58,7 +56,7 @@ public class ListViewAdapter extends BaseAdapter {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.list_view_items, null);
+            view = inflater.inflate(R.layout.search_list_items, null);
             holder.userName = (TextView) view.findViewById(R.id.userName);
             holder.platformName = (TextView) view.findViewById(R.id.platformName);
             holder.profilePicture = (ImageView) view.findViewById(R.id.imageView);

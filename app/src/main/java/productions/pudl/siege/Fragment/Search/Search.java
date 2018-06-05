@@ -1,12 +1,7 @@
-package productions.pudl.siege.Fragment;
+package productions.pudl.siege.Fragment.Search;
 
-import android.app.Dialog;
 import android.app.SearchManager;
-import android.content.ClipData;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,31 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import productions.pudl.siege.Adapter.R6DBJSONAdapter;
-import productions.pudl.siege.Adapter.ListViewAdapter;
+import productions.pudl.siege.Adapter.SearchListViewAdapter;
 import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
-import productions.pudl.siege.TabbedDialog;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, ListView.OnItemClickListener, SearchView.OnCloseListener {
     SearchView searchView;
     ListView listView;
-    ListViewAdapter listViewAdapter;
+    SearchListViewAdapter searchListViewAdapter;
     R6DBJSONAdapter r6DBJsonAdapter;
     String[] platformList;
     String[] userNameList;
@@ -75,33 +64,13 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         setupSearchView();
 
-        userNameList = new String[]{"sallad_", "fork__", "KonoAma", "Darksubi_", "XboxTest", "PlaystationTest"};
-        platformList = new String[]{"PC", "PC", "PC", "PC", "Xbox", "PS4"};
-
         listView = (ListView) view.findViewById(R.id.listview);
         mQueue = Volley.newRequestQueue(view.getContext());
 
-//        // just for populating the arrays before implementing previous history
-//        if (userNameList.length == 0 || platformList.length == 0)  // if no hardcoded values given
-//        {
-//            User previousSearches = new User("No Results", "Please Search Usernames to populate");
-//            userList.add(previousSearches);
-//            currUserNameSelected = "Please Search Usernames to populate";
-//            currPlatformSelected = "No Results";
-//        }
-//        else if (userNameList.length == platformList.length) // if there are equal matching pairs in the hardcoded string arrays
-//        {
-//            for (int i = 0; i < userNameList.length; i++) {
-//                User user = new User(platformList[i], userNameList[i]);
-//                userList.add(user);
-//            }
-//        }
-
-        //if i replace the below userList with searchResults it doesn't work as it isnt populated yet
         searchResults = new ArrayList<GeneralObject>();
-        listViewAdapter = new ListViewAdapter(view.getContext(), searchResults);
+        searchListViewAdapter = new SearchListViewAdapter(view.getContext(), searchResults);
         listView.setOnItemClickListener(this);
-        listView.setAdapter(listViewAdapter);
+        listView.setAdapter(searchListViewAdapter);
 
         return view;
     }
@@ -120,7 +89,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) // Spinner Select
     {
         currPlatformSelected = (String) adapterView.getItemAtPosition(i);
-        listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
+        searchListViewAdapter.filter(currUserNameSelected, currPlatformSelected);
         Log.v("item", (String) currPlatformSelected);
     }
 
@@ -138,7 +107,6 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
         //R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
         r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
-        Toast.makeText(getContext(), "Searching Data...", Toast.LENGTH_SHORT).show();
         r6DBJsonAdapter.ParseGeneral();
         searchResults = r6DBJsonAdapter.getSearchResults();
         Log.v("Test", "Updated Search Results");
@@ -153,7 +121,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public boolean onQueryTextChange(String newText) // on SearchView text change
     {
         currUserNameSelected = newText;
-        listViewAdapter.filter(currUserNameSelected, currPlatformSelected);
+        searchListViewAdapter.filter(currUserNameSelected, currPlatformSelected);
         return false;
     }
 
@@ -168,7 +136,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         Log.v("Item", "Item Clicked");
-        ItemClicked = listViewAdapter.getItem(i);
+        ItemClicked = searchListViewAdapter.getItem(i);
         ItemView = view;
         Log.v("CurrItem", ItemClicked.getName() + ", " + ItemClicked.getPlatform());
         r6DBJsonAdapter.ParseDetailed(ItemClicked.getUserID());
@@ -178,14 +146,12 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
 
     public void updateListView(ArrayList<GeneralObject> newArrayList)
     {
-        listViewAdapter.updateSearchList(newArrayList);
-        Toast.makeText(getContext(), "Search Complete!", Toast.LENGTH_SHORT).show();
+        searchListViewAdapter.updateSearchList(newArrayList);
     }
 
     public void updateFinalResult(DetailedMainObject finalObject)
     {
         finalResult = finalObject;
-        Toast.makeText(getContext(), "Fetched all Data for User: " + finalResult.getName(), Toast.LENGTH_SHORT).show();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
         if (prev != null)

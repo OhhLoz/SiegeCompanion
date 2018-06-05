@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,6 +13,24 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.33" />
 
+    <View
+        android:id="@+id/leftView"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintStart_toEndOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/middleGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
     <android.support.constraint.Guideline
         android:id="@+id/rightGuideline"
         android:layout_width="0dp"
@@ -19,19 +38,29 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.66" />
 
+    <View
+        android:id="@+id/rightView"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <TextView
         android:id="@+id/weaponHSTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginStart="@dimen/statsMargin"
         android:text="@string/weaponHeadshot"
-        android:textSize="@dimen/statTitleSize"
         android:textColor="@color/colorStatTitle"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/statTitleSize"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rightView" />
 
     <TextView
         android:id="@+id/weaponHSText"
@@ -42,7 +71,7 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponHSTitle" />
+        app:layout_constraintTop_toBottomOf="@id/weaponHSTitle" />
 
     <TextView
         android:id="@+id/weaponHSHitTitle"
@@ -50,13 +79,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
-        android:textSize="@dimen/statTitleSize"
         android:text="@string/weaponHeadshotHit"
         android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponHSText" />
+        app:layout_constraintBottom_toTopOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/weaponHSHitText"
@@ -64,11 +92,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginBottom="@dimen/statsMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponHSHitTitle" />
+        app:layout_constraintTop_toBottomOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/weaponHSKillsTitle"
@@ -76,13 +103,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/weaponHeadshotKills"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponHSHitText" />
+        app:layout_constraintBottom_toTopOf="@id/weaponHSKillsText" />
 
     <TextView
         android:id="@+id/weaponHSKillsText"
@@ -90,26 +116,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponHSKillsTitle"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@id/rightView"/>
 
     <TextView
         android:id="@+id/weaponBulletsHitTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
         android:text="@string/weaponBulletsHit"
         android:textSize="@dimen/statTitleSize"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/rightView" />
 
     <TextView
         android:id="@+id/weaponBulletsHitText"
@@ -128,13 +151,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/weaponBulletsFired"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponBulletsHitText" />
+        app:layout_constraintBottom_toTopOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/weaponBulletsFiredText"
@@ -145,7 +167,7 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponBulletsFiredTitle" />
+        app:layout_constraintTop_toBottomOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/weaponAccuracyTitle"
@@ -153,13 +175,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/weaponAccuracy"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponBulletsFiredText" />
+        app:layout_constraintBottom_toTopOf="@id/weaponAccuracyText" />
 
     <TextView
         android:id="@+id/weaponAccuracyText"
@@ -167,12 +188,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/weaponAccuracyTitle"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@id/rightView"/>
 
     <TextView
         android:id="@+id/weaponMeleeKillsTitle"
@@ -180,13 +199,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/weaponMeleeKills"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/rightView" />
 
     <TextView
         android:id="@+id/weaponMeleeKillsText"
@@ -205,13 +223,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/weaponPenetrationKills"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weaponMeleeKillsText" />
+        app:layout_constraintBottom_toTopOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/weaponPenetrationKillsText"
@@ -222,7 +239,7 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weaponPenetrationKillsTitle" />
+        app:layout_constraintTop_toBottomOf="@id/middleGuideline" />
 
 
     <TextView
@@ -231,13 +248,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/generalAssists"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weaponPenetrationKillsText" />
+        app:layout_constraintBottom_toTopOf="@id/weaponAssistsText" />
 
     <TextView
         android:id="@+id/weaponAssistsText"
@@ -245,11 +261,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weaponAssistsTitle"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@id/rightView"/>
 
 </android.support.constraint.ConstraintLayout>

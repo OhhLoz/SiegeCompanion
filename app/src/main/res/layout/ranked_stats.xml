@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <android.support.constraint.Guideline
         android:id="@+id/leftGuideline"
@@ -14,25 +14,53 @@
         app:layout_constraintGuide_percent="0.33" />
 
     <android.support.constraint.Guideline
+        android:id="@+id/middleGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
         android:id="@+id/rightGuideline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.66" />
 
+    <View
+        android:id="@+id/leftView"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintStart_toEndOf="@id/leftGuideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:id="@+id/rightView"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <TextView
         android:id="@+id/rankedKillsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
         android:text="@string/casualKills"
         android:textSize="@dimen/statTitleSize"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/rightView" />
 
     <TextView
         android:id="@+id/rankedKillsText"
@@ -51,13 +79,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/casualDeaths"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/rankedKillsText" />
+        app:layout_constraintBottom_toTopOf="@id/middleGuideline"/>
 
     <TextView
         android:id="@+id/rankedDeathsText"
@@ -68,22 +95,20 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/rankedDeathsTitle" />
+        app:layout_constraintTop_toBottomOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/rankedKDTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="@dimen/statsMargin"
         android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:text="@string/casualKD"
         android:textColor="@color/colorStatTitle"
         android:textSize="@dimen/statTitleSize"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rankedDeathsText" />
+        app:layout_constraintBottom_toTopOf="@id/rankedKDText" />
 
     <TextView
         android:id="@+id/rankedKDText"
@@ -91,26 +116,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/rankedKDTitle"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@id/rightView"/>
 
     <TextView
         android:id="@+id/rankedWinsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
         android:text="@string/casualWins"
         android:textSize="@dimen/statTitleSize"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/rightView" />
 
     <TextView
         android:id="@+id/rankedWinsText"
@@ -129,13 +151,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/casualLosses"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/rankedWinsText" />
+        app:layout_constraintBottom_toTopOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/rankedLossesText"
@@ -146,7 +167,7 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/rankedLossesTitle" />
+        app:layout_constraintTop_toBottomOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/rankedWLTitle"
@@ -154,13 +175,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/casualWL"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/rankedLossesText" />
+        app:layout_constraintBottom_toTopOf="@id/rankedWLText" />
 
     <TextView
         android:id="@+id/rankedWLText"
@@ -168,34 +188,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/rankedWLTitle"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@id/rightView"/>
 
     <ImageView
         android:id="@+id/rankPicture"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsSmallMargin"
-        android:layout_marginStart="@dimen/statsMargin"
+        android:layout_marginStart="@dimen/statsSmallMargin"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/profileLogo"
+        android:maxWidth="25dp"
         android:src="@drawable/r6slogo"
-        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/rankedWinsText"
         app:layout_constraintEnd_toStartOf="@id/rankedRankText"
-        app:layout_constraintTop_toTopOf="@id/rankedWinsTitle"
-        app:layout_constraintBottom_toBottomOf="@id/rankedWinsText">
-    </ImageView>
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toTopOf="@id/rankedWinsTitle"></ImageView>
 
     <TextView
         android:id="@+id/rankedRankText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginEnd="@dimen/statsMargin"
+        android:layout_marginEnd="@dimen/statsSmallMargin"
         android:textSize="@dimen/statTextSize"
+        android:gravity="center_horizontal"
+        android:maxEms="4"
+        android:maxLines="2"
+        android:singleLine="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/rankPicture"
         app:layout_constraintTop_toTopOf="@id/rankPicture"
@@ -207,13 +229,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/casualPlayed"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rankPicture" />
+        app:layout_constraintBottom_toTopOf="@id/middleGuideline" />
 
     <TextView
         android:id="@+id/rankedPlayedText"
@@ -224,7 +245,7 @@
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rankedPlayedTitle" />
+        app:layout_constraintTop_toBottomOf="@id/middleGuideline" />
 
 
     <TextView
@@ -233,13 +254,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTitleSize"
         android:text="@string/casualTimePlayed"
         android:textColor="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rankedPlayedText" />
+        app:layout_constraintBottom_toTopOf="@id/rankedTimePlayedText" />
 
     <TextView
         android:id="@+id/rankedTimePlayedText"
@@ -247,11 +267,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/statsMargin"
         android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintStart_toStartOf="@id/rightGuideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rankedTimePlayedTitle"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@id/rightView"/>
 
 </android.support.constraint.ConstraintLayout>

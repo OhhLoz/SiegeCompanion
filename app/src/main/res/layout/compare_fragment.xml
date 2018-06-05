@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/container"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="productions.pudl.siege.Fragment.Compare"
-    >
+    android:layout_height="match_parent">
 
-    <TextView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_compare"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:textSize="36sp"
-        android:textAlignment="center"/>
-</LinearLayout>
+        android:layout_height="match_parent">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/centerGuideline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/leftImage"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:layout_marginBottom="@dimen/statsMargin"
+            android:contentDescription="@string/profileLogo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/r6slogo"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/rightImage"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:layout_marginBottom="@dimen/statsMargin"
+            android:contentDescription="@string/profileLogo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/r6slogo"
+            app:layout_constraintStart_toStartOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

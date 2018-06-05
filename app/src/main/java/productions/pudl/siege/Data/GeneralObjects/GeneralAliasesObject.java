@@ -11,7 +11,7 @@ public class GeneralAliasesObject
         setAliasObjects(inputArrayList);
     }
 
-    private ArrayList<GeneralAliasObject> getAliasObjects() {
+    public ArrayList<GeneralAliasObject> getAliasObjects() {
         return aliasObjects;
     }
 

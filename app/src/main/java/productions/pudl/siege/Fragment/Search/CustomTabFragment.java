@@ -1,6 +1,5 @@
-package productions.pudl.siege;
+package productions.pudl.siege.Fragment.Search;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,13 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
 
+import productions.pudl.siege.Adapter.AliasListAdapter;
 import productions.pudl.siege.Data.DetailedObjects.DetailedGeneralObject;
 import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
+import productions.pudl.siege.Data.DetailedObjects.DetailedPlacementsObject;
+import productions.pudl.siege.Data.DetailedObjects.DetailedRanksObject;
 import productions.pudl.siege.Data.DetailedObjects.DetailedStatObject;
+import productions.pudl.siege.Data.GeneralObjects.GeneralAliasObject;
+import productions.pudl.siege.Data.GeneralObjects.GeneralAliasesObject;
+import productions.pudl.siege.R;
 
 public class CustomTabFragment extends Fragment
 {
@@ -57,6 +63,19 @@ public class CustomTabFragment extends Fragment
     int suicides = 0;
     int rappelBreaches = 0;
 
+    DetailedPlacementsObject placement;
+    DetailedRanksObject placementRanks;
+    int placementGlobal = 0;
+    int placementAPAC = 0;
+    int APACRank = 0;
+    int placementEMEA = 0;
+    int EMEARank = 0;
+    int placementNCSA = 0;
+    int NCSARank = 0;
+
+    ArrayList<GeneralAliasObject> aliasesObject;
+    ListView aliasesListView;
+
     String flag;
 
     public static CustomTabFragment createInstance(DetailedMainObject currItem, String flag)
@@ -92,7 +111,8 @@ public class CustomTabFragment extends Fragment
                 timePlayed.append(String.valueOf(fragment.hours) + "H ");
             if (fragment.minutes != 0)
                 timePlayed.append(String.valueOf(fragment.minutes) + "M");
-
+            if(fragment.hours == 0)
+                timePlayed.append(" " + String.valueOf(fragment.seconds) + "S");
             fragment.timePlayed = timePlayed.toString();
         }
         else if(flag.equals("casual"))
@@ -120,7 +140,8 @@ public class CustomTabFragment extends Fragment
                 timePlayed.append(String.valueOf(fragment.hours) + "H ");
             if (fragment.minutes != 0)
                 timePlayed.append(String.valueOf(fragment.minutes) + "M");
-
+            if(fragment.hours == 0)
+                timePlayed.append(" " + String.valueOf(fragment.seconds) + "S");
             fragment.timePlayed = timePlayed.toString();
         }
         else if(flag.equals("ranked"))
@@ -152,8 +173,22 @@ public class CustomTabFragment extends Fragment
                 timePlayed.append(String.valueOf(fragment.hours) + "H ");
             if (fragment.minutes != 0)
                 timePlayed.append(String.valueOf(fragment.minutes) + "M");
-
+            if(fragment.hours == 0)
+                timePlayed.append(" " + String.valueOf(fragment.seconds) + "S");
             fragment.timePlayed = timePlayed.toString();
+        }
+        else if (flag.equals("placements"))
+        {
+            fragment.placementRanks = currItem.getRanksObject();
+
+            fragment.placement = currItem.getPlacements();
+            fragment.placementGlobal = fragment.placement.getGlobal();
+            fragment.placementAPAC = fragment.placement.getAPAC();
+            fragment.APACRank = fragment.placementRanks.getAPAC().getRank();
+            fragment.placementEMEA = fragment.placement.getEMEA();
+            fragment.EMEARank = fragment.placementRanks.getEMEA().getRank();
+            fragment.placementNCSA = fragment.placement.getNCSA();
+            fragment.NCSARank = fragment.placementRanks.getNCSA().getRank();
         }
         else if(flag.equals("weapon"))
         {
@@ -161,8 +196,13 @@ public class CustomTabFragment extends Fragment
             Log.v("CustomFragment", "Weapon Created!");
             fragment.bulletsFired = fragment.general.getBulletsFired();
             fragment.bulletsHit = fragment.general.getBulletsHit();
-            fragment.accuracy = ((double) fragment.bulletsHit / (double) fragment.bulletsFired) * 100;
-            fragment.accuracy = (double) Math.round(fragment.accuracy * 100d) / 100d;
+            if(fragment.bulletsFired != 0)
+            {
+                fragment.accuracy = ((double) fragment.bulletsHit / (double) fragment.bulletsFired) * 100;
+                fragment.accuracy = (double) Math.round(fragment.accuracy * 100d) / 100d;
+            }
+            else
+                fragment.accuracy = fragment.bulletsHit;
 
             fragment.headshots = fragment.general.getHeadshot();
             fragment.kills = fragment.general.getKills();
@@ -187,6 +227,10 @@ public class CustomTabFragment extends Fragment
             fragment.suicides = fragment.general.getSuicides();
             fragment.rappelBreaches = fragment.general.getRappelBreaches();
             fragment.blindfires = fragment.general.getBlindKills();
+        }
+        else if (flag.equals("aliases"))
+        {
+            fragment.aliasesObject = currItem.getAliasesObject().getAliasObjects();
         }
         return fragment;
     }
@@ -239,6 +283,20 @@ public class CustomTabFragment extends Fragment
             ((TextView) v.findViewById(R.id.rankedTimePlayedText)).setText(timePlayed);
             return v;
         }
+        else if (flag.equals("placements"))
+        {
+            Log.v("CustomFragment", "Placements Created!");
+            View v = inflater.inflate(R.layout.placements_stats,container,false);
+            //((ImageView) v.findViewById(R.id.rankPicture)).setImageResource(getResources().getIdentifier("r" + String.valueOf(rank), "drawable", getActivity().getPackageName()));
+            ((TextView) v.findViewById(R.id.placementsGlobalText)).setText(String.valueOf(placementGlobal) + getSuffix(placementGlobal));
+            ((ImageView) v.findViewById(R.id.placementsAPACPicture)).setImageResource(getResources().getIdentifier("r" + String.valueOf(APACRank), "drawable", getActivity().getPackageName()));
+            ((TextView) v.findViewById(R.id.placementsAPACText)).setText(String.valueOf(placementAPAC) + getSuffix(placementAPAC));
+            ((ImageView) v.findViewById(R.id.placementsEMEAPicture)).setImageResource(getResources().getIdentifier("r" + String.valueOf(EMEARank), "drawable", getActivity().getPackageName()));
+            ((TextView) v.findViewById(R.id.placementsEMEAText)).setText(String.valueOf(placementEMEA) + getSuffix(placementEMEA));
+            ((ImageView) v.findViewById(R.id.placementsNCSAPicture)).setImageResource(getResources().getIdentifier("r" + String.valueOf(NCSARank), "drawable", getActivity().getPackageName()));
+            ((TextView) v.findViewById(R.id.placementsNCSAText)).setText(String.valueOf(placementNCSA) + getSuffix(placementNCSA));
+            return v;
+        }
         else if (flag.equals("weapon"))
         {
             Log.v("CustomFragment", "Weapon Created!");
@@ -268,20 +326,28 @@ public class CustomTabFragment extends Fragment
             ((TextView) v.findViewById(R.id.miscBlindFiresText)).setText(String.valueOf(blindfires));
             return v;
         }
+        else if (flag.equals("aliases"))
+        {
+            Log.v("CustomFragment", "Aliases Created!");
+            View v = inflater.inflate(R.layout.aliases_stats,container,false);
+            aliasesListView = v.findViewById(R.id.aliasesListView);
+            AliasListAdapter aliasListAdapter = new AliasListAdapter(getActivity(), aliasesObject);
+            aliasesListView.setAdapter(aliasListAdapter);
+            return v;
+        }
         return getView();
     }
 
-    public static int getResId(String resName, Class<?> c)
+    public String getSuffix(int input)
     {
-        try
+        // if (input last2 chars >= 11 && <=13 return "th"
+
+        switch(input % 10)
         {
-            Field idField = c.getDeclaredField(resName);
-            return idField.getInt(idField);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return -1;
+            case 1: return "st";
+            case 2: return "nd";
+            case 3: return "rd";
+            default : return "th";
         }
     }
 }

@@ -18,7 +18,7 @@ public class WrapContentHeightViewPager extends ViewPager {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        setOffscreenPageLimit(5);
+        setOffscreenPageLimit(6);
         int height = 0;
         for(int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);

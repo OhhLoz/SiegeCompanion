@@ -1,5 +1,6 @@
-package productions.pudl.siege;
+package productions.pudl.siege.Fragment.Search;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import productions.pudl.siege.Adapter.TabViewAdapter;
 import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
+import productions.pudl.siege.R;
 
+@SuppressLint("ValidFragment")
 public class TabbedDialog extends android.support.v4.app.DialogFragment
 {
     public static DetailedMainObject currItem;
@@ -24,6 +27,7 @@ public class TabbedDialog extends android.support.v4.app.DialogFragment
     TextView platformName;
     TextView level;
 
+    @SuppressLint("ValidFragment")
     public TabbedDialog(DetailedMainObject currItem)
     {
         this.currItem = currItem;
@@ -43,7 +47,10 @@ public class TabbedDialog extends android.support.v4.app.DialogFragment
         currItem.getUserPicture(profilePicture);
         userName.setText(currItem.getName());
         platformName.setText(currItem.getPlatform());
-        level.setText(getString(R.string.level) + ": " + String.valueOf(currItem.getLevel()));
+        String levelText = getString(R.string.level);
+        if (userName.length() <= 5)
+            levelText = getString(R.string.levelShort);
+        level.setText(levelText + ": " + String.valueOf(currItem.getLevel()));
         
         tabLayout = (TabLayout) rootview.findViewById(R.id.tabLayout);
         viewPager = (ViewPager) rootview.findViewById(R.id.masterViewPager);
@@ -51,8 +58,13 @@ public class TabbedDialog extends android.support.v4.app.DialogFragment
         adapter.addFragment("General", CustomTabFragment.createInstance(currItem, "general"));
         adapter.addFragment("Casual", CustomTabFragment.createInstance(currItem, "casual"));
         adapter.addFragment("Ranked", CustomTabFragment.createInstance(currItem, "ranked"));
+
+        if(currItem.getPlacements().getGlobal() != 0)
+            adapter.addFragment("Placements", CustomTabFragment.createInstance(currItem, "placements"));
+
         adapter.addFragment("Weapons", CustomTabFragment.createInstance(currItem, "weapon"));
         adapter.addFragment("Misc", CustomTabFragment.createInstance(currItem, "misc"));
+        adapter.addFragment("Aliases", CustomTabFragment.createInstance(currItem, "aliases"));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         return rootview;

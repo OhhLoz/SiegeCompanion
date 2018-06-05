@@ -69,43 +69,43 @@ public class DetailedRanksObject
             case 0:
                 return "Unranked";
             case 1:
-                return "Copper 4";
+                return "Copper IV";
             case 2:
-                return "Copper 3";
+                return "Copper III";
             case 3:
-                return "Copper 2";
+                return "Copper II";
             case 4:
-                return "Copper 1";
+                return "Copper I";
             case 5:
-                return "Bronze 4";
+                return "Bronze IV";
             case 6:
-                return "Bronze 3";
+                return "Bronze III";
             case 7:
-                return "Bronze 2";
+                return "Bronze II";
             case 8:
-                return "Bronze 1";
+                return "Bronze I";
             case 9:
-                return "Silver 4";
+                return "Silver IV";
             case 10:
-                return "Silver 3";
+                return "Silver III";
             case 11:
-                return "Silver 2";
+                return "Silver II";
             case 12:
-                return "Silver 1";
+                return "Silver I";
             case 13:
-                return "Gold 4";
+                return "Gold IV";
             case 14:
-                return "Gold 3";
+                return "Gold III";
             case 15:
-                return "Gold 2";
+                return "Gold II";
             case 16:
-                return "Gold 1";
+                return "Gold I";
             case 17:
-                return "Platinum 3";
+                return "Platinum III";
             case 18:
-                return "Platinum 2";
+                return "Platinum II";
             case 19:
-                return "Platinum 1";
+                return "Platinum I";
             case 20:
                 return "Diamond";
         }
