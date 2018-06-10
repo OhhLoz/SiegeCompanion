@@ -1,21 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/container"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    tools:context="productions.pudl.siege.Fragment.More"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_more"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:textSize="36sp"
-        android:textAlignment="center"/>
-</LinearLayout>
+        android:id="@+id/moreGeneralTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:text="@string/generalTitle"
+        android:textSize="@dimen/statSuperTitleSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/generalView"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreGeneralTitle" />
+
+    <TextView
+        android:id="@+id/moreDefaultNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreDefaultName"
+        app:layout_constraintEnd_toStartOf="@id/moreDefaultNameInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/moreDefaultNameInput"
+        app:layout_constraintBottom_toBottomOf="@id/moreDefaultNameInput"/>
+
+    <EditText
+        android:id="@+id/moreDefaultNameInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/generalView" />
+
+    <TextView
+        android:id="@+id/moreDefaultPlatformTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreDefaultPlatform"
+        app:layout_constraintEnd_toStartOf="@id/morePlatformSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/morePlatformSpinner"
+        app:layout_constraintBottom_toBottomOf="@id/morePlatformSpinner"/>
+
+    <Spinner
+        android:id="@+id/morePlatformSpinner"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/moreDefaultNameInput" />
+
+    <TextView
+        android:id="@+id/moreColourSchemeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreColourScheme"
+        app:layout_constraintEnd_toStartOf="@id/moreColourSchemeSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/moreColourSchemeSpinner"
+        app:layout_constraintBottom_toBottomOf="@id/moreColourSchemeSpinner"/>
+
+    <Spinner
+        android:id="@+id/moreColourSchemeSpinner"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/morePlatformSpinner" />
+
+    <TextView
+        android:id="@+id/moreLanguageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreLanguage"
+        app:layout_constraintEnd_toStartOf="@id/moreLanguageSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/moreLanguageSpinner"
+        app:layout_constraintBottom_toBottomOf="@id/moreLanguageSpinner"/>
+
+    <Spinner
+        android:id="@+id/moreLanguageSpinner"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spinnerHeight"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/moreColourSchemeSpinner" />
+
+    <TextView
+        android:id="@+id/moreSupportTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:text="@string/moreSupport"
+        android:textSize="@dimen/statSuperTitleSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreLanguageSpinner" />
+
+    <View
+        android:id="@+id/supportView"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreSupportTitle" />
+
+    <Button
+        android:id="@+id/contactButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:text="@string/moreContact"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/supportView" />
+
+    <Button
+        android:id="@+id/FAQButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:text="@string/moreFAQ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/supportView" />
+
+    <Button
+        android:id="@+id/feedbackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreFeedback"
+        app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contactButton" />
+
+    <Button
+        android:id="@+id/playStoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/morePlayStore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/FAQButton" />
+
+    <TextView
+        android:id="@+id/moreSystemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:text="@string/moreSystem"
+        android:textSize="@dimen/statSuperTitleSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedbackButton" />
+
+    <View
+        android:id="@+id/systemView"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/statsMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreSystemTitle" />
+
+    <TextView
+        android:id="@+id/moreVersionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreVersionNo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/systemView" />
+
+    <TextView
+        android:id="@+id/moreLastUpdatedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreLastUpdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreVersionTitle" />
+
+    <TextView
+        android:id="@+id/moreMinAPITitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreMinAPI"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreLastUpdatedTitle" />
+
+    <Button
+        android:id="@+id/removeAdsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moreRemoveAds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreMinAPITitle" />
+</android.support.constraint.ConstraintLayout>

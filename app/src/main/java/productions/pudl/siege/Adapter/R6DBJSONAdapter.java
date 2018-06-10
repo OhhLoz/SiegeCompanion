@@ -1,12 +1,6 @@
 package productions.pudl.siege.Adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,17 +9,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,9 +34,7 @@ import productions.pudl.siege.Data.GeneralObjects.GeneralLastPlayedObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralRankObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralRanksObject;
-import productions.pudl.siege.Fragment.Search;
-
-import static com.android.volley.VolleyLog.TAG;
+import productions.pudl.siege.Fragment.Search.Search;
 
 public class R6DBJSONAdapter {
     protected String userName;
@@ -80,7 +66,8 @@ public class R6DBJSONAdapter {
         }
     }
 
-    public void ParseGeneral() {
+    public void ParseGeneral()
+    {
         String URL = "https://r6db.com/api/v2/players?name=" + getUserName() + "&platform=" + getPlatformName();
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL, null,
@@ -335,17 +322,24 @@ public class R6DBJSONAdapter {
                             int kills = casualObject.getInt("kills");
                             lost = casualObject.getInt("lost");
                             played = casualObject.getInt("played");
-                            int timePlayed = casualObject.getInt("timePlayed");
+                            int timePlayed = 0;
+                            if (casualObject.isNull("timePlayed"))
+                                timePlayed = 0;
+                            else
+                                timePlayed = casualObject.getInt("timePlayed");
                             won = casualObject.getInt("won");
 
                             DetailedStatObject casual = new DetailedStatObject(deaths, kills, lost, played, timePlayed, won);
 
-                            JSONObject rankedObject = statsObject.getJSONObject("casual");
+                            JSONObject rankedObject = statsObject.getJSONObject("ranked");
                             deaths = rankedObject.getInt("deaths");
                             kills = rankedObject.getInt("kills");
                             lost = rankedObject.getInt("lost");
                             played = rankedObject.getInt("played");
-                            timePlayed = rankedObject.getInt("timePlayed");
+                            if(rankedObject.isNull("timePlayed"))
+                                timePlayed = 0;
+                            else
+                                timePlayed = rankedObject.getInt("timePlayed");
                             won = rankedObject.getInt("won");
 
                             DetailedStatObject ranked = new DetailedStatObject(deaths, kills, lost, played, timePlayed, won);

@@ -12,6 +12,7 @@
         <item>Xbox</item>
         <item>PS4</item>
     </string-array>
+    <string name="levelShort">Lvl</string>
     <string name="level">Level</string>
     <string name="generalTitle">General</string>
     <string name="generalKills">Kills</string>
@@ -21,7 +22,7 @@
     <string name="generalWins">Wins</string>
     <string name="generalLosses">Losses</string>
     <string name="generalPlayed">Played</string>
-    <string name="generalWL">W/L</string>
+    <string name="generalWL">Win%</string>
     <string name="generalRevives">Revives</string>
     <string name="generalSuicides">Suicides</string>
     <string name="generalMelee">Melee Kills</string>
@@ -32,8 +33,42 @@
     <string name="casualKD">K/D</string>
     <string name="casualWins">Wins</string>
     <string name="casualLosses">Losses</string>
-    <string name="casualWL">W/L</string>
+    <string name="casualWL">Win%</string>
     <string name="casualPlayed">Played</string>
     <string name="casualLevel">Level</string>
     <string name="casualTimePlayed">Play Time</string>
+    <string name="placementsGlobal">Global</string>
+    <string name="placementsAPAC">Asia</string>
+    <string name="placementsEMEA">Europe</string>
+    <string name="placementsNCSA">America</string>
+    <string name="weaponHeadshot">Head Shots</string>
+    <string name="weaponHeadshotHit">HS / Hit%</string>
+    <string name="weaponHeadshotKills">HS / Kills%</string>
+    <string name="weaponAccuracy">Accuracy</string>
+    <string name="weaponBulletsHit">Bullets Hit</string>
+    <string name="weaponBulletsFired">Bullets Shot</string>
+    <string name="weaponMeleeKills">Melee Kills</string>
+    <string name="weaponPenetrationKills">Penetrations</string>
+    <string name="miscDBNO">DBNO</string>
+    <string name="miscDBNOAssists">DBNO Assists</string>
+    <string name="miscGadgetsDestroyed">Gadgets Destroyed</string>
+    <string name="miscRevives">Revives</string>
+    <string name="miscRevivesDenied">Revives Denied</string>
+    <string name="miscSuicides">Suicides</string>
+    <string name="miscRappelBreaches">Rappel Breaches</string>
+    <string name="miscBlindFires">Blind Kills</string>
+    <string name="moreDefaultName">Default Name:</string>
+    <string name="moreDefaultPlatform">Default Platform:</string>
+    <string name="moreColourScheme">Colour Scheme:</string>
+    <string name="moreLanguage">Language:</string>
+    <string name="moreSupport">Support</string>
+    <string name="moreContact">Contact</string>
+    <string name="moreFAQ">FAQ</string>
+    <string name="moreFeedback">Give Feedback</string>
+    <string name="morePlayStore">Play Store Review</string>
+    <string name="moreSystem">System</string>
+    <string name="moreVersionNo">Version Number: 1.0</string>
+    <string name="moreLastUpdate">Last Updated: 29th May 2018</string>
+    <string name="moreMinAPI">Minimum Version: Android 4.4 Kitkat</string>
+    <string name="moreRemoveAds">Remove Ads: £0.75</string>
 </resources>

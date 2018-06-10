@@ -7,7 +7,7 @@ public class DetailedGeneralObject
     private int bulletsFired;
     private int bulletsHit;
     private int dbno;
-    private int dboAssists;
+    private int dbnoAssists;
     private int deaths;
     private int gadgetsDestroyed;
     private int headshot;
@@ -28,14 +28,14 @@ public class DetailedGeneralObject
     private int timePlayed;
     private int won;
 
-    public DetailedGeneralObject(int assists, int blindKills, int bulletsFired, int bulletsHit, int dbno, int dboAssists, int deaths, int gadgetsDestroyed, int headshot, int hostageDefense, int hostageRescue, int kills, int lost, int meleekills, int penetrationKills, int played, int rappelBreaches, int revives, int revivesDenied, int serverAggression, int serverDefender, int serversHacked, int suicides, int timePlayed, int won)
+    public DetailedGeneralObject(int assists, int blindKills, int bulletsFired, int bulletsHit, int dbno, int dbnoAssists, int deaths, int gadgetsDestroyed, int headshot, int hostageDefense, int hostageRescue, int kills, int lost, int meleekills, int penetrationKills, int played, int rappelBreaches, int revives, int revivesDenied, int serverAggression, int serverDefender, int serversHacked, int suicides, int timePlayed, int won)
     {
         setAssists(assists);
         setBlindKills(blindKills);
         setBulletsFired(bulletsFired);
         setBulletsHit(bulletsHit);
         setDbno(dbno);
-        setDboAssists(dboAssists);
+        setDboAssists(dbnoAssists);
         setDeaths(deaths);
         setGadgetsDestroyed(gadgetsDestroyed);
         setHeadshot(headshot);
@@ -97,12 +97,12 @@ public class DetailedGeneralObject
         this.dbno = dbno;
     }
 
-    public int getDboAssists() {
-        return dboAssists;
+    public int getDbnoAssists() {
+        return dbnoAssists;
     }
 
     public void setDboAssists(int dboAssists) {
-        this.dboAssists = dboAssists;
+        this.dbnoAssists = dboAssists;
     }
 
     public int getDeaths() {

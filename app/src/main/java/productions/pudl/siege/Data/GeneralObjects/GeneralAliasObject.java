@@ -11,7 +11,7 @@ public class GeneralAliasObject
         setCreatedAt(createdAt);
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
@@ -19,7 +19,7 @@ public class GeneralAliasObject
         this.name = name;
     }
 
-    private String getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 

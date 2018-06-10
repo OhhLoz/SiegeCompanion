@@ -12,7 +12,7 @@ import productions.pudl.siege.Fragment.Compare;
 import productions.pudl.siege.Fragment.More;
 import productions.pudl.siege.Fragment.Operators;
 import productions.pudl.siege.Fragment.Profile;
-import productions.pudl.siege.Fragment.Search;
+import productions.pudl.siege.Fragment.Search.Search;
 
 public class MainActivity extends AppCompatActivity
 {

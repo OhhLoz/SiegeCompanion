@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/colorNavBar">
+
+    <ImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/profileLogo"
+        android:src="@drawable/r6slogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toStartOf="@+id/profilePicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
+
+    <View
+        android:id="@+id/uiview"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="@dimen/statsSmallMargin"
+        android:layout_marginStart="@dimen/statsSmallMargin"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintBottom_toBottomOf="@id/level"
+        app:layout_constraintEnd_toStartOf="@id/platformName"
+        app:layout_constraintStart_toEndOf="@id/level"
+        app:layout_constraintTop_toTopOf="@id/level" />
+
+    <TextView
+        android:id="@+id/platformName"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@id/userName" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintTop_toBottomOf="@id/profilePicture" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:tabMode="scrollable" />
+
+    <view
+        android:id="@+id/masterViewPager"
+        class="productions.pudl.siege.Adapter.WrapContentHeightViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <View
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorStatTitle"
+        app:layout_constraintTop_toBottomOf="@id/masterViewPager" />
+
+    <ImageButton
+        android:id="@+id/detailedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:contentDescription="@string/profileLogo"
+        app:layout_constraintEnd_toStartOf="@+id/compareButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ic_profile"
+        app:layout_constraintTop_toBottomOf="@id/bottomView" />
+
+    <ImageButton
+        android:id="@+id/compareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/profileLogo"
+        app:layout_constraintEnd_toStartOf="@+id/webButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/detailedButton"
+        app:layout_constraintTop_toBottomOf="@id/bottomView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ic_compare" />
+
+    <ImageButton
+        android:id="@+id/webButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/profileLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/compareButton"
+        app:layout_constraintTop_toBottomOf="@id/bottomView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ic_home_black_24dp" />
+
+</android.support.constraint.ConstraintLayout>
