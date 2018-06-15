@@ -22,11 +22,9 @@ public class Operators extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.operators_fragment, container, false);
-        String encoded = "***REMOVED***";
+        String encoded = "raspberrypicreations@gmail.com:1NnpENN6za61";
         RequestQueue mQueue = Volley.newRequestQueue(view.getContext());
         MyUbiAPIAdapter.create(mQueue, encoded);
-        //MyUbiAPIAdapter.printLogs();
-        Log.v("UbiAdapter", "Token Expired");
         return view;
     }
 }

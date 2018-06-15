@@ -55,9 +55,7 @@ public class MyUbiAPIAdapter
                         expirationTimeFormatted = fromISO8601UTC(expirationTimeStr);
                         userName = response.getString("nameOnPlatform");
                         headers.setTicket(response.getString("ticket"));
-                        Log.v("onResponse", "Printing Logs/Expiration Times");
                         printLogs();
-                        Log.v("onResponse", "Printing Headers");
                         headers.printHeaders();
                     }
                     catch (Exception e)
@@ -93,8 +91,11 @@ public class MyUbiAPIAdapter
 
     static private void printLogs()
     {
+        Log.v("onResponse", "Printing Logs/Expiration Times");
+        Log.v("UserName", userName);
         Log.v("ExpirationTimeStr", expirationTimeStr);
         Log.v("ExpirationTimeFormatted", expirationTimeFormatted.toString());
+        Log.v("CurrentTimeFormatted", new Date().toString());
     }
 
     private static String toISO8601UTC(Date date)
@@ -164,6 +165,7 @@ public class MyUbiAPIAdapter
 
         public void printHeaders()
         {
+            Log.v("onResponse", "Printing Headers");
             Log.v("HeaderContent", this.headers.get("Content-Type"));
             Log.v("HeaderAppID", this.headers.get("ubi-appid"));
             Log.v("HeaderAuth", this.headers.get("authorization"));
