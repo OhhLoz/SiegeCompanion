@@ -364,6 +364,271 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/casualPlayedTitle" />
 
+            <View
+                android:id="@+id/casualView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/statsLargeMargin"
+                android:layout_marginStart="@dimen/statsLargeMargin"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorStatTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/casualTimePlayedTitle" />
+
+            <TextView
+                android:id="@+id/rankedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/rankedTitle"
+                android:textColor="@color/colorProfileTab"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/casualView" />
+
+            <TextView
+                android:id="@+id/rankedKillsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/statsMargin"
+                android:layout_marginBottom="@dimen/statsMargin"
+                android:textSize="@dimen/statTitleSize"
+                android:text="@string/generalKills"
+                android:textColor="@color/colorOperatorTab"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedTitle" />
+
+            <TextView
+                android:id="@+id/rankedDeathsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/casualDeaths"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedKillsTitle" />
+
+            <TextView
+                android:id="@+id/rankedKDTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/casualKD"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedDeathsTitle" />
+
+            <TextView
+                android:id="@+id/rankedWinsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/casualWins"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedKDTitle" />
+
+            <TextView
+                android:id="@+id/rankedLossesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/casualLosses"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedWinsTitle" />
+
+            <TextView
+                android:id="@+id/rankedWLTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/casualWL"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedLossesTitle" />
+
+            <TextView
+                android:id="@+id/rankedPlayedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/casualPlayed"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedWLTitle" />
+
+            <TextView
+                android:id="@+id/rankedRankTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/rankedRank"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedPlayedTitle" />
+
+            <TextView
+                android:id="@+id/rankedTimePlayedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/casualTimePlayed"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedRankTitle" />
+
+            <View
+                android:id="@+id/rankedView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/statsLargeMargin"
+                android:layout_marginStart="@dimen/statsLargeMargin"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorStatTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedTimePlayedTitle" />
+
+            <TextView
+                android:id="@+id/weaponTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/weaponTitle"
+                android:textColor="@color/colorProfileTab"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rankedView" />
+
+            <TextView
+                android:id="@+id/weaponHSTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/statsMargin"
+                android:layout_marginBottom="@dimen/statsMargin"
+                android:textSize="@dimen/statTitleSize"
+                android:text="@string/weaponHeadshot"
+                android:textColor="@color/colorOperatorTab"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponTitle" />
+
+            <TextView
+                android:id="@+id/weaponHSHitTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weaponHeadshotHit"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponHSTitle" />
+
+            <TextView
+                android:id="@+id/weaponHSKillsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weaponHeadshotKills"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponHSHitTitle" />
+
+            <TextView
+                android:id="@+id/weaponBulletsHitTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weaponBulletsHit"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponHSKillsTitle" />
+
+            <TextView
+                android:id="@+id/weaponBulletsFiredTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weaponBulletsFired"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponBulletsHitTitle" />
+
+            <TextView
+                android:id="@+id/weaponAccuracyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weaponAccuracy"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponBulletsFiredTitle" />
+
+            <TextView
+                android:id="@+id/weaponMeleeKillsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weaponMeleeKills"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponAccuracyTitle" />
+
+            <TextView
+                android:id="@+id/weaponPenetrationKillsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weaponPenetrationKills"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponMeleeKillsTitle" />
+
+            <TextView
+                android:id="@+id/weaponAssistsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/generalAssists"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponPenetrationKillsTitle" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </LinearLayout>

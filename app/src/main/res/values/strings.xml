@@ -37,10 +37,13 @@
     <string name="casualPlayed">Played</string>
     <string name="casualLevel">Level</string>
     <string name="casualTimePlayed">Play Time</string>
+    <string name="rankedTitle">Ranked</string>
+    <string name="rankedRank">Rank</string>
     <string name="placementsGlobal">Global</string>
     <string name="placementsAPAC">Asia</string>
     <string name="placementsEMEA">Europe</string>
     <string name="placementsNCSA">America</string>
+    <string name="weaponTitle">Weapon</string>
     <string name="weaponHeadshot">Head Shots</string>
     <string name="weaponHeadshotHit">HS / Hit%</string>
     <string name="weaponHeadshotKills">HS / Kills%</string>
