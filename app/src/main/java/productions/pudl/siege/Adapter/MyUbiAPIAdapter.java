@@ -35,6 +35,7 @@ public class MyUbiAPIAdapter
     {
         headers = new MyHeader(credentials);
         mQueue = currQueue;
+        if (expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null)
         loginAuth();
     }
 
@@ -83,10 +84,65 @@ public class MyUbiAPIAdapter
         mQueue.add(request);
     }
 
+    static private void getPlayer(String platform, String key, String vals)
+    {
+        // valid platforms = psn, vbl, uplay
+        // valid keys= nameOnPlatform, idOnPlatform, userId
+        if (isExpired())
+            loginAuth();
+        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&@" + key + "=@" + vals;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.v("JSONResponse", response.toString());
+                            printLogs();
+                            headers.printHeaders();
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Log.v("getHeaders", "Getting Headers");
+                return headers.getHeaders();
+            }
+        };
+        mQueue.add(request);
+    }
+
     static public boolean isExpired()
     {
         //if expired time > currenttime then call loginAuth
         return fromISO8601UTC(toISO8601UTC(new Date())).after(expirationTimeFormatted);
+    }
+
+    static public RequestQueue getmQueue()
+    {
+        return mQueue;
+    }
+
+    static public void setmQueue(RequestQueue queue)
+    {
+        mQueue = queue;
     }
 
     static private void printLogs()
