@@ -25,7 +25,6 @@ import productions.pudl.siege.Adapter.R6DBJSONAdapter;
 import productions.pudl.siege.Adapter.SearchListViewAdapter;
 import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
-import productions.pudl.siege.Data.User;
 import productions.pudl.siege.R;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, ListView.OnItemClickListener, SearchView.OnCloseListener {
@@ -35,7 +34,6 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     R6DBJSONAdapter r6DBJsonAdapter;
     String[] platformList;
     String[] userNameList;
-    ArrayList<User> userList = new ArrayList<User>();
     public static ArrayList<GeneralObject> searchResults;
     public static DetailedMainObject finalResult;
     GeneralObject ItemClicked;

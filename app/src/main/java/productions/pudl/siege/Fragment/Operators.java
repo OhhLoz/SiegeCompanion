@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 
 import productions.pudl.siege.Adapter.MyUbiAPIAdapter;
+import productions.pudl.siege.Data.Player;
 import productions.pudl.siege.R;
 
 public class Operators extends Fragment
@@ -25,7 +26,6 @@ public class Operators extends Fragment
     {
         View view = inflater.inflate(R.layout.operators_fragment, container, false);
         mQueue = Volley.newRequestQueue(view.getContext());
-        //String encoded = "raspberrypicreations@gmail.com:1NnpENN6za61";
         //RequestQueue mQueue = Volley.newRequestQueue(view.getContext());
         //MyUbiAPIAdapter.create(mQueue, encoded);
 
@@ -46,7 +46,19 @@ public class Operators extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getPlayer("uplay", "nameOnPlatform", "sallad_");
+                MyUbiAPIAdapter.getPlayer("uplay", "nameOnPlatform", "Tachanka");
+            }
+
+        });
+
+        Button testButton3 = (Button) view.findViewById(R.id.testButton3);
+        testButton3.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+                for(Player temp : MyUbiAPIAdapter.getPlayersResult())
+                    Log.v("FinalPlayer", temp.toString());
             }
 
         });

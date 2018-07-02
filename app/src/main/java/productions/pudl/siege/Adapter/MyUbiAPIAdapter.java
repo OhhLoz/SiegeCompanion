@@ -1,6 +1,5 @@
 package productions.pudl.siege.Adapter;
 
-import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
 
@@ -34,13 +33,14 @@ public class MyUbiAPIAdapter
     static private Date expirationTimeFormatted = null;
     static private RequestQueue mQueue;
     static private MyHeader headers;
+    static private ArrayList<Player> playersResult;
 
     static public void create(RequestQueue currQueue, String credentials)
     {
         headers = new MyHeader(credentials);
         mQueue = currQueue;
-        //if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
-        loginAuth();
+        if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
+            loginAuth();
     }
 
     static private void loginAuth()
@@ -93,8 +93,8 @@ public class MyUbiAPIAdapter
         // valid platforms = psn, vbl, uplay
         // valid keys= nameOnPlatform, idOnPlatform, userId
         // valid vals = name or id (depends on the key)
-        //if (isExpired())
-        //    loginAuth();
+        if (isExpired())
+            loginAuth();
         String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&" + key + "=" + vals;
         //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
 
@@ -120,8 +120,9 @@ public class MyUbiAPIAdapter
                                 playersArr.add(temp);
                             }
 
-                            printLogs();
+                            //printLogs();
                             headers.printHeaders();
+                            setPlayersResult(playersArr);
                         }
                         catch (Exception e)
                         {
@@ -146,6 +147,17 @@ public class MyUbiAPIAdapter
             }
         };
         mQueue.add(request);
+    }
+
+    static private void setPlayersResult(ArrayList<Player> temp)
+    {
+        playersResult = temp;
+        Log.v("GetPlayer", "Set Results");
+    }
+
+    static public ArrayList<Player> getPlayersResult()
+    {
+        return playersResult;
     }
 
     static public boolean isExpired()
