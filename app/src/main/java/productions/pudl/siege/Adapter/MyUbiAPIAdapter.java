@@ -11,16 +11,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+
+import productions.pudl.siege.Data.Player;
 
 
 public class MyUbiAPIAdapter
@@ -35,7 +39,7 @@ public class MyUbiAPIAdapter
     {
         headers = new MyHeader(credentials);
         mQueue = currQueue;
-        if (expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null)
+        //if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
         loginAuth();
     }
 
@@ -77,22 +81,24 @@ public class MyUbiAPIAdapter
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError
             {
-                Log.v("getHeaders", "Getting Headers");
+                //Log.v("getHeaders", "Getting Headers");
                 return headers.getHeaders();
             }
         };
         mQueue.add(request);
     }
 
-    static private void getPlayer(String platform, String key, String vals)
+    static public void getPlayer(String platform, String key, String vals)
     {
         // valid platforms = psn, vbl, uplay
         // valid keys= nameOnPlatform, idOnPlatform, userId
-        if (isExpired())
-            loginAuth();
-        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&@" + key + "=@" + vals;
+        // valid vals = name or id (depends on the key)
+        //if (isExpired())
+        //    loginAuth();
+        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&" + key + "=" + vals;
+        //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, null,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
@@ -101,6 +107,19 @@ public class MyUbiAPIAdapter
                         try
                         {
                             Log.v("JSONResponse", response.toString());
+                            JSONArray profilesArr = response.getJSONArray("profiles");
+                            ArrayList<Player> playersArr = new ArrayList<>();
+                            for (int i = 0; i < profilesArr.length(); i++)
+                            {
+                                JSONObject player = profilesArr.getJSONObject(i);
+                                String userName = player.getString("nameOnPlatform");
+                                String platform = player.getString("platformType");
+                                String userID = player.getString("userId");
+                                Player temp = new Player(userName, platform, userID);
+                                Log.v("PlayerToString", temp.toString());
+                                playersArr.add(temp);
+                            }
+
                             printLogs();
                             headers.printHeaders();
                         }
@@ -216,7 +235,7 @@ public class MyUbiAPIAdapter
         public void setTicket(String ticket)
         {
             this.ticket = ticket;
-            headers.put("Ubi_v1 t=", ticket);
+            this.headers.put("authorization", "Ubi_v1 t=" + ticket);
         }
 
         public void printHeaders()
@@ -225,7 +244,6 @@ public class MyUbiAPIAdapter
             Log.v("HeaderContent", this.headers.get("Content-Type"));
             Log.v("HeaderAppID", this.headers.get("ubi-appid"));
             Log.v("HeaderAuth", this.headers.get("authorization"));
-            Log.v("HeaderTicket", this.headers.get("Ubi_v1 t="));
         }
     }
 }
