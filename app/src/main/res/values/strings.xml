@@ -37,10 +37,13 @@
     <string name="casualPlayed">Played</string>
     <string name="casualLevel">Level</string>
     <string name="casualTimePlayed">Play Time</string>
+    <string name="rankedTitle">Ranked</string>
+    <string name="rankedRank">Rank</string>
     <string name="placementsGlobal">Global</string>
     <string name="placementsAPAC">Asia</string>
     <string name="placementsEMEA">Europe</string>
     <string name="placementsNCSA">America</string>
+    <string name="weaponTitle">Weapon</string>
     <string name="weaponHeadshot">Head Shots</string>
     <string name="weaponHeadshotHit">HS / Hit%</string>
     <string name="weaponHeadshotKills">HS / Kills%</string>
@@ -57,6 +60,11 @@
     <string name="miscSuicides">Suicides</string>
     <string name="miscRappelBreaches">Rappel Breaches</string>
     <string name="miscBlindFires">Blind Kills</string>
+    <string name="gamemodeTitle">Gamemodes</string>
+    <string name="gamemodeBestScore">Best Score</string>
+    <string name="secureAreaTitle">Secure Area</string>
+    <string name="hostageTitle">Hostage</string>
+    <string name="bombTitle">Bomb</string>
     <string name="moreDefaultName">Default Name:</string>
     <string name="moreDefaultPlatform">Default Platform:</string>
     <string name="moreColourScheme">Colour Scheme:</string>

@@ -169,6 +169,6 @@ public class DetailedMainObject
 
     public void getUserPicture(ImageView imgView)
     {
-        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + getUserID() + "/default_146_146.png").into(imgView);
+        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + getUserID() + "/default_256_256.png").into(imgView);
     }
 }
