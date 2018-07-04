@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 
 import productions.pudl.siege.Adapter.MyUbiAPIAdapter;
+import productions.pudl.siege.Data.Level;
 import productions.pudl.siege.Data.Player;
 import productions.pudl.siege.R;
 
@@ -46,7 +47,7 @@ public class Operators extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getPlayer("uplay", "nameOnPlatform", "Tachanka");
+                MyUbiAPIAdapter.getPlayer("uplay", "userId", "28ca710b-270d-491b-8073-42654f82745d");
             }
 
         });
@@ -57,8 +58,33 @@ public class Operators extends Fragment
             @Override
             public void onClick(View view)
             {
-                for(Player temp : MyUbiAPIAdapter.getPlayersResult())
-                    Log.v("FinalPlayer", temp.toString());
+//                for(Player temp : MyUbiAPIAdapter.getPlayersResult())
+//                    Log.v("FinalPlayer", temp.toString());
+                Log.v("FinalPlayer", MyUbiAPIAdapter.getPlayersResult().get(0).toString());
+            }
+
+        });
+
+        Button testButton4 = (Button) view.findViewById(R.id.testButton4);
+        testButton4.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+                MyUbiAPIAdapter.getLevel("28ca710b-270d-491b-8073-42654f82745d", "PC");
+            }
+
+        });
+
+        Button testButton5 = (Button) view.findViewById(R.id.testButton5);
+        testButton5.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+//                for(Level temp : MyUbiAPIAdapter.getLevelsResult())
+//                    Log.v("FinalPlayerLevel", temp.toString());
+                Log.v("FinalLevel", MyUbiAPIAdapter.getLevelsResult().get(0).toString());
             }
 
         });
