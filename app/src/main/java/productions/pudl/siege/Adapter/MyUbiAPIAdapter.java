@@ -23,6 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import productions.pudl.siege.Data.Level;
 import productions.pudl.siege.Data.Player;
 
 
@@ -34,6 +35,7 @@ public class MyUbiAPIAdapter
     static private RequestQueue mQueue;
     static private MyHeader headers;
     static private ArrayList<Player> playersResult;
+    static private ArrayList<Level> levelsResult;
 
     static public void create(RequestQueue currQueue, String credentials)
     {
@@ -158,6 +160,76 @@ public class MyUbiAPIAdapter
     static public ArrayList<Player> getPlayersResult()
     {
         return playersResult;
+    }
+
+    static public void getLevel(String id, String platform)
+    {
+        // valid platforms = PS4, XBOXONE, PC
+        if (isExpired())
+            loginAuth();
+        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6playerprofile/playerprofile/progressions?profile_ids="+ id;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.v("JSONResponse", response.toString());
+                            JSONArray profilesArr = response.getJSONArray("player_profiles");
+                            ArrayList<Level> levelsArr = new ArrayList<>();
+                            for (int i = 0; i < profilesArr.length(); i++)
+                            {
+                                JSONObject player = profilesArr.getJSONObject(i);
+                                int xp = player.getInt("xp");
+                                String userID = player.getString("profile_id");
+                                int lootboxProbability = player.getInt("lootbox_probability");
+                                int level = player.getInt("level");
+                                Level temp = new Level(xp, userID, lootboxProbability, level);
+                                Log.v("LevelToString", temp.toString());
+                                levelsArr.add(temp);
+                            }
+
+                            //printLogs();
+                            headers.printHeaders();
+                            setLevelsResult(levelsArr);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Log.v("getHeaders", "Getting Headers");
+                return headers.getHeaders();
+            }
+        };
+        mQueue.add(request);
+    }
+
+    static private void setLevelsResult(ArrayList<Level> temp)
+    {
+        levelsResult = temp;
+        Log.v("GetLevel", "Set Results");
+    }
+
+    static public ArrayList<Level> getLevelsResult()
+    {
+        return levelsResult;
     }
 
     static public boolean isExpired()

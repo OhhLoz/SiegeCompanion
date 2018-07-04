@@ -1,18 +1,29 @@
 package productions.pudl.siege.Data;
 
-import android.util.Log;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 public class Player
 {
     private String userName;
     private String platformName;
     private String userID;
+    private Level levelObj;
 
     public Player(String userName, String platformName, String userID)
     {
         setUserName(userName);
         setPlatformName(platformName);
         setUserID(userID);
+    }
+
+    public Player(String userName, String platformName, String userID, Level levelObj)
+    {
+        setUserName(userName);
+        setPlatformName(platformName);
+        setUserID(userID);
+        setLevelObj(levelObj);
     }
 
     public String getPlayerName()
@@ -30,6 +41,11 @@ public class Player
         return this.userID;
     }
 
+    public void getUserPicture(ImageView imgView)
+    {
+        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + getUserID() + "/default_256_256.png").into(imgView);
+    }
+
     private void setUserName(String user)
     {
         this.userName = user;
@@ -43,6 +59,11 @@ public class Player
     private void setUserID(String ID)
     {
         this.userID = ID;
+    }
+
+    private void setLevelObj(Level levelObj)
+    {
+        this.levelObj = levelObj;
     }
 
     public String toString()
