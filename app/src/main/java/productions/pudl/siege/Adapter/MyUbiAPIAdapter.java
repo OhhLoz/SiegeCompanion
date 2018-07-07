@@ -19,12 +19,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
 import productions.pudl.siege.Data.Level;
 import productions.pudl.siege.Data.Player;
+import productions.pudl.siege.Data.Ranked;
+import productions.pudl.siege.Data.Stat;
 
 
 public class MyUbiAPIAdapter
@@ -36,6 +39,8 @@ public class MyUbiAPIAdapter
     static private MyHeader headers;
     static private ArrayList<Player> playersResult;
     static private ArrayList<Level> levelsResult;
+    static private ArrayList<Stat> statsResult;
+    static private ArrayList<Ranked> rankedResult;
 
     static public void create(RequestQueue currQueue, String credentials)
     {
@@ -123,7 +128,7 @@ public class MyUbiAPIAdapter
                             }
 
                             //printLogs();
-                            headers.printHeaders();
+                            //headers.printHeaders();
                             setPlayersResult(playersArr);
                         }
                         catch (Exception e)
@@ -193,7 +198,7 @@ public class MyUbiAPIAdapter
                             }
 
                             //printLogs();
-                            headers.printHeaders();
+                            //headers.printHeaders();
                             setLevelsResult(levelsArr);
                         }
                         catch (Exception e)
@@ -230,6 +235,174 @@ public class MyUbiAPIAdapter
     static public ArrayList<Level> getLevelsResult()
     {
         return levelsResult;
+    }
+
+    static public void getStats(String id, String platform, String stats)
+    {
+        // valid platforms = PS4, XBOXONE, PC
+        if (isExpired())
+            loginAuth();
+        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.v("JSONResponse", response.toString());
+                            JSONObject resultsObj = response.getJSONObject("results");
+                            ArrayList<Stat> statsArr = new ArrayList<>();
+                            Iterator<?> keys = resultsObj.keys();
+
+                            while( keys.hasNext() )
+                            {
+                                String key = (String)keys.next();
+                                if ( resultsObj.get(key) instanceof JSONObject )
+                                {
+                                    JSONObject currObj = resultsObj.getJSONObject(key);
+                                    int casualWon = currObj.getInt("casualpvp_matchwon:infinite");
+                                    int casualLost = currObj.getInt("casualpvp_matchlost:infinite");
+                                    int casualPlayed = currObj.getInt("casualpvp_matchplayed:infinite");
+                                    int casualKills = currObj.getInt("casualpvp_kills:infinite");
+                                    int casualDeaths = currObj.getInt("casualpvp_death:infinite");
+                                    int casualTimePlayed = currObj.getInt("casualpvp_timeplayed:infinite");
+                                    int rankedWon = currObj.getInt("rankedpvp_matchwon:infinite");
+                                    int rankedLost = currObj.getInt("rankedpvp_matchlost:infinite");
+                                    int rankedPlayed = currObj.getInt("rankedpvp_matchplayed:infinite");
+                                    int rankedKills = currObj.getInt("rankedpvp_kills:infinite");
+                                    int rankedDeaths = currObj.getInt("rankedpvp_death:infinite");
+                                    int rankedTimePlayed = currObj.getInt("rankedpvp_timeplayed:infinite");
+                                    Stat temp = new Stat(casualWon,casualLost, casualPlayed, casualKills, casualDeaths, casualTimePlayed, rankedWon, rankedLost, rankedPlayed, rankedKills, rankedDeaths, rankedTimePlayed);
+                                    statsArr.add(temp);
+                                }
+                            }
+                            //printLogs();
+                            //headers.printHeaders();
+                            setStatsResult(statsArr);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Log.v("getHeaders", "Getting Headers");
+                return headers.getHeaders();
+            }
+        };
+        mQueue.add(request);
+    }
+
+    static private void setStatsResult(ArrayList<Stat> temp)
+    {
+        statsResult = temp;
+        Log.v("GetLevel", "Set Results");
+    }
+
+    static public ArrayList<Stat> getStatsResult()
+    {
+        return statsResult;
+    }
+
+    static public void getRanked(String id, String platform, String region, int season)
+    {
+        // valid platforms = PS4, XBOXONE, PC
+        if (isExpired())
+            loginAuth();
+        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6karma/players?board_id=pvp_ranked&season=" + season + "&region_id=" + region + "&profile_ids=" + id;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.v("JSONResponse", response.toString());
+                            JSONObject resultsObj = response.getJSONObject("players");
+                            ArrayList<Ranked> rankedArr = new ArrayList<>();
+                            Iterator<?> keys = resultsObj.keys();
+
+                            while( keys.hasNext() )
+                            {
+                                String key = (String)keys.next();
+                                if ( resultsObj.get(key) instanceof JSONObject )
+                                {
+                                    JSONObject currObj = resultsObj.getJSONObject(key);
+                                    String updateTime = currObj.getString("update_time");
+                                    double skillMean = currObj.getDouble("skill_mean");
+                                    int season = currObj.getInt("season");
+                                    String region = currObj.getString("region");
+                                    String userID = currObj.getString("profile_id");
+                                    int pastSeasonWins = currObj.getInt("past_seasons_wins");
+                                    int pastSeasonLosses = currObj.getInt("past_seasons_losses");
+                                    double maxmmr = currObj.getDouble("max_mmr");
+                                    double mmr = currObj.getDouble("mmr");
+                                    int wins = currObj.getInt("wins");
+                                    int losses = currObj.getInt("losses");
+                                    int abandons = currObj.getInt("abandons");
+                                    double standardDeviation = currObj.getDouble("skill_stdev");
+                                    int rank = currObj.getInt("rank");
+                                    double nextRankMMR = currObj.getDouble("next_rank_mmr");
+                                    double prevRankMMR = currObj.getDouble("previous_rank_mmr");
+                                    int maxRank = currObj.getInt("max_rank");
+                                    Ranked temp = new Ranked(updateTime, skillMean, season, region, userID, pastSeasonWins, pastSeasonLosses, maxmmr, mmr, wins, losses, abandons, standardDeviation, rank, nextRankMMR, prevRankMMR, maxRank);
+                                    rankedArr.add(temp);
+                                }
+                            }
+                            //printLogs();
+                            //headers.printHeaders();
+                            setRankedResult(rankedArr);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Log.v("getHeaders", "Getting Headers");
+                return headers.getHeaders();
+            }
+        };
+        mQueue.add(request);
+    }
+
+    static private void setRankedResult(ArrayList<Ranked> temp)
+    {
+        rankedResult = temp;
+        Log.v("GetLevel", "Set Results");
+    }
+
+    static public ArrayList<Ranked> getRankedResult()
+    {
+        return rankedResult;
     }
 
     static public boolean isExpired()

@@ -50,9 +50,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Print Level"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/testButton4" />
+
+        <Button
+            android:id="@+id/testButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Stats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/testButton5" />
+
+        <Button
+            android:id="@+id/testButton7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Print Stats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/testButton6" />
+
+        <Button
+            android:id="@+id/testButton8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Ranked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/testButton7" />
+
+        <Button
+            android:id="@+id/testButton9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Print Ranked"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/testButton8" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

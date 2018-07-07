@@ -79,4 +79,60 @@
     <string name="moreLastUpdate">Last Updated: 29th May 2018</string>
     <string name="moreMinAPI">Minimum Version: Android 4.4 Kitkat</string>
     <string name="moreRemoveAds">Remove Ads: £0.75</string>
+    <string-array name="overallStats">
+        <item>generalpvp_accuracy,</item>
+        <item>generalpvp_barricadedeployed,</item>
+        <item>generalpvp_blindkills,</item>
+        <item>generalpvp_bulletfired,</item>
+        <item>generalpvp_bullethit,</item>
+        <item>generalpvp_dbno,</item>
+        <item>generalpvp_dbnoassists,</item>
+        <item>generalpvp_death,</item>
+        <item>generalpvp_distancetravelled,</item>
+        <item>generalpvp_gadgetdestroy,</item>
+        <item>generalpvp_headshot,</item>
+        <item>generalpvp_hostagedefense,</item>
+        <item>generalpvp_hostagerescue,</item>
+        <item>generalpvp_kdratio,</item>
+        <item>generalpvp_killassists,</item>
+        <item>generalpvp_kills,</item>
+        <item>generalpvp_matchlost,</item>
+        <item>generalpvp_matchplayed,</item>
+        <item>generalpvp_matchwlratio,</item>
+        <item>generalpvp_matchwon,</item>
+        <item>generalpvp_meleekills,</item>
+        <item>generalpvp_penetrationkills,</item>
+        <item>generalpvp_rappelbreach,</item>
+        <item>generalpvp_reinforcementdeploy,</item>
+        <item>generalpvp_revive,</item>
+        <item>generalpvp_revivedenied,</item>
+        <item>generalpvp_serveraggression,</item>
+        <item>generalpvp_serverdefender,</item>
+        <item>generalpvp_servershacked,</item>
+        <item>generalpvp_suicide,</item>
+        <item>generalpvp_timeplayed,</item>
+        <item>generalpvp_totalxp,</item>
+        <item>casualpvp_death,</item>
+        <item>casualpvp_kdratio,</item>
+        <item>casualpvp_kills,</item>
+        <item>casualpvp_matchlost,</item>
+        <item>casualpvp_matchplayed,</item>
+        <item>casualpvp_matchwlratio,</item>
+        <item>casualpvp_matchwon,</item>
+        <item>casualpvp_timeplayed,</item>
+        <item>rankedpvp_death,</item>
+        <item>rankedpvp_kdratio,</item>
+        <item>rankedpvp_kills,</item>
+        <item>rankedpvp_matchlost,</item>
+        <item>rankedpvp_matchplayed,</item>
+        <item>rankedpvp_matchwlratio,</item>
+        <item>rankedpvp_matchwon,</item>
+        <item>rankedpvp_timeplayed,</item>
+        <item>terrohuntclassicpve_bestscore,</item>
+        <item>terrohuntclassicpve_matchlost,</item>
+        <item>terrohuntclassicpve_matchplayed,</item>
+        <item>terrohuntclassicpve_matchwlratio,</item>
+        <item>terrohuntclassicpve_matchwon,</item>
+        <item>terrohuntclassicpve_timeplayed</item>
+    </string-array>
 </resources>
