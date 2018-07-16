@@ -1,110 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/centerGuideline"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/sas"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
-        android:contentDescription="@string/s1"
-        android:src="@drawable/sas"
-        app:layout_constraintBottom_toTopOf="@id/gign"
-        app:layout_constraintEnd_toStartOf="@id/centerGuideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.Guideline
+            android:id="@+id/centerGuideline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-    <ImageView
-        android:id="@+id/gign"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
-        android:contentDescription="@string/s1"
-        android:src="@drawable/gign"
-        app:layout_constraintBottom_toTopOf="@id/gsg9"
-        app:layout_constraintEnd_toStartOf="@id/centerGuideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sas" />
+        <ImageView
+            android:id="@+id/sas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sas"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/gsg9"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
-        android:contentDescription="@string/s1"
-        android:src="@drawable/gsg9"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/centerGuideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gign" />
+        <ImageView
+            android:id="@+id/gign"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/gign"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sas" />
 
-    <ImageView
-        android:id="@+id/fbiswat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
-        android:contentDescription="@string/s1"
-        android:src="@drawable/fbiswat"
-        app:layout_constraintBottom_toTopOf="@id/spetsnaz"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/centerGuideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/gsg9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/gsg9"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gign" />
 
-    <ImageView
-        android:id="@+id/spetsnaz"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:contentDescription="@string/s1"
-        android:src="@drawable/spetsnaz"
-        app:layout_constraintBottom_toTopOf="@id/jtf2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/centerGuideline"
-        app:layout_constraintTop_toBottomOf="@id/fbiswat" />
+        <ImageView
+            android:id="@+id/bope"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/bope"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gsg9" />
 
-    <ImageView
-        android:id="@+id/jtf2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:contentDescription="@string/s1"
-        android:src="@drawable/jtf2"
-        app:layout_constraintBottom_toTopOf="@id/navyseal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/centerGuideline"
-        app:layout_constraintTop_toBottomOf="@id/spetsnaz" />
+        <ImageView
+            android:id="@+id/sat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sat"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bope" />
 
-    <ImageView
-        android:id="@+id/navyseal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/statsMargin"
-        android:layout_marginStart="@dimen/statsMargin"
-        android:layout_marginTop="@dimen/statsMargin"
-        android:contentDescription="@string/s1"
-        android:src="@drawable/navyseals"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/centerGuideline"
-        app:layout_constraintTop_toBottomOf="@id/jtf2" />
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/grom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/grom"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sat" />
+
+        <ImageView
+            android:id="@+id/smb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/smb"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grom" />
+
+        <ImageView
+            android:id="@+id/fbiswat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fbiswat"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/spetsnaz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/spetsnaz"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sas" />
+
+        <ImageView
+            android:id="@+id/jtf2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/jtf2"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spetsnaz" />
+
+        <ImageView
+            android:id="@+id/navyseal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/navyseals"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jtf2" />
+
+        <ImageView
+            android:id="@+id/geo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/geo"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/navyseal" />
+
+        <ImageView
+            android:id="@+id/sdu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sdu"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/geo" />
+
+        <ImageView
+            android:id="@+id/cbrn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/cbrn"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sdu" />
+
+        <ImageView
+            android:id="@+id/gis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/gis"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbrn" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

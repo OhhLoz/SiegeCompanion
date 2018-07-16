@@ -29,7 +29,7 @@ public class Profile extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.operators_fragment, container, false);
+        View view = inflater.inflate(R.layout.profile_fragment, container, false);
         mQueue = Volley.newRequestQueue(view.getContext());
         Resources res = getResources();
         String[] tempArr;
