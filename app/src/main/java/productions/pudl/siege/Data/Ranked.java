@@ -10,8 +10,8 @@ public class Ranked
     private String userID;
     private int pastSeasonWins;
     private int pastSeasonLosses;
-    private double maxmmr;
-    private double mmr;
+    private double maxMMR;
+    private double MMR;
     private int wins;
     private int losses;
     private int abandons;
@@ -21,7 +21,7 @@ public class Ranked
     private double prevRankMMR;
     private int maxRank;
 
-    public Ranked(String updateTime, double skillMean, int season, String region, String userID, int pastSeasonWins, int pastSeasonLosses, double maxmmr, double mmr, int wins, int losses, int abandons, double standardDeviation, int rank, double nextRankMMR, double prevRankMMR, int maxRank) {
+    public Ranked(String updateTime, double skillMean, int season, String region, String userID, int pastSeasonWins, int pastSeasonLosses, double maxMMR, double MMR, int wins, int losses, int abandons, double standardDeviation, int rank, double nextRankMMR, double prevRankMMR, int maxRank) {
         setUpdateTime(updateTime);
         setSkillMean(skillMean);
         setSeason(season);
@@ -29,8 +29,8 @@ public class Ranked
         setUserID(userID);
         setPastSeasonWins(pastSeasonWins);
         setPastSeasonLosses(pastSeasonLosses);
-        setMaxmmr(maxmmr);
-        setMmr(mmr);
+        setMaxMMR(maxMMR);
+        setMMR(MMR);
         setWins(wins);
         setLosses(losses);
         setAbandons(abandons);
@@ -97,20 +97,20 @@ public class Ranked
         this.pastSeasonLosses = pastSeasonLosses;
     }
 
-    public double getMaxmmr() {
-        return maxmmr;
+    public double getMaxMMR() {
+        return maxMMR;
     }
 
-    public void setMaxmmr(double maxmmr) {
-        this.maxmmr = maxmmr;
+    public void setMaxMMR(double maxMMR) {
+        this.maxMMR = maxMMR;
     }
 
-    public double getMmr() {
-        return mmr;
+    public double getMMR() {
+        return MMR;
     }
 
-    public void setMmr(double mmr) {
-        this.mmr = mmr;
+    public void setMMR(double MMR) {
+        this.MMR = MMR;
     }
 
     public int getWins() {
@@ -179,7 +179,7 @@ public class Ranked
 
     public String toString()
     {
-        String temp = "";
+        String temp = "Wins: " + getWins() + ", Losses: " + getLosses() + ", Abandons: " + getAbandons() + ", Season: " + getSeason() + ", Region: " + getRegion() + ", Rank: " + getRank() + ", Max Rank: " + getMaxRank() + ", MMR: " + getMMR() + ", Max MMR: " + getMaxMMR() + ", Skill Mean: " + getSkillMean() + ", Skill Stdev: " + getStandardDeviation();
         return temp;
     }
 }

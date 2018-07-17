@@ -32,12 +32,17 @@ public class Profile extends Fragment
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
         mQueue = Volley.newRequestQueue(view.getContext());
         Resources res = getResources();
-        String[] tempArr;
-        tempArr = res.getStringArray(R.array.overallStats);
-        String tempStats = Arrays.toString(tempArr);
+        String[] tempStatsArr = res.getStringArray(R.array.overallStats);
+        String tempStats = Arrays.toString(tempStatsArr);
         tempStats = tempStats.substring(1, tempStats.length()-1);
         final String stats = tempStats;
-        Log.v("TestToSeeIfArrayWorks", stats);
+        Log.v("ImportedStatsArray", stats);
+
+        String[] tempOperatorArr = res.getStringArray(R.array.operators);
+        String tempOps = Arrays.toString(tempOperatorArr);
+        tempOps = tempOps.substring(1, tempOps.length()-1);
+        final String operators = tempOps;
+        Log.v("ImportedOperatorsArray", operators);
         //RequestQueue mQueue = Volley.newRequestQueue(view.getContext());
         //MyUbiAPIAdapter.create(mQueue, encoded);
         //final String stats = "casualpvp_matchwon:infinite, rankedpvp_timeplayed:infinite, rankedpvp_matchlost:infinite, casualpvp_matchlost:infinite, rankedpvp_death:infinite, casualpvp_timeplayed:infinite, rankedpvp_matchwon:infinite, rankedpvp_kills:infinite, casualpvp_matchplayed:infinite, casualpvp_death:infinite, rankedpvp_matchplayed:infinite, casualpvp_kills:infinite";
@@ -137,6 +142,29 @@ public class Profile extends Fragment
 
         Button testButton9 = (Button) view.findViewById(R.id.testButton9);
         testButton9.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+                for(Ranked temp : MyUbiAPIAdapter.getRankedResult())
+                    Log.v("FinalPlayerRanked", temp.toString());
+            }
+
+        });
+
+        Button testButton10 = (Button) view.findViewById(R.id.testButton10);
+        testButton10.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+                MyUbiAPIAdapter.getOperators(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", operators);
+            }
+
+        });
+
+        Button testButton11 = (Button) view.findViewById(R.id.testButton11);
+        testButton11.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view)

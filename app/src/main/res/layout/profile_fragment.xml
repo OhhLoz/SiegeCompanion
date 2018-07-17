@@ -86,9 +86,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Print Ranked"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/testButton8" />
+
+        <Button
+            android:id="@+id/testButton10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Operators"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/testButton9" />
+
+        <Button
+            android:id="@+id/testButton11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Print Operators"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/testButton10" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

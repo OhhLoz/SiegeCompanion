@@ -323,7 +323,7 @@ public class MyUbiAPIAdapter
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
             loginAuth();
-        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6karma/players?board_id=pvp_ranked&season=" + season + "&region_id=" + region + "&profile_ids=" + id;
+        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6karma/players?board_id=pvp_ranked&season_id=" + season + "&region_id=" + region + "&profile_ids=" + id;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>()
@@ -403,6 +403,50 @@ public class MyUbiAPIAdapter
     static public ArrayList<Ranked> getRankedResult()
     {
         return rankedResult;
+    }
+
+    static public void getOperators(String id, String platform, String stats)
+    {
+        // valid platforms = PS4, XBOXONE, PC
+        if (isExpired())
+            loginAuth();
+        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.v("JSONResponse", response.toString());
+                            //printLogs();
+                            //headers.printHeaders();
+                            //setStatsResult(statsArr);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Log.v("getHeaders", "Getting Headers");
+                return headers.getHeaders();
+            }
+        };
+        mQueue.add(request);
     }
 
     static public boolean isExpired()
