@@ -1,0 +1,13 @@
+operatorpvp_dbno,
+operatorpvp_death,
+operatorpvp_headshot,
+operatorpvp_kdratio,
+operatorpvp_kills,
+operatorpvp_meleekills,
+operatorpvp_mostused,
+operatorpvp_roundlost,
+operatorpvp_roundplayed,
+operatorpvp_roundwlratio,
+operatorpvp_roundwon,
+operatorpvp_timeplayed,
+operatorpvp_totalxp
