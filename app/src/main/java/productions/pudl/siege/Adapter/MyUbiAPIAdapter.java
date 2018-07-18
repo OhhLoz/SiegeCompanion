@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import productions.pudl.siege.Data.Level;
+import productions.pudl.siege.Data.Operator;
 import productions.pudl.siege.Data.Player;
 import productions.pudl.siege.Data.Ranked;
 import productions.pudl.siege.Data.Stat;
@@ -41,13 +42,65 @@ public class MyUbiAPIAdapter
     static private ArrayList<Level> levelsResult;
     static private ArrayList<Stat> statsResult;
     static private ArrayList<Ranked> rankedResult;
+    static private ArrayList<Operator> operatorResult;
+    static private HashMap<String, String> operatorMap = new HashMap<>();
 
     static public void create(RequestQueue currQueue, String credentials)
     {
+        populateOperatorMap();
         headers = new MyHeader(credentials);
         mQueue = currQueue;
         if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
             loginAuth();
+    }
+
+    static private void populateOperatorMap()
+    {
+        operatorMap.put("1:1", "Recruit (SAS)");
+        operatorMap.put("1:2", "Recruit (FBI)");
+        operatorMap.put("1:3", "Recruit (GIGN)");
+        operatorMap.put("1:4", "Recruit (GSG9)");
+        operatorMap.put("1:5", "Recruit (Spetsnaz)");
+        operatorMap.put("2:1", "Smoke");
+        operatorMap.put("3:1", "Mute");
+        operatorMap.put("4:1", "Sledge");
+        operatorMap.put("5:1", "Thatcher");
+        operatorMap.put("2:2", "Castle");
+        operatorMap.put("3:2", "Ash");
+        operatorMap.put("4:2", "Pulse");
+        operatorMap.put("5:2", "Thermite");
+        operatorMap.put("2:3", "Doc");
+        operatorMap.put("3:3", "Rook");
+        operatorMap.put("4:3", "Twitch");
+        operatorMap.put("5:3", "Montagne");
+        operatorMap.put("2:4", "Glaz");
+        operatorMap.put("3:4", "Fuze");
+        operatorMap.put("4:4", "Kapkan");
+        operatorMap.put("5:4", "Tachanka");
+        operatorMap.put("2:5", "Blitz");
+        operatorMap.put("3:5", "IQ");
+        operatorMap.put("4:5", "Jäger");
+        operatorMap.put("5:5", "Bandit");
+        operatorMap.put("2:6", "Buck");
+        operatorMap.put("3:6", "Frost");
+        operatorMap.put("2:7", "Blackbeard");
+        operatorMap.put("3:7", "Valkyrie");
+        operatorMap.put("2:8", "Capitão");
+        operatorMap.put("3:8", "Caveira");
+        operatorMap.put("2:9", "Hibana");
+        operatorMap.put("3:9", "Echo");
+        operatorMap.put("2:A", "Jackal");
+        operatorMap.put("3:A", "Mira");
+        operatorMap.put("2:B", "Ying");
+        operatorMap.put("3:B", "Lesion");
+        operatorMap.put("2:C", "Ela");
+        operatorMap.put("2:D", "Zofia");
+        operatorMap.put("3:C", "Dokkaebi");
+        operatorMap.put("3:D", "Vigil");
+        operatorMap.put("3:E", "Lion");
+        operatorMap.put("4:E", "Finka");
+        operatorMap.put("2:F", "Maestro");
+        operatorMap.put("3:F", "Alibi");
     }
 
     static private void loginAuth()
@@ -420,6 +473,34 @@ public class MyUbiAPIAdapter
                         try
                         {
                             Log.v("JSONResponse", response.toString());
+                            JSONObject resultsObj = response.getJSONObject("players");
+                            ArrayList<Operator> operatorArr = new ArrayList<>();
+                            Iterator<?> keys = resultsObj.keys();
+
+                            while( keys.hasNext() )
+                            {
+                                String key = (String) keys.next();
+                                if (resultsObj.get(key) instanceof JSONObject)
+                                {
+                                    JSONObject currObj = resultsObj.getJSONObject(key);
+                                    String name;
+                                    String CTU;
+                                    int kills;
+                                    int deaths;
+                                    double kd;
+                                    int dbno;
+                                    int headshot;
+                                    int meleekills;
+                                    int mostused;
+                                    int wins;
+                                    int losses;
+                                    int played;
+                                    double wl;
+                                    int totalxp;
+                                    int timeplayed;
+                                    String userID;
+                                }
+                            }
                             //printLogs();
                             //headers.printHeaders();
                             //setStatsResult(statsArr);
@@ -447,6 +528,17 @@ public class MyUbiAPIAdapter
             }
         };
         mQueue.add(request);
+    }
+
+    static private void setOperatorsResult(ArrayList<Operator> temp)
+    {
+        operatorResult = temp;
+        Log.v("GetOperators", "Set Results");
+    }
+
+    static public ArrayList<Operator> getOperatorResult()
+    {
+        return operatorResult;
     }
 
     static public boolean isExpired()
