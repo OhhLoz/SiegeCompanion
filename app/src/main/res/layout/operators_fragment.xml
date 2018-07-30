@@ -7,6 +7,7 @@
     android:layout_width="match_parent">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -26,7 +27,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/sas"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/gign"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sas" />
@@ -54,7 +53,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/gsg9"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gign" />
@@ -68,7 +66,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/bope"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gsg9" />
@@ -81,7 +78,6 @@
             android:layout_marginEnd="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/sat"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bope" />
@@ -95,7 +91,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/grom"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sat" />
@@ -108,7 +103,6 @@
             android:layout_marginEnd="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/smb"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grom" />
@@ -122,7 +116,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/fbiswat"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -136,7 +129,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/spetsnaz"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sas" />
@@ -150,7 +142,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/jtf2"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spetsnaz" />
@@ -163,7 +154,6 @@
             android:layout_marginEnd="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/navyseals"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/jtf2" />
@@ -177,7 +167,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/geo"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/navyseal" />
@@ -190,7 +179,6 @@
             android:layout_marginEnd="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/sdu"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/geo" />
@@ -204,7 +192,6 @@
             android:layout_marginTop="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/cbrn"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sdu" />
@@ -217,7 +204,6 @@
             android:layout_marginEnd="@dimen/statsMargin"
             android:contentDescription="@string/s1"
             android:adjustViewBounds="true"
-            android:src="@drawable/gis"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbrn" />

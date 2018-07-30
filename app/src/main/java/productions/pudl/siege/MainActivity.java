@@ -5,15 +5,12 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import productions.pudl.siege.Adapter.MyUbiAPIAdapter;
 import productions.pudl.siege.Fragment.Compare;
 import productions.pudl.siege.Fragment.More;
-import productions.pudl.siege.Fragment.Operators;
+import productions.pudl.siege.Fragment.Operators.Operators;
 import productions.pudl.siege.Fragment.Profile;
 import productions.pudl.siege.Fragment.Search.Search;
 
