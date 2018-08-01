@@ -5,16 +5,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import productions.pudl.siege.R;
 
 public class OperatorCustomFragment extends Fragment
 {
-    private String mText = "";
-    public static OperatorCustomFragment createInstance(String txt)
+    private String opName = "";
+    public static OperatorCustomFragment createInstance(String opName)
     {
         OperatorCustomFragment fragment = new OperatorCustomFragment();
-        fragment.mText = txt;
+        fragment.opName = opName;
         return fragment;
     }
     @Override
