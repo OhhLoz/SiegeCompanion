@@ -23,7 +23,7 @@ public class OperatorCustomFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.general_stats,container,false);
+        View v = inflater.inflate(R.layout.operator_tab,container,false);
         return v;
     }
 }
