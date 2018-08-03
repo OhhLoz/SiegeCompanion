@@ -75,11 +75,13 @@
         android:id="@+id/killsView"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
         android:layout_marginBottom="@dimen/statsLargeMargin"
         android:layout_marginTop="@dimen/statsLargeMargin"
         android:background="@color/colorStatTitle"
-        app:layout_constraintStart_toStartOf="@id/operatorKillsTitle"
-        app:layout_constraintEnd_toEndOf="@id/operatorKDTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/operatorDeathsText" />
 
     <TextView
@@ -152,11 +154,13 @@
         android:id="@+id/winsView"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
         android:layout_marginBottom="@dimen/statsLargeMargin"
         android:layout_marginTop="@dimen/statsLargeMargin"
         android:background="@color/colorStatTitle"
-        app:layout_constraintStart_toStartOf="@id/operatorKillsTitle"
-        app:layout_constraintEnd_toEndOf="@id/operatorKDTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/operatorWinsText" />
 
     <TextView
@@ -229,11 +233,13 @@
         android:id="@+id/playedView"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
         android:layout_marginBottom="@dimen/statsLargeMargin"
         android:layout_marginTop="@dimen/statsLargeMargin"
         android:background="@color/colorStatTitle"
-        app:layout_constraintStart_toStartOf="@id/operatorKillsTitle"
-        app:layout_constraintEnd_toEndOf="@id/operatorKDTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/operatorXPText" />
 
     <TextView
@@ -306,11 +312,13 @@
         android:id="@+id/dbnoView"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="@dimen/statsLargeMargin"
+        android:layout_marginEnd="@dimen/statsLargeMargin"
         android:layout_marginBottom="@dimen/statsLargeMargin"
         android:layout_marginTop="@dimen/statsLargeMargin"
         android:background="@color/colorStatTitle"
-        app:layout_constraintStart_toStartOf="@id/operatorKillsTitle"
-        app:layout_constraintEnd_toEndOf="@id/operatorKDTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/operatorMeleeKillsText" />
 
     <TextView
@@ -321,7 +329,11 @@
         android:text="@string/operatorSpecial1"
         android:textColor="@color/colorStatTitle"
         android:textSize="@dimen/statTitleSize"
-        app:layout_constraintEnd_toStartOf="@+id/operatorSpecial2Title"
+        android:singleLine="false"
+        android:maxLines="2"
+        android:maxEms="5"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/operatorDeathsTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dbnoView" />
 
@@ -331,8 +343,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
-        app:layout_constraintStart_toStartOf="@id/operatorSpecial1Title"
-        app:layout_constraintEnd_toEndOf="@id/operatorSpecial1Title"
+        app:layout_constraintStart_toStartOf="@id/operatorKillsTitle"
+        app:layout_constraintEnd_toEndOf="@id/operatorKillsTitle"
         app:layout_constraintTop_toBottomOf="@+id/operatorSpecial1Title" />
 
     <TextView
@@ -343,8 +355,12 @@
         android:text="@string/operatorSpecial2"
         android:textColor="@color/colorStatTitle"
         android:textSize="@dimen/statTitleSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/operatorSpecial1Title"
+        android:singleLine="false"
+        android:maxLines="2"
+        android:maxEms="5"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/operatorKDTitle"
+        app:layout_constraintStart_toEndOf="@+id/operatorKillsTitle"
         app:layout_constraintTop_toBottomOf="@id/dbnoView"/>
 
     <TextView
@@ -353,7 +369,33 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
-        app:layout_constraintStart_toStartOf="@id/operatorSpecial2Title"
-        app:layout_constraintEnd_toEndOf="@id/operatorSpecial2Title"
+        app:layout_constraintStart_toStartOf="@id/operatorDeathsTitle"
+        app:layout_constraintEnd_toEndOf="@id/operatorDeathsTitle"
         app:layout_constraintTop_toBottomOf="@id/operatorSpecial2Title"/>
+
+    <TextView
+        android:id="@+id/operatorSpecial3Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/statsLargeMargin"
+        android:text="@string/operatorSpecial3"
+        android:textColor="@color/colorStatTitle"
+        android:textSize="@dimen/statTitleSize"
+        android:singleLine="false"
+        android:maxLines="2"
+        android:maxEms="5"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/dbnoView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/operatorDeathsTitle" />
+
+    <TextView
+        android:id="@+id/operatorSpecial3Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/statsLargeMargin"
+        android:textSize="@dimen/statTextSize"
+        app:layout_constraintEnd_toEndOf="@id/operatorKDTitle"
+        app:layout_constraintStart_toStartOf="@id/operatorKDTitle"
+        app:layout_constraintTop_toBottomOf="@id/operatorSpecial3Title"/>
 </android.support.constraint.ConstraintLayout>

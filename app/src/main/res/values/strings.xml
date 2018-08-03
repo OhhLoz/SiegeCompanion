@@ -68,6 +68,7 @@
     <string name="operatorXP">Total XP</string>
     <string name="operatorSpecial1">Special 1</string>
     <string name="operatorSpecial2">Special 2</string>
+    <string name="operatorSpecial3">Special 3</string>
     <string name="moreDefaultName">Default Name:</string>
     <string name="moreDefaultPlatform">Default Platform:</string>
     <string name="moreColourScheme">Colour Scheme:</string>

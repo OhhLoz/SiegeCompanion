@@ -22,9 +22,9 @@ public class Operator
     private int special1;
     private int special2;
     private int special3;
-    private boolean isSpecial1;
-    private boolean isSpecial2;
-    private boolean isSpecial3;
+    private boolean isSpecial1 = false;
+    private boolean isSpecial2 = false;
+    private boolean isSpecial3 = false;
     private String special1Desc;
     private String special2Desc;
     private String special3Desc;
@@ -176,5 +176,80 @@ public class Operator
 
     public void setTotalxp(int totalxp) {
         this.totalxp = totalxp;
+    }
+
+    public int getSpecial1() {
+        return special1;
+    }
+
+    public void setSpecial1(int special1) {
+        this.special1 = special1;
+        setSpecial1(true);
+    }
+
+    public int getSpecial2() {
+        return special2;
+    }
+
+    public void setSpecial2(int special2) {
+        this.special2 = special2;
+        setSpecial2(true);
+    }
+
+    public int getSpecial3() {
+        return special3;
+    }
+
+    public void setSpecial3(int special3) {
+        this.special3 = special3;
+        setSpecial3(true);
+    }
+
+    public boolean isSpecial1() {
+        return isSpecial1;
+    }
+
+    public boolean isSpecial2() {
+        return isSpecial2;
+    }
+
+    public boolean isSpecial3() {
+        return isSpecial3;
+    }
+
+    public void setSpecial1(boolean special1) {
+        isSpecial1 = special1;
+    }
+
+    public void setSpecial2(boolean special2) {
+        isSpecial2 = special2;
+    }
+
+    public void setSpecial3(boolean special3) {
+        isSpecial3 = special3;
+    }
+
+    public String getSpecial1Desc() {
+        return special1Desc;
+    }
+
+    public void setSpecial1Desc(String special1Desc) {
+        this.special1Desc = special1Desc;
+    }
+
+    public String getSpecial2Desc() {
+        return special2Desc;
+    }
+
+    public void setSpecial2Desc(String special2Desc) {
+        this.special2Desc = special2Desc;
+    }
+
+    public String getSpecial3Desc() {
+        return special3Desc;
+    }
+
+    public void setSpecial3Desc(String special3Desc) {
+        this.special3Desc = special3Desc;
     }
 }
