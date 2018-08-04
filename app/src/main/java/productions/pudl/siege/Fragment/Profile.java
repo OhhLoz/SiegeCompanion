@@ -38,14 +38,7 @@ public class Profile extends Fragment
         final String stats = tempStats;
         Log.v("ImportedStatsArray", stats);
 
-        String[] tempOperatorArr = res.getStringArray(R.array.operators);
-        String tempOps = Arrays.toString(tempOperatorArr);
-        tempOps = tempOps.substring(1, tempOps.length()-1);
-        final String operators = tempOps;
-        Log.v("ImportedOperatorsArray", operators);
-        //RequestQueue mQueue = Volley.newRequestQueue(view.getContext());
-        //MyUbiAPIAdapter.create(mQueue, encoded);
-        //final String stats = "casualpvp_matchwon:infinite, rankedpvp_timeplayed:infinite, rankedpvp_matchlost:infinite, casualpvp_matchlost:infinite, rankedpvp_death:infinite, casualpvp_timeplayed:infinite, rankedpvp_matchwon:infinite, rankedpvp_kills:infinite, casualpvp_matchplayed:infinite, casualpvp_death:infinite, rankedpvp_matchplayed:infinite, casualpvp_kills:infinite";
+        final String[] tempOperatorArr = res.getStringArray(R.array.operators);
 
         Button testButton = (Button) view.findViewById(R.id.testButton);
         testButton.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +151,7 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getOperators(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", operators);
+                MyUbiAPIAdapter.getOperators(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", tempOperatorArr);
             }
 
         });

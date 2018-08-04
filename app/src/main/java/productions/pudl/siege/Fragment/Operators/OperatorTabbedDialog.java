@@ -44,15 +44,10 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
         Picasso.get().load(getResources().getIdentifier(CTU, "drawable", getContext().getPackageName())).fit().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into((ImageView) rootview.findViewById(R.id.ctuPicture));
 
         TabViewAdapter adapter = new TabViewAdapter(getChildFragmentManager());
-        Operator sledgeTest = new Operator("28ca710b-270d-491b-8073-42654f82745d", "Sledge", "sas", 111, 99, 1.12, 35, 38, 0, 0, 84, 65, 149, 56.38, 329100, 30273);
-        sledgeTest.setSpecial1Desc("Hammer Destructions");
-        sledgeTest.setSpecial1(203);
-        sledgeTest.setSpecial2Desc("Hammer Kills");
-        sledgeTest.setSpecial2(5);
         switch(CTU)
         {
             case "sas":
-                adapter.addFragment("Sledge",OperatorCustomFragment.createInstance("Sledge", sledgeTest));
+                adapter.addFragment("Sledge",OperatorCustomFragment.createInstance("Sledge"));
                 adapter.addFragment("Thatcher",OperatorCustomFragment.createInstance("Thatcher"));
                 adapter.addFragment("Mute",OperatorCustomFragment.createInstance("Mute"));
                 adapter.addFragment("Smoke",OperatorCustomFragment.createInstance("Smoke"));

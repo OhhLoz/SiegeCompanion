@@ -29,7 +29,7 @@ public class Operator
     private String special2Desc;
     private String special3Desc;
 
-    public Operator(String userID, String name, String CTU, int kills, int deaths, double kd, int dbno, int headshot, int meleekills, int mostused, int wins, int losses, int played, double wl, int totalxp, int timeplayed)
+    public Operator(String userID, String name, String CTU, int kills, int deaths, int dbno, int headshot, int meleekills, int wins, int losses, int played, int totalxp, int timeplayed)
     {
         setUserID(userID);
         setName(name);

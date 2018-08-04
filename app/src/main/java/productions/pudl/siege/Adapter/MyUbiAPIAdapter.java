@@ -1,7 +1,10 @@
 package productions.pudl.siege.Adapter;
 
+import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
+import android.util.Pair;
+import android.util.SparseArray;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,11 +20,14 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 import productions.pudl.siege.Data.Level;
@@ -29,6 +35,7 @@ import productions.pudl.siege.Data.Operator;
 import productions.pudl.siege.Data.Player;
 import productions.pudl.siege.Data.Ranked;
 import productions.pudl.siege.Data.Stat;
+import productions.pudl.siege.R;
 
 
 public class MyUbiAPIAdapter
@@ -43,7 +50,8 @@ public class MyUbiAPIAdapter
     static private ArrayList<Stat> statsResult;
     static private ArrayList<Ranked> rankedResult;
     static private ArrayList<Operator> operatorResult;
-    static private HashMap<String, String> operatorMap = new HashMap<>();
+    static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<>();
+    static private String[] statArray;
 
     static public void create(RequestQueue currQueue, String credentials)
     {
@@ -56,51 +64,51 @@ public class MyUbiAPIAdapter
 
     static private void populateOperatorMap()
     {
-        operatorMap.put("1:1", "Recruit (SAS)");
-        operatorMap.put("1:2", "Recruit (FBI)");
-        operatorMap.put("1:3", "Recruit (GIGN)");
-        operatorMap.put("1:4", "Recruit (GSG9)");
-        operatorMap.put("1:5", "Recruit (Spetsnaz)");
-        operatorMap.put("2:1", "Smoke");
-        operatorMap.put("3:1", "Mute");
-        operatorMap.put("4:1", "Sledge");
-        operatorMap.put("5:1", "Thatcher");
-        operatorMap.put("2:2", "Castle");
-        operatorMap.put("3:2", "Ash");
-        operatorMap.put("4:2", "Pulse");
-        operatorMap.put("5:2", "Thermite");
-        operatorMap.put("2:3", "Doc");
-        operatorMap.put("3:3", "Rook");
-        operatorMap.put("4:3", "Twitch");
-        operatorMap.put("5:3", "Montagne");
-        operatorMap.put("2:4", "Glaz");
-        operatorMap.put("3:4", "Fuze");
-        operatorMap.put("4:4", "Kapkan");
-        operatorMap.put("5:4", "Tachanka");
-        operatorMap.put("2:5", "Blitz");
-        operatorMap.put("3:5", "IQ");
-        operatorMap.put("4:5", "Jäger");
-        operatorMap.put("5:5", "Bandit");
-        operatorMap.put("2:6", "Buck");
-        operatorMap.put("3:6", "Frost");
-        operatorMap.put("2:7", "Blackbeard");
-        operatorMap.put("3:7", "Valkyrie");
-        operatorMap.put("2:8", "Capitão");
-        operatorMap.put("3:8", "Caveira");
-        operatorMap.put("2:9", "Hibana");
-        operatorMap.put("3:9", "Echo");
-        operatorMap.put("2:A", "Jackal");
-        operatorMap.put("3:A", "Mira");
-        operatorMap.put("2:B", "Ying");
-        operatorMap.put("3:B", "Lesion");
-        operatorMap.put("2:C", "Ela");
-        operatorMap.put("2:D", "Zofia");
-        operatorMap.put("3:C", "Dokkaebi");
-        operatorMap.put("3:D", "Vigil");
-        operatorMap.put("3:E", "Lion");
-        operatorMap.put("4:E", "Finka");
-        operatorMap.put("2:F", "Maestro");
-        operatorMap.put("3:F", "Alibi");
+        operatorFinalMap.append(0, new Pair<>("1:1", "Recruit(SAS)"));
+        operatorFinalMap.append(1, new Pair<>("1:2", "Recruit(FBI)"));
+        operatorFinalMap.append(2, new Pair<>("1:3", "Recruit(GIGN)"));
+        operatorFinalMap.append(3, new Pair<>("1:4", "Recruit(GSG9)"));
+        operatorFinalMap.append(4, new Pair<>("1:5", "Recruit(Spetsnaz)"));
+        operatorFinalMap.append(5, new Pair<>("2:1", "Smoke"));
+        operatorFinalMap.append(6, new Pair<>("3:1", "Mute"));
+        operatorFinalMap.append(7, new Pair<>("4:1", "Sledge"));
+        operatorFinalMap.append(8, new Pair<>("5:1", "Thatcher"));
+        operatorFinalMap.append(9, new Pair<>("2:2", "Castle"));
+        operatorFinalMap.append(10, new Pair<>("3:2", "Ash"));
+        operatorFinalMap.append(11, new Pair<>("4:2", "Pulse"));
+        operatorFinalMap.append(12, new Pair<>("5:2", "Thermite"));
+        operatorFinalMap.append(13, new Pair<>("2:3", "Doc"));
+        operatorFinalMap.append(14, new Pair<>("3:3", "Rook"));
+        operatorFinalMap.append(15, new Pair<>("4:3", "Twitch"));
+        operatorFinalMap.append(16, new Pair<>("5:3", "Montagne"));
+        operatorFinalMap.append(17, new Pair<>("2:4", "Glaz"));
+        operatorFinalMap.append(18, new Pair<>("3:4", "Fuze"));
+        operatorFinalMap.append(19, new Pair<>("4:4", "Kapkan"));
+        operatorFinalMap.append(20, new Pair<>("5:4", "Tachanka"));
+        operatorFinalMap.append(21, new Pair<>("2:5", "Blitz"));
+        operatorFinalMap.append(22, new Pair<>("3:5", "IQ"));
+        operatorFinalMap.append(23, new Pair<>("4:5", "Jäger"));
+        operatorFinalMap.append(24, new Pair<>("5:5", "Bandit"));
+        operatorFinalMap.append(25, new Pair<>("2:6", "Buck"));
+        operatorFinalMap.append(26, new Pair<>("3:6", "Frost"));
+        operatorFinalMap.append(27, new Pair<>("2:7", "Blackbeard"));
+        operatorFinalMap.append(28, new Pair<>("3:7", "Valkyrie"));
+        operatorFinalMap.append(29, new Pair<>("2:8", "Capitão"));
+        operatorFinalMap.append(30, new Pair<>("3:8", "Caveira"));
+        operatorFinalMap.append(31, new Pair<>("2:9", "Hibana"));
+        operatorFinalMap.append(32, new Pair<>("3:9", "Echo"));
+        operatorFinalMap.append(33, new Pair<>("2:A", "Jackal"));
+        operatorFinalMap.append(34, new Pair<>("3:A", "Mira"));
+        operatorFinalMap.append(35, new Pair<>("2:B", "Ying"));
+        operatorFinalMap.append(36, new Pair<>("3:B", "Lesion"));
+        operatorFinalMap.append(37, new Pair<>("2:C", "Ela"));
+        operatorFinalMap.append(38, new Pair<>("2:D", "Zofia"));
+        operatorFinalMap.append(39, new Pair<>("3:C", "Dokkaebi"));
+        operatorFinalMap.append(40, new Pair<>("3:D", "Vigil"));
+        operatorFinalMap.append(41, new Pair<>("3:E", "Lion"));
+        operatorFinalMap.append(42, new Pair<>("4:E", "Finka"));
+        operatorFinalMap.append(43, new Pair<>("2:F", "Maestro"));
+        operatorFinalMap.append(44, new Pair<>("3:F", "Alibi"));
     }
 
     static private void loginAuth()
@@ -154,7 +162,10 @@ public class MyUbiAPIAdapter
         // valid keys= nameOnPlatform, idOnPlatform, userId
         // valid vals = name or id (depends on the key)
         if (isExpired())
+        {
             loginAuth();
+            getPlayer(platform, key, vals);
+        }
         String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&" + key + "=" + vals;
         //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
 
@@ -224,7 +235,10 @@ public class MyUbiAPIAdapter
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
+        {
             loginAuth();
+            getLevel(id, platform);
+        }
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6playerprofile/playerprofile/progressions?profile_ids="+ id;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
@@ -294,7 +308,10 @@ public class MyUbiAPIAdapter
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
+        {
             loginAuth();
+            getStats(id, platform, stats);
+        }
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>()
@@ -375,7 +392,10 @@ public class MyUbiAPIAdapter
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
+        {
             loginAuth();
+            getRanked(id, platform, region, season);
+        }
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6karma/players?board_id=pvp_ranked&season_id=" + season + "&region_id=" + region + "&profile_ids=" + id;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
@@ -458,12 +478,21 @@ public class MyUbiAPIAdapter
         return rankedResult;
     }
 
-    static public void getOperators(String id, String platform, String stats)
+    static public void getOperators(String id, String platform, String[] stats)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
+        {
             loginAuth();
-        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
+            getOperators(id, platform, stats);
+        }
+        statArray = stats;
+        String tempOps = Arrays.toString(stats);
+        tempOps = tempOps.substring(1, tempOps.length()-1);
+        String operators = tempOps;
+        Log.v("ImportedOperatorsArray", operators);
+
+        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>()
                 {
@@ -473,9 +502,11 @@ public class MyUbiAPIAdapter
                         try
                         {
                             Log.v("JSONResponse", response.toString());
-                            JSONObject resultsObj = response.getJSONObject("players");
+                            JSONObject resultsObj = response.getJSONObject("results");
                             ArrayList<Operator> operatorArr = new ArrayList<>();
                             Iterator<?> keys = resultsObj.keys();
+                            String prefix = "operatorpvp_";
+                            String suffix = ":infinite";
 
                             while( keys.hasNext() )
                             {
@@ -483,22 +514,39 @@ public class MyUbiAPIAdapter
                                 if (resultsObj.get(key) instanceof JSONObject)
                                 {
                                     JSONObject currObj = resultsObj.getJSONObject(key);
-                                    String name;
-                                    String CTU;
-                                    int kills;
-                                    int deaths;
-                                    double kd;
-                                    int dbno;
-                                    int headshot;
-                                    int meleekills;
-                                    int mostused;
-                                    int wins;
-                                    int losses;
-                                    int played;
-                                    double wl;
-                                    int totalxp;
-                                    int timeplayed;
-                                    String userID;
+                                    //String name;
+                                    //String CTU;
+                                    //int kills;
+                                    //int deaths;
+                                    //double kd;
+                                    //int dbno;
+                                    //int headshot;
+                                    //int meleekills;
+                                    //int mostused;
+                                    //int wins;
+                                    //int losses;
+                                    //int played;
+                                    //double wl;
+                                    //int totalxp;
+                                    //int timeplayed;
+                                    //int special1;
+                                    //String special1Desc;
+                                    //int special2;
+                                    //String special2Desc;
+                                    //int special3;
+                                    //String special3Desc;
+                                    String userID = key;
+                                    for (int i = 0; i < operatorFinalMap.size(); i++)
+                                    {
+                                        for (int j = 0; j < statArray.length; j++)
+                                        {
+                                            int currentStat;
+                                            if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
+                                                Log.v(operatorFinalMap.get(i).second + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
+                                            else
+                                                Log.v(operatorFinalMap.get(i).second + " " + statArray[j], String.valueOf(currentStat = 0));
+                                        }
+                                    }
                                 }
                             }
                             //printLogs();
