@@ -151,7 +151,8 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getOperators(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", tempOperatorArr);
+                //MyUbiAPIAdapter.getOperators(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", tempOperatorArr);
+                MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", tempOperatorArr);
             }
 
         });

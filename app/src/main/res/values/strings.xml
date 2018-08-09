@@ -149,7 +149,6 @@
         <item>operatorpvp_roundplayed</item>
         <item>operatorpvp_roundwon</item>
         <item>operatorpvp_timeplayed</item>
-        <item>operatorpvp_totalxp</item>
     </string-array>
     <string-array name="specialoperators">
         <item>operatorpvp_ash_bonfirekill</item>

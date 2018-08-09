@@ -1,5 +1,7 @@
 package productions.pudl.siege.Data;
 
+import java.util.ArrayList;
+
 public class Operator
 {
     private String name;
@@ -10,12 +12,10 @@ public class Operator
     private int dbno;
     private int headshot;
     private int meleekills;
-    private int mostused;
     private int wins;
     private int losses;
     private int played;
     private double wl;
-    private int totalxp;
     private int timeplayed;
     private String userID;
 
@@ -29,24 +29,59 @@ public class Operator
     private String special2Desc;
     private String special3Desc;
 
-    public Operator(String userID, String name, String CTU, int kills, int deaths, int dbno, int headshot, int meleekills, int wins, int losses, int played, int totalxp, int timeplayed)
+    public Operator(String userID, String name, String CTU, int kills, int deaths, int dbno, int headshot, int meleekills, int wins, int losses, int played, int timeplayed)
     {
         setUserID(userID);
         setName(name);
         setCTU(CTU);
         setKills(kills);
         setDeaths(deaths);
-        setKd(kd);
         setDbno(dbno);
         setHeadshot(headshot);
         setMeleekills(meleekills);
-        setMostused(mostused);
         setWins(wins);
         setLosses(losses);
         setPlayed(played);
-        setWl(wl);
-        setTotalxp(totalxp);
         setTimeplayed(timeplayed);
+        calculateKD(kills, deaths);
+        calculateWL(wins, losses);
+    }
+
+    public Operator(String userID, String name, String CTU, ArrayList<Integer> param)
+    {
+        setUserID(userID);
+        setName(name);
+        setCTU(CTU);
+        setDbno(param.get(0));
+        setDeaths(param.get(1));
+        setHeadshot(param.get(2));
+        setKills(param.get(3));
+        setMeleekills(param.get(4));
+        setLosses(param.get(5));
+        setPlayed(param.get(6));
+        setWins(param.get(7));
+        setTimeplayed(param.get(8));
+        calculateKD(param.get(3), param.get(1));
+        calculateWL(param.get(7), param.get(6));
+    }
+
+    public void calculateKD(int kills, int deaths)
+    {
+        double tempKD = (double) kills / (double) deaths;
+        tempKD = (double) Math.round(tempKD * 1000d) / 1000d;
+        setKD(tempKD);
+    }
+
+    public void calculateWL(int wins, int played)
+    {
+        double tempWL = ((double) wins / (double) played) * 100;
+        tempWL = (double) Math.round(tempWL * 100d) / 100d;
+        setWL(tempWL);
+    }
+
+    public String toString()
+    {
+        return getName() + " CTU: " + getCTU() + " K: " + getKills() + " D: " + getDeaths() + " KD: " + getKd() + " W: " + getWins() + " L: " + getLosses() + " WL: " + getWl() + " P: " + getPlayed() + " DBNO: " + getDbno() + " HS: " + getHeadshot() + " MK: " + getMeleekills() + " TP: " + getTimeplayed();
     }
 
     public String getName() {
@@ -81,7 +116,6 @@ public class Operator
         this.userID = userID;
     }
 
-
     public int getKills() {
         return kills;
     }
@@ -102,7 +136,7 @@ public class Operator
         return kd;
     }
 
-    public void setKd(double kd) {
+    public void setKD(double kd) {
         this.kd = kd;
     }
 
@@ -128,14 +162,6 @@ public class Operator
 
     public void setMeleekills(int meleekills) {
         this.meleekills = meleekills;
-    }
-
-    public int getMostused() {
-        return mostused;
-    }
-
-    public void setMostused(int mostused) {
-        this.mostused = mostused;
     }
 
     public int getWins() {
@@ -166,16 +192,8 @@ public class Operator
         return wl;
     }
 
-    public void setWl(double wl) {
+    public void setWL(double wl) {
         this.wl = wl;
-    }
-
-    public int getTotalxp() {
-        return totalxp;
-    }
-
-    public void setTotalxp(int totalxp) {
-        this.totalxp = totalxp;
     }
 
     public int getSpecial1() {

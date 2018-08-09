@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import productions.pudl.siege.Adapter.TabViewAdapter;
 import productions.pudl.siege.Data.Operator;
 import productions.pudl.siege.R;
@@ -25,11 +27,13 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
     TabLayout tabLayout;
     ViewPager viewPager;
     String CTU;
+    ArrayList<Operator> operatorArrayList;
 
     @SuppressLint("ValidFragment")
-    public OperatorTabbedDialog(String ctu)
+    public OperatorTabbedDialog(String ctu, ArrayList<Operator> operatorArrayList)
     {
         this.CTU = ctu;
+        this.operatorArrayList = operatorArrayList;
     }
 
     @Nullable

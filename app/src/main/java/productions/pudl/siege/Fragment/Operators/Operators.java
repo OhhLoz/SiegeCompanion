@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import productions.pudl.siege.Adapter.MyUbiAPIAdapter;
 import productions.pudl.siege.R;
 
 public class Operators extends Fragment
@@ -22,11 +26,14 @@ public class Operators extends Fragment
     {
         View view = inflater.inflate(R.layout.operators_fragment, container, false);
         loadOperatorImages(view);
+        RequestQueue test = Volley.newRequestQueue(view.getContext());
+        MyUbiAPIAdapter.create(test, "raspberrypicreations@gmail.com:1NnpENN6za61");
         return view;
     }
 
     private void loadOperatorImages(View view)
     {
+        MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", getResources().getStringArray(R.array.operators));
 
         ImageView sasImage = (ImageView) view.findViewById(R.id.sas);
         Picasso.get().load(R.drawable.sas).fit().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(sasImage);

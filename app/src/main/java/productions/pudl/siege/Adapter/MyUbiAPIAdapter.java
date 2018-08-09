@@ -49,13 +49,15 @@ public class MyUbiAPIAdapter
     static private ArrayList<Level> levelsResult;
     static private ArrayList<Stat> statsResult;
     static private ArrayList<Ranked> rankedResult;
-    static private ArrayList<Operator> operatorResult;
+    static private ArrayList<Operator> operatorResult = new ArrayList<>();
+    static private HashMap<String, String> ctuMap = new HashMap<>();
     static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<>();
     static private String[] statArray;
 
     static public void create(RequestQueue currQueue, String credentials)
     {
         populateOperatorMap();
+        populateCTUMap();
         headers = new MyHeader(credentials);
         mQueue = currQueue;
         if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
@@ -109,6 +111,55 @@ public class MyUbiAPIAdapter
         operatorFinalMap.append(42, new Pair<>("4:E", "Finka"));
         operatorFinalMap.append(43, new Pair<>("2:F", "Maestro"));
         operatorFinalMap.append(44, new Pair<>("3:F", "Alibi"));
+    }
+
+    static private void populateCTUMap()
+    {
+        ctuMap.put("Sledge", "SAS");
+        ctuMap.put("Thatcher", "SAS");
+        ctuMap.put("Smoke", "SAS");
+        ctuMap.put("Mute", "SAS");
+        ctuMap.put("Recruit(SAS)", "SAS");
+        ctuMap.put("Castle", "FBISWAT");
+        ctuMap.put("Ash", "FBISWAT");
+        ctuMap.put("Recruit(FBI)", "FBISWAT");
+        ctuMap.put("Thermite", "FBISWAT");
+        ctuMap.put("Pulse", "FBISWAT");
+        ctuMap.put("Recruit(GIGN)", "GIGN");
+        ctuMap.put("Rook", "GIGN");
+        ctuMap.put("Doc", "GIGN");
+        ctuMap.put("Twitch", "GIGN");
+        ctuMap.put("Montagne", "GIGN");
+        ctuMap.put("Recruit(Spetsnaz)", "Spetsnaz");
+        ctuMap.put("Glaz", "Spetsnaz");
+        ctuMap.put("Fuze", "Spetsnaz");
+        ctuMap.put("Kapkan", "Spetsnaz");
+        ctuMap.put("Tachanka", "Spetsnaz");
+        ctuMap.put("Recruit(GSG9)", "GSG9");
+        ctuMap.put("Blitz", "GSG9");
+        ctuMap.put("Bandit", "GSG9");
+        ctuMap.put("Jäger", "GSG9");
+        ctuMap.put("IQ", "GSG9");
+        ctuMap.put("Buck", "JTF2");
+        ctuMap.put("Frost", "JTF2");
+        ctuMap.put("Blackbeard", "NAVYSEALS");
+        ctuMap.put("Valkyrie", "NAVYSEALS");
+        ctuMap.put("Caveira", "BOPE");
+        ctuMap.put("Capitão", "BOPE");
+        ctuMap.put("Echo", "SAT");
+        ctuMap.put("Hibana", "SAT");
+        ctuMap.put("Jackal", "GEO");
+        ctuMap.put("Mira", "GEO");
+        ctuMap.put("Ying", "SDU");
+        ctuMap.put("Lesion", "SDU");
+        ctuMap.put("Zofia", "GROM");
+        ctuMap.put("Ela", "GROM");
+        ctuMap.put("Dokkaebi", "SMB");
+        ctuMap.put("Vigil", "SMB");
+        ctuMap.put("Finka", "CBRN");
+        ctuMap.put("Lion", "CBRN");
+        ctuMap.put("Maestro", "GIS");
+        ctuMap.put("Alibi", "GIS");
     }
 
     static private void loginAuth()
@@ -489,7 +540,7 @@ public class MyUbiAPIAdapter
         statArray = stats;
         String tempOps = Arrays.toString(stats);
         tempOps = tempOps.substring(1, tempOps.length()-1);
-        String operators = tempOps;
+        final String operators = tempOps;
         Log.v("ImportedOperatorsArray", operators);
 
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
@@ -503,9 +554,8 @@ public class MyUbiAPIAdapter
                         {
                             Log.v("JSONResponse", response.toString());
                             JSONObject resultsObj = response.getJSONObject("results");
-                            ArrayList<Operator> operatorArr = new ArrayList<>();
                             Iterator<?> keys = resultsObj.keys();
-                            String prefix = "operatorpvp_";
+                            //String prefix = "operatorpvp_";
                             String suffix = ":infinite";
 
                             while( keys.hasNext() )
@@ -514,21 +564,6 @@ public class MyUbiAPIAdapter
                                 if (resultsObj.get(key) instanceof JSONObject)
                                 {
                                     JSONObject currObj = resultsObj.getJSONObject(key);
-                                    //String name;
-                                    //String CTU;
-                                    //int kills;
-                                    //int deaths;
-                                    //double kd;
-                                    //int dbno;
-                                    //int headshot;
-                                    //int meleekills;
-                                    //int mostused;
-                                    //int wins;
-                                    //int losses;
-                                    //int played;
-                                    //double wl;
-                                    //int totalxp;
-                                    //int timeplayed;
                                     //int special1;
                                     //String special1Desc;
                                     //int special2;
@@ -536,22 +571,33 @@ public class MyUbiAPIAdapter
                                     //int special3;
                                     //String special3Desc;
                                     String userID = key;
+                                    String name = "Sledge";
+                                    ArrayList<Integer> operatorStats = new ArrayList<>();
                                     for (int i = 0; i < operatorFinalMap.size(); i++)
                                     {
                                         for (int j = 0; j < statArray.length; j++)
                                         {
                                             int currentStat;
+                                            name = operatorFinalMap.get(i).second;
                                             if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
-                                                Log.v(operatorFinalMap.get(i).second + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
+                                                currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix);//Log.v(name + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
                                             else
-                                                Log.v(operatorFinalMap.get(i).second + " " + statArray[j], String.valueOf(currentStat = 0));
+                                                currentStat = 0;//Log.v(name + " " + statArray[j], String.valueOf(currentStat = 0));
+
+                                            operatorStats.add(currentStat);
                                         }
+                                        String CTU = ctuMap.get(name);
+                                        Operator temp = new Operator(userID, name, CTU, operatorStats);
+                                        operatorResult.add(temp);
+                                        operatorStats.clear();
                                     }
+
+                                    for (int i = 0; i < operatorResult.size(); i++)
+                                        Log.v("OpTest", operatorResult.get(i).toString());
                                 }
                             }
                             //printLogs();
                             //headers.printHeaders();
-                            //setStatsResult(statsArr);
                         }
                         catch (Exception e)
                         {
@@ -576,12 +622,6 @@ public class MyUbiAPIAdapter
             }
         };
         mQueue.add(request);
-    }
-
-    static private void setOperatorsResult(ArrayList<Operator> temp)
-    {
-        operatorResult = temp;
-        Log.v("GetOperators", "Set Results");
     }
 
     static public ArrayList<Operator> getOperatorResult()

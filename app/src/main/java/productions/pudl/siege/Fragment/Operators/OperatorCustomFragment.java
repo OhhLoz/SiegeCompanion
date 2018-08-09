@@ -63,7 +63,6 @@ public class OperatorCustomFragment extends Fragment
             ((TextView) v.findViewById(R.id.operatorWLText)).setText(String.valueOf(operator.getWl()));
             ((TextView) v.findViewById(R.id.operatorPlayedText)).setText(String.valueOf(operator.getPlayed()));
             ((TextView) v.findViewById(R.id.operatorTimePlayedText)).setText(convertedTimePlayed);
-            ((TextView) v.findViewById(R.id.operatorXPText)).setText(String.valueOf(operator.getTotalxp()));
             ((TextView) v.findViewById(R.id.operatorDBNOText)).setText(String.valueOf(operator.getDbno()));
             ((TextView) v.findViewById(R.id.operatorHeadshotText)).setText(String.valueOf(operator.getHeadshot()));
             ((TextView) v.findViewById(R.id.operatorMeleeKillsText)).setText(String.valueOf(operator.getMeleekills()));
