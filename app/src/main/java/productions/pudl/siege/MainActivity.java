@@ -13,7 +13,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import productions.pudl.siege.Adapter.MyUbiAPIAdapter;
 import productions.pudl.siege.Fragment.Compare;
 import productions.pudl.siege.Fragment.More;
-import productions.pudl.siege.Fragment.Operators;
+import productions.pudl.siege.Fragment.Operators.Operators;
 import productions.pudl.siege.Fragment.Profile;
 import productions.pudl.siege.Fragment.Search.Search;
 
@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-
         bottomBar.setOnTabSelectListener(new OnTabSelectListener()
         {
             @Override

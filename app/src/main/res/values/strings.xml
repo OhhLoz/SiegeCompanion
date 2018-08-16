@@ -65,6 +65,10 @@
     <string name="secureAreaTitle">Secure Area</string>
     <string name="hostageTitle">Hostage</string>
     <string name="bombTitle">Bomb</string>
+    <string name="operatorXP">Total XP</string>
+    <string name="operatorSpecial1">Special 1</string>
+    <string name="operatorSpecial2">Special 2</string>
+    <string name="operatorSpecial3">Special 3</string>
     <string name="moreDefaultName">Default Name:</string>
     <string name="moreDefaultPlatform">Default Platform:</string>
     <string name="moreColourScheme">Colour Scheme:</string>
@@ -79,4 +83,155 @@
     <string name="moreLastUpdate">Last Updated: 29th May 2018</string>
     <string name="moreMinAPI">Minimum Version: Android 4.4 Kitkat</string>
     <string name="moreRemoveAds">Remove Ads: £0.75</string>
+    <string-array name="overallStats">
+        <item>generalpvp_accuracy</item>
+        <item>generalpvp_barricadedeployed</item>
+        <item>generalpvp_blindkills</item>
+        <item>generalpvp_bulletfired</item>
+        <item>generalpvp_bullethit</item>
+        <item>generalpvp_dbno</item>
+        <item>generalpvp_dbnoassists</item>
+        <item>generalpvp_death</item>
+        <item>generalpvp_distancetravelled</item>
+        <item>generalpvp_gadgetdestroy</item>
+        <item>generalpvp_headshot</item>
+        <item>generalpvp_hostagedefense</item>
+        <item>generalpvp_hostagerescue</item>
+        <item>generalpvp_kdratio</item>
+        <item>generalpvp_killassists</item>
+        <item>generalpvp_kills</item>
+        <item>generalpvp_matchlost</item>
+        <item>generalpvp_matchplayed</item>
+        <item>generalpvp_matchwlratio</item>
+        <item>generalpvp_matchwon</item>
+        <item>generalpvp_meleekills</item>
+        <item>generalpvp_penetrationkills</item>
+        <item>generalpvp_rappelbreach</item>
+        <item>generalpvp_reinforcementdeploy</item>
+        <item>generalpvp_revive</item>
+        <item>generalpvp_revivedenied</item>
+        <item>generalpvp_serveraggression</item>
+        <item>generalpvp_serverdefender</item>
+        <item>generalpvp_servershacked</item>
+        <item>generalpvp_suicide</item>
+        <item>generalpvp_timeplayed</item>
+        <item>generalpvp_totalxp</item>
+        <item>casualpvp_death</item>
+        <item>casualpvp_kdratio</item>
+        <item>casualpvp_kills</item>
+        <item>casualpvp_matchlost</item>
+        <item>casualpvp_matchplayed</item>
+        <item>casualpvp_matchwlratio</item>
+        <item>casualpvp_matchwon</item>
+        <item>casualpvp_timeplayed</item>
+        <item>rankedpvp_death</item>
+        <item>rankedpvp_kdratio</item>
+        <item>rankedpvp_kills</item>
+        <item>rankedpvp_matchlost</item>
+        <item>rankedpvp_matchplayed</item>
+        <item>rankedpvp_matchwlratio</item>
+        <item>rankedpvp_matchwon</item>
+        <item>rankedpvp_timeplayed</item>
+        <item>terrohuntclassicpve_bestscore</item>
+        <item>terrohuntclassicpve_matchlost</item>
+        <item>terrohuntclassicpve_matchplayed</item>
+        <item>terrohuntclassicpve_matchwlratio</item>
+        <item>terrohuntclassicpve_matchwon</item>
+        <item>terrohuntclassicpve_timeplayed</item>
+    </string-array>
+    <string-array name="operators">
+        <item>operatorpvp_dbno</item>
+        <item>operatorpvp_death</item>
+        <item>operatorpvp_headshot</item>
+        <item>operatorpvp_kills</item>
+        <item>operatorpvp_meleekills</item>
+        <item>operatorpvp_roundlost</item>
+        <item>operatorpvp_roundplayed</item>
+        <item>operatorpvp_roundwon</item>
+        <item>operatorpvp_timeplayed</item>
+    </string-array>
+    <string-array name="specialoperators">
+        <item>operatorpvp_ash_bonfirekill</item>
+        <item>operatorpvp_ash_bonfirewallbreached</item>
+        <item>operatorpvp_bandit_batterykill</item>
+        <item>operatorpvp_black_mirror_gadget_deployed</item>
+        <item>operatorpvp_blackbeard_gunshieldblockdamage</item>
+        <item>operatorpvp_blitz_flashedenemy</item>
+        <item>operatorpvp_blitz_flashfollowupkills</item>
+        <item>operatorpvp_blitz_flashshieldassist</item>
+        <item>operatorpvp_buck_kill</item>
+        <item>operatorpvp_capitao_lethaldartkills</item>
+        <item>operatorpvp_capitao_smokedartslaunched</item>
+        <item>operatorpvp_castle_kevlarbarricadedeployed</item>
+        <item>operatorpvp_caveira_interrogations</item>
+        <item>operatorpvp_cazador_assist_kill</item>
+        <item>operatorpvp_doc_hostagerevive</item>
+        <item>operatorpvp_doc_selfrevive</item>
+        <item>operatorpvp_doc_teammaterevive</item>
+        <item>operatorpvp_echo_enemy_sonicburst_affected</item>
+        <item>operatorpvp_frost_dbno</item>
+        <item>operatorpvp_fuze_clusterchargekill</item>
+        <item>operatorpvp_glaz_sniperkill</item>
+        <item>operatorpvp_glaz_sniperpenetrationkill</item>
+        <item>operatorpvp_hibana_detonate_projectile</item>
+        <item>operatorpvp_iq_gadgetspotbyef</item>
+        <item>operatorpvp_jager_gadgetdestroybycatcher</item>
+        <item>operatorpvp_kapkan_boobytrapdeployed</item>
+        <item>operatorpvp_kapkan_boobytrapkill</item>
+        <item>operatorpvp_montagne_shieldblockdamage</item>
+        <item>operatorpvp_mute_gadgetjammed</item>
+        <item>operatorpvp_mute_jammerdeployed</item>
+        <item>operatorpvp_pulse_heartbeatassist</item>
+        <item>operatorpvp_pulse_heartbeatspot</item>
+        <item>operatorpvp_rook_armorboxdeployed</item>
+        <item>operatorpvp_rook_armortakenourself</item>
+        <item>operatorpvp_rook_armortakenteammate</item>
+        <item>operatorpvp_sledge_hammerhole</item>
+        <item>operatorpvp_sledge_hammerkill</item>
+        <item>operatorpvp_smoke_poisongaskill</item>
+        <item>operatorpvp_tachanka_turretdeployed</item>
+        <item>operatorpvp_tachanka_turretkill</item>
+        <item>operatorpvp_thatcher_gadgetdestroywithemp</item>
+        <item>operatorpvp_thermite_chargedeployed</item>
+        <item>operatorpvp_thermite_chargekill</item>
+        <item>operatorpvp_thermite_reinforcementbreached</item>
+        <item>operatorpvp_twitch_gadgetdestroybyshockdrone</item>
+        <item>operatorpvp_twitch_shockdronekill</item>
+        <item>operatorpvp_valkyrie_camdeployed</item>
+    </string-array>
+    <string-array name="ranks">
+        <item>Unranked</item>
+        <item>Copper IV</item>
+        <item>Copper III</item>
+        <item>Copper II</item>
+        <item>Copper I</item>
+        <item>Bronze IV</item>
+        <item>Bronze III</item>
+        <item>Bronze II</item>
+        <item>Bronze I</item>
+        <item>Silver IV</item>
+        <item>Silver III</item>
+        <item>Silver II</item>
+        <item>Silver I</item>
+        <item>Gold IV</item>
+        <item>Gold III</item>
+        <item>Gold II</item>
+        <item>Gold I</item>
+        <item>Platinum III</item>
+        <item>Platinum II</item>
+        <item>Platinum I</item>
+        <item>Diamond</item>
+    </string-array>
+    <string-array name="seasons">
+        <item>Black Ice</item>
+        <item>Dust Line</item>
+        <item>Skull Rain</item>
+        <item>Red Crow</item>
+        <item>Velvet Shell</item>
+        <item>Operation Health</item>
+        <item>Blood Orchid</item>
+        <item>White Noise</item>
+        <item>Operation Chimera</item>
+        <item>Operation Para Bellum</item>
+    </string-array>
 </resources>
