@@ -61,10 +61,6 @@ public class Operators extends Fragment
 
     private void loadOperatorImages(View view)
     {
-        //while (MyUbiAPIAdapter.getOperatorFinalResult().isEmpty()) {}
-        //final HashMap<String, Operator> temp = MyUbiAPIAdapter.getOperatorFinalResult();
-        //final String temp = "B";
-
         ImageView sasImage = (ImageView) view.findViewById(R.id.sas);
         Picasso.get().load(R.drawable.sas).fit().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(sasImage);
         sasImage.setOnClickListener(new View.OnClickListener()

@@ -46,7 +46,7 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.create(getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61");
+                MyUbiAPIAdapter.create(getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", null);
             }
 
         });
@@ -57,7 +57,7 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getPlayer("uplay", "userId", "28ca710b-270d-491b-8073-42654f82745d");
+                MyUbiAPIAdapter.getPlayer("uplay", "userId", "28ca710b-270d-491b-8073-42654f82745d", null);
             }
 
         });
@@ -81,7 +81,7 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getLevel("28ca710b-270d-491b-8073-42654f82745d", "PC");
+                MyUbiAPIAdapter.getLevel("28ca710b-270d-491b-8073-42654f82745d", "PC", null);
             }
 
         });
@@ -105,7 +105,7 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getStats(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", stats);
+                MyUbiAPIAdapter.getStats(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", stats, null);
             }
 
         });
@@ -128,7 +128,7 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.getRanked(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", "emea", -1);
+                MyUbiAPIAdapter.getRanked(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", "emea", -1, null);
             }
 
         });
@@ -152,7 +152,7 @@ public class Profile extends Fragment
             public void onClick(View view)
             {
                 //MyUbiAPIAdapter.getOperators(MyUbiAPIAdapter.getPlayersResult().get(0).getUserID(), "PC", tempOperatorArr);
-                MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", tempOperatorArr);
+                MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", tempOperatorArr, null);
             }
 
         });
