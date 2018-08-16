@@ -12,26 +12,10 @@ import productions.pudl.siege.R;
 
 public class OperatorCustomFragment extends Fragment
 {
-    private String opName = "";
     private Operator operator;
-    public static OperatorCustomFragment createInstance(String opName)
-    {
-        OperatorCustomFragment fragment = new OperatorCustomFragment();
-        fragment.opName = opName;
-        return fragment;
-    }
-
     public static OperatorCustomFragment createInstance(Operator operator)
     {
         OperatorCustomFragment fragment = new OperatorCustomFragment();
-        fragment.operator = operator;
-        return fragment;
-    }
-
-    public static OperatorCustomFragment createInstance(String opName, Operator operator)
-    {
-        OperatorCustomFragment fragment = new OperatorCustomFragment();
-        fragment.opName = opName;
         fragment.operator = operator;
         return fragment;
     }

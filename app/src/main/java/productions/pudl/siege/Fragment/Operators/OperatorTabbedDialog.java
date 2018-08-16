@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import productions.pudl.siege.Adapter.TabViewAdapter;
 import productions.pudl.siege.Data.Operator;
@@ -27,13 +28,25 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
     TabLayout tabLayout;
     ViewPager viewPager;
     String CTU;
-    ArrayList<Operator> operatorArrayList;
+    HashMap<String, Operator> operatorHashMap;
 
     @SuppressLint("ValidFragment")
-    public OperatorTabbedDialog(String ctu, ArrayList<Operator> operatorArrayList)
+    public OperatorTabbedDialog(String ctu, HashMap<String, Operator> operatorHashMap)
     {
         this.CTU = ctu;
-        this.operatorArrayList = operatorArrayList;
+        this.operatorHashMap = operatorHashMap;
+    }
+
+    @SuppressLint("ValidFragment")
+    public OperatorTabbedDialog(String ctu)
+    {
+        this.CTU = ctu;
+    }
+
+    @SuppressLint("ValidFragment")
+    public OperatorTabbedDialog(String ctu, String temp)
+    {
+        this.CTU = ctu;
     }
 
     @Nullable
@@ -51,77 +64,77 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
         switch(CTU)
         {
             case "sas":
-                adapter.addFragment("Sledge",OperatorCustomFragment.createInstance("Sledge"));
-                adapter.addFragment("Thatcher",OperatorCustomFragment.createInstance("Thatcher"));
-                adapter.addFragment("Mute",OperatorCustomFragment.createInstance("Mute"));
-                adapter.addFragment("Smoke",OperatorCustomFragment.createInstance("Smoke"));
+                adapter.addFragment("Sledge",OperatorCustomFragment.createInstance(operatorHashMap.get("Sledge")));
+                adapter.addFragment("Thatcher",OperatorCustomFragment.createInstance(operatorHashMap.get("Thatcher")));
+                adapter.addFragment("Mute",OperatorCustomFragment.createInstance(operatorHashMap.get("Mute")));
+                adapter.addFragment("Smoke",OperatorCustomFragment.createInstance(operatorHashMap.get("Smoke")));
                 break;
             case "fbiswat":
-                adapter.addFragment("Ash",OperatorCustomFragment.createInstance("Ash"));
-                adapter.addFragment("Thermite",OperatorCustomFragment.createInstance("Thermite"));
-                adapter.addFragment("Castle",OperatorCustomFragment.createInstance("Castle"));
-                adapter.addFragment("Pulse",OperatorCustomFragment.createInstance("Pulse"));
+                adapter.addFragment("Ash",OperatorCustomFragment.createInstance(operatorHashMap.get("Ash")));
+                adapter.addFragment("Thermite",OperatorCustomFragment.createInstance(operatorHashMap.get("Thermite")));
+                adapter.addFragment("Castle",OperatorCustomFragment.createInstance(operatorHashMap.get("Castle")));
+                adapter.addFragment("Pulse",OperatorCustomFragment.createInstance(operatorHashMap.get("Pulse")));
                 break;
             case "gign":
-                adapter.addFragment("Twitch",OperatorCustomFragment.createInstance("Twitch"));
-                adapter.addFragment("Montagne",OperatorCustomFragment.createInstance("Montagne"));
-                adapter.addFragment("Rook",OperatorCustomFragment.createInstance("Rook"));
-                adapter.addFragment("Doc",OperatorCustomFragment.createInstance("Doc"));
+                adapter.addFragment("Twitch",OperatorCustomFragment.createInstance(operatorHashMap.get("Twitch")));
+                adapter.addFragment("Montagne",OperatorCustomFragment.createInstance(operatorHashMap.get("Montagne")));
+                adapter.addFragment("Rook",OperatorCustomFragment.createInstance(operatorHashMap.get("Rook")));
+                adapter.addFragment("Doc",OperatorCustomFragment.createInstance(operatorHashMap.get("Doc")));
                 break;
             case "spetsnaz":
-                adapter.addFragment("Glaz",OperatorCustomFragment.createInstance("Glaz"));
-                adapter.addFragment("Fuze",OperatorCustomFragment.createInstance("Fuze"));
-                adapter.addFragment("Kapkan",OperatorCustomFragment.createInstance("Kapkan"));
-                adapter.addFragment("Tachanka",OperatorCustomFragment.createInstance("Tachanka"));
+                adapter.addFragment("Glaz",OperatorCustomFragment.createInstance(operatorHashMap.get("Glaz")));
+                adapter.addFragment("Fuze",OperatorCustomFragment.createInstance(operatorHashMap.get("Fuze")));
+                adapter.addFragment("Kapkan",OperatorCustomFragment.createInstance(operatorHashMap.get("Kapkan")));
+                adapter.addFragment("Tachanka",OperatorCustomFragment.createInstance(operatorHashMap.get("Tachanka")));
                 break;
             case "gsg9":
-                adapter.addFragment("Blitz",OperatorCustomFragment.createInstance("Blitz"));
-                adapter.addFragment("IQ",OperatorCustomFragment.createInstance("IQ"));
-                adapter.addFragment("Jäger",OperatorCustomFragment.createInstance("Jäger"));
-                adapter.addFragment("Bandit",OperatorCustomFragment.createInstance("Bandit"));
+                adapter.addFragment("Blitz",OperatorCustomFragment.createInstance(operatorHashMap.get("Blitz")));
+                adapter.addFragment("IQ",OperatorCustomFragment.createInstance(operatorHashMap.get("IQ")));
+                adapter.addFragment("Jäger",OperatorCustomFragment.createInstance(operatorHashMap.get("Jäger")));
+                adapter.addFragment("Bandit",OperatorCustomFragment.createInstance(operatorHashMap.get("Bandit")));
                 break;
             case "jtf2":
-                adapter.addFragment("Buck",OperatorCustomFragment.createInstance("Buck"));
-                adapter.addFragment("Frost",OperatorCustomFragment.createInstance("Frost"));
+                adapter.addFragment("Buck",OperatorCustomFragment.createInstance(operatorHashMap.get("Buck")));
+                adapter.addFragment("Frost",OperatorCustomFragment.createInstance(operatorHashMap.get("Frost")));
                 break;
             case "navyseals":
-                adapter.addFragment("Blackbeard",OperatorCustomFragment.createInstance("Blackbeard"));
-                adapter.addFragment("Valkyrie",OperatorCustomFragment.createInstance("Valkyrie"));
+                adapter.addFragment("Blackbeard",OperatorCustomFragment.createInstance(operatorHashMap.get("Blackbeard")));
+                adapter.addFragment("Valkyrie",OperatorCustomFragment.createInstance(operatorHashMap.get("Valkyrie")));
                 break;
             case "bope":
-                adapter.addFragment("Capitão",OperatorCustomFragment.createInstance("Capitão"));
-                adapter.addFragment("Caveira",OperatorCustomFragment.createInstance("Caveira"));
+                adapter.addFragment("Capitão",OperatorCustomFragment.createInstance(operatorHashMap.get("Capitão")));
+                adapter.addFragment("Caveira",OperatorCustomFragment.createInstance(operatorHashMap.get("Caveira")));
                 break;
             case "sat":
-                adapter.addFragment("Hibana",OperatorCustomFragment.createInstance("Hibana"));
-                adapter.addFragment("Echo",OperatorCustomFragment.createInstance("Echo"));
+                adapter.addFragment("Hibana",OperatorCustomFragment.createInstance(operatorHashMap.get("Hibana")));
+                adapter.addFragment("Echo",OperatorCustomFragment.createInstance(operatorHashMap.get("Echo")));
                 break;
             case "geo":
-                adapter.addFragment("Jackal",OperatorCustomFragment.createInstance("Jackal"));
-                adapter.addFragment("Mira",OperatorCustomFragment.createInstance("Mira"));
+                adapter.addFragment("Jackal",OperatorCustomFragment.createInstance(operatorHashMap.get("Jackal")));
+                adapter.addFragment("Mira",OperatorCustomFragment.createInstance(operatorHashMap.get("Mira")));
                 break;
             case "sdu":
-                adapter.addFragment("Ying",OperatorCustomFragment.createInstance("Ying"));
-                adapter.addFragment("Lesion",OperatorCustomFragment.createInstance("Lesion"));
+                adapter.addFragment("Ying",OperatorCustomFragment.createInstance(operatorHashMap.get("Ying")));
+                adapter.addFragment("Lesion",OperatorCustomFragment.createInstance(operatorHashMap.get("Lesion")));
                 break;
             case "grom":
-                adapter.addFragment("Zofia",OperatorCustomFragment.createInstance("Zofia"));
-                adapter.addFragment("Ela",OperatorCustomFragment.createInstance("Ela"));
+                adapter.addFragment("Zofia",OperatorCustomFragment.createInstance(operatorHashMap.get("Zofia")));
+                adapter.addFragment("Ela",OperatorCustomFragment.createInstance(operatorHashMap.get("Ela")));
                 break;
             case "smb":
-                adapter.addFragment("Dokkaebi",OperatorCustomFragment.createInstance("Dokkaebi"));
-                adapter.addFragment("Vigil",OperatorCustomFragment.createInstance("Vigil"));
+                adapter.addFragment("Dokkaebi",OperatorCustomFragment.createInstance(operatorHashMap.get("Dokkaebi")));
+                adapter.addFragment("Vigil",OperatorCustomFragment.createInstance(operatorHashMap.get("Vigil")));
                 break;
             case "cbrn":
-                adapter.addFragment("Finka",OperatorCustomFragment.createInstance("Finka"));
-                adapter.addFragment("Lion",OperatorCustomFragment.createInstance("Lion"));
+                adapter.addFragment("Finka",OperatorCustomFragment.createInstance(operatorHashMap.get("Finka")));
+                adapter.addFragment("Lion",OperatorCustomFragment.createInstance(operatorHashMap.get("Lion")));
                 break;
             case "gis":
-                adapter.addFragment("Maestro",OperatorCustomFragment.createInstance("Maestro"));
-                adapter.addFragment("Alibi",OperatorCustomFragment.createInstance("Alibi"));
+                adapter.addFragment("Maestro",OperatorCustomFragment.createInstance(operatorHashMap.get("Maestro")));
+                adapter.addFragment("Alibi",OperatorCustomFragment.createInstance(operatorHashMap.get("Alibi")));
                 break;
             default:
-                adapter.addFragment("Error",OperatorCustomFragment.createInstance("Error"));
+                adapter.addFragment("Error",OperatorCustomFragment.createInstance(operatorHashMap.get("Sledge")));
                 break;
         }
 

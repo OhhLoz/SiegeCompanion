@@ -46,7 +46,7 @@ public class Profile extends Fragment
             @Override
             public void onClick(View view)
             {
-                MyUbiAPIAdapter.create(mQueue, "raspberrypicreations@gmail.com:1NnpENN6za61");
+                MyUbiAPIAdapter.create(getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61");
             }
 
         });

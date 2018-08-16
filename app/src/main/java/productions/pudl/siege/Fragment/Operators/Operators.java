@@ -8,32 +8,62 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 import productions.pudl.siege.Adapter.MyUbiAPIAdapter;
+import productions.pudl.siege.Adapter.VolleyResponseListener;
+import productions.pudl.siege.Data.Operator;
 import productions.pudl.siege.R;
 
 public class Operators extends Fragment
 {
+    HashMap<String, Operator> temp = new HashMap<>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.operators_fragment, container, false);
+        MyUbiAPIAdapter.create(view.getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", new VolleyResponseListener()
+        {
+            @Override
+            public void onError(String message)
+            {
+
+            }
+
+            @Override
+            public void onResponse()
+            {
+                MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", getResources().getStringArray(R.array.operators), new VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+
+                    }
+
+                    @Override
+                    public void onResponse() {
+                        temp = MyUbiAPIAdapter.getOperatorFinalResult();
+                    }
+                });
+                Log.v("onResponseCallback", "GetOperators Run");
+            }
+        });
         loadOperatorImages(view);
-        RequestQueue test = Volley.newRequestQueue(view.getContext());
-        MyUbiAPIAdapter.create(test, "raspberrypicreations@gmail.com:1NnpENN6za61");
         return view;
     }
 
     private void loadOperatorImages(View view)
     {
-        MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", getResources().getStringArray(R.array.operators));
+        //while (MyUbiAPIAdapter.getOperatorFinalResult().isEmpty()) {}
+        //final HashMap<String, Operator> temp = MyUbiAPIAdapter.getOperatorFinalResult();
+        //final String temp = "B";
 
         ImageView sasImage = (ImageView) view.findViewById(R.id.sas);
         Picasso.get().load(R.drawable.sas).fit().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(sasImage);
@@ -48,7 +78,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "SAS");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sas");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sas", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -67,7 +97,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "FBI SWAT");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("fbiswat");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("fbiswat", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -86,7 +116,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "GIGN");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("gign");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("gign", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -105,7 +135,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "Spetsnaz");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("spetsnaz");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("spetsnaz", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -124,7 +154,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "gsg9");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("gsg9");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("gsg9", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -143,7 +173,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "JTF2");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("jtf2");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("jtf2", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -162,7 +192,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "navyseals");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("navyseals");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("navyseals", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -181,7 +211,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "bope");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("bope");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("bope", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -200,7 +230,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "sat");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sat");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sat", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -219,7 +249,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "geo");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("geo");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("geo", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -238,7 +268,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "sdu");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sdu");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sdu", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -257,7 +287,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "grom");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("grom");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("grom", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -276,7 +306,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "smb");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("smb");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("smb", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -295,7 +325,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "cbrn");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("cbrn");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("cbrn", temp);
                 tabbedDialog.show(ft, "dialog");
             }
         });
@@ -314,7 +344,7 @@ public class Operators extends Fragment
                 }
                 ft.addToBackStack(null);
                 Log.v("OperatorClick", "gis");
-                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("gis");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("gis", temp);
                 tabbedDialog.show(ft, "gis");
             }
         });

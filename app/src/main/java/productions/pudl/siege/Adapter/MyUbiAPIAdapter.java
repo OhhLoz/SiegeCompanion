@@ -1,5 +1,6 @@
 package productions.pudl.siege.Adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,10 +51,15 @@ public class MyUbiAPIAdapter
     static private ArrayList<Level> levelsResult;
     static private ArrayList<Stat> statsResult;
     static private ArrayList<Ranked> rankedResult;
-    static private ArrayList<Operator> operatorResult = new ArrayList<>();
+    static private HashMap<String, Operator> operatorFinalResult = new HashMap<>();
     static private HashMap<String, String> ctuMap = new HashMap<>();
     static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<>();
     static private String[] statArray;
+
+    static public void changeContext(Context context, String credentials)
+    {
+        mQueue = Volley.newRequestQueue(context);
+    }
 
     static public void create(RequestQueue currQueue, String credentials)
     {
@@ -62,6 +69,26 @@ public class MyUbiAPIAdapter
         mQueue = currQueue;
         if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
             loginAuth();
+    }
+
+    static public void create(Context context, String credentials)
+    {
+        populateOperatorMap();
+        populateCTUMap();
+        headers = new MyHeader(credentials);
+        mQueue = Volley.newRequestQueue(context);
+        if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
+            loginAuth();
+    }
+
+    static public void create(Context context, String credentials, final VolleyResponseListener listener)
+    {
+        populateOperatorMap();
+        populateCTUMap();
+        headers = new MyHeader(credentials);
+        mQueue = Volley.newRequestQueue(context);
+        if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
+            loginAuth(listener);
     }
 
     static private void populateOperatorMap()
@@ -207,6 +234,54 @@ public class MyUbiAPIAdapter
         mQueue.add(request);
     }
 
+    static private void loginAuth(final VolleyResponseListener listener)
+    {
+        String URL = "https://uplayconnect.ubi.com/ubiservices/v2/profiles/sessions";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.v("JSONResponse", response.toString());
+                            expirationTimeStr = response.getString("expiration");
+                            expirationTimeFormatted = fromISO8601UTC(expirationTimeStr);
+                            userName = response.getString("nameOnPlatform");
+                            headers.setTicket(response.getString("ticket"));
+                            printLogs();
+                            headers.printHeaders();
+                            if (listener != null)
+                            {
+                                listener.onResponse();
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                //Log.v("getHeaders", "Getting Headers");
+                return headers.getHeaders();
+            }
+        };
+        mQueue.add(request);
+    }
     static public void getPlayer(String platform, String key, String vals)
     {
         // valid platforms = psn, vbl, uplay
@@ -586,14 +661,14 @@ public class MyUbiAPIAdapter
 
                                             operatorStats.add(currentStat);
                                         }
-                                        String CTU = ctuMap.get(name);
-                                        Operator temp = new Operator(userID, name, CTU, operatorStats);
-                                        operatorResult.add(temp);
+                                        Operator temp = new Operator(userID, name, ctuMap.get(name), operatorStats);
+                                        operatorFinalResult.put(name, temp);
                                         operatorStats.clear();
                                     }
 
-                                    for (int i = 0; i < operatorResult.size(); i++)
-                                        Log.v("OpTest", operatorResult.get(i).toString());
+                                    for (Operator op: operatorFinalResult.values()) {
+                                        Log.v("OpTest", op.toString());
+                                    }
                                 }
                             }
                             //printLogs();
@@ -624,9 +699,107 @@ public class MyUbiAPIAdapter
         mQueue.add(request);
     }
 
-    static public ArrayList<Operator> getOperatorResult()
+    static public void getOperators(String id, String platform, String[] stats, final VolleyResponseListener listener)
     {
-        return operatorResult;
+        // valid platforms = PS4, XBOXONE, PC
+        if (isExpired())
+        {
+            loginAuth();
+            getOperators(id, platform, stats);
+        }
+        statArray = stats;
+        String tempOps = Arrays.toString(stats);
+        tempOps = tempOps.substring(1, tempOps.length()-1);
+        final String operators = tempOps;
+        Log.v("ImportedOperatorsArray", operators);
+
+        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try
+                        {
+                            Log.v("JSONResponse", response.toString());
+                            JSONObject resultsObj = response.getJSONObject("results");
+                            Iterator<?> keys = resultsObj.keys();
+                            //String prefix = "operatorpvp_";
+                            String suffix = ":infinite";
+
+                            while( keys.hasNext() )
+                            {
+                                String key = (String) keys.next();
+                                if (resultsObj.get(key) instanceof JSONObject)
+                                {
+                                    JSONObject currObj = resultsObj.getJSONObject(key);
+                                    //int special1;
+                                    //String special1Desc;
+                                    //int special2;
+                                    //String special2Desc;
+                                    //int special3;
+                                    //String special3Desc;
+                                    String userID = key;
+                                    String name = "Sledge";
+                                    ArrayList<Integer> operatorStats = new ArrayList<>();
+                                    for (int i = 0; i < operatorFinalMap.size(); i++)
+                                    {
+                                        for (int j = 0; j < statArray.length; j++)
+                                        {
+                                            int currentStat;
+                                            name = operatorFinalMap.get(i).second;
+                                            if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
+                                                currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix);//Log.v(name + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
+                                            else
+                                                currentStat = 0;//Log.v(name + " " + statArray[j], String.valueOf(currentStat = 0));
+
+                                            operatorStats.add(currentStat);
+                                        }
+                                        Operator temp = new Operator(userID, name, ctuMap.get(name), operatorStats);
+                                        operatorFinalResult.put(name, temp);
+                                        operatorStats.clear();
+                                    }
+
+                                    for (Operator op: operatorFinalResult.values()) {
+                                        Log.v("OpTest", op.toString());
+                                    }
+
+                                    if (listener != null)
+                                        listener.onResponse();
+                                }
+                            }
+                            //printLogs();
+                            //headers.printHeaders();
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Log.v("getHeaders", "Getting Headers");
+                return headers.getHeaders();
+            }
+        };
+        mQueue.add(request);
+    }
+
+    static public HashMap<String, Operator> getOperatorFinalResult()
+    {
+        return operatorFinalResult;
     }
 
     static public boolean isExpired()
