@@ -1,13 +1,9 @@
-r6stats api
-
 # Rainbow Six Siege Android Companion App
 A simple app to display stats and other tools in an efficient and free way, used as a complement to the game Rainbow Six Siege. Aimed at showing statistics, metrics and important information for players of the game.
 
 ## Getting Started
 
-This project is hosted on a server and therefore has no installation instructions as it is intended to work serverside not clientside.
-
-[Can be found at this URL](www.laurenceure.me)
+This project is a work in progress and so is not published, when completed it will published on the google play store.
 
 ## Built With
 
