@@ -227,15 +227,26 @@ public class MyUbiAPIAdapter
         };
         mQueue.add(request);
     }
-    static public void getPlayer(String platform, String key, String vals, final VolleyResponseListener listener)
+    static public void getPlayer(final String platform, final String key, final String vals, final VolleyResponseListener listener)
     {
         // valid platforms = psn, vbl, uplay
         // valid keys= nameOnPlatform, idOnPlatform, userId
         // valid vals = name or id (depends on the key)
         if (isExpired())
         {
-            loginAuth(null);
-            getPlayer(platform, key, vals, null);
+            loginAuth(new VolleyResponseListener() {
+                @Override
+                public void onError(String message) {
+
+                }
+
+                @Override
+                public void onResponse()
+                {
+                    getPlayer(platform, key, vals, null);
+                }
+            });
+
         }
         String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&" + key + "=" + vals;
         //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
@@ -296,13 +307,23 @@ public class MyUbiAPIAdapter
         return playersResult;
     }
 
-    static public void getLevel(String id, String platform, final VolleyResponseListener listener)
+    static public void getLevel(final String id, final String platform, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
         {
-            loginAuth(null);
-            getLevel(id, platform, null);
+            loginAuth(new VolleyResponseListener() {
+                @Override
+                public void onError(String message) {
+
+                }
+
+                @Override
+                public void onResponse() {
+                    getLevel(id, platform, null);
+                }
+            });
+
         }
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6playerprofile/playerprofile/progressions?profile_ids="+ id;
 
@@ -364,13 +385,23 @@ public class MyUbiAPIAdapter
         return levelsResult;
     }
 
-    static public void getStats(String id, String platform, String stats, final VolleyResponseListener listener)
+    static public void getStats(final String id, final String platform, final String stats, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
         {
-            loginAuth(null);
-            getStats(id, platform, stats, null);
+            loginAuth(new VolleyResponseListener() {
+                @Override
+                public void onError(String message) {
+
+                }
+
+                @Override
+                public void onResponse() {
+                    getStats(id, platform, stats, null);
+                }
+            });
+
         }
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
@@ -443,13 +474,23 @@ public class MyUbiAPIAdapter
         return statsResult;
     }
 
-    static public void getRanked(String id, String platform, String region, int season, final VolleyResponseListener listener)
+    static public void getRanked(final String id, final String platform, final String region, final int season, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
         {
-            loginAuth(null);
-            getRanked(id, platform, region, season, null);
+            loginAuth(new VolleyResponseListener() {
+                @Override
+                public void onError(String message) {
+
+                }
+
+                @Override
+                public void onResponse() {
+                    getRanked(id, platform, region, season, null);
+                }
+            });
+
         }
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6karma/players?board_id=pvp_ranked&season_id=" + season + "&region_id=" + region + "&profile_ids=" + id;
 
@@ -527,13 +568,23 @@ public class MyUbiAPIAdapter
         return rankedResult;
     }
 
-    static public void getOperators(String id, String platform, String[] stats, final VolleyResponseListener listener)
+    static public void getOperators(final String id, final String platform, final String[] stats, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
         {
-            loginAuth(null);
-            getOperators(id, platform, stats, null);
+            loginAuth(new VolleyResponseListener() {
+                @Override
+                public void onError(String message) {
+
+                }
+
+                @Override
+                public void onResponse() {
+                    getOperators(id, platform, stats, null);
+                }
+            });
+
         }
         statArray = stats;
         String tempOps = Arrays.toString(stats);
