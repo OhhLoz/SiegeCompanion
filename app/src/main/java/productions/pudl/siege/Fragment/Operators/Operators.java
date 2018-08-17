@@ -29,7 +29,7 @@ public class Operators extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.operators_fragment, container, false);
+        final View view = inflater.inflate(R.layout.operators_fragment, container, false);
         MyUbiAPIAdapter.create(view.getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", new VolleyResponseListener()
         {
             @Override
@@ -50,12 +50,12 @@ public class Operators extends Fragment
                     @Override
                     public void onResponse() {
                         temp = MyUbiAPIAdapter.getOperatorFinalResult();
+                        loadOperatorImages(view);
                     }
                 });
                 Log.v("onResponseCallback", "GetOperators Run");
             }
         });
-        loadOperatorImages(view);
         return view;
     }
 

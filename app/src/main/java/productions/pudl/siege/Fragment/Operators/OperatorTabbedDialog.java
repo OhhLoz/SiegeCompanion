@@ -68,30 +68,35 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
                 adapter.addFragment("Thatcher",OperatorCustomFragment.createInstance(operatorHashMap.get("Thatcher")));
                 adapter.addFragment("Mute",OperatorCustomFragment.createInstance(operatorHashMap.get("Mute")));
                 adapter.addFragment("Smoke",OperatorCustomFragment.createInstance(operatorHashMap.get("Smoke")));
+                adapter.addFragment("Recruit(SAS)",OperatorCustomFragment.createInstance(operatorHashMap.get("Recruit(SAS)")));
                 break;
             case "fbiswat":
                 adapter.addFragment("Ash",OperatorCustomFragment.createInstance(operatorHashMap.get("Ash")));
                 adapter.addFragment("Thermite",OperatorCustomFragment.createInstance(operatorHashMap.get("Thermite")));
                 adapter.addFragment("Castle",OperatorCustomFragment.createInstance(operatorHashMap.get("Castle")));
                 adapter.addFragment("Pulse",OperatorCustomFragment.createInstance(operatorHashMap.get("Pulse")));
+                adapter.addFragment("Recruit(FBI)",OperatorCustomFragment.createInstance(operatorHashMap.get("Recruit(FBI)")));
                 break;
             case "gign":
                 adapter.addFragment("Twitch",OperatorCustomFragment.createInstance(operatorHashMap.get("Twitch")));
                 adapter.addFragment("Montagne",OperatorCustomFragment.createInstance(operatorHashMap.get("Montagne")));
                 adapter.addFragment("Rook",OperatorCustomFragment.createInstance(operatorHashMap.get("Rook")));
                 adapter.addFragment("Doc",OperatorCustomFragment.createInstance(operatorHashMap.get("Doc")));
+                adapter.addFragment("Recruit(GIGN)",OperatorCustomFragment.createInstance(operatorHashMap.get("Recruit(GIGN)")));
                 break;
             case "spetsnaz":
                 adapter.addFragment("Glaz",OperatorCustomFragment.createInstance(operatorHashMap.get("Glaz")));
                 adapter.addFragment("Fuze",OperatorCustomFragment.createInstance(operatorHashMap.get("Fuze")));
                 adapter.addFragment("Kapkan",OperatorCustomFragment.createInstance(operatorHashMap.get("Kapkan")));
                 adapter.addFragment("Tachanka",OperatorCustomFragment.createInstance(operatorHashMap.get("Tachanka")));
+                adapter.addFragment("Recruit(Spetsnaz)",OperatorCustomFragment.createInstance(operatorHashMap.get("Recruit(Spetsnaz)")));
                 break;
             case "gsg9":
                 adapter.addFragment("Blitz",OperatorCustomFragment.createInstance(operatorHashMap.get("Blitz")));
                 adapter.addFragment("IQ",OperatorCustomFragment.createInstance(operatorHashMap.get("IQ")));
                 adapter.addFragment("Jäger",OperatorCustomFragment.createInstance(operatorHashMap.get("Jäger")));
                 adapter.addFragment("Bandit",OperatorCustomFragment.createInstance(operatorHashMap.get("Bandit")));
+                adapter.addFragment("Recruit(GSG9)",OperatorCustomFragment.createInstance(operatorHashMap.get("Recruit(GSG9)")));
                 break;
             case "jtf2":
                 adapter.addFragment("Buck",OperatorCustomFragment.createInstance(operatorHashMap.get("Buck")));
