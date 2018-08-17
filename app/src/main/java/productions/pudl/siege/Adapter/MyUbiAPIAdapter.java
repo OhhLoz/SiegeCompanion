@@ -39,7 +39,6 @@ import productions.pudl.siege.Data.Ranked;
 import productions.pudl.siege.Data.Stat;
 import productions.pudl.siege.R;
 
-
 public class MyUbiAPIAdapter
 {
     static private String expirationTimeStr = "DEFAULT";
@@ -52,8 +51,100 @@ public class MyUbiAPIAdapter
     static private ArrayList<Stat> statsResult = new ArrayList<>();
     static private ArrayList<Ranked> rankedResult = new ArrayList<>();
     static private HashMap<String, Operator> operatorFinalResult = new HashMap<>();
-    static private HashMap<String, String> ctuMap = new HashMap<>();
-    static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<>();
+    static private HashMap<String, String> ctuMap = new HashMap<String, String>(){{
+        put("Sledge", "SAS");
+        put("Thatcher", "SAS");
+        put("Smoke", "SAS");
+        put("Mute", "SAS");
+        put("Recruit(SAS)", "SAS");
+        put("Castle", "FBISWAT");
+        put("Ash", "FBISWAT");
+        put("Recruit(FBI)", "FBISWAT");
+        put("Thermite", "FBISWAT");
+        put("Pulse", "FBISWAT");
+        put("Recruit(GIGN)", "GIGN");
+        put("Rook", "GIGN");
+        put("Doc", "GIGN");
+        put("Twitch", "GIGN");
+        put("Montagne", "GIGN");
+        put("Recruit(Spetsnaz)", "Spetsnaz");
+        put("Glaz", "Spetsnaz");
+        put("Fuze", "Spetsnaz");
+        put("Kapkan", "Spetsnaz");
+        put("Tachanka", "Spetsnaz");
+        put("Recruit(GSG9)", "GSG9");
+        put("Blitz", "GSG9");
+        put("Bandit", "GSG9");
+        put("Jäger", "GSG9");
+        put("IQ", "GSG9");
+        put("Buck", "JTF2");
+        put("Frost", "JTF2");
+        put("Blackbeard", "NAVYSEALS");
+        put("Valkyrie", "NAVYSEALS");
+        put("Caveira", "BOPE");
+        put("Capitão", "BOPE");
+        put("Echo", "SAT");
+        put("Hibana", "SAT");
+        put("Jackal", "GEO");
+        put("Mira", "GEO");
+        put("Ying", "SDU");
+        put("Lesion", "SDU");
+        put("Zofia", "GROM");
+        put("Ela", "GROM");
+        put("Dokkaebi", "SMB");
+        put("Vigil", "SMB");
+        put("Finka", "CBRN");
+        put("Lion", "CBRN");
+        put("Maestro", "GIS");
+        put("Alibi", "GIS");
+    }};
+    static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<Pair<String, String>>(){{
+        append(0, new Pair<>("1:1", "Recruit(SAS)"));
+        append(1, new Pair<>("1:2", "Recruit(FBI)"));
+        append(2, new Pair<>("1:3", "Recruit(GIGN)"));
+        append(3, new Pair<>("1:4", "Recruit(Spetsnaz)"));
+        append(4, new Pair<>("1:5", "Recruit(GSG9)"));
+        append(5, new Pair<>("2:1", "Smoke"));
+        append(6, new Pair<>("3:1", "Mute"));
+        append(7, new Pair<>("4:1", "Sledge"));
+        append(8, new Pair<>("5:1", "Thatcher"));
+        append(9, new Pair<>("2:2", "Castle"));
+        append(10, new Pair<>("3:2", "Ash"));
+        append(11, new Pair<>("4:2", "Pulse"));
+        append(12, new Pair<>("5:2", "Thermite"));
+        append(13, new Pair<>("2:3", "Doc"));
+        append(14, new Pair<>("3:3", "Rook"));
+        append(15, new Pair<>("4:3", "Twitch"));
+        append(16, new Pair<>("5:3", "Montagne"));
+        append(17, new Pair<>("2:4", "Glaz"));
+        append(18, new Pair<>("3:4", "Fuze"));
+        append(19, new Pair<>("4:4", "Kapkan"));
+        append(20, new Pair<>("5:4", "Tachanka"));
+        append(21, new Pair<>("2:5", "Blitz"));
+        append(22, new Pair<>("3:5", "IQ"));
+        append(23, new Pair<>("4:5", "Jäger"));
+        append(24, new Pair<>("5:5", "Bandit"));
+        append(25, new Pair<>("2:6", "Buck"));
+        append(26, new Pair<>("3:6", "Frost"));
+        append(27, new Pair<>("2:7", "Blackbeard"));
+        append(28, new Pair<>("3:7", "Valkyrie"));
+        append(29, new Pair<>("2:8", "Capitão"));
+        append(30, new Pair<>("3:8", "Caveira"));
+        append(31, new Pair<>("2:9", "Hibana"));
+        append(32, new Pair<>("3:9", "Echo"));
+        append(33, new Pair<>("2:A", "Jackal"));
+        append(34, new Pair<>("3:A", "Mira"));
+        append(35, new Pair<>("2:B", "Ying"));
+        append(36, new Pair<>("3:B", "Lesion"));
+        append(37, new Pair<>("2:C", "Ela"));
+        append(38, new Pair<>("3:C", "Zofia"));
+        append(39, new Pair<>("2:D", "Dokkaebi"));
+        append(40, new Pair<>("3:D", "Vigil"));
+        append(41, new Pair<>("3:E", "Lion"));
+        append(42, new Pair<>("4:E", "Finka"));
+        append(43, new Pair<>("2:F", "Maestro"));
+        append(44, new Pair<>("3:F", "Alibi"));
+    }};
     static private String[] statArray;
 
     static public void changeContext(Context context, String credentials)
@@ -63,8 +154,6 @@ public class MyUbiAPIAdapter
 
     static public void create(RequestQueue currQueue, String credentials, final VolleyResponseListener listener)
     {
-        populateOperatorMap();
-        populateCTUMap();
         headers = new MyHeader(credentials);
         mQueue = currQueue;
         if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
@@ -73,110 +162,10 @@ public class MyUbiAPIAdapter
 
     static public void create(Context context, String credentials, final VolleyResponseListener listener)
     {
-        populateOperatorMap();
-        populateCTUMap();
         headers = new MyHeader(credentials);
         mQueue = Volley.newRequestQueue(context);
         if ((expirationTimeStr.equals("DEFAULT") && expirationTimeFormatted == null) || isExpired())
             loginAuth(listener);
-    }
-
-    static private void populateOperatorMap()
-    {
-        operatorFinalMap.append(0, new Pair<>("1:1", "Recruit(SAS)"));
-        operatorFinalMap.append(1, new Pair<>("1:2", "Recruit(FBI)"));
-        operatorFinalMap.append(2, new Pair<>("1:3", "Recruit(GIGN)"));
-        operatorFinalMap.append(3, new Pair<>("1:4", "Recruit(GSG9)"));
-        operatorFinalMap.append(4, new Pair<>("1:5", "Recruit(Spetsnaz)"));
-        operatorFinalMap.append(5, new Pair<>("2:1", "Smoke"));
-        operatorFinalMap.append(6, new Pair<>("3:1", "Mute"));
-        operatorFinalMap.append(7, new Pair<>("4:1", "Sledge"));
-        operatorFinalMap.append(8, new Pair<>("5:1", "Thatcher"));
-        operatorFinalMap.append(9, new Pair<>("2:2", "Castle"));
-        operatorFinalMap.append(10, new Pair<>("3:2", "Ash"));
-        operatorFinalMap.append(11, new Pair<>("4:2", "Pulse"));
-        operatorFinalMap.append(12, new Pair<>("5:2", "Thermite"));
-        operatorFinalMap.append(13, new Pair<>("2:3", "Doc"));
-        operatorFinalMap.append(14, new Pair<>("3:3", "Rook"));
-        operatorFinalMap.append(15, new Pair<>("4:3", "Twitch"));
-        operatorFinalMap.append(16, new Pair<>("5:3", "Montagne"));
-        operatorFinalMap.append(17, new Pair<>("2:4", "Glaz"));
-        operatorFinalMap.append(18, new Pair<>("3:4", "Fuze"));
-        operatorFinalMap.append(19, new Pair<>("4:4", "Kapkan"));
-        operatorFinalMap.append(20, new Pair<>("5:4", "Tachanka"));
-        operatorFinalMap.append(21, new Pair<>("2:5", "Blitz"));
-        operatorFinalMap.append(22, new Pair<>("3:5", "IQ"));
-        operatorFinalMap.append(23, new Pair<>("4:5", "Jäger"));
-        operatorFinalMap.append(24, new Pair<>("5:5", "Bandit"));
-        operatorFinalMap.append(25, new Pair<>("2:6", "Buck"));
-        operatorFinalMap.append(26, new Pair<>("3:6", "Frost"));
-        operatorFinalMap.append(27, new Pair<>("2:7", "Blackbeard"));
-        operatorFinalMap.append(28, new Pair<>("3:7", "Valkyrie"));
-        operatorFinalMap.append(29, new Pair<>("2:8", "Capitão"));
-        operatorFinalMap.append(30, new Pair<>("3:8", "Caveira"));
-        operatorFinalMap.append(31, new Pair<>("2:9", "Hibana"));
-        operatorFinalMap.append(32, new Pair<>("3:9", "Echo"));
-        operatorFinalMap.append(33, new Pair<>("2:A", "Jackal"));
-        operatorFinalMap.append(34, new Pair<>("3:A", "Mira"));
-        operatorFinalMap.append(35, new Pair<>("2:B", "Ying"));
-        operatorFinalMap.append(36, new Pair<>("3:B", "Lesion"));
-        operatorFinalMap.append(37, new Pair<>("2:C", "Ela"));
-        operatorFinalMap.append(38, new Pair<>("2:D", "Zofia"));
-        operatorFinalMap.append(39, new Pair<>("3:C", "Dokkaebi"));
-        operatorFinalMap.append(40, new Pair<>("3:D", "Vigil"));
-        operatorFinalMap.append(41, new Pair<>("3:E", "Lion"));
-        operatorFinalMap.append(42, new Pair<>("4:E", "Finka"));
-        operatorFinalMap.append(43, new Pair<>("2:F", "Maestro"));
-        operatorFinalMap.append(44, new Pair<>("3:F", "Alibi"));
-    }
-
-    static private void populateCTUMap()
-    {
-        ctuMap.put("Sledge", "SAS");
-        ctuMap.put("Thatcher", "SAS");
-        ctuMap.put("Smoke", "SAS");
-        ctuMap.put("Mute", "SAS");
-        ctuMap.put("Recruit(SAS)", "SAS");
-        ctuMap.put("Castle", "FBISWAT");
-        ctuMap.put("Ash", "FBISWAT");
-        ctuMap.put("Recruit(FBI)", "FBISWAT");
-        ctuMap.put("Thermite", "FBISWAT");
-        ctuMap.put("Pulse", "FBISWAT");
-        ctuMap.put("Recruit(GIGN)", "GIGN");
-        ctuMap.put("Rook", "GIGN");
-        ctuMap.put("Doc", "GIGN");
-        ctuMap.put("Twitch", "GIGN");
-        ctuMap.put("Montagne", "GIGN");
-        ctuMap.put("Recruit(Spetsnaz)", "Spetsnaz");
-        ctuMap.put("Glaz", "Spetsnaz");
-        ctuMap.put("Fuze", "Spetsnaz");
-        ctuMap.put("Kapkan", "Spetsnaz");
-        ctuMap.put("Tachanka", "Spetsnaz");
-        ctuMap.put("Recruit(GSG9)", "GSG9");
-        ctuMap.put("Blitz", "GSG9");
-        ctuMap.put("Bandit", "GSG9");
-        ctuMap.put("Jäger", "GSG9");
-        ctuMap.put("IQ", "GSG9");
-        ctuMap.put("Buck", "JTF2");
-        ctuMap.put("Frost", "JTF2");
-        ctuMap.put("Blackbeard", "NAVYSEALS");
-        ctuMap.put("Valkyrie", "NAVYSEALS");
-        ctuMap.put("Caveira", "BOPE");
-        ctuMap.put("Capitão", "BOPE");
-        ctuMap.put("Echo", "SAT");
-        ctuMap.put("Hibana", "SAT");
-        ctuMap.put("Jackal", "GEO");
-        ctuMap.put("Mira", "GEO");
-        ctuMap.put("Ying", "SDU");
-        ctuMap.put("Lesion", "SDU");
-        ctuMap.put("Zofia", "GROM");
-        ctuMap.put("Ela", "GROM");
-        ctuMap.put("Dokkaebi", "SMB");
-        ctuMap.put("Vigil", "SMB");
-        ctuMap.put("Finka", "CBRN");
-        ctuMap.put("Lion", "CBRN");
-        ctuMap.put("Maestro", "GIS");
-        ctuMap.put("Alibi", "GIS");
     }
 
     static private void loginAuth(final VolleyResponseListener listener)
