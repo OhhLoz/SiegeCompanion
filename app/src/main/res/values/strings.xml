@@ -66,6 +66,7 @@
     <string name="hostageTitle">Hostage</string>
     <string name="bombTitle">Bomb</string>
     <string name="operatorXP">Total XP</string>
+    <string name="operatorKR">Kills/Round</string>
     <string name="operatorSpecial1">Special 1</string>
     <string name="operatorSpecial2">Special 2</string>
     <string name="operatorSpecial3">Special 3</string>

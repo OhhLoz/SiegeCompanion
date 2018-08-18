@@ -26,19 +26,6 @@ public class OperatorCustomFragment extends Fragment
         View v = inflater.inflate(R.layout.operator_tab,container,false);
         if (operator != null)
         {
-            int seconds = operator.getTimeplayed();
-            int hours = seconds / 3600;
-            int minutes = (seconds % 3600) / 60;
-            seconds = (seconds % 3600) % 60;
-            StringBuilder timePlayed = new StringBuilder();
-            if (hours != 0)
-                timePlayed.append(String.valueOf(hours) + "H ");
-            if (minutes != 0)
-                timePlayed.append(String.valueOf(minutes) + "M");
-            if (hours == 0)
-                timePlayed.append(" " + String.valueOf(seconds) + "S");
-            String convertedTimePlayed = timePlayed.toString();
-
             ((TextView) v.findViewById(R.id.operatorKillsText)).setText(String.valueOf(operator.getKills()));
             ((TextView) v.findViewById(R.id.operatorDeathsText)).setText(String.valueOf(operator.getDeaths()));
             ((TextView) v.findViewById(R.id.operatorKDText)).setText(String.valueOf(operator.getKd()));
@@ -46,7 +33,8 @@ public class OperatorCustomFragment extends Fragment
             ((TextView) v.findViewById(R.id.operatorLossesText)).setText(String.valueOf(operator.getLosses()));
             ((TextView) v.findViewById(R.id.operatorWLText)).setText(String.valueOf(operator.getWl()));
             ((TextView) v.findViewById(R.id.operatorPlayedText)).setText(String.valueOf(operator.getPlayed()));
-            ((TextView) v.findViewById(R.id.operatorTimePlayedText)).setText(convertedTimePlayed);
+            ((TextView) v.findViewById(R.id.operatorTimePlayedText)).setText(operator.getTimeplayedStr());
+            ((TextView) v.findViewById(R.id.operatorKillsRoundText)).setText(String.valueOf(operator.getKR()));
             ((TextView) v.findViewById(R.id.operatorDBNOText)).setText(String.valueOf(operator.getDbno()));
             ((TextView) v.findViewById(R.id.operatorHeadshotText)).setText(String.valueOf(operator.getHeadshot()));
             ((TextView) v.findViewById(R.id.operatorMeleeKillsText)).setText(String.valueOf(operator.getMeleekills()));

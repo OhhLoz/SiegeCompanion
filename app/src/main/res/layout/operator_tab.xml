@@ -208,11 +208,11 @@
         app:layout_constraintTop_toBottomOf="@id/operatorTimePlayedTitle"/>
 
     <TextView
-        android:id="@+id/operatorXPTitle"
+        android:id="@+id/operatorKillsRoundTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/statsLargeMargin"
-        android:text="@string/operatorXP"
+        android:text="@string/operatorKR"
         android:textColor="@color/colorStatTitle"
         android:textSize="@dimen/statTitleSize"
         app:layout_constraintTop_toBottomOf="@id/winsView"
@@ -220,14 +220,14 @@
         app:layout_constraintStart_toEndOf="@+id/operatorDeathsTitle" />
 
     <TextView
-        android:id="@+id/operatorXPText"
+        android:id="@+id/operatorKillsRoundText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/statsLargeMargin"
         android:textSize="@dimen/statTextSize"
         app:layout_constraintEnd_toEndOf="@id/operatorKDTitle"
         app:layout_constraintStart_toStartOf="@id/operatorKDTitle"
-        app:layout_constraintTop_toBottomOf="@id/operatorXPTitle"/>
+        app:layout_constraintTop_toBottomOf="@id/operatorKillsRoundTitle"/>
 
     <View
         android:id="@+id/playedView"
@@ -240,7 +240,7 @@
         android:background="@color/colorStatTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/operatorXPText" />
+        app:layout_constraintTop_toBottomOf="@id/operatorKillsRoundText" />
 
     <TextView
         android:id="@+id/operatorDBNOTitle"

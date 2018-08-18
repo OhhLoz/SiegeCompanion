@@ -58,7 +58,7 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
         viewPager = (ViewPager) rootview.findViewById(R.id.masterViewPager);
 
         ((TextView) rootview.findViewById(R.id.ctuName)).setText(CTU.toUpperCase());
-        Picasso.get().load(getResources().getIdentifier(CTU, "drawable", getContext().getPackageName())).fit().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into((ImageView) rootview.findViewById(R.id.ctuPicture));
+        Picasso.get().load(getResources().getIdentifier(CTU, "drawable", getContext().getPackageName())).fit().centerInside().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into((ImageView) rootview.findViewById(R.id.ctuPicture));
 
         TabViewAdapter adapter = new TabViewAdapter(getChildFragmentManager());
         switch(CTU)
@@ -83,6 +83,7 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
                 adapter.addFragment("Rook",OperatorCustomFragment.createInstance(operatorHashMap.get("Rook")));
                 adapter.addFragment("Doc",OperatorCustomFragment.createInstance(operatorHashMap.get("Doc")));
                 adapter.addFragment("Recruit(GIGN)",OperatorCustomFragment.createInstance(operatorHashMap.get("Recruit(GIGN)")));
+
                 break;
             case "spetsnaz":
                 adapter.addFragment("Glaz",OperatorCustomFragment.createInstance(operatorHashMap.get("Glaz")));
