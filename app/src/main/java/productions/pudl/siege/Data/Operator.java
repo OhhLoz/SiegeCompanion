@@ -17,6 +17,8 @@ public class Operator
     private int played;
     private double wl;
     private int timeplayed;
+    private String timePlayedStr;
+    private double killsRound;
     private String userID;
 
     private int special1;
@@ -42,9 +44,10 @@ public class Operator
         setWins(wins);
         setLosses(losses);
         setPlayed(played);
-        setTimeplayed(timeplayed);
+        calculateTimeplayed(timeplayed);
         calculateKD(kills, deaths);
         calculateWL(wins, losses);
+        calculateKillsRound(kills, played);
     }
 
     public Operator(String userID, String name, String CTU, ArrayList<Integer> param)
@@ -60,9 +63,10 @@ public class Operator
         setLosses(param.get(5));
         setPlayed(param.get(6));
         setWins(param.get(7));
-        setTimeplayed(param.get(8));
+        calculateTimeplayed(param.get(8));
         calculateKD(param.get(3), param.get(1));
         calculateWL(param.get(7), param.get(6));
+        calculateKillsRound(param.get(3), param.get(6));
     }
 
     public void calculateKD(int kills, int deaths)
@@ -79,9 +83,41 @@ public class Operator
         setWL(tempWL);
     }
 
+    public void calculateKillsRound(int kills, int played)
+    {
+        double tempKR = (double) kills / (double) played;
+        tempKR = (double) Math.round(tempKR * 100d) / 100d;
+        setKR(tempKR);
+    }
+
+    public void calculateTimeplayed(int timeplayed)
+    {
+        setTimeplayed(timeplayed);
+        int seconds = timeplayed;
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        seconds = (seconds % 3600) % 60;
+        StringBuilder timePlayed = new StringBuilder();
+        if (hours != 0)
+            timePlayed.append(String.valueOf(hours) + "H ");
+        if (minutes != 0)
+            timePlayed.append(String.valueOf(minutes) + "M");
+        if (hours == 0)
+            timePlayed.append(" " + String.valueOf(seconds) + "S");
+        this.timePlayedStr = timePlayed.toString();
+    }
+
     public String toString()
     {
-        return getName() + " CTU: " + getCTU() + " K: " + getKills() + " D: " + getDeaths() + " KD: " + getKd() + " W: " + getWins() + " L: " + getLosses() + " WL: " + getWl() + " P: " + getPlayed() + " DBNO: " + getDbno() + " HS: " + getHeadshot() + " MK: " + getMeleekills() + " TP: " + getTimeplayed();
+        return getName() + " CTU: " + getCTU() + " K: " + getKills() + " D: " + getDeaths() + " KD: " + getKd() + " W: " + getWins() + " L: " + getLosses() + " WL: " + getWl() + " P: " + getPlayed() + " Kills/Round: " + getKR() + " DBNO: "+ getDbno() + " HS: " + getHeadshot() + " MK: " + getMeleekills() + " TP: " + getTimeplayed();
+    }
+
+    public double getKR() {
+        return killsRound;
+    }
+
+    public void setKR(double KR) {
+        this.killsRound = KR;
     }
 
     public String getName() {
@@ -98,6 +134,10 @@ public class Operator
 
     public void setCTU(String CTU) {
         this.CTU = CTU;
+    }
+
+    public String getTimeplayedStr() {
+        return timePlayedStr;
     }
 
     public int getTimeplayed() {
