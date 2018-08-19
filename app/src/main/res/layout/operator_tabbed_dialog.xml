@@ -48,8 +48,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/view"
-        app:tabMode="scrollable" />
+        app:tabMode="scrollable"
+        app:layout_constraintTop_toBottomOf="@id/view" />
+<!--        app:tabMode="fixed"
+        app:tabGravity="fill"/>-->
 
     <view
         android:id="@+id/masterViewPager"

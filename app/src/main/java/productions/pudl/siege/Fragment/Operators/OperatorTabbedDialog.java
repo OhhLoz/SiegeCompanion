@@ -1,6 +1,8 @@
 package productions.pudl.siege.Fragment.Operators;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -83,7 +86,6 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
                 adapter.addFragment("Rook",OperatorCustomFragment.createInstance(operatorHashMap.get("Rook")));
                 adapter.addFragment("Doc",OperatorCustomFragment.createInstance(operatorHashMap.get("Doc")));
                 adapter.addFragment("Recruit(GIGN)",OperatorCustomFragment.createInstance(operatorHashMap.get("Recruit(GIGN)")));
-
                 break;
             case "spetsnaz":
                 adapter.addFragment("Glaz",OperatorCustomFragment.createInstance(operatorHashMap.get("Glaz")));
@@ -146,6 +148,15 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        String packageName = getActivity().getPackageName();
+
+        for (int i = 0; i < tabLayout.getTabCount() - 1; i++)
+        {
+            String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase();
+            Log.v("ResName", resName);
+            tabLayout.getTabAt(i).setIcon(getResources().getIdentifier(resName,"drawable", packageName));
+        }
         return rootview;
     }
 }
