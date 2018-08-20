@@ -155,7 +155,7 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
         for (int i = 0; i < tabLayout.getTabCount(); i++)
         {
             //String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase().replace('(', '_').replace(")", "").replace('ã', 'a').replace('ä', 'a');
-            String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase().split("\\(")[0].replace('ã', 'a').replace('ä', 'a');
+            String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase().replace('ã', 'a').replace('ä', 'a');
             Log.v("ResName", resName);
             tabLayout.getTabAt(i).setIcon(getResources().getIdentifier(resName,"drawable", packageName));
         }
