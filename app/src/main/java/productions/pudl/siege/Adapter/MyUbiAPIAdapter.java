@@ -59,7 +59,7 @@ public class MyUbiAPIAdapter
         put("Recruit(SAS)", "SAS");
         put("Castle", "FBISWAT");
         put("Ash", "FBISWAT");
-        put("Recruit(FBI)", "FBISWAT");
+        put("Recruit(FBISWAT)", "FBISWAT");
         put("Thermite", "FBISWAT");
         put("Pulse", "FBISWAT");
         put("Recruit(GIGN)", "GIGN");
@@ -100,7 +100,7 @@ public class MyUbiAPIAdapter
     }};
     static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<Pair<String, String>>(){{
         append(0, new Pair<>("1:1", "Recruit(SAS)"));
-        append(1, new Pair<>("1:2", "Recruit(FBI)"));
+        append(1, new Pair<>("1:2", "Recruit(FBISWAT)"));
         append(2, new Pair<>("1:3", "Recruit(GIGN)"));
         append(3, new Pair<>("1:4", "Recruit(Spetsnaz)"));
         append(4, new Pair<>("1:5", "Recruit(GSG9)"));

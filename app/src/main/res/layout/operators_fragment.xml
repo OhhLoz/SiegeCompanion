@@ -18,6 +18,16 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/libs/com.google.ads"
+            android:id="@+id/adView"
+            ads:adSize="BANNER"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/sas"
             android:layout_width="0dp"
@@ -29,7 +39,7 @@
             android:adjustViewBounds="true"
             app:layout_constraintEnd_toStartOf="@id/centerGuideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/adView" />
 
         <ImageView
             android:id="@+id/gign"
@@ -118,7 +128,7 @@
             android:adjustViewBounds="true"
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/adView" />
 
         <ImageView
             android:id="@+id/spetsnaz"
