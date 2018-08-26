@@ -41,7 +41,7 @@ public class Operators extends Fragment
             @Override
             public void onResponse()
             {
-                MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", getResources().getStringArray(R.array.operators), new VolleyResponseListener() {
+                MyUbiAPIAdapter.getOperators("28ca710b-270d-491b-8073-42654f82745d", "PC", getResources().getStringArray(R.array.operators), getResources().getStringArray(R.array.specialoperators), new VolleyResponseListener() {
                     @Override
                     public void onError(String message) {
 

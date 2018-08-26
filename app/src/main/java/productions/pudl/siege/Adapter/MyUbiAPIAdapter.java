@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -144,6 +145,38 @@ public class MyUbiAPIAdapter
         append(42, new Pair<>("4:E", "Finka"));
         append(43, new Pair<>("2:F", "Maestro"));
         append(44, new Pair<>("3:F", "Alibi"));
+    }};
+    static private HashMap<String, String[]> specialMap = new HashMap<String, String[]>(){{
+        put("Ash", new String[] {"bonfirekill", "bonfirewallbreached"});
+        put("Bandit", new String[] {"batterykill"});
+        put("Mira", new String[] {"black_mirror_gadget_deployed"});
+        put("Blackbeard", new String[] {"gunshieldblockdamage"});
+        put("Blitz", new String[] {"flashedenemy", "flashfollowupkills", "flashshieldassist"});
+        put("Buck", new String[] {"kill"});
+        put("Capitao", new String[] {"lethaldartkills", "smokedartslaunched"});
+        put("Castle", new String[] {"kevlarbarricadedeployed"});
+        put("Caveira", new String[] {"interrogations"});
+        put("Jackal", new String[] {"cazador_assist_kill"});
+        put("Doc", new String[] {"hostagerevive", "selfrevive", "teammaterevive"});
+        put("Echo", new String[] {"enemy_sonicburst_affected"});
+        put("Frost", new String[] {"dbno"});
+        put("Fuze", new String[] {"clusterchargekill"});
+        put("Glaz", new String[] {"sniperkill", "sniperpenetrationkill"});
+        put("Hibana", new String[] {"detonate_projectile"});
+        put("IQ", new String[] {"gadgetspotbyef"});
+        put("Jager", new String[] {"gadgetdestroybycatcher"});
+        put("Kapkan", new String[] {"boobytrapdeployed", "boobytrapkill"});
+        put("Montagne", new String[] {"shieldblockdamage"});
+        put("Mute", new String[] {"gadgetjammed", "jammerdeployed"});
+        put("Pulse", new String[] {"heartbeatassist", "heartbeatspot"});
+        put("Rook", new String[] {"armorboxdeployed", "armortakenourself", "armortakenteammate"});
+        put("Sledge", new String[] {"hammerkill", "hammerhole"});
+        put("Smoke", new String[] {"poisongaskill"});
+        put("Tachanka", new String[] {"turretdeployed", "turretkill"});
+        put("Thatcher", new String[] {"gadgetdestroywithemp"});
+        put("Thermite", new String[] {"chargekill", "chargedeployed", "reinforcementbreached"});
+        put("Twitch", new String[] {"gadgetdestroybyshockdrone", "shockdronekill"});
+        put("Valkyrie", new String[] {"camdeployed"});
     }};
     static private String[] statArray;
 
@@ -557,7 +590,7 @@ public class MyUbiAPIAdapter
         return rankedResult;
     }
 
-    static public void getOperators(final String id, final String platform, final String[] stats, final VolleyResponseListener listener)
+    static public void getOperators(final String id, final String platform, final String[] stats, final String[] specialstats, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
@@ -569,8 +602,9 @@ public class MyUbiAPIAdapter
                 }
 
                 @Override
-                public void onResponse() {
-                    getOperators(id, platform, stats, null);
+                public void onResponse()
+                {
+                    getOperators(id, platform, stats, specialstats, null);
                 }
             });
 
@@ -580,6 +614,11 @@ public class MyUbiAPIAdapter
         tempOps = tempOps.substring(1, tempOps.length()-1);
         final String operators = tempOps;
         Log.v("ImportedOperatorsArray", operators);
+
+        String tempSpecial = Arrays.toString(specialstats);
+        tempSpecial = tempSpecial.substring(1, tempSpecial.length()-1);
+        final String specialStats = tempSpecial;
+        Log.v("ImportedSpecialArray", specialStats);
 
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
@@ -617,14 +656,23 @@ public class MyUbiAPIAdapter
                                         {
                                             int currentStat;
                                             name = operatorFinalMap.get(i).second;
-                                            if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
+/*                                            if(statArray[j].contains("_" + name.toLowerCase() + "_")) //black_mirror, cazador
+                                            {
+                                                Log.v("TestSuccess", name.toLowerCase() + " " + statArray[j]);
+                                            }
+                                            else */if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
+                                            {
                                                 currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix);//Log.v(name + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
+                                                operatorStats.add(currentStat);
+                                            }
                                             else
+                                            {
                                                 currentStat = 0;//Log.v(name + " " + statArray[j], String.valueOf(currentStat = 0));
-
-                                            operatorStats.add(currentStat);
+                                                operatorStats.add(currentStat);
+                                            }
                                         }
                                         Operator temp = new Operator(userID, name, ctuMap.get(name), operatorStats);
+                                        // special stats here
                                         operatorFinalResult.put(name, temp);
                                         operatorStats.clear();
                                     }
