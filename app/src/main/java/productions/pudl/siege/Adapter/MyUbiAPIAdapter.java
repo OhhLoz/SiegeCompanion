@@ -99,6 +99,53 @@ public class MyUbiAPIAdapter
         put("Maestro", "GIS");
         put("Alibi", "GIS");
     }};
+    static private HashMap<String, String> operatorMap = new HashMap<String, String>(){{
+        put("Recruit(SAS)"  ,  "1:1");
+        put("Recruit(FBISWAT)"  ,  "1:2");
+        put("Recruit(GIGN)"  ,  "1:3");
+        put("Recruit(Spetsnaz)"  ,  "1:4");
+        put("Recruit(GSG9)"  ,  "1:5");
+        put("Smoke"  ,  "2:1");
+        put("Mute"  ,  "3:1");
+        put("Sledge"  ,  "4:1");
+        put("Thatcher"  ,  "5:1");
+        put("Castle"  ,  "2:2");
+        put("Ash"  ,  "3:2");
+        put("Pulse"  ,  "4:2");
+        put("Thermite"  ,  "5:2");
+        put("Doc"  ,  "2:3");
+        put("Rook"  ,  "3:3");
+        put("Twitch"  ,  "4:3");
+        put("Montagne"  ,  "5:3");
+        put("Glaz"  ,  "2:4");
+        put("Fuze"  ,  "3:4");
+        put("Kapkan"  ,  "4:4");
+        put("Tachanka"  ,  "5:4");
+        put("Blitz"  ,  "2:5");
+        put("IQ"  ,  "3:5");
+        put("Jäger"  ,  "4:5");
+        put("Bandit"  ,  "5:5");
+        put("Buck"  ,  "2:6");
+        put("Frost"  ,  "3:6");
+        put("Blackbeard"  ,  "2:7");
+        put("Valkyrie"  ,  "3:7");
+        put("Capitão"  ,  "2:8");
+        put("Caveira"  ,  "3:8");
+        put("Hibana"  ,  "2:9");
+        put("Echo"  ,  "3:9");
+        put("Jackal"  ,  "2:A");
+        put("Mira"  ,  "3:A");
+        put("Ying"  ,  "2:B");
+        put("Lesion"  ,  "3:B");
+        put("Ela"  ,  "2:C");
+        put("Zofia"  ,  "3:C");
+        put("Dokkaebi"  ,  "2:D");
+        put("Vigil"  ,  "3:D");
+        put("Lion"  ,  "3:E");
+        put("Finka"  ,  "4:E");
+        put("Maestro"  ,  "2:F");
+        put("Alibi"  ,  "3:F");
+    }};
     static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<Pair<String, String>>(){{
         append(0, new Pair<>("1:1", "Recruit(SAS)"));
         append(1, new Pair<>("1:2", "Recruit(FBISWAT)"));
@@ -147,36 +194,36 @@ public class MyUbiAPIAdapter
         append(44, new Pair<>("3:F", "Alibi"));
     }};
     static private HashMap<String, String[]> specialMap = new HashMap<String, String[]>(){{
-        put("Ash", new String[] {"bonfirekill", "bonfirewallbreached"});
-        put("Bandit", new String[] {"batterykill"});
+        put("Ash", new String[] {"ash_bonfirekill", "ash_bonfirewallbreached"});
+        put("Bandit", new String[] {"bandit_batterykill"});
         put("Mira", new String[] {"black_mirror_gadget_deployed"});
-        put("Blackbeard", new String[] {"gunshieldblockdamage"});
-        put("Blitz", new String[] {"flashedenemy", "flashfollowupkills", "flashshieldassist"});
-        put("Buck", new String[] {"kill"});
-        put("Capitao", new String[] {"lethaldartkills", "smokedartslaunched"});
-        put("Castle", new String[] {"kevlarbarricadedeployed"});
-        put("Caveira", new String[] {"interrogations"});
+        put("Blackbeard", new String[] {"blackbeard_gunshieldblockdamage"});
+        put("Blitz", new String[] {"blitz_flashedenemy", "blitz_flashfollowupkills", "blitz_flashshieldassist"});
+        put("Buck", new String[] {"buck_kill"});
+        put("Capitao", new String[] {"capitao_lethaldartkills", "capitao_smokedartslaunched"});
+        put("Castle", new String[] {"castle_kevlarbarricadedeployed"});
+        put("Caveira", new String[] {"caveira_interrogations"});
         put("Jackal", new String[] {"cazador_assist_kill"});
-        put("Doc", new String[] {"hostagerevive", "selfrevive", "teammaterevive"});
-        put("Echo", new String[] {"enemy_sonicburst_affected"});
-        put("Frost", new String[] {"dbno"});
-        put("Fuze", new String[] {"clusterchargekill"});
-        put("Glaz", new String[] {"sniperkill", "sniperpenetrationkill"});
-        put("Hibana", new String[] {"detonate_projectile"});
-        put("IQ", new String[] {"gadgetspotbyef"});
-        put("Jager", new String[] {"gadgetdestroybycatcher"});
-        put("Kapkan", new String[] {"boobytrapdeployed", "boobytrapkill"});
-        put("Montagne", new String[] {"shieldblockdamage"});
-        put("Mute", new String[] {"gadgetjammed", "jammerdeployed"});
-        put("Pulse", new String[] {"heartbeatassist", "heartbeatspot"});
-        put("Rook", new String[] {"armorboxdeployed", "armortakenourself", "armortakenteammate"});
-        put("Sledge", new String[] {"hammerkill", "hammerhole"});
-        put("Smoke", new String[] {"poisongaskill"});
-        put("Tachanka", new String[] {"turretdeployed", "turretkill"});
-        put("Thatcher", new String[] {"gadgetdestroywithemp"});
-        put("Thermite", new String[] {"chargekill", "chargedeployed", "reinforcementbreached"});
-        put("Twitch", new String[] {"gadgetdestroybyshockdrone", "shockdronekill"});
-        put("Valkyrie", new String[] {"camdeployed"});
+        put("Doc", new String[] {"doc_hostagerevive", "doc_selfrevive", "doc_teammaterevive"});
+        put("Echo", new String[] {"echo_enemy_sonicburst_affected"});
+        put("Frost", new String[] {"frost_dbno"});
+        put("Fuze", new String[] {"fuze_clusterchargekill"});
+        put("Glaz", new String[] {"glaz_sniperkill", "glaz_sniperpenetrationkill"});
+        put("Hibana", new String[] {"hibana_detonate_projectile"});
+        put("IQ", new String[] {"iq_gadgetspotbyef"});
+        put("Jager", new String[] {"jager_gadgetdestroybycatcher"});
+        put("Kapkan", new String[] {"kapkan_boobytrapdeployed", "kapkan_boobytrapkill"});
+        put("Montagne", new String[] {"montagne_shieldblockdamage"});
+        put("Mute", new String[] {"mute_gadgetjammed", "mute_jammerdeployed"});
+        put("Pulse", new String[] {"pulse_heartbeatassist", "pulse_heartbeatspot"});
+        put("Rook", new String[] {"rook_armorboxdeployed", "rook_armortakenourself", "rook_armortakenteammate"});
+        put("Sledge", new String[] {"sledge_hammerkill", "sledge_hammerhole"});
+        put("Smoke", new String[] {"smoke_poisongaskill"});
+        put("Tachanka", new String[] {"tachanka_turretdeployed", "tachanka_turretkill"});
+        put("Thatcher", new String[] {"thatcher_gadgetdestroywithemp"});
+        put("Thermite", new String[] {"thermite_chargekill", "thermite_chargedeployed", "thermite_reinforcementbreached"});
+        put("Twitch", new String[] {"twitch_gadgetdestroybyshockdrone", "twitch_shockdronekill"});
+        put("Valkyrie", new String[] {"valkyrie_camdeployed"});
     }};
     static private String[] statArray;
 
@@ -615,11 +662,13 @@ public class MyUbiAPIAdapter
         final String operators = tempOps;
         Log.v("ImportedOperatorsArray", operators);
 
-        String tempSpecial = Arrays.toString(specialstats);
-        tempSpecial = tempSpecial.substring(1, tempSpecial.length()-1);
-        final String specialStats = tempSpecial;
-        Log.v("ImportedSpecialArray", specialStats);
-
+        if (specialstats != null)
+        {
+            String tempSpecial = Arrays.toString(specialstats);
+            tempSpecial = tempSpecial.substring(1, tempSpecial.length() - 1);
+            final String specialStats = tempSpecial;
+            Log.v("ImportedSpecialArray", specialStats);
+        }
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>()
@@ -632,7 +681,7 @@ public class MyUbiAPIAdapter
                             Log.v("JSONResponse", response.toString());
                             JSONObject resultsObj = response.getJSONObject("results");
                             Iterator<?> keys = resultsObj.keys();
-                            //String prefix = "operatorpvp_";
+                            String prefix = "operatorpvp_";
                             String suffix = ":infinite";
 
                             while( keys.hasNext() )
@@ -673,6 +722,24 @@ public class MyUbiAPIAdapter
                                         }
                                         Operator temp = new Operator(userID, name, ctuMap.get(name), operatorStats);
                                         // special stats here
+                                        Log.v("OpName", name);
+                                        String [] tempStr = specialMap.get(name);
+                                        if (tempStr == null){}
+                                        else if (tempStr.length == 1)
+                                        {
+                                            currObj.getInt(prefix + tempStr[0] + ":" + operatorMap.get(name) + suffix);
+                                        }
+                                        else if (tempStr.length == 2)
+                                        {
+                                            currObj.getInt(prefix + tempStr[0] + ":" + operatorMap.get(name) + suffix);
+                                            currObj.getInt(prefix + tempStr[1] + ":" + operatorMap.get(name) + suffix);
+                                        }
+                                        else if (tempStr.length == 3)
+                                        {
+                                            currObj.getInt(prefix + tempStr[0] + ":" + operatorMap.get(name) + suffix);
+                                            currObj.getInt(prefix + tempStr[1] + ":" + operatorMap.get(name) + suffix);
+                                            currObj.getInt(prefix + tempStr[2] + ":" + operatorMap.get(name) + suffix);
+                                        }
                                         operatorFinalResult.put(name, temp);
                                         operatorStats.clear();
                                     }
