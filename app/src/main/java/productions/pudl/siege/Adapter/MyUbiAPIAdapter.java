@@ -602,12 +602,6 @@ public class MyUbiAPIAdapter
                                 if (resultsObj.get(key) instanceof JSONObject)
                                 {
                                     JSONObject currObj = resultsObj.getJSONObject(key);
-                                    //int special1;
-                                    //String special1Desc;
-                                    //int special2;
-                                    //String special2Desc;
-                                    //int special3;
-                                    //String special3Desc;
                                     String userID = key;
                                     String name = "Sledge";
                                     ArrayList<Integer> operatorStats = new ArrayList<>();

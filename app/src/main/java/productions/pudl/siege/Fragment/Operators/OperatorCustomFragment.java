@@ -38,20 +38,6 @@ public class OperatorCustomFragment extends Fragment
             ((TextView) v.findViewById(R.id.operatorDBNOText)).setText(String.valueOf(operator.getDbno()));
             ((TextView) v.findViewById(R.id.operatorHeadshotText)).setText(String.valueOf(operator.getHeadshot()));
             ((TextView) v.findViewById(R.id.operatorMeleeKillsText)).setText(String.valueOf(operator.getMeleekills()));
-
-            if (operator.isSpecial1()) {
-                ((TextView) v.findViewById(R.id.operatorSpecial1Text)).setText(String.valueOf(operator.getSpecial1()));
-                ((TextView) v.findViewById(R.id.operatorSpecial1Title)).setText(operator.getSpecial1Desc());
-            }
-            if (operator.isSpecial2()) {
-                ((TextView) v.findViewById(R.id.operatorSpecial2Text)).setText(String.valueOf(operator.getSpecial2()));
-                ((TextView) v.findViewById(R.id.operatorSpecial2Title)).setText(operator.getSpecial2Desc());
-            }
-            if(operator.isSpecial3())
-            {
-                ((TextView) v.findViewById(R.id.operatorSpecial3Text)).setText(String.valueOf(operator.getSpecial3()));
-                ((TextView) v.findViewById(R.id.operatorSpecial3Title)).setText(operator.getSpecial3Desc());
-            }
         }
         return v;
     }
