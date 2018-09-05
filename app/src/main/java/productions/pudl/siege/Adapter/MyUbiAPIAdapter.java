@@ -590,7 +590,7 @@ public class MyUbiAPIAdapter
         return rankedResult;
     }
 
-    static public void getOperators(final String id, final String platform, final String[] stats, final String[] specialstats, final VolleyResponseListener listener)
+    static public void getOperators(final String id, final String platform, final String[] stats, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
@@ -604,7 +604,7 @@ public class MyUbiAPIAdapter
                 @Override
                 public void onResponse()
                 {
-                    getOperators(id, platform, stats, specialstats, null);
+                    getOperators(id, platform, stats, null);
                 }
             });
 
@@ -614,11 +614,6 @@ public class MyUbiAPIAdapter
         tempOps = tempOps.substring(1, tempOps.length()-1);
         final String operators = tempOps;
         Log.v("ImportedOperatorsArray", operators);
-
-        String tempSpecial = Arrays.toString(specialstats);
-        tempSpecial = tempSpecial.substring(1, tempSpecial.length()-1);
-        final String specialStats = tempSpecial;
-        Log.v("ImportedSpecialArray", specialStats);
 
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
@@ -650,11 +645,7 @@ public class MyUbiAPIAdapter
                                         {
                                             int currentStat;
                                             name = operatorFinalMap.get(i).second;
-/*                                            if(statArray[j].contains("_" + name.toLowerCase() + "_")) //black_mirror, cazador
-                                            {
-                                                Log.v("TestSuccess", name.toLowerCase() + " " + statArray[j]);
-                                            }
-                                            else */if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
+                                            if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
                                             {
                                                 currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix);//Log.v(name + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
                                                 operatorStats.add(currentStat);
