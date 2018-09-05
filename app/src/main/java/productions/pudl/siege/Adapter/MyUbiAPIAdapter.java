@@ -98,6 +98,8 @@ public class MyUbiAPIAdapter
         put("Lion", "CBRN");
         put("Maestro", "GIS");
         put("Alibi", "GIS");
+        put("Maverick", "GSUTR");
+        put("Clash", "GSUTR");
     }};
     static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<Pair<String, String>>(){{
         append(0, new Pair<>("1:1", "Recruit(SAS)"));
@@ -145,40 +147,9 @@ public class MyUbiAPIAdapter
         append(42, new Pair<>("4:E", "Finka"));
         append(43, new Pair<>("2:F", "Maestro"));
         append(44, new Pair<>("3:F", "Alibi"));
+        append(43, new Pair<>("2:10", "Maverick"));
+        append(44, new Pair<>("3:10", "Clash"));
     }};
-    static private HashMap<String, String[]> specialMap = new HashMap<String, String[]>(){{
-        put("Ash", new String[] {"bonfirekill", "bonfirewallbreached"});
-        put("Bandit", new String[] {"batterykill"});
-        put("Mira", new String[] {"black_mirror_gadget_deployed"});
-        put("Blackbeard", new String[] {"gunshieldblockdamage"});
-        put("Blitz", new String[] {"flashedenemy", "flashfollowupkills", "flashshieldassist"});
-        put("Buck", new String[] {"kill"});
-        put("Capitao", new String[] {"lethaldartkills", "smokedartslaunched"});
-        put("Castle", new String[] {"kevlarbarricadedeployed"});
-        put("Caveira", new String[] {"interrogations"});
-        put("Jackal", new String[] {"cazador_assist_kill"});
-        put("Doc", new String[] {"hostagerevive", "selfrevive", "teammaterevive"});
-        put("Echo", new String[] {"enemy_sonicburst_affected"});
-        put("Frost", new String[] {"dbno"});
-        put("Fuze", new String[] {"clusterchargekill"});
-        put("Glaz", new String[] {"sniperkill", "sniperpenetrationkill"});
-        put("Hibana", new String[] {"detonate_projectile"});
-        put("IQ", new String[] {"gadgetspotbyef"});
-        put("Jager", new String[] {"gadgetdestroybycatcher"});
-        put("Kapkan", new String[] {"boobytrapdeployed", "boobytrapkill"});
-        put("Montagne", new String[] {"shieldblockdamage"});
-        put("Mute", new String[] {"gadgetjammed", "jammerdeployed"});
-        put("Pulse", new String[] {"heartbeatassist", "heartbeatspot"});
-        put("Rook", new String[] {"armorboxdeployed", "armortakenourself", "armortakenteammate"});
-        put("Sledge", new String[] {"hammerkill", "hammerhole"});
-        put("Smoke", new String[] {"poisongaskill"});
-        put("Tachanka", new String[] {"turretdeployed", "turretkill"});
-        put("Thatcher", new String[] {"gadgetdestroywithemp"});
-        put("Thermite", new String[] {"chargekill", "chargedeployed", "reinforcementbreached"});
-        put("Twitch", new String[] {"gadgetdestroybyshockdrone", "shockdronekill"});
-        put("Valkyrie", new String[] {"camdeployed"});
-    }};
-    static private String[] statArray;
 
     static public void changeContext(Context context, String credentials)
     {
@@ -590,7 +561,7 @@ public class MyUbiAPIAdapter
         return rankedResult;
     }
 
-    static public void getOperators(final String id, final String platform, final String[] stats, final VolleyResponseListener listener)
+    static public void getOperators(final String id, final String platform, final String[] statArray, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
@@ -604,13 +575,12 @@ public class MyUbiAPIAdapter
                 @Override
                 public void onResponse()
                 {
-                    getOperators(id, platform, stats, null);
+                    getOperators(id, platform, statArray, null);
                 }
             });
 
         }
-        statArray = stats;
-        String tempOps = Arrays.toString(stats);
+        String tempOps = Arrays.toString(statArray);
         tempOps = tempOps.substring(1, tempOps.length()-1);
         final String operators = tempOps;
         Log.v("ImportedOperatorsArray", operators);
