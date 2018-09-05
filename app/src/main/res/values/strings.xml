@@ -200,6 +200,64 @@
         <item>operatorpvp_twitch_shockdronekill</item>
         <item>operatorpvp_valkyrie_camdeployed</item>
     </string-array>
+    <string-array name="alloperators">
+        <item>operatorpvp_dbno</item>
+        <item>operatorpvp_death</item>
+        <item>operatorpvp_headshot</item>
+        <item>operatorpvp_kills</item>
+        <item>operatorpvp_meleekills</item>
+        <item>operatorpvp_roundlost</item>
+        <item>operatorpvp_roundplayed</item>
+        <item>operatorpvp_roundwon</item>
+        <item>operatorpvp_timeplayed</item>
+        <item>operatorpvp_ash_bonfirekill</item>
+        <item>operatorpvp_ash_bonfirewallbreached</item>
+        <item>operatorpvp_bandit_batterykill</item>
+        <item>operatorpvp_black_mirror_gadget_deployed</item>
+        <item>operatorpvp_blackbeard_gunshieldblockdamage</item>
+        <item>operatorpvp_blitz_flashedenemy</item>
+        <item>operatorpvp_blitz_flashfollowupkills</item>
+        <item>operatorpvp_blitz_flashshieldassist</item>
+        <item>operatorpvp_buck_kill</item>
+        <item>operatorpvp_capitao_lethaldartkills</item>
+        <item>operatorpvp_capitao_smokedartslaunched</item>
+        <item>operatorpvp_castle_kevlarbarricadedeployed</item>
+        <item>operatorpvp_caveira_interrogations</item>
+        <item>operatorpvp_cazador_assist_kill</item>
+        <item>operatorpvp_doc_hostagerevive</item>
+        <item>operatorpvp_doc_selfrevive</item>
+        <item>operatorpvp_doc_teammaterevive</item>
+        <item>operatorpvp_echo_enemy_sonicburst_affected</item>
+        <item>operatorpvp_frost_dbno</item>
+        <item>operatorpvp_fuze_clusterchargekill</item>
+        <item>operatorpvp_glaz_sniperkill</item>
+        <item>operatorpvp_glaz_sniperpenetrationkill</item>
+        <item>operatorpvp_hibana_detonate_projectile</item>
+        <item>operatorpvp_iq_gadgetspotbyef</item>
+        <item>operatorpvp_jager_gadgetdestroybycatcher</item>
+        <item>operatorpvp_kapkan_boobytrapdeployed</item>
+        <item>operatorpvp_kapkan_boobytrapkill</item>
+        <item>operatorpvp_montagne_shieldblockdamage</item>
+        <item>operatorpvp_mute_gadgetjammed</item>
+        <item>operatorpvp_mute_jammerdeployed</item>
+        <item>operatorpvp_pulse_heartbeatassist</item>
+        <item>operatorpvp_pulse_heartbeatspot</item>
+        <item>operatorpvp_rook_armorboxdeployed</item>
+        <item>operatorpvp_rook_armortakenourself</item>
+        <item>operatorpvp_rook_armortakenteammate</item>
+        <item>operatorpvp_sledge_hammerhole</item>
+        <item>operatorpvp_sledge_hammerkill</item>
+        <item>operatorpvp_smoke_poisongaskill</item>
+        <item>operatorpvp_tachanka_turretdeployed</item>
+        <item>operatorpvp_tachanka_turretkill</item>
+        <item>operatorpvp_thatcher_gadgetdestroywithemp</item>
+        <item>operatorpvp_thermite_chargedeployed</item>
+        <item>operatorpvp_thermite_chargekill</item>
+        <item>operatorpvp_thermite_reinforcementbreached</item>
+        <item>operatorpvp_twitch_gadgetdestroybyshockdrone</item>
+        <item>operatorpvp_twitch_shockdronekill</item>
+        <item>operatorpvp_valkyrie_camdeployed</item>
+    </string-array>
     <string-array name="ranks">
         <item>Unranked</item>
         <item>Copper IV</item>

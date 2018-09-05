@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -97,6 +98,8 @@ public class MyUbiAPIAdapter
         put("Lion", "CBRN");
         put("Maestro", "GIS");
         put("Alibi", "GIS");
+        put("Maverick", "GSUTR");
+        put("Clash", "GSUTR");
     }};
     static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<Pair<String, String>>(){{
         append(0, new Pair<>("1:1", "Recruit(SAS)"));
@@ -144,8 +147,9 @@ public class MyUbiAPIAdapter
         append(42, new Pair<>("4:E", "Finka"));
         append(43, new Pair<>("2:F", "Maestro"));
         append(44, new Pair<>("3:F", "Alibi"));
+        append(43, new Pair<>("2:10", "Maverick"));
+        append(44, new Pair<>("3:10", "Clash"));
     }};
-    static private String[] statArray;
 
     static public void changeContext(Context context, String credentials)
     {
@@ -557,7 +561,7 @@ public class MyUbiAPIAdapter
         return rankedResult;
     }
 
-    static public void getOperators(final String id, final String platform, final String[] stats, final VolleyResponseListener listener)
+    static public void getOperators(final String id, final String platform, final String[] statArray, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
@@ -569,14 +573,14 @@ public class MyUbiAPIAdapter
                 }
 
                 @Override
-                public void onResponse() {
-                    getOperators(id, platform, stats, null);
+                public void onResponse()
+                {
+                    getOperators(id, platform, statArray, null);
                 }
             });
 
         }
-        statArray = stats;
-        String tempOps = Arrays.toString(stats);
+        String tempOps = Arrays.toString(statArray);
         tempOps = tempOps.substring(1, tempOps.length()-1);
         final String operators = tempOps;
         Log.v("ImportedOperatorsArray", operators);
@@ -602,12 +606,6 @@ public class MyUbiAPIAdapter
                                 if (resultsObj.get(key) instanceof JSONObject)
                                 {
                                     JSONObject currObj = resultsObj.getJSONObject(key);
-                                    //int special1;
-                                    //String special1Desc;
-                                    //int special2;
-                                    //String special2Desc;
-                                    //int special3;
-                                    //String special3Desc;
                                     String userID = key;
                                     String name = "Sledge";
                                     ArrayList<Integer> operatorStats = new ArrayList<>();
@@ -618,13 +616,18 @@ public class MyUbiAPIAdapter
                                             int currentStat;
                                             name = operatorFinalMap.get(i).second;
                                             if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
+                                            {
                                                 currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix);//Log.v(name + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
+                                                operatorStats.add(currentStat);
+                                            }
                                             else
+                                            {
                                                 currentStat = 0;//Log.v(name + " " + statArray[j], String.valueOf(currentStat = 0));
-
-                                            operatorStats.add(currentStat);
+                                                operatorStats.add(currentStat);
+                                            }
                                         }
                                         Operator temp = new Operator(userID, name, ctuMap.get(name), operatorStats);
+                                        // special stats here
                                         operatorFinalResult.put(name, temp);
                                         operatorStats.clear();
                                     }

@@ -344,5 +344,23 @@ public class Operators extends Fragment
                 tabbedDialog.show(ft, "gis");
             }
         });
+
+        ImageView gsutrImage = (ImageView) view.findViewById(R.id.gsutr);
+        Picasso.get().load(R.drawable.gsutr).fit().centerInside().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(gsutrImage);
+        gsutrImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                Log.v("OperatorClick", "gsutr");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("gsutr", temp);
+                tabbedDialog.show(ft, "gsutr");
+            }
+        });
     }
 }
