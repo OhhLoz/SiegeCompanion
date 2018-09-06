@@ -49,7 +49,7 @@
     <string name="weaponHeadshotKills">HS / Kills%</string>
     <string name="weaponAccuracy">Accuracy</string>
     <string name="weaponBulletsHit">Bullets Hit</string>
-    <string name="weaponBulletsFired">Bullets Shot</string>
+    <string name="weaponBulletsFired">Bullets Fired</string>
     <string name="weaponMeleeKills">Melee Kills</string>
     <string name="weaponPenetrationKills">Penetrations</string>
     <string name="miscDBNO">DBNO</string>
@@ -154,6 +154,7 @@
     <string-array name="specialoperators">
         <item>operatorpvp_ash_bonfirekill</item>
         <item>operatorpvp_ash_bonfirewallbreached</item>
+        <item>operatorpvp_attackerdrone_diminishedrealitymode</item>
         <item>operatorpvp_bandit_batterykill</item>
         <item>operatorpvp_black_mirror_gadget_deployed</item>
         <item>operatorpvp_blackbeard_gunshieldblockdamage</item>
@@ -164,8 +165,12 @@
         <item>operatorpvp_capitao_lethaldartkills</item>
         <item>operatorpvp_capitao_smokedartslaunched</item>
         <item>operatorpvp_castle_kevlarbarricadedeployed</item>
+        <item>operatorpvp_caltrop_enemy_affected</item>
         <item>operatorpvp_caveira_interrogations</item>
         <item>operatorpvp_cazador_assist_kill</item>
+        <item>operatorpvp_concussiongrenade_detonate</item>
+        <item>operatorpvp_concussionmine_detonate</item>
+        <item>operatorpvp_dazzler_gadget_detonate</item>
         <item>operatorpvp_doc_hostagerevive</item>
         <item>operatorpvp_doc_selfrevive</item>
         <item>operatorpvp_doc_teammaterevive</item>
@@ -187,11 +192,13 @@
         <item>operatorpvp_rook_armorboxdeployed</item>
         <item>operatorpvp_rook_armortakenourself</item>
         <item>operatorpvp_rook_armortakenteammate</item>
+        <item>operatorpvp_rush_adrenalinerush</item>
         <item>operatorpvp_sledge_hammerhole</item>
         <item>operatorpvp_sledge_hammerkill</item>
         <item>operatorpvp_smoke_poisongaskill</item>
         <item>operatorpvp_tachanka_turretdeployed</item>
         <item>operatorpvp_tachanka_turretkill</item>
+        <item>operatorpvp_tagger_tagdevice_spot</item>
         <item>operatorpvp_thatcher_gadgetdestroywithemp</item>
         <item>operatorpvp_thermite_chargedeployed</item>
         <item>operatorpvp_thermite_chargekill</item>
