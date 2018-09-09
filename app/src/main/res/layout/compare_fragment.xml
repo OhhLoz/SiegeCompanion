@@ -615,16 +615,28 @@
                 app:layout_constraintTop_toBottomOf="@id/weaponMeleeKillsTitle" />
 
             <TextView
-                android:id="@+id/weaponAssistsTitle"
+                android:id="@+id/weaponDBNOTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/generalAssists"
+                android:text="@string/miscDBNO"
                 android:textColor="@color/colorOperatorTab"
                 android:textSize="@dimen/statTitleSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/weaponPenetrationKillsTitle" />
+
+            <TextView
+                android:id="@+id/weaponDBNOAssistsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscDBNOAssists"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponDBNOTitle" />
 
             <View
                 android:id="@+id/weaponView"
@@ -636,7 +648,128 @@
                 android:background="@color/colorStatTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weaponAssistsTitle" />
+                app:layout_constraintTop_toBottomOf="@id/weaponDBNOAssistsTitle" />
+
+            <TextView
+                android:id="@+id/miscTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/miscTitle"
+                android:textColor="@color/colorProfileTab"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weaponView" />
+
+            <TextView
+                android:id="@+id/miscBarricadeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/statsMargin"
+                android:layout_marginBottom="@dimen/statsMargin"
+                android:textSize="@dimen/statTitleSize"
+                android:text="@string/miscBarricade"
+                android:textColor="@color/colorOperatorTab"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscTitle" />
+
+            <TextView
+                android:id="@+id/miscDistanceTravelledTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscDistance"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscBarricadeTitle" />
+
+            <TextView
+                android:id="@+id/miscGadgetsDestroyedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscGadgetsDestroyed"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscDistanceTravelledTitle" />
+
+            <TextView
+                android:id="@+id/miscRappelBreachesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscRappelBreaches"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscGadgetsDestroyedTitle" />
+
+            <TextView
+                android:id="@+id/miscReinforcements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscReinforcement"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscRappelBreachesTitle" />
+
+            <TextView
+                android:id="@+id/miscRevivesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscRevives"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscReinforcements" />
+
+            <TextView
+                android:id="@+id/miscRevivesDeniedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscRevivesDenied"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscRevivesTitle" />
+
+            <TextView
+                android:id="@+id/miscSuicidesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/miscSuicides"
+                android:textColor="@color/colorOperatorTab"
+                android:textSize="@dimen/statTitleSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscRevivesDeniedTitle" />
+
+            <View
+                android:id="@+id/miscView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/statsLargeMargin"
+                android:layout_marginStart="@dimen/statsLargeMargin"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorStatTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/miscSuicidesTitle" />
 
             <TextView
                 android:id="@+id/gamemodeTitle"
@@ -648,7 +781,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weaponView" />
+                app:layout_constraintTop_toBottomOf="@id/miscView" />
 
             <TextView
                 android:id="@+id/secureAreaTitle"

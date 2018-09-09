@@ -54,10 +54,14 @@
     <string name="weaponPenetrationKills">Penetrations</string>
     <string name="miscDBNO">DBNO</string>
     <string name="miscDBNOAssists">DBNO Assists</string>
+    <string name="miscBarricade">Barricades</string>
+    <string name="miscReinforcement">Reinforcements</string>
+    <string name="miscDistance">Distance</string>
     <string name="miscGadgetsDestroyed">Gadgets Destroyed</string>
     <string name="miscRevives">Revives</string>
     <string name="miscRevivesDenied">Revives Denied</string>
     <string name="miscSuicides">Suicides</string>
+    <string name="miscTitle">Misc</string>
     <string name="miscRappelBreaches">Rappel Breaches</string>
     <string name="miscBlindFires">Blind Kills</string>
     <string name="gamemodeTitle">Gamemodes</string>
@@ -98,12 +102,10 @@
         <item>generalpvp_headshot</item>
         <item>generalpvp_hostagedefense</item>
         <item>generalpvp_hostagerescue</item>
-        <item>generalpvp_kdratio</item>
         <item>generalpvp_killassists</item>
         <item>generalpvp_kills</item>
         <item>generalpvp_matchlost</item>
         <item>generalpvp_matchplayed</item>
-        <item>generalpvp_matchwlratio</item>
         <item>generalpvp_matchwon</item>
         <item>generalpvp_meleekills</item>
         <item>generalpvp_penetrationkills</item>
@@ -133,12 +135,25 @@
         <item>rankedpvp_matchwlratio</item>
         <item>rankedpvp_matchwon</item>
         <item>rankedpvp_timeplayed</item>
-        <item>terrohuntclassicpve_bestscore</item>
-        <item>terrohuntclassicpve_matchlost</item>
-        <item>terrohuntclassicpve_matchplayed</item>
-        <item>terrohuntclassicpve_matchwlratio</item>
-        <item>terrohuntclassicpve_matchwon</item>
-        <item>terrohuntclassicpve_timeplayed</item>
+        <item>secureareapvp_bestscore</item>
+        <item>secureareapvp_matchlost</item>
+        <item>secureareapvp_matchplayed</item>
+        <item>secureareapvp_matchwon</item>
+        <item>secureareapvp_timeplayed</item>
+        <item>rescuehostagepvp_bestscore</item>
+        <item>rescuehostagepvp_matchlost</item>
+        <item>rescuehostagepvp_matchplay</item>
+        <item>rescuehostagepvp_matchwon</item>
+        <item>rescuehostagepvp_timeplaye</item>
+        <item>plantbombpvp_bestscore</item>
+        <item>plantbombpvp_matchlost</item>
+        <item>plantbombpvp_matchplayed</item>
+        <item>plantbombpvp_matchwon</item>
+        <item>plantbombpvp_timeplayed</item>
+        <item>weapontypepvp_headshot</item>
+        <item>weapontypepvp_bulletfired</item>
+        <item>weapontypepvp_bullethit</item>
+        <item>weapontypepvp_kills</item>
     </string-array>
     <string-array name="operators">
         <item>operatorpvp_dbno</item>
@@ -299,5 +314,6 @@
         <item>White Noise</item>
         <item>Operation Chimera</item>
         <item>Operation Para Bellum</item>
+        <item>Operation Grim Sky</item>
     </string-array>
 </resources>
