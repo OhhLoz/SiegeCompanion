@@ -10,6 +10,9 @@ public class Player
     private String platformName;
     private String userID;
     private Level levelObj;
+    private Stat playerStats;
+    private Ranked playerRanked;
+    private Operator playerOperator;
 
     public Player(String userName, String platformName, String userID)
     {

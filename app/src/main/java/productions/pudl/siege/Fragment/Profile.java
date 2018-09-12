@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 
@@ -30,7 +33,12 @@ public class Profile extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
-        mQueue = Volley.newRequestQueue(view.getContext());
+        ImageView userImage = (ImageView) view.findViewById(R.id.userImage);
+        Picasso.get().load(R.drawable.r6slogo).fit().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(userImage);
+        TextView levelName = (TextView) view.findViewById(R.id.level);
+        levelName.setText("Level: ");
+        //View view = inflater.inflate(R.layout.test_profile_fragment, container, false);
+        /*mQueue = Volley.newRequestQueue(view.getContext());
         Resources res = getResources();
         String[] tempStatsArr = res.getStringArray(R.array.overallStats);
         String tempStats = Arrays.toString(tempStatsArr);
@@ -167,7 +175,7 @@ public class Profile extends Fragment
                     Log.v("FinalPlayerRanked", temp.toString());
             }
 
-        });
+        });*/
         return view;
     }
 }
