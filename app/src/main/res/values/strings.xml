@@ -56,7 +56,7 @@
     <string name="miscDBNOAssists">DBNO Assists</string>
     <string name="miscBarricade">Barricades</string>
     <string name="miscReinforcement">Reinforcements</string>
-    <string name="miscDistance">Distance</string>
+    <string name="miscDistance">Distance Travelled</string>
     <string name="miscGadgetsDestroyed">Gadgets Destroyed</string>
     <string name="miscRevives">Revives</string>
     <string name="miscRevivesDenied">Revives Denied</string>
