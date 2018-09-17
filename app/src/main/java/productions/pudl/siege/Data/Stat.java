@@ -47,12 +47,10 @@ public class Stat
     private int weaponDBNOAssists;
 
     private int miscBarricade;
-    private int miscDistanceTravelled;
     private int miscGadgetDestroyed;
     private int miscRappelBreach;
     private int miscReinforcementDeploy;
     private int miscRevives;
-    private int miscRevivesDenied;
     private int miscSuicides;
 
     private int secureBestScore;
@@ -61,6 +59,7 @@ public class Stat
     private double secureWL;
     private int securePlayed;
     private int secureTimePlayed;
+    private String secureTimePlayedStr;
 
     private int hostageBestScore;
     private int hostageWins;
@@ -68,6 +67,7 @@ public class Stat
     private double hostageWL;
     private int hostagePlayed;
     private int hostageTimePlayed;
+    private String hostageTimePlayedStr;
 
     private int bombBestScore;
     private int bombWins;
@@ -75,6 +75,7 @@ public class Stat
     private double bombWL;
     private int bombPlayed;
     private int bombTimePlayed;
+    private String bombTimePlayedStr;
 
     public Stat(int casualWon, int casualLost, int casualPlayed, int casualKills, int casualDeaths, int casualTimePlayed, int rankedWon, int rankedLost, int rankedPlayed, int rankedKills, int rankedDeaths, int rankedTimePlayed)
     {
@@ -98,7 +99,7 @@ public class Stat
         this.rankedWL = calculateWL(rankedWon, rankedPlayed);
     }
 
-    public Stat(int generalKills, int generalDeaths, int generalAssists, int generalWins, int generalLosses, int generalPlayed, int generalLevel, int generalTimeplayed, int casualWon, int casualLost, int casualPlayed, int casualKills, int casualDeaths, int casualTimePlayed, int rankedWon, int rankedLost, int rankedPlayed, int rankedKills, int rankedDeaths, int rankedTimePlayed, int weaponHeadshots, int weaponBulletHit, int weaponBulletFired, int weaponBlindKills, int weaponMeleeKills, int weaponPenetrations, int weaponDBNO, int weaponDBNOAssists, int miscBarricade, int miscDistanceTravelled, int miscGadgetDestroyed, int miscRappelBreach, int miscReinforcementDeploy, int miscRevives, int miscRevivesDenied, int miscSuicides,  int secureBestScore, int secureWins, int secureLosses, int securePlayed, int secureTimePlayed, int hostageBestScore, int hostageWins, int hostageLosses, int hostagePlayed, int hostageTimePlayed, int bombBestScore, int bombWins, int bombLosses, int bombPlayed, int bombTimePlayed)
+    public Stat(int generalKills, int generalDeaths, int generalAssists, int generalWins, int generalLosses, int generalPlayed, int generalLevel, int generalTimeplayed, int casualWon, int casualLost, int casualPlayed, int casualKills, int casualDeaths, int casualTimePlayed, int rankedWon, int rankedLost, int rankedPlayed, int rankedKills, int rankedDeaths, int rankedTimePlayed, int weaponHeadshots, int weaponBulletHit, int weaponBulletFired, int weaponBlindKills, int weaponMeleeKills, int weaponPenetrations, int weaponDBNO, int weaponDBNOAssists, int miscBarricade, int miscGadgetDestroyed, int miscRappelBreach, int miscReinforcementDeploy, int miscRevives, int miscSuicides,  int secureBestScore, int secureWins, int secureLosses, int securePlayed, int secureTimePlayed, int hostageBestScore, int hostageWins, int hostageLosses, int hostagePlayed, int hostageTimePlayed, int bombBestScore, int bombWins, int bombLosses, int bombPlayed, int bombTimePlayed)
     {
         this.generalKills = generalKills;
         this.generalDeaths = generalDeaths;
@@ -145,12 +146,10 @@ public class Stat
         this.weaponDBNOAssists = weaponDBNOAssists;
 
         this.miscBarricade = miscBarricade;
-        this.miscDistanceTravelled = miscDistanceTravelled;
         this.miscGadgetDestroyed = miscGadgetDestroyed;
         this.miscRappelBreach = miscRappelBreach;
         this.miscReinforcementDeploy = miscReinforcementDeploy;
         this.miscRevives = miscRevives;
-        this.miscRevivesDenied = miscRevivesDenied;
         this.miscSuicides = miscSuicides;
 
         this.secureBestScore = secureBestScore;
@@ -159,6 +158,7 @@ public class Stat
         this.secureWL = calculateWL(secureWins, securePlayed);
         this.securePlayed = securePlayed;
         this.secureTimePlayed = secureTimePlayed;
+        this.secureTimePlayedStr = calculateTimeplayed(secureTimePlayed);
 
         this.hostageBestScore = hostageBestScore;
         this.hostageWins = hostageWins;
@@ -166,6 +166,7 @@ public class Stat
         this.hostageWL = calculateWL(hostageWins, hostagePlayed);
         this.hostagePlayed = hostagePlayed;
         this.hostageTimePlayed = hostageTimePlayed;
+        this.hostageTimePlayedStr = calculateTimeplayed(hostageTimePlayed);
 
         this.bombBestScore = bombBestScore;
         this.bombWins = bombWins;
@@ -173,6 +174,7 @@ public class Stat
         this.bombWL = calculateWL(bombWins, bombPlayed);
         this.bombPlayed = bombPlayed;
         this.bombTimePlayed = bombTimePlayed;
+        this.bombTimePlayedStr = calculateTimeplayed(bombTimePlayed);
     }
 
     public double calculateKD(int kills, int deaths)
@@ -206,6 +208,118 @@ public class Stat
     }
 
 
+    public String getSecureTimePlayedStr() {
+        return secureTimePlayedStr;
+    }
+
+    public String getHostageTimePlayedStr() {
+        return hostageTimePlayedStr;
+    }
+
+    public String getBombTimePlayedStr() {
+        return bombTimePlayedStr;
+    }
+
+    public int getWeaponBlindKills() {
+        return weaponBlindKills;
+    }
+
+    public int getMiscBarricade() {
+        return miscBarricade;
+    }
+
+    public int getMiscGadgetDestroyed() {
+        return miscGadgetDestroyed;
+    }
+
+    public int getMiscRappelBreach() {
+        return miscRappelBreach;
+    }
+
+    public int getMiscReinforcementDeploy() {
+        return miscReinforcementDeploy;
+    }
+
+    public int getMiscRevives() {
+        return miscRevives;
+    }
+
+    public int getMiscSuicides() {
+        return miscSuicides;
+    }
+
+    public int getSecureBestScore() {
+        return secureBestScore;
+    }
+
+    public int getSecureWins() {
+        return secureWins;
+    }
+
+    public int getSecureLosses() {
+        return secureLosses;
+    }
+
+    public double getSecureWL() {
+        return secureWL;
+    }
+
+    public int getSecurePlayed() {
+        return securePlayed;
+    }
+
+    public int getSecureTimePlayed() {
+        return secureTimePlayed;
+    }
+
+    public int getHostageBestScore() {
+        return hostageBestScore;
+    }
+
+    public int getHostageWins() {
+        return hostageWins;
+    }
+
+    public int getHostageLosses() {
+        return hostageLosses;
+    }
+
+    public double getHostageWL() {
+        return hostageWL;
+    }
+
+    public int getHostagePlayed() {
+        return hostagePlayed;
+    }
+
+    public int getHostageTimePlayed() {
+        return hostageTimePlayed;
+    }
+
+    public int getBombBestScore() {
+        return bombBestScore;
+    }
+
+    public int getBombWins() {
+        return bombWins;
+    }
+
+    public int getBombLosses() {
+        return bombLosses;
+    }
+
+    public double getBombWL() {
+        return bombWL;
+    }
+
+    public int getBombPlayed() {
+        return bombPlayed;
+    }
+
+    public int getBombTimePlayed() {
+        return bombTimePlayed;
+    }
+
     public int getWeaponHeadshots() {
         return weaponHeadshots;
     }
@@ -236,6 +350,14 @@ public class Stat
 
     public int getWeaponPenetrations() {
         return weaponPenetrations;
+    }
+
+    public int getWeaponDBNO() {
+        return weaponDBNO;
+    }
+
+    public int getWeaponDBNOAssists() {
+        return weaponDBNOAssists;
     }
 
     public int getGeneralWins() {

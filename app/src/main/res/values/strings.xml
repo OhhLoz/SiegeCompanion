@@ -97,7 +97,6 @@
         <item>generalpvp_dbno</item>
         <item>generalpvp_dbnoassists</item>
         <item>generalpvp_death</item>
-        <item>generalpvp_distancetravelled</item>
         <item>generalpvp_gadgetdestroy</item>
         <item>generalpvp_headshot</item>
         <item>generalpvp_hostagedefense</item>
@@ -112,7 +111,6 @@
         <item>generalpvp_rappelbreach</item>
         <item>generalpvp_reinforcementdeploy</item>
         <item>generalpvp_revive</item>
-        <item>generalpvp_revivedenied</item>
         <item>generalpvp_serveraggression</item>
         <item>generalpvp_serverdefender</item>
         <item>generalpvp_servershacked</item>
@@ -142,18 +140,14 @@
         <item>secureareapvp_timeplayed</item>
         <item>rescuehostagepvp_bestscore</item>
         <item>rescuehostagepvp_matchlost</item>
-        <item>rescuehostagepvp_matchplay</item>
+        <item>rescuehostagepvp_matchplayed</item>
         <item>rescuehostagepvp_matchwon</item>
-        <item>rescuehostagepvp_timeplaye</item>
+        <item>rescuehostagepvp_timeplayed</item>
         <item>plantbombpvp_bestscore</item>
         <item>plantbombpvp_matchlost</item>
         <item>plantbombpvp_matchplayed</item>
         <item>plantbombpvp_matchwon</item>
         <item>plantbombpvp_timeplayed</item>
-        <item>weapontypepvp_headshot</item>
-        <item>weapontypepvp_bulletfired</item>
-        <item>weapontypepvp_bullethit</item>
-        <item>weapontypepvp_kills</item>
     </string-array>
     <string-array name="operators">
         <item>operatorpvp_dbno</item>
