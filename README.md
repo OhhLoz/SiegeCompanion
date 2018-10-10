@@ -13,9 +13,7 @@ This project is a work in progress and so is not published, when completed it wi
 
 ## Authors
 
-* **Laurence Ure** - *Initial work* - [Website](www.laurenceure.me)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Laurence Ure** - *Initial work* - [Website](https://www.laurenceure.me)
 
 ## License
 
