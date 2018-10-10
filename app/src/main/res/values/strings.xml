@@ -49,15 +49,19 @@
     <string name="weaponHeadshotKills">HS / Kills%</string>
     <string name="weaponAccuracy">Accuracy</string>
     <string name="weaponBulletsHit">Bullets Hit</string>
-    <string name="weaponBulletsFired">Bullets Shot</string>
+    <string name="weaponBulletsFired">Bullets Fired</string>
     <string name="weaponMeleeKills">Melee Kills</string>
     <string name="weaponPenetrationKills">Penetrations</string>
     <string name="miscDBNO">DBNO</string>
     <string name="miscDBNOAssists">DBNO Assists</string>
+    <string name="miscBarricade">Barricades</string>
+    <string name="miscReinforcement">Reinforcements</string>
+    <string name="miscDistance">Distance Travelled</string>
     <string name="miscGadgetsDestroyed">Gadgets Destroyed</string>
     <string name="miscRevives">Revives</string>
     <string name="miscRevivesDenied">Revives Denied</string>
     <string name="miscSuicides">Suicides</string>
+    <string name="miscTitle">Misc</string>
     <string name="miscRappelBreaches">Rappel Breaches</string>
     <string name="miscBlindFires">Blind Kills</string>
     <string name="gamemodeTitle">Gamemodes</string>
@@ -93,24 +97,20 @@
         <item>generalpvp_dbno</item>
         <item>generalpvp_dbnoassists</item>
         <item>generalpvp_death</item>
-        <item>generalpvp_distancetravelled</item>
         <item>generalpvp_gadgetdestroy</item>
         <item>generalpvp_headshot</item>
         <item>generalpvp_hostagedefense</item>
         <item>generalpvp_hostagerescue</item>
-        <item>generalpvp_kdratio</item>
         <item>generalpvp_killassists</item>
         <item>generalpvp_kills</item>
         <item>generalpvp_matchlost</item>
         <item>generalpvp_matchplayed</item>
-        <item>generalpvp_matchwlratio</item>
         <item>generalpvp_matchwon</item>
         <item>generalpvp_meleekills</item>
         <item>generalpvp_penetrationkills</item>
         <item>generalpvp_rappelbreach</item>
         <item>generalpvp_reinforcementdeploy</item>
         <item>generalpvp_revive</item>
-        <item>generalpvp_revivedenied</item>
         <item>generalpvp_serveraggression</item>
         <item>generalpvp_serverdefender</item>
         <item>generalpvp_servershacked</item>
@@ -133,12 +133,21 @@
         <item>rankedpvp_matchwlratio</item>
         <item>rankedpvp_matchwon</item>
         <item>rankedpvp_timeplayed</item>
-        <item>terrohuntclassicpve_bestscore</item>
-        <item>terrohuntclassicpve_matchlost</item>
-        <item>terrohuntclassicpve_matchplayed</item>
-        <item>terrohuntclassicpve_matchwlratio</item>
-        <item>terrohuntclassicpve_matchwon</item>
-        <item>terrohuntclassicpve_timeplayed</item>
+        <item>secureareapvp_bestscore</item>
+        <item>secureareapvp_matchlost</item>
+        <item>secureareapvp_matchplayed</item>
+        <item>secureareapvp_matchwon</item>
+        <item>secureareapvp_timeplayed</item>
+        <item>rescuehostagepvp_bestscore</item>
+        <item>rescuehostagepvp_matchlost</item>
+        <item>rescuehostagepvp_matchplayed</item>
+        <item>rescuehostagepvp_matchwon</item>
+        <item>rescuehostagepvp_timeplayed</item>
+        <item>plantbombpvp_bestscore</item>
+        <item>plantbombpvp_matchlost</item>
+        <item>plantbombpvp_matchplayed</item>
+        <item>plantbombpvp_matchwon</item>
+        <item>plantbombpvp_timeplayed</item>
     </string-array>
     <string-array name="operators">
         <item>operatorpvp_dbno</item>
@@ -154,6 +163,7 @@
     <string-array name="specialoperators">
         <item>operatorpvp_ash_bonfirekill</item>
         <item>operatorpvp_ash_bonfirewallbreached</item>
+        <item>operatorpvp_attackerdrone_diminishedrealitymode</item>
         <item>operatorpvp_bandit_batterykill</item>
         <item>operatorpvp_black_mirror_gadget_deployed</item>
         <item>operatorpvp_blackbeard_gunshieldblockdamage</item>
@@ -164,8 +174,12 @@
         <item>operatorpvp_capitao_lethaldartkills</item>
         <item>operatorpvp_capitao_smokedartslaunched</item>
         <item>operatorpvp_castle_kevlarbarricadedeployed</item>
+        <item>operatorpvp_caltrop_enemy_affected</item>
         <item>operatorpvp_caveira_interrogations</item>
         <item>operatorpvp_cazador_assist_kill</item>
+        <item>operatorpvp_concussiongrenade_detonate</item>
+        <item>operatorpvp_concussionmine_detonate</item>
+        <item>operatorpvp_dazzler_gadget_detonate</item>
         <item>operatorpvp_doc_hostagerevive</item>
         <item>operatorpvp_doc_selfrevive</item>
         <item>operatorpvp_doc_teammaterevive</item>
@@ -187,11 +201,13 @@
         <item>operatorpvp_rook_armorboxdeployed</item>
         <item>operatorpvp_rook_armortakenourself</item>
         <item>operatorpvp_rook_armortakenteammate</item>
+        <item>operatorpvp_rush_adrenalinerush</item>
         <item>operatorpvp_sledge_hammerhole</item>
         <item>operatorpvp_sledge_hammerkill</item>
         <item>operatorpvp_smoke_poisongaskill</item>
         <item>operatorpvp_tachanka_turretdeployed</item>
         <item>operatorpvp_tachanka_turretkill</item>
+        <item>operatorpvp_tagger_tagdevice_spot</item>
         <item>operatorpvp_thatcher_gadgetdestroywithemp</item>
         <item>operatorpvp_thermite_chargedeployed</item>
         <item>operatorpvp_thermite_chargekill</item>
@@ -292,5 +308,6 @@
         <item>White Noise</item>
         <item>Operation Chimera</item>
         <item>Operation Para Bellum</item>
+        <item>Operation Grim Sky</item>
     </string-array>
 </resources>

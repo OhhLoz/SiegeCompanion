@@ -222,7 +222,7 @@ public class MyUbiAPIAdapter
     }
     static public void getPlayer(final String platform, final String key, final String vals, final VolleyResponseListener listener)
     {
-        // valid platforms = psn, vbl, uplay
+        // valid platforms = psn, xbl, uplay
         // valid keys= nameOnPlatform, idOnPlatform, userId
         // valid vals = name or id (depends on the key)
         if (isExpired())
@@ -241,7 +241,16 @@ public class MyUbiAPIAdapter
             });
 
         }
-        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&" + key + "=" + vals;
+        String finalPlatform;
+
+        if (platform.equals("PC"))
+            finalPlatform = "uplay";
+        else if (platform.equals("XBOXONE"))
+            finalPlatform = "xbl";
+        else
+            finalPlatform = "psn";
+
+        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ finalPlatform + "&" + key + "=" + vals;
         //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
@@ -378,7 +387,7 @@ public class MyUbiAPIAdapter
         return levelsResult;
     }
 
-    static public void getStats(final String id, final String platform, final String stats, final VolleyResponseListener listener)
+    static public void getStats(final String id, final String platform, final String[] statsArray, final VolleyResponseListener listener)
     {
         // valid platforms = PS4, XBOXONE, PC
         if (isExpired())
@@ -391,11 +400,16 @@ public class MyUbiAPIAdapter
 
                 @Override
                 public void onResponse() {
-                    getStats(id, platform, stats, null);
+                    getStats(id, platform, statsArray, null);
                 }
             });
-
         }
+        String tempStats = Arrays.toString(statsArray);
+        tempStats = tempStats.substring(1, tempStats.length()-1);
+        final String stats = tempStats;
+        Log.v("ImportedOperatorsArray", stats);
+
+
         String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>()
@@ -415,6 +429,13 @@ public class MyUbiAPIAdapter
                                 if ( resultsObj.get(key) instanceof JSONObject )
                                 {
                                     JSONObject currObj = resultsObj.getJSONObject(key);
+                                    int generalKills = currObj.getInt("generalpvp_kills:infinite");
+                                    int generalDeaths = currObj.getInt("generalpvp_death:infinite");
+                                    int generalAssists = currObj.getInt("generalpvp_killassists:infinite");
+                                    int generalWins = currObj.getInt("generalpvp_matchwon:infinite");
+                                    int generalLosses = currObj.getInt("generalpvp_matchlost:infinite");
+                                    int generalPlayed = currObj.getInt("generalpvp_matchplayed:infinite");
+                                    int generalTimePlayed = currObj.getInt("generalpvp_timeplayed:infinite");
                                     int casualWon = currObj.getInt("casualpvp_matchwon:infinite");
                                     int casualLost = currObj.getInt("casualpvp_matchlost:infinite");
                                     int casualPlayed = currObj.getInt("casualpvp_matchplayed:infinite");
@@ -427,7 +448,36 @@ public class MyUbiAPIAdapter
                                     int rankedKills = currObj.getInt("rankedpvp_kills:infinite");
                                     int rankedDeaths = currObj.getInt("rankedpvp_death:infinite");
                                     int rankedTimePlayed = currObj.getInt("rankedpvp_timeplayed:infinite");
-                                    Stat temp = new Stat(casualWon,casualLost, casualPlayed, casualKills, casualDeaths, casualTimePlayed, rankedWon, rankedLost, rankedPlayed, rankedKills, rankedDeaths, rankedTimePlayed);
+                                    int weaponBlindKills  = currObj.getInt("generalpvp_blindkills:infinite");
+                                    int weaponMeleeKills = currObj.getInt("generalpvp_meleekills:infinite");
+                                    int weaponPenetrationKills = currObj.getInt("generalpvp_penetrationkills:infinite");
+                                    int weaponBulletsHit = currObj.getInt("generalpvp_bullethit:infinite");
+                                    int weaponBulletsFired = currObj.getInt("generalpvp_bulletfired:infinite");
+                                    int weaponHeadshots = currObj.getInt("generalpvp_headshot:infinite");
+                                    int weaponDBNO = currObj.getInt("generalpvp_dbno:infinite");
+                                    int weaponDBNOAssists = currObj.getInt("generalpvp_dbnoassists:infinite");
+                                    int miscBarricade = currObj.getInt("generalpvp_barricadedeployed:infinite");
+                                    int miscGadgetsDestroyed = currObj.getInt("generalpvp_gadgetdestroy:infinite");
+                                    int miscRappelBreach = currObj.getInt("generalpvp_rappelbreach:infinite");
+                                    int miscReinforcement = currObj.getInt("generalpvp_reinforcementdeploy:infinite");
+                                    int miscRevives = currObj.getInt("generalpvp_revive:infinite");
+                                    int miscSuicide = currObj.getInt("generalpvp_suicide:infinite");
+                                    int gamemodeSABestScore = currObj.getInt("secureareapvp_bestscore:infinite");
+                                    int gamemodeSAWins = currObj.getInt("secureareapvp_matchwon:infinite");
+                                    int gamemodeSALosses = currObj.getInt("secureareapvp_matchlost:infinite");
+                                    int gamemodeSAPlayed = currObj.getInt("secureareapvp_matchplayed:infinite");
+                                    int gamemodeSATimePlayed = currObj.getInt("secureareapvp_timeplayed:infinite");
+                                    int gamemodeHostageBestScore = currObj.getInt("rescuehostagepvp_bestscore:infinite");
+                                    int gamemodeHostageWins = currObj.getInt("rescuehostagepvp_matchwon:infinite");
+                                    int gamemodeHostageLosses = currObj.getInt("rescuehostagepvp_matchlost:infinite");
+                                    int gamemodeHostagePlayed = currObj.getInt("rescuehostagepvp_matchplayed:infinite");
+                                    int gamemodeHostageTimePlayed = currObj.getInt("rescuehostagepvp_timeplayed:infinite");
+                                    int gamemodeBombBestScore = currObj.getInt("plantbombpvp_bestscore:infinite");
+                                    int gamemodeBombWins = currObj.getInt("plantbombpvp_matchwon:infinite");
+                                    int gamemodeBombLosses = currObj.getInt("plantbombpvp_matchlost:infinite");
+                                    int gamemodeBombPlayed = currObj.getInt("plantbombpvp_matchplayed:infinite");
+                                    int gamemodeBombTimePlayed = currObj.getInt("plantbombpvp_timeplayed:infinite");
+                                    Stat temp = new Stat(generalKills, generalDeaths, generalAssists, generalWins, generalLosses, generalPlayed, 0, generalTimePlayed, casualWon, casualLost, casualPlayed, casualKills, casualDeaths, casualTimePlayed, rankedWon, rankedLost, rankedPlayed, rankedKills, rankedDeaths, rankedTimePlayed, weaponHeadshots, weaponBulletsHit, weaponBulletsFired, weaponBlindKills, weaponMeleeKills, weaponPenetrationKills, weaponDBNO, weaponDBNOAssists, miscBarricade, miscGadgetsDestroyed, miscRappelBreach, miscReinforcement, miscRevives, miscSuicide, gamemodeSABestScore, gamemodeSAWins, gamemodeSALosses, gamemodeSAPlayed, gamemodeSATimePlayed, gamemodeHostageBestScore, gamemodeHostageWins, gamemodeHostageLosses, gamemodeHostagePlayed, gamemodeHostageTimePlayed, gamemodeBombBestScore, gamemodeBombWins, gamemodeBombLosses, gamemodeBombPlayed, gamemodeBombTimePlayed);
                                     statsResult.add(temp);
 
                                     if (listener != null)
