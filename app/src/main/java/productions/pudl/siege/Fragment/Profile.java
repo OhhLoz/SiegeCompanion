@@ -364,7 +364,7 @@ public class Profile extends Fragment {
             ((TextView) view.findViewById(R.id.rankedWLText)).setText(String.valueOf(player.getStatObj().getRankedWL()) + "%");
             ((TextView) view.findViewById(R.id.rankedPlayedText)).setText(String.valueOf(player.getStatObj().getRankedPlayed()));
             ((TextView) view.findViewById(R.id.rankedTimePlayedText)).setText(String.valueOf(player.getStatObj().getRankedTimePlayedStr()));
-            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(player.getRankedObj().getRank()));
+            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(getResources().getStringArray(R.array.ranks)[player.getRankedObj().getRank()]));
 
             //WEAPON
             ((TextView) view.findViewById(R.id.weaponHSText)).setText(String.valueOf(player.getStatObj().getWeaponHeadshots()));
