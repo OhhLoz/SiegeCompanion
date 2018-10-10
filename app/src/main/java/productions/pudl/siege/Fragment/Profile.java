@@ -43,7 +43,7 @@ public class Profile extends Fragment {
         final View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
         ImageView userImage = view.findViewById(R.id.userImage);
-        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + userID + "/default_256_256.png").into(userImage);
+        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + userID + "/default_256_256.png").placeholder(R.drawable.ic_operators).into(userImage);
 
         MyUbiAPIAdapter.create(view.getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", new VolleyResponseListener() {
             @Override
@@ -279,7 +279,7 @@ public class Profile extends Fragment {
             ((TextView) view.findViewById(R.id.rankedWLText)).setText(String.valueOf(statResult.get(0).getRankedWL()) + "%");
             ((TextView) view.findViewById(R.id.rankedPlayedText)).setText(String.valueOf(statResult.get(0).getRankedPlayed()));
             ((TextView) view.findViewById(R.id.rankedTimePlayedText)).setText(String.valueOf(statResult.get(0).getRankedTimePlayedStr()));
-            ((TextView) view.findViewById(R.id.rankedRankText)).setText("IDK M8");
+            ((TextView) view.findViewById(R.id.rankedRankText)).setText("ERROR");
 
             //WEAPON
             ((TextView) view.findViewById(R.id.weaponHSText)).setText(String.valueOf(statResult.get(0).getWeaponHeadshots()));
