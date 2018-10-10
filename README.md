@@ -13,7 +13,7 @@ This project is a work in progress and so is not published, when completed it wi
 
 ## Authors
 
-* **Laurence Ure** - *Initial work* - [Website](https://www.laurenceure.me)
+* **Laurence Ure** - *Initial work* - [Website](http://www.laurenceure.me)
 
 ## License
 
