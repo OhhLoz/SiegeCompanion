@@ -30,9 +30,9 @@ public class Player
     }
 
     public String getPlayerName()
-    {
-        return this.userName;
-    }
+{
+    return this.userName;
+}
 
     public String getPlatform()
     {
@@ -44,29 +44,59 @@ public class Player
         return this.userID;
     }
 
+    public Ranked getRankedObj()
+    {
+        return this.playerRanked;
+    }
+
+    public Level getLevelObj()
+    {
+        return this.levelObj;
+    }
+
+    public Stat getStatObj()
+    {
+        return this.playerStats;
+    }
+
     public void getUserPicture(ImageView imgView)
     {
         Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + getUserID() + "/default_256_256.png").into(imgView);
     }
 
-    private void setUserName(String user)
+    public void getUserPicture(ImageView imgView, String userID)
+    {
+        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + userID + "/default_256_256.png").into(imgView);
+    }
+
+    public void setUserName(String user)
     {
         this.userName = user;
     }
 
-    private void setPlatformName(String platform)
+    public void setPlatformName(String platform)
     {
         this.platformName = platform;
     }
 
-    private void setUserID(String ID)
+    public void setUserID(String ID)
     {
         this.userID = ID;
     }
 
-    private void setLevelObj(Level levelObj)
+    public void setLevelObj(Level levelObj)
     {
         this.levelObj = levelObj;
+    }
+
+    public void setRankedObj(Ranked rankedObj)
+    {
+        this.playerRanked = rankedObj;
+    }
+
+    public void setStatsObj(Stat statObj)
+    {
+        this.playerStats = statObj;
     }
 
     public String toString()

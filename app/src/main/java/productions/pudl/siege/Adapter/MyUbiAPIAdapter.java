@@ -222,7 +222,7 @@ public class MyUbiAPIAdapter
     }
     static public void getPlayer(final String platform, final String key, final String vals, final VolleyResponseListener listener)
     {
-        // valid platforms = psn, vbl, uplay
+        // valid platforms = psn, xbl, uplay
         // valid keys= nameOnPlatform, idOnPlatform, userId
         // valid vals = name or id (depends on the key)
         if (isExpired())
@@ -241,7 +241,16 @@ public class MyUbiAPIAdapter
             });
 
         }
-        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ platform + "&" + key + "=" + vals;
+        String finalPlatform;
+
+        if (platform.equals("PC"))
+            finalPlatform = "uplay";
+        else if (platform.equals("XBOXONE"))
+            finalPlatform = "xbl";
+        else
+            finalPlatform = "psn";
+
+        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ finalPlatform + "&" + key + "=" + vals;
         //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
