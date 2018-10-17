@@ -42,9 +42,6 @@ public class Profile extends Fragment {
         final String platform = "PC";
         final View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
-        ImageView userImage = view.findViewById(R.id.userImage);
-        Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + userID + "/default_256_256.png").placeholder(R.drawable.ic_operators).into(userImage);
-
         MyUbiAPIAdapter.create(view.getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", new VolleyResponseListener() {
             @Override
             public void onError(String message) {
@@ -54,6 +51,43 @@ public class Profile extends Fragment {
             @Override
             public void onResponse() {
                 MyUbiAPIAdapter.getStats(userID, platform, getResources().getStringArray(R.array.overallStats), new VolleyResponseListener() {
+                        @Override
+                        public void onError(String message) {
+
+                        }
+
+                        @Override
+                        public void onResponse() {
+                            statResult = MyUbiAPIAdapter.getStatsResult();
+                            populateStats(view, statResult.get(0));
+                        }
+                    });
+
+                MyUbiAPIAdapter.getLevel(userID, platform, new VolleyResponseListener() {
+                        @Override
+                        public void onError(String message) {
+
+                        }
+
+                        @Override
+                        public void onResponse() {
+                            levelObj = MyUbiAPIAdapter.getLevelsResult().get(0);
+                            populateLevel(view, levelObj);
+                        }
+                    });
+                MyUbiAPIAdapter.getRanked(userID, platform, "emea", -1, new VolleyResponseListener() { // need to figure out how to decide which region they are from
+                        @Override
+                        public void onError(String message) {
+
+                        }
+
+                        @Override
+                        public void onResponse() {
+                            rankedObj = MyUbiAPIAdapter.getRankedResult().get(0);
+                            populateRanked(view, rankedObj);
+                        }
+                    });
+                MyUbiAPIAdapter.getPlayer(platform, "userId", userID, new VolleyResponseListener() {
                     @Override
                     public void onError(String message) {
 
@@ -61,45 +95,11 @@ public class Profile extends Fragment {
 
                     @Override
                     public void onResponse() {
-                        statResult = MyUbiAPIAdapter.getStatsResult();
-                        //populateView(view, statResult);
-                        MyUbiAPIAdapter.getLevel(userID, platform, new VolleyResponseListener() {
-                            @Override
-                            public void onError(String message) {
-
-                            }
-
-                            @Override
-                            public void onResponse() {
-                                levelObj = MyUbiAPIAdapter.getLevelsResult().get(0);
-                                MyUbiAPIAdapter.getRanked(userID, platform, "emea", -1, new VolleyResponseListener() {
-                                    @Override
-                                    public void onError(String message) {
-
-                                    }
-
-                                    @Override
-                                    public void onResponse() {
-                                        rankedObj = MyUbiAPIAdapter.getRankedResult().get(0);
-                                        MyUbiAPIAdapter.getPlayer(platform, "userId", userID, new VolleyResponseListener() {
-                                            @Override
-                                            public void onError(String message) {
-
-                                            }
-
-                                            @Override
-                                            public void onResponse() {
-                                                playerObj = MyUbiAPIAdapter.getPlayersResult().get(0);
-                                                playerObj.setLevelObj(levelObj);
-                                                playerObj.setRankedObj(rankedObj);
-                                                playerObj.setStatsObj(statResult.get(0));
-                                                populateView(view, playerObj);
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        });
+                        playerObj = MyUbiAPIAdapter.getPlayersResult().get(0);
+                        //playerObj.setLevelObj(levelObj);
+                        //playerObj.setRankedObj(rankedObj);
+                        //playerObj.setStatsObj(statResult.get(0));
+                        populatePlayer(view, playerObj);
                     }
                 });
             }
@@ -246,170 +246,112 @@ public class Profile extends Fragment {
         return view;
     }
 
-    public void populateView(View view, ArrayList<Stat> statResult) {
-        if (!statResult.isEmpty()) {
-
+    public void populateStats(View view, Stat stats)
+    {
+        if (stats != null)
+        {
             //GENERAL
-            ((TextView) view.findViewById(R.id.generalKillsText)).setText(String.valueOf(statResult.get(0).getGeneralKills()));
-            ((TextView) view.findViewById(R.id.generalDeathsText)).setText(String.valueOf(statResult.get(0).getGeneralDeaths()));
-            ((TextView) view.findViewById(R.id.generalKDText)).setText(String.valueOf(statResult.get(0).getGeneralKD()));
-            ((TextView) view.findViewById(R.id.generalWinsText)).setText(String.valueOf(statResult.get(0).getGeneralWins()));
-            ((TextView) view.findViewById(R.id.generalLossesText)).setText(String.valueOf(statResult.get(0).getGeneralLost()));
-            ((TextView) view.findViewById(R.id.generalWLText)).setText(String.valueOf(statResult.get(0).getGeneralWL()));
-            ((TextView) view.findViewById(R.id.generalAssistsText)).setText(String.valueOf(statResult.get(0).getGeneralAssists()));
-            ((TextView) view.findViewById(R.id.generalPlayedText)).setText(String.valueOf(statResult.get(0).getGeneralPlayed()));
-            ((TextView) view.findViewById(R.id.generalTimePlayedText)).setText(String.valueOf(statResult.get(0).getGeneralTimePlayedStr()));
+            ((TextView) view.findViewById(R.id.generalKillsText)).setText(String.valueOf(stats.getGeneralKills()));
+            ((TextView) view.findViewById(R.id.generalDeathsText)).setText(String.valueOf(stats.getGeneralDeaths()));
+            ((TextView) view.findViewById(R.id.generalKDText)).setText(String.valueOf(stats.getGeneralKD()));
+            ((TextView) view.findViewById(R.id.generalWinsText)).setText(String.valueOf(stats.getGeneralWins()));
+            ((TextView) view.findViewById(R.id.generalLossesText)).setText(String.valueOf(stats.getGeneralLost()));
+            ((TextView) view.findViewById(R.id.generalWLText)).setText(String.valueOf(stats.getGeneralWL()));
+            ((TextView) view.findViewById(R.id.generalAssistsText)).setText(String.valueOf(stats.getGeneralAssists()));
+            ((TextView) view.findViewById(R.id.generalPlayedText)).setText(String.valueOf(stats.getGeneralPlayed()));
+            ((TextView) view.findViewById(R.id.generalTimePlayedText)).setText(String.valueOf(stats.getGeneralTimePlayedStr()));
 
             //CASUAL
-            ((TextView) view.findViewById(R.id.casualKillsText)).setText(String.valueOf(statResult.get(0).getCasualKills()));
-            ((TextView) view.findViewById(R.id.casualDeathsText)).setText(String.valueOf(statResult.get(0).getCasualDeaths()));
-            ((TextView) view.findViewById(R.id.casualKDText)).setText(String.valueOf(statResult.get(0).getCasualKD()));
-            ((TextView) view.findViewById(R.id.casualWinsText)).setText(String.valueOf(statResult.get(0).getCasualWon()));
-            ((TextView) view.findViewById(R.id.casualLossesText)).setText(String.valueOf(statResult.get(0).getCasualLost()));
-            ((TextView) view.findViewById(R.id.casualWLText)).setText(String.valueOf(statResult.get(0).getCasualWL()) + "%");
-            ((TextView) view.findViewById(R.id.casualPlayedText)).setText(String.valueOf(statResult.get(0).getCasualPlayed()));
-            ((TextView) view.findViewById(R.id.casualTimePlayedText)).setText(String.valueOf(statResult.get(0).getCasualTimePlayedStr()));
+            ((TextView) view.findViewById(R.id.casualKillsText)).setText(String.valueOf(stats.getCasualKills()));
+            ((TextView) view.findViewById(R.id.casualDeathsText)).setText(String.valueOf(stats.getCasualDeaths()));
+            ((TextView) view.findViewById(R.id.casualKDText)).setText(String.valueOf(stats.getCasualKD()));
+            ((TextView) view.findViewById(R.id.casualWinsText)).setText(String.valueOf(stats.getCasualWon()));
+            ((TextView) view.findViewById(R.id.casualLossesText)).setText(String.valueOf(stats.getCasualLost()));
+            ((TextView) view.findViewById(R.id.casualWLText)).setText(String.valueOf(stats.getCasualWL()) + "%");
+            ((TextView) view.findViewById(R.id.casualPlayedText)).setText(String.valueOf(stats.getCasualPlayed()));
+            ((TextView) view.findViewById(R.id.casualTimePlayedText)).setText(String.valueOf(stats.getCasualTimePlayedStr()));
 
             //RANKED
-            ((TextView) view.findViewById(R.id.rankedKillsText)).setText(String.valueOf(statResult.get(0).getRankedKills()));
-            ((TextView) view.findViewById(R.id.rankedDeathsText)).setText(String.valueOf(statResult.get(0).getRankedDeaths()));
-            ((TextView) view.findViewById(R.id.rankedKDText)).setText(String.valueOf(statResult.get(0).getRankedKD()));
-            ((TextView) view.findViewById(R.id.rankedWinsText)).setText(String.valueOf(statResult.get(0).getRankedWon()));
-            ((TextView) view.findViewById(R.id.rankedLossesText)).setText(String.valueOf(statResult.get(0).getRankedLost()));
-            ((TextView) view.findViewById(R.id.rankedWLText)).setText(String.valueOf(statResult.get(0).getRankedWL()) + "%");
-            ((TextView) view.findViewById(R.id.rankedPlayedText)).setText(String.valueOf(statResult.get(0).getRankedPlayed()));
-            ((TextView) view.findViewById(R.id.rankedTimePlayedText)).setText(String.valueOf(statResult.get(0).getRankedTimePlayedStr()));
-            ((TextView) view.findViewById(R.id.rankedRankText)).setText("ERROR");
+            ((TextView) view.findViewById(R.id.rankedKillsText)).setText(String.valueOf(stats.getRankedKills()));
+            ((TextView) view.findViewById(R.id.rankedDeathsText)).setText(String.valueOf(stats.getRankedDeaths()));
+            ((TextView) view.findViewById(R.id.rankedKDText)).setText(String.valueOf(stats.getRankedKD()));
+            ((TextView) view.findViewById(R.id.rankedWinsText)).setText(String.valueOf(stats.getRankedWon()));
+            ((TextView) view.findViewById(R.id.rankedLossesText)).setText(String.valueOf(stats.getRankedLost()));
+            ((TextView) view.findViewById(R.id.rankedWLText)).setText(String.valueOf(stats.getRankedWL()) + "%");
+            ((TextView) view.findViewById(R.id.rankedPlayedText)).setText(String.valueOf(stats.getRankedPlayed()));
+            ((TextView) view.findViewById(R.id.rankedTimePlayedText)).setText(String.valueOf(stats.getRankedTimePlayedStr()));
 
             //WEAPON
-            ((TextView) view.findViewById(R.id.weaponHSText)).setText(String.valueOf(statResult.get(0).getWeaponHeadshots()));
-            ((TextView) view.findViewById(R.id.weaponHSHitText)).setText(String.valueOf(statResult.get(0).getWeaponHSHit()) + "%");
-            ((TextView) view.findViewById(R.id.weaponHSKillText)).setText(String.valueOf(statResult.get(0).getWeaponHSKill()) + "%");
-            ((TextView) view.findViewById(R.id.weaponBulletsHitText)).setText(String.valueOf(statResult.get(0).getWeaponBulletHit()));
-            ((TextView) view.findViewById(R.id.weaponBulletsFiredText)).setText(String.valueOf(statResult.get(0).getWeaponBulletFired()));
-            ((TextView) view.findViewById(R.id.weaponAccuracyText)).setText(String.valueOf(statResult.get(0).getWeaponAccuracy()) + "%");
-            ((TextView) view.findViewById(R.id.weaponPenetrationKillsText)).setText(String.valueOf(statResult.get(0).getWeaponPenetrations()));
-            ((TextView) view.findViewById(R.id.weaponBlindKillsText)).setText(String.valueOf(statResult.get(0).getWeaponBlindKills()));
-            ((TextView) view.findViewById(R.id.weaponMeleeKillsText)).setText(String.valueOf(statResult.get(0).getWeaponMeleeKills()));
+            ((TextView) view.findViewById(R.id.weaponHSText)).setText(String.valueOf(stats.getWeaponHeadshots()));
+            ((TextView) view.findViewById(R.id.weaponHSHitText)).setText(String.valueOf(stats.getWeaponHSHit()) + "%");
+            ((TextView) view.findViewById(R.id.weaponHSKillText)).setText(String.valueOf(stats.getWeaponHSKill()) + "%");
+            ((TextView) view.findViewById(R.id.weaponBulletsHitText)).setText(String.valueOf(stats.getWeaponBulletHit()));
+            ((TextView) view.findViewById(R.id.weaponBulletsFiredText)).setText(String.valueOf(stats.getWeaponBulletFired()));
+            ((TextView) view.findViewById(R.id.weaponAccuracyText)).setText(String.valueOf(stats.getWeaponAccuracy()) + "%");
+            ((TextView) view.findViewById(R.id.weaponPenetrationKillsText)).setText(String.valueOf(stats.getWeaponPenetrations()));
+            ((TextView) view.findViewById(R.id.weaponBlindKillsText)).setText(String.valueOf(stats.getWeaponBlindKills()));
+            ((TextView) view.findViewById(R.id.weaponMeleeKillsText)).setText(String.valueOf(stats.getWeaponMeleeKills()));
 
             //MISC
-            ((TextView) view.findViewById(R.id.miscBarricadeText)).setText(String.valueOf(statResult.get(0).getMiscBarricade()));
-            ((TextView) view.findViewById(R.id.miscReinforcementsText)).setText(String.valueOf(statResult.get(0).getMiscReinforcementDeploy()));
-            ((TextView) view.findViewById(R.id.miscRappelBreachesText)).setText(String.valueOf(statResult.get(0).getMiscRappelBreach()));
-            ((TextView) view.findViewById(R.id.miscRevivesText)).setText(String.valueOf(statResult.get(0).getMiscRevives()));
-            ((TextView) view.findViewById(R.id.miscSuicidesText)).setText(String.valueOf(statResult.get(0).getMiscSuicides()));
-            ((TextView) view.findViewById(R.id.miscGadgetsDestroyedText)).setText(String.valueOf(statResult.get(0).getMiscGadgetDestroyed()));
-            ((TextView) view.findViewById(R.id.miscDBNOText)).setText(String.valueOf(statResult.get(0).getWeaponDBNO()));
-            ((TextView) view.findViewById(R.id.miscDBNOAssistsText)).setText(String.valueOf(statResult.get(0).getWeaponDBNOAssists()));
+            ((TextView) view.findViewById(R.id.miscBarricadeText)).setText(String.valueOf(stats.getMiscBarricade()));
+            ((TextView) view.findViewById(R.id.miscReinforcementsText)).setText(String.valueOf(stats.getMiscReinforcementDeploy()));
+            ((TextView) view.findViewById(R.id.miscRappelBreachesText)).setText(String.valueOf(stats.getMiscRappelBreach()));
+            ((TextView) view.findViewById(R.id.miscRevivesText)).setText(String.valueOf(stats.getMiscRevives()));
+            ((TextView) view.findViewById(R.id.miscSuicidesText)).setText(String.valueOf(stats.getMiscSuicides()));
+            ((TextView) view.findViewById(R.id.miscGadgetsDestroyedText)).setText(String.valueOf(stats.getMiscGadgetDestroyed()));
+            ((TextView) view.findViewById(R.id.miscDBNOText)).setText(String.valueOf(stats.getWeaponDBNO()));
+            ((TextView) view.findViewById(R.id.miscDBNOAssistsText)).setText(String.valueOf(stats.getWeaponDBNOAssists()));
 
             //Secure
-            ((TextView) view.findViewById(R.id.secureWinsText)).setText(String.valueOf(statResult.get(0).getSecureWins()));
-            ((TextView) view.findViewById(R.id.secureLossesText)).setText(String.valueOf(statResult.get(0).getSecureLosses()));
-            ((TextView) view.findViewById(R.id.secureWLText)).setText(String.valueOf(statResult.get(0).getSecureWL()) + "%");
-            ((TextView) view.findViewById(R.id.securePlayedText)).setText(String.valueOf(statResult.get(0).getSecurePlayed()));
-            ((TextView) view.findViewById(R.id.secureBestScoreText)).setText(String.valueOf(statResult.get(0).getSecureBestScore()));
-            ((TextView) view.findViewById(R.id.secureTimePlayedText)).setText(String.valueOf(statResult.get(0).getSecureTimePlayedStr()));
+            ((TextView) view.findViewById(R.id.secureWinsText)).setText(String.valueOf(stats.getSecureWins()));
+            ((TextView) view.findViewById(R.id.secureLossesText)).setText(String.valueOf(stats.getSecureLosses()));
+            ((TextView) view.findViewById(R.id.secureWLText)).setText(String.valueOf(stats.getSecureWL()) + "%");
+            ((TextView) view.findViewById(R.id.securePlayedText)).setText(String.valueOf(stats.getSecurePlayed()));
+            ((TextView) view.findViewById(R.id.secureBestScoreText)).setText(String.valueOf(stats.getSecureBestScore()));
+            ((TextView) view.findViewById(R.id.secureTimePlayedText)).setText(String.valueOf(stats.getSecureTimePlayedStr()));
 
             //Hostage
-            ((TextView) view.findViewById(R.id.hostageWinsText)).setText(String.valueOf(statResult.get(0).getHostageWins()));
-            ((TextView) view.findViewById(R.id.hostageLossesText)).setText(String.valueOf(statResult.get(0).getHostageLosses()));
-            ((TextView) view.findViewById(R.id.hostageWLText)).setText(String.valueOf(statResult.get(0).getHostageWL()) + " %");
-            ((TextView) view.findViewById(R.id.hostagePlayedText)).setText(String.valueOf(statResult.get(0).getHostagePlayed()));
-            ((TextView) view.findViewById(R.id.hostageBestScoreText)).setText(String.valueOf(statResult.get(0).getHostageBestScore()));
-            ((TextView) view.findViewById(R.id.hostageTimePlayedText)).setText(String.valueOf(statResult.get(0).getHostageTimePlayedStr()));
+            ((TextView) view.findViewById(R.id.hostageWinsText)).setText(String.valueOf(stats.getHostageWins()));
+            ((TextView) view.findViewById(R.id.hostageLossesText)).setText(String.valueOf(stats.getHostageLosses()));
+            ((TextView) view.findViewById(R.id.hostageWLText)).setText(String.valueOf(stats.getHostageWL()) + " %");
+            ((TextView) view.findViewById(R.id.hostagePlayedText)).setText(String.valueOf(stats.getHostagePlayed()));
+            ((TextView) view.findViewById(R.id.hostageBestScoreText)).setText(String.valueOf(stats.getHostageBestScore()));
+            ((TextView) view.findViewById(R.id.hostageTimePlayedText)).setText(String.valueOf(stats.getHostageTimePlayedStr()));
 
             //Bomb
-            ((TextView) view.findViewById(R.id.bombWinsText)).setText(String.valueOf(statResult.get(0).getBombWins()));
-            ((TextView) view.findViewById(R.id.bombLossesText)).setText(String.valueOf(statResult.get(0).getBombLosses()));
-            ((TextView) view.findViewById(R.id.bombWLText)).setText(String.valueOf(statResult.get(0).getBombWL()) + "%");
-            ((TextView) view.findViewById(R.id.bombPlayedText)).setText(String.valueOf(statResult.get(0).getBombPlayed()));
-            ((TextView) view.findViewById(R.id.bombBestScoreText)).setText(String.valueOf(statResult.get(0).getBombBestScore()));
-            ((TextView) view.findViewById(R.id.bombTimePlayedText)).setText(String.valueOf(statResult.get(0).getBombTimePlayedStr()));
+            ((TextView) view.findViewById(R.id.bombWinsText)).setText(String.valueOf(stats.getBombWins()));
+            ((TextView) view.findViewById(R.id.bombLossesText)).setText(String.valueOf(stats.getBombLosses()));
+            ((TextView) view.findViewById(R.id.bombWLText)).setText(String.valueOf(stats.getBombWL()) + "%");
+            ((TextView) view.findViewById(R.id.bombPlayedText)).setText(String.valueOf(stats.getBombPlayed()));
+            ((TextView) view.findViewById(R.id.bombBestScoreText)).setText(String.valueOf(stats.getBombBestScore()));
+            ((TextView) view.findViewById(R.id.bombTimePlayedText)).setText(String.valueOf(stats.getBombTimePlayedStr()));
         }
     }
 
-    public void populateView(View view, Player player) {
-        if (player != null) {
-
-            ((TextView) view.findViewById(R.id.level)).setText("Level: " + String.valueOf(player.getLevelObj().getLevel()));
-            ((TextView) view.findViewById(R.id.userName)).setText(player.getPlayerName());
-
-            //GENERAL
-            ((TextView) view.findViewById(R.id.generalKillsText)).setText(String.valueOf(player.getStatObj().getGeneralKills()));
-            ((TextView) view.findViewById(R.id.generalDeathsText)).setText(String.valueOf(player.getStatObj().getGeneralDeaths()));
-            ((TextView) view.findViewById(R.id.generalKDText)).setText(String.valueOf(player.getStatObj().getGeneralKD()));
-            ((TextView) view.findViewById(R.id.generalWinsText)).setText(String.valueOf(player.getStatObj().getGeneralWins()));
-            ((TextView) view.findViewById(R.id.generalLossesText)).setText(String.valueOf(player.getStatObj().getGeneralLost()));
-            ((TextView) view.findViewById(R.id.generalWLText)).setText(String.valueOf(player.getStatObj().getGeneralWL()));
-            ((TextView) view.findViewById(R.id.generalAssistsText)).setText(String.valueOf(player.getStatObj().getGeneralAssists()));
-            ((TextView) view.findViewById(R.id.generalPlayedText)).setText(String.valueOf(player.getStatObj().getGeneralPlayed()));
-            ((TextView) view.findViewById(R.id.generalTimePlayedText)).setText(String.valueOf(player.getStatObj().getGeneralTimePlayedStr()));
-
-            //CASUAL
-            ((TextView) view.findViewById(R.id.casualKillsText)).setText(String.valueOf(player.getStatObj().getCasualKills()));
-            ((TextView) view.findViewById(R.id.casualDeathsText)).setText(String.valueOf(player.getStatObj().getCasualDeaths()));
-            ((TextView) view.findViewById(R.id.casualKDText)).setText(String.valueOf(player.getStatObj().getCasualKD()));
-            ((TextView) view.findViewById(R.id.casualWinsText)).setText(String.valueOf(player.getStatObj().getCasualWon()));
-            ((TextView) view.findViewById(R.id.casualLossesText)).setText(String.valueOf(player.getStatObj().getCasualLost()));
-            ((TextView) view.findViewById(R.id.casualWLText)).setText(String.valueOf(player.getStatObj().getCasualWL()) + "%");
-            ((TextView) view.findViewById(R.id.casualPlayedText)).setText(String.valueOf(player.getStatObj().getCasualPlayed()));
-            ((TextView) view.findViewById(R.id.casualTimePlayedText)).setText(String.valueOf(player.getStatObj().getCasualTimePlayedStr()));
-
+    public void populateRanked(View view, Ranked rankedObj)
+    {
+        if (rankedObj != null)
+        {
             //RANKED
-            ((TextView) view.findViewById(R.id.rankedKillsText)).setText(String.valueOf(player.getStatObj().getRankedKills()));
-            ((TextView) view.findViewById(R.id.rankedDeathsText)).setText(String.valueOf(player.getStatObj().getRankedDeaths()));
-            ((TextView) view.findViewById(R.id.rankedKDText)).setText(String.valueOf(player.getStatObj().getRankedKD()));
-            ((TextView) view.findViewById(R.id.rankedWinsText)).setText(String.valueOf(player.getStatObj().getRankedWon()));
-            ((TextView) view.findViewById(R.id.rankedLossesText)).setText(String.valueOf(player.getStatObj().getRankedLost()));
-            ((TextView) view.findViewById(R.id.rankedWLText)).setText(String.valueOf(player.getStatObj().getRankedWL()) + "%");
-            ((TextView) view.findViewById(R.id.rankedPlayedText)).setText(String.valueOf(player.getStatObj().getRankedPlayed()));
-            ((TextView) view.findViewById(R.id.rankedTimePlayedText)).setText(String.valueOf(player.getStatObj().getRankedTimePlayedStr()));
-            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(getResources().getStringArray(R.array.ranks)[player.getRankedObj().getRank()]));
+            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(getResources().getStringArray(R.array.ranks)[rankedObj.getRank()]));
+        }
+    }
 
-            //WEAPON
-            ((TextView) view.findViewById(R.id.weaponHSText)).setText(String.valueOf(player.getStatObj().getWeaponHeadshots()));
-            ((TextView) view.findViewById(R.id.weaponHSHitText)).setText(String.valueOf(player.getStatObj().getWeaponHSHit()) + "%");
-            ((TextView) view.findViewById(R.id.weaponHSKillText)).setText(String.valueOf(player.getStatObj().getWeaponHSKill()) + "%");
-            ((TextView) view.findViewById(R.id.weaponBulletsHitText)).setText(String.valueOf(player.getStatObj().getWeaponBulletHit()));
-            ((TextView) view.findViewById(R.id.weaponBulletsFiredText)).setText(String.valueOf(player.getStatObj().getWeaponBulletFired()));
-            ((TextView) view.findViewById(R.id.weaponAccuracyText)).setText(String.valueOf(player.getStatObj().getWeaponAccuracy()) + "%");
-            ((TextView) view.findViewById(R.id.weaponPenetrationKillsText)).setText(String.valueOf(player.getStatObj().getWeaponPenetrations()));
-            ((TextView) view.findViewById(R.id.weaponBlindKillsText)).setText(String.valueOf(player.getStatObj().getWeaponBlindKills()));
-            ((TextView) view.findViewById(R.id.weaponMeleeKillsText)).setText(String.valueOf(player.getStatObj().getWeaponMeleeKills()));
+    public void populateLevel(View view, Level levelObj)
+    {
+        if (levelObj != null)
+        {
+            ((TextView) view.findViewById(R.id.level)).setText("Level: " + String.valueOf(levelObj.getLevel()));
+        }
+    }
 
-            //MISC
-            ((TextView) view.findViewById(R.id.miscBarricadeText)).setText(String.valueOf(player.getStatObj().getMiscBarricade()));
-            ((TextView) view.findViewById(R.id.miscReinforcementsText)).setText(String.valueOf(player.getStatObj().getMiscReinforcementDeploy()));
-            ((TextView) view.findViewById(R.id.miscRappelBreachesText)).setText(String.valueOf(player.getStatObj().getMiscRappelBreach()));
-            ((TextView) view.findViewById(R.id.miscRevivesText)).setText(String.valueOf(player.getStatObj().getMiscRevives()));
-            ((TextView) view.findViewById(R.id.miscSuicidesText)).setText(String.valueOf(player.getStatObj().getMiscSuicides()));
-            ((TextView) view.findViewById(R.id.miscGadgetsDestroyedText)).setText(String.valueOf(player.getStatObj().getMiscGadgetDestroyed()));
-            ((TextView) view.findViewById(R.id.miscDBNOText)).setText(String.valueOf(player.getStatObj().getWeaponDBNO()));
-            ((TextView) view.findViewById(R.id.miscDBNOAssistsText)).setText(String.valueOf(player.getStatObj().getWeaponDBNOAssists()));
-
-            //Secure
-            ((TextView) view.findViewById(R.id.secureWinsText)).setText(String.valueOf(player.getStatObj().getSecureWins()));
-            ((TextView) view.findViewById(R.id.secureLossesText)).setText(String.valueOf(player.getStatObj().getSecureLosses()));
-            ((TextView) view.findViewById(R.id.secureWLText)).setText(String.valueOf(player.getStatObj().getSecureWL()) + "%");
-            ((TextView) view.findViewById(R.id.securePlayedText)).setText(String.valueOf(player.getStatObj().getSecurePlayed()));
-            ((TextView) view.findViewById(R.id.secureBestScoreText)).setText(String.valueOf(player.getStatObj().getSecureBestScore()));
-            ((TextView) view.findViewById(R.id.secureTimePlayedText)).setText(String.valueOf(player.getStatObj().getSecureTimePlayedStr()));
-
-            //Hostage
-            ((TextView) view.findViewById(R.id.hostageWinsText)).setText(String.valueOf(player.getStatObj().getHostageWins()));
-            ((TextView) view.findViewById(R.id.hostageLossesText)).setText(String.valueOf(player.getStatObj().getHostageLosses()));
-            ((TextView) view.findViewById(R.id.hostageWLText)).setText(String.valueOf(player.getStatObj().getHostageWL()) + " %");
-            ((TextView) view.findViewById(R.id.hostagePlayedText)).setText(String.valueOf(player.getStatObj().getHostagePlayed()));
-            ((TextView) view.findViewById(R.id.hostageBestScoreText)).setText(String.valueOf(player.getStatObj().getHostageBestScore()));
-            ((TextView) view.findViewById(R.id.hostageTimePlayedText)).setText(String.valueOf(player.getStatObj().getHostageTimePlayedStr()));
-
-            //Bomb
-            ((TextView) view.findViewById(R.id.bombWinsText)).setText(String.valueOf(player.getStatObj().getBombWins()));
-            ((TextView) view.findViewById(R.id.bombLossesText)).setText(String.valueOf(player.getStatObj().getBombLosses()));
-            ((TextView) view.findViewById(R.id.bombWLText)).setText(String.valueOf(player.getStatObj().getBombWL()) + "%");
-            ((TextView) view.findViewById(R.id.bombPlayedText)).setText(String.valueOf(player.getStatObj().getBombPlayed()));
-            ((TextView) view.findViewById(R.id.bombBestScoreText)).setText(String.valueOf(player.getStatObj().getBombBestScore()));
-            ((TextView) view.findViewById(R.id.bombTimePlayedText)).setText(String.valueOf(player.getStatObj().getBombTimePlayedStr()));
+    public void populatePlayer(View view, Player player)
+    {
+        if (player != null)
+        {
+            ImageView userImage = view.findViewById(R.id.userImage);
+            Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + player.getUserID() + "/default_256_256.png").placeholder(R.drawable.ic_operators).fit().into(userImage);
+            ((TextView) view.findViewById(R.id.userName)).setText(player.getPlayerName());
         }
     }
 }

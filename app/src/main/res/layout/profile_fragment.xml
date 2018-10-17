@@ -53,12 +53,11 @@
                 android:layout_marginEnd="@dimen/statsMargin"
                 android:layout_marginStart="@dimen/statsMargin"
                 android:layout_marginTop="@dimen/statsMargin"
-                android:adjustViewBounds="true"
                 android:contentDescription="@string/profileLogo"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:adjustViewBounds="true"
+                app:layout_constraintEnd_toEndOf="@id/topView"
                 app:layout_constraintStart_toStartOf="@id/middleGuideline"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/userName"
@@ -1692,6 +1691,7 @@
                 android:id="@+id/bombPlayedText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/statsMargin"
                 android:textSize="@dimen/statTextSize"
                 app:layout_constraintEnd_toStartOf="@id/rightGuideline"
                 app:layout_constraintStart_toEndOf="@id/leftGuideline"
@@ -1714,6 +1714,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/statTextSize"
+                android:layout_marginBottom="@dimen/statsMargin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/rightGuideline"
                 app:layout_constraintTop_toBottomOf="@id/bombTimePlayedTitle" />

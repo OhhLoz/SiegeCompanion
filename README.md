@@ -5,6 +5,11 @@ A simple app to display stats and other tools in an efficient and free way, used
 
 This project is a work in progress and so is not published, when completed it will published on the google play store.
 
+## Documentation
+
+Currently, I am using Trello to keep track of tasks, however I may switch to GitKraken Glo as it links with Github Issues.
+* [Trello](https://trello.com/b/PedD5Kzs/siegecompanion)
+
 ## Built With
 
 * [Android Studio](https://developer.android.com/studio/) - Used to code the whole project
