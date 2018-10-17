@@ -350,7 +350,7 @@ public class Profile extends Fragment {
         if (player != null)
         {
             ImageView userImage = view.findViewById(R.id.userImage);
-            Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + player.getUserID() + "/default_256_256.png").placeholder(R.drawable.ic_operators).into(userImage);
+            Picasso.get().load("https://ubisoft-avatars.akamaized.net/" + player.getUserID() + "/default_256_256.png").placeholder(R.drawable.ic_operators).fit().into(userImage);
             ((TextView) view.findViewById(R.id.userName)).setText(player.getPlayerName());
         }
     }
