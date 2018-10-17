@@ -717,26 +717,35 @@
                 app:layout_constraintStart_toEndOf="@id/rightGuideline"
                 app:layout_constraintTop_toBottomOf="@id/rankedWLTitle" />
 
-            <TextView
-                android:id="@+id/rankedRankTitle"
+            <ImageView
+                android:id="@+id/rankPicture"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/statsLargeMargin"
-                android:text="@string/rankedRank"
-                android:textColor="@color/colorStatTitle"
-                android:textSize="@dimen/statTitleSize"
-                app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/statsSmallMargin"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/profileLogo"
+                android:maxWidth="25dp"
+                android:src="@drawable/r6slogo"
+                app:layout_constraintBottom_toBottomOf="@id/rankedPlayedText"
+                app:layout_constraintEnd_toStartOf="@id/rankedRankText"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rankedWinsText" />
+                app:layout_constraintTop_toTopOf="@id/rankedPlayedTitle"/>
 
             <TextView
                 android:id="@+id/rankedRankText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/statsSmallMargin"
                 android:textSize="@dimen/statTextSize"
+                android:gravity="center_horizontal"
+                android:maxEms="4"
+                android:maxLines="2"
+                android:singleLine="false"
                 app:layout_constraintEnd_toStartOf="@id/leftGuideline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rankedRankTitle" />
+                app:layout_constraintStart_toEndOf="@id/rankPicture"
+                app:layout_constraintTop_toTopOf="@id/rankPicture"
+                app:layout_constraintBottom_toBottomOf="@id/rankPicture"/>
 
             <TextView
                 android:id="@+id/rankedPlayedTitle"

@@ -333,7 +333,10 @@ public class Profile extends Fragment {
         if (rankedObj != null)
         {
             //RANKED
-            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(getResources().getStringArray(R.array.ranks)[rankedObj.getRank()]));
+            int rank = rankedObj.getRank();
+            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(getResources().getStringArray(R.array.ranks)[rank]));
+            //((ImageView) v.findViewById(R.id.rankPicture)).setImageResource(getResources().getIdentifier("r" + String.valueOf(rank), "drawable", getActivity().getPackageName()));
+            Picasso.get().load(getResources().getIdentifier("r" + String.valueOf(rank), "drawable", getActivity().getPackageName())).placeholder(R.drawable.r6slogo).into((ImageView) view.findViewById(R.id.rankPicture));
         }
     }
 
