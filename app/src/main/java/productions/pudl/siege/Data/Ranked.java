@@ -14,6 +14,7 @@ public class Ranked
     private double MMR;
     private int wins;
     private int losses;
+    private double WL;
     private int abandons;
     private double standardDeviation;
     private int rank;
@@ -33,6 +34,7 @@ public class Ranked
         setMMR(MMR);
         setWins(wins);
         setLosses(losses);
+        this.WL = calculateWL(wins, wins + losses);
         setAbandons(abandons);
         setStandardDeviation(standardDeviation);
         setRank(rank);
@@ -41,8 +43,20 @@ public class Ranked
         setMaxRank(maxRank);
     }
 
+    public double calculateWL(int wins, int played)
+    {
+        double tempWL = ((double) wins / (double) played) * 100;
+        tempWL = (double) Math.round(tempWL * 100d) / 100d;
+        return tempWL;
+    }
+
     public String getUpdateTime() {
         return updateTime;
+    }
+
+    public double getWL()
+    {
+        return WL;
     }
 
     public void setUpdateTime(String updateTime) {
