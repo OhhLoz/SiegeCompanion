@@ -676,18 +676,6 @@
                 app:layout_constraintTop_toBottomOf="@id/miscTitle" />
 
             <TextView
-                android:id="@+id/miscDistanceTravelledTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/miscDistance"
-                android:textColor="@color/colorOperatorTab"
-                android:textSize="@dimen/statTitleSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/miscBarricadeTitle" />
-
-            <TextView
                 android:id="@+id/miscGadgetsDestroyedTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -697,7 +685,7 @@
                 android:textSize="@dimen/statTitleSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/miscDistanceTravelledTitle" />
+                app:layout_constraintTop_toBottomOf="@id/miscBarricadeTitle" />
 
             <TextView
                 android:id="@+id/miscRappelBreachesTitle"

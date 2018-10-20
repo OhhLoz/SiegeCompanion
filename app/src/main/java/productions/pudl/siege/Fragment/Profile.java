@@ -275,10 +275,6 @@ public class Profile extends Fragment {
             ((TextView) view.findViewById(R.id.rankedKillsText)).setText(String.valueOf(stats.getRankedKills()));
             ((TextView) view.findViewById(R.id.rankedDeathsText)).setText(String.valueOf(stats.getRankedDeaths()));
             ((TextView) view.findViewById(R.id.rankedKDText)).setText(String.valueOf(stats.getRankedKD()));
-            ((TextView) view.findViewById(R.id.rankedWinsText)).setText(String.valueOf(stats.getRankedWon()));
-            ((TextView) view.findViewById(R.id.rankedLossesText)).setText(String.valueOf(stats.getRankedLost()));
-            ((TextView) view.findViewById(R.id.rankedWLText)).setText(String.valueOf(stats.getRankedWL()) + "%");
-            ((TextView) view.findViewById(R.id.rankedPlayedText)).setText(String.valueOf(stats.getRankedPlayed()));
             ((TextView) view.findViewById(R.id.rankedTimePlayedText)).setText(String.valueOf(stats.getRankedTimePlayedStr()));
 
             //WEAPON
@@ -333,7 +329,20 @@ public class Profile extends Fragment {
         if (rankedObj != null)
         {
             //RANKED
-            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(getResources().getStringArray(R.array.ranks)[rankedObj.getRank()]));
+            int rank = rankedObj.getRank();
+            String[] ranks = getResources().getStringArray(R.array.ranks);
+
+            ((TextView) view.findViewById(R.id.rankedRankText)).setText(String.valueOf(ranks[rank]));
+            ((TextView) view.findViewById(R.id.rankedWinsText)).setText(String.valueOf(rankedObj.getWins()));
+            ((TextView) view.findViewById(R.id.rankedLossesText)).setText(String.valueOf(rankedObj.getLosses()));
+            ((TextView) view.findViewById(R.id.rankedWLText)).setText(String.valueOf(rankedObj.getWL()) + "%");
+            ((TextView) view.findViewById(R.id.rankedAbandonsText)).setText(String.valueOf(rankedObj.getAbandons()));
+            ((TextView) view.findViewById(R.id.rankedRegionText)).setText(rankedObj.getRegion().toUpperCase());
+            ((TextView) view.findViewById(R.id.rankedMaxRankText)).setText(String.valueOf(ranks[rankedObj.getMaxRank()]));
+            ((TextView) view.findViewById(R.id.rankedMaxMMRText)).setText(String.valueOf(Math.round(rankedObj.getMaxMMR() * 100d) / 100d));
+            ((TextView) view.findViewById(R.id.rankedMMRText)).setText("(" + String.valueOf(Math.round(rankedObj.getMMR() * 100d) / 100d) + ")");
+            //((ImageView) v.findViewById(R.id.rankPicture)).setImageResource(getResources().getIdentifier("r" + String.valueOf(rank), "drawable", getActivity().getPackageName()));
+            Picasso.get().load(getResources().getIdentifier("r" + String.valueOf(rank), "drawable", getActivity().getPackageName())).placeholder(R.drawable.r6slogo).into((ImageView) view.findViewById(R.id.rankPicture));
         }
     }
 
@@ -342,6 +351,7 @@ public class Profile extends Fragment {
         if (levelObj != null)
         {
             ((TextView) view.findViewById(R.id.level)).setText("Level: " + String.valueOf(levelObj.getLevel()));
+            ((TextView) view.findViewById(R.id.miscAlphaPackText)).setText(String.valueOf((double) levelObj.getLootboxProbability() / 100) + "%");
         }
     }
 

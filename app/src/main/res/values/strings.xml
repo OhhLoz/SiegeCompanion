@@ -38,7 +38,11 @@
     <string name="casualLevel">Level</string>
     <string name="casualTimePlayed">Play Time</string>
     <string name="rankedTitle">Ranked</string>
+    <string name="rankedAbandons">Abandons</string>
+    <string name="rankedMaxRank">Max Rank</string>
+    <string name="rankedMaxMMR">Max MMR</string>
     <string name="rankedRank">Rank</string>
+    <string name="rankedRegion">Region</string>
     <string name="placementsGlobal">Global</string>
     <string name="placementsAPAC">Asia</string>
     <string name="placementsEMEA">Europe</string>
@@ -56,7 +60,7 @@
     <string name="miscDBNOAssists">DBNO Assists</string>
     <string name="miscBarricade">Barricades</string>
     <string name="miscReinforcement">Reinforcements</string>
-    <string name="miscDistance">Distance Travelled</string>
+    <string name="miscAlphaPack">Alpha Pack</string>
     <string name="miscGadgetsDestroyed">Gadgets Destroyed</string>
     <string name="miscRevives">Revives</string>
     <string name="miscRevivesDenied">Revives Denied</string>
