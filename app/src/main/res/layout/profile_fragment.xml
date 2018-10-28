@@ -56,7 +56,7 @@
                 android:contentDescription="@string/profileLogo"
                 android:adjustViewBounds="true"
                 app:layout_constraintEnd_toEndOf="@id/topView"
-                app:layout_constraintStart_toStartOf="@id/middleGuideline"
+                app:layout_constraintStart_toStartOf="@id/rightGuideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
