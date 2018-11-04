@@ -162,6 +162,9 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
             String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase().replace('ã', 'a').replace('ä', 'a');
             //Log.v("ResName", resName);
             tabLayout.getTabAt(i).setIcon(getResources().getIdentifier(resName,"drawable", packageName));
+//            ImageView temp = new ImageView(this.getContext());
+//            Picasso.get().load(getResources().getIdentifier(resName,"drawable", packageName)).into(temp);
+//            tabLayout.getTabAt(i).setCustomView(temp);
         }
         return rootview;
     }
