@@ -15,6 +15,7 @@ Currently, I am using Trello to keep track of tasks, however I may switch to Git
 * [Android Studio](https://developer.android.com/studio/) - Used to code the whole project
 * [Picasso](https://github.com/square/picasso) - Used to fetch images from URL's inside of the app.
 * [Roughike Bottombar](https://github.com/roughike/BottomBar) - Used as a navigation bar for the app.
+* [StickyScrollView](https://github.com/amarjain07/StickyScrollView) - Used to make elements stay on the screen when scrolling
 
 ## Authors
 
