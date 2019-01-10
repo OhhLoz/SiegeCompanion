@@ -230,5 +230,18 @@
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbrn" />
+
+        <ImageView
+            android:id="@+id/gigr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gis" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
