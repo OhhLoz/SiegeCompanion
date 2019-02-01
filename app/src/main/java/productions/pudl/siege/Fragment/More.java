@@ -19,6 +19,8 @@ public class More extends Fragment
     SharedPreferences prefs;
     EditText userNameEditText;
     Spinner platformSpinner;
+    Spinner themeSpinner;
+    Spinner languageSpinner;
     String defaultUserNameKey = "productions.pudl.siege.defaultUserName";
     String defaultPlatformKey = "productions.pudl.siege.defaultPlatform";
     ArrayAdapter<CharSequence> spinnerAdapter;
@@ -30,6 +32,8 @@ public class More extends Fragment
         View temp = inflater.inflate(R.layout.more_fragment, container, false);
         userNameEditText = temp.findViewById(R.id.moreDefaultNameInput);
         platformSpinner = temp.findViewById(R.id.morePlatformSpinner);
+        themeSpinner = temp.findViewById(R.id.moreColourSchemeSpinner);
+        languageSpinner = temp.findViewById(R.id.moreLanguageSpinner);
 
         prefs = this.getActivity().getSharedPreferences("productions.pudl.siege", Context.MODE_PRIVATE);
 
@@ -47,6 +51,13 @@ public class More extends Fragment
             platformSpinner.setSelection(spinnerAdapter.getPosition(platformVal));
         }
 
+        ArrayAdapter<CharSequence> tempThemeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.theme_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> tempLanguageAdapter = ArrayAdapter.createFromResource(getContext(), R.array.languages_array, android.R.layout.simple_spinner_item);
+        tempThemeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tempLanguageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        languageSpinner.setAdapter(tempLanguageAdapter);
+        themeSpinner.setAdapter(tempThemeAdapter);
         return temp;
     }
 
