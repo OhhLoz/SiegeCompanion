@@ -380,5 +380,23 @@ public class Operators extends Fragment
                 tabbedDialog.show(ft, "gigr");
             }
         });
+
+        ImageView sasrImage = (ImageView) view.findViewById(R.id.sasr);
+        Picasso.get().load(R.drawable.sasr).fit().centerInside().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(sasrImage);
+        sasrImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                Log.v("OperatorClick", "gigr");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sasr", temp);
+                tabbedDialog.show(ft, "sasr");
+            }
+        });
     }
 }

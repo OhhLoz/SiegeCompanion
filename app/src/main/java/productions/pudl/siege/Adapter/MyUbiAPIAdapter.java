@@ -102,6 +102,8 @@ public class MyUbiAPIAdapter
         put("Clash", "GSUTR");
         put("Nomad", "GIGR");
         put("Kaid", "GIGR");
+        put("Gridlock", "SASR");
+        put("Mozzie", "SASR");
     }};
     static private SparseArray<Pair<String, String>> operatorFinalMap = new SparseArray<Pair<String, String>>(){{
         append(0, new Pair<>("1:1", "Recruit(SAS)"));
@@ -153,6 +155,8 @@ public class MyUbiAPIAdapter
         append(46, new Pair<>("3:10", "Clash"));
         append(47, new Pair<>("2:11", "Nomad"));
         append(48, new Pair<>("3:11", "Kaid"));
+        append(49, new Pair<>("2:12", "Gridlock"));
+        append(50, new Pair<>("3:12", "Mozzie"));
     }};
 
     static public void changeContext(Context context, String credentials)

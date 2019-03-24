@@ -150,6 +150,10 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
                 adapter.addFragment("Nomad",OperatorCustomFragment.createInstance(operatorHashMap.get("Nomad")));
                 adapter.addFragment("Kaid",OperatorCustomFragment.createInstance(operatorHashMap.get("Kaid")));
                 break;
+            case "sasr":
+                adapter.addFragment("Gridlock",OperatorCustomFragment.createInstance(operatorHashMap.get("Gridlock")));
+                adapter.addFragment("Mozzie",OperatorCustomFragment.createInstance(operatorHashMap.get("Mozzie")));
+                break;
             default:
                 adapter.addFragment("Error",OperatorCustomFragment.createInstance(operatorHashMap.get("Sledge")));
                 break;
