@@ -398,5 +398,23 @@ public class Operators extends Fragment
                 tabbedDialog.show(ft, "sasr");
             }
         });
+
+        ImageView usssjaegImage = (ImageView) view.findViewById(R.id.usssjaeg);
+        Picasso.get().load(R.drawable.usssjaeg).fit().centerInside().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(usssjaegImage);
+        usssjaegImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                Log.v("OperatorClick", "gigr");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("usssjaeg", temp);
+                tabbedDialog.show(ft, "USSS / Jaegercorps");
+            }
+        });
     }
 }
