@@ -12,6 +12,12 @@
         <item>Xbox</item>
         <item>PS4</item>
     </string-array>
+    <string-array name="languages_array">
+        <item>English</item>
+    </string-array>
+    <string-array name="theme_array">
+        <item>Dark</item>
+    </string-array>
     <string name="levelShort">Lvl</string>
     <string name="level">Level</string>
     <string name="generalTitle">General</string>
@@ -313,5 +319,7 @@
         <item>Operation Chimera</item>
         <item>Operation Para Bellum</item>
         <item>Operation Grim Sky</item>
+        <item>Operation Wind Bastion</item>
+        <item>Operation Burnt Horizon</item>
     </string-array>
 </resources>

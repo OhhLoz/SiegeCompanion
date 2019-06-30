@@ -146,6 +146,18 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
                 adapter.addFragment("Maverick",OperatorCustomFragment.createInstance(operatorHashMap.get("Maverick")));
                 adapter.addFragment("Clash",OperatorCustomFragment.createInstance(operatorHashMap.get("Clash")));
                 break;
+            case "gigr":
+                adapter.addFragment("Nomad",OperatorCustomFragment.createInstance(operatorHashMap.get("Nomad")));
+                adapter.addFragment("Kaid",OperatorCustomFragment.createInstance(operatorHashMap.get("Kaid")));
+                break;
+            case "sasr":
+                adapter.addFragment("Gridlock",OperatorCustomFragment.createInstance(operatorHashMap.get("Gridlock")));
+                adapter.addFragment("Mozzie",OperatorCustomFragment.createInstance(operatorHashMap.get("Mozzie")));
+                break;
+            case "usssjaeg":
+                adapter.addFragment("Nøkk",OperatorCustomFragment.createInstance(operatorHashMap.get("Nøkk")));
+                adapter.addFragment("Warden",OperatorCustomFragment.createInstance(operatorHashMap.get("Warden")));
+                break;
             default:
                 adapter.addFragment("Error",OperatorCustomFragment.createInstance(operatorHashMap.get("Sledge")));
                 break;
@@ -159,7 +171,7 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
         for (int i = 0; i < tabLayout.getTabCount(); i++)
         {
             //String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase().replace('(', '_').replace(")", "").replace('ã', 'a').replace('ä', 'a');
-            String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase().replace('ã', 'a').replace('ä', 'a');
+            String resName = CTU + tabLayout.getTabAt(i).getText().toString().toLowerCase().replace('ã', 'a').replace('ä', 'a').replace('ø', 'o');
             //Log.v("ResName", resName);
             tabLayout.getTabAt(i).setIcon(getResources().getIdentifier(resName,"drawable", packageName));
 //            ImageView temp = new ImageView(this.getContext());
