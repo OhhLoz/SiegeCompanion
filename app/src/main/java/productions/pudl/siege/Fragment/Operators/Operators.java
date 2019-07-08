@@ -10,14 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-import productions.pudl.siege.Adapter.MyUbiAPIAdapter;
-import productions.pudl.siege.Adapter.VolleyResponseListener;
 import productions.pudl.siege.Data.Operator;
 import productions.pudl.siege.R;
 
@@ -30,7 +26,9 @@ public class Operators extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         final View view = inflater.inflate(R.layout.operators_fragment, container, false);
-        MyUbiAPIAdapter.create(view.getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", new VolleyResponseListener()
+
+
+        /*MyUbiAPIAdapter.create(view.getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", new VolleyResponseListener()
         {
             @Override
             public void onError(String message)
@@ -55,7 +53,7 @@ public class Operators extends Fragment
                 });
                 Log.v("onResponseCallback", "GetOperators Run");
             }
-        });
+        });*/
         return view;
     }
 

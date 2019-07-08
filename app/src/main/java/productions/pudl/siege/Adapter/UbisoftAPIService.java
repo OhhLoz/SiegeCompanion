@@ -37,7 +37,7 @@ public class UbisoftAPIService extends Service
     private Messenger messenger = new Messenger(new APIMessageHandler());
     private Messenger replyMessenger;
 
-    static private String globalCreds = null;
+    static private String globalCreds = "raspberrypicreations@gmail.com:1NnpENN6za61";
     static private String expirationTimeStr = "DEFAULT";
     static private String userName = "DEFAULT";
     static private Date expirationTimeFormatted = null;
@@ -51,10 +51,9 @@ public class UbisoftAPIService extends Service
         Log.v("UbisoftAPIService", "Service Created");
     }
 
-    public void changeContext(Context context, String credentials)
+    public void changeContext()
     {
-        mQueue = Volley.newRequestQueue(context);
-        globalCreds = credentials;
+        mQueue = Volley.newRequestQueue(this);
     }
 
     public void create(Context context, String credentials, final VolleyResponseListener listener)
@@ -106,15 +105,20 @@ public class UbisoftAPIService extends Service
         {
             replyMessenger = msg.replyTo;
             //Log.d("RunningService", "Reply Received");
+            Bundle receivedBundle = msg.getData();
             switch (msg.what)
             {
                 case APIConstants.OPEN_CONN:
                     Log.v("APIMessageHandler", "Handled message OPEN_CONN");
-                    openConnection(null);
+                    create(getApplicationContext(), globalCreds, null);
                     break;
                 case APIConstants.CLOSE_CONN:
                     Log.v("APIMessageHandler", "Handled message CLOSE_CONN");
                     closeConnection();
+                    break;
+                case APIConstants.CHANGE_CONN:
+                    Log.v("APIMessageHandler", "Handled message CHANGE_CONN");
+                    changeContext();
                     break;
                 default:
                     super.handleMessage(msg);
@@ -279,6 +283,7 @@ public class UbisoftAPIService extends Service
     {
         public static final int OPEN_CONN = 0;
         public static final int CLOSE_CONN = 1;
+        public static final int CHANGE_CONN = 2;
     }
 
     @Override
@@ -292,7 +297,7 @@ public class UbisoftAPIService extends Service
     public void onDestroy()
     {
         Log.v("UbisoftAPIService", "Service Destroyed");
-        stopForeground(true);
+        closeConnection();
         super.onDestroy();
     }
 
@@ -300,7 +305,7 @@ public class UbisoftAPIService extends Service
     public void onRebind(Intent intent)
     {
         super.onRebind(intent);
-        //changeContext(intent, globalCreds);
+        changeContext();
         Log.v("UbisoftAPIService", "Service Rebound");
     }
 }

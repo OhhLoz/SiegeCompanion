@@ -38,9 +38,11 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         APIServiceIntent = new Intent(MainActivity.this, UbisoftAPIService.class);
         startService(APIServiceIntent);
         bindService(APIServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener()
         {
