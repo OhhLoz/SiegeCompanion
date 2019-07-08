@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import productions.pudl.siege.Adapter.R6TabAPIAdapter;
 import productions.pudl.siege.Adapter.SearchListViewAdapter;
 import productions.pudl.siege.Adapter.VolleyResponseListener;
-import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
 import productions.pudl.siege.Data.R6TabObjects.SearchObject;
 import productions.pudl.siege.R;
 
@@ -34,7 +32,6 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
     SearchListViewAdapter searchListViewAdapter;
     //R6DBJSONAdapter r6DBJsonAdapter;
     public static ArrayList<SearchObject> searchResults;
-    public static DetailedMainObject finalResult;
     SearchObject ItemClicked;
     View ItemView;
     ArrayAdapter<CharSequence> spinnerAdapter;

@@ -20,24 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import productions.pudl.siege.Data.DetailedObjects.DetailedGameModeObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedGeneralObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedOperatorObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedOperatorsObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedPlacementsObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedRankObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedRanksObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedStatObject;
-import productions.pudl.siege.Data.DetailedObjects.DetailedStatsObject;
-import productions.pudl.siege.Data.GeneralObjects.GeneralAliasObject;
-import productions.pudl.siege.Data.GeneralObjects.GeneralAliasesObject;
-import productions.pudl.siege.Data.GeneralObjects.GeneralLastPlayedObject;
-import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
-import productions.pudl.siege.Data.GeneralObjects.GeneralRankObject;
-import productions.pudl.siege.Data.GeneralObjects.GeneralRanksObject;
 import productions.pudl.siege.Data.R6TabObjects.SearchObject;
-import productions.pudl.siege.Fragment.Search.Search;
 
 public class R6TabAPIAdapter {
     private static RequestQueue mQueue;
@@ -50,6 +33,7 @@ public class R6TabAPIAdapter {
 
     public R6TabAPIAdapter(RequestQueue mQueue)
     {
+        this.mQueue = mQueue;
     }
 
     public static void searchPlayer(Context context, String platformName, String userName, final VolleyResponseListener listener)
@@ -64,7 +48,6 @@ public class R6TabAPIAdapter {
                     public void onResponse(JSONObject response) {
                         try {
                             Log.v("JSONObject", response.toString());
-                            //ArrayList<GeneralObject> generalObjectArrayList = new ArrayList<>();
 
                             if(response.getInt("totalresults") <= 0)
                                 Log.v("R6TabAPI", "No search results found");

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
 import productions.pudl.siege.Data.R6TabObjects.SearchObject;
 import productions.pudl.siege.R;
 
