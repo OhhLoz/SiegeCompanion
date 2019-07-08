@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -30,6 +28,8 @@ public class Operators extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         final View view = inflater.inflate(R.layout.operators_fragment, container, false);
+
+
         MyUbiAPIAdapter.create(view.getContext(), "raspberrypicreations@gmail.com:1NnpENN6za61", new VolleyResponseListener()
         {
             @Override
