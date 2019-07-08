@@ -21,22 +21,21 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
-import productions.pudl.siege.Adapter.R6DBJSONAdapter;
+import productions.pudl.siege.Adapter.R6TabAPIAdapter;
 import productions.pudl.siege.Adapter.SearchListViewAdapter;
+import productions.pudl.siege.Adapter.VolleyResponseListener;
 import productions.pudl.siege.Data.DetailedObjects.DetailedMainObject;
-import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
+import productions.pudl.siege.Data.R6TabObjects.SearchObject;
 import productions.pudl.siege.R;
 
 public class Search extends Fragment implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, ListView.OnItemClickListener, SearchView.OnCloseListener {
     SearchView searchView;
     ListView listView;
     SearchListViewAdapter searchListViewAdapter;
-    R6DBJSONAdapter r6DBJsonAdapter;
-    String[] platformList;
-    String[] userNameList;
-    public static ArrayList<GeneralObject> searchResults;
+    //R6DBJSONAdapter r6DBJsonAdapter;
+    public static ArrayList<SearchObject> searchResults;
     public static DetailedMainObject finalResult;
-    GeneralObject ItemClicked;
+    SearchObject ItemClicked;
     View ItemView;
     ArrayAdapter<CharSequence> spinnerAdapter;
 
@@ -65,7 +64,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         listView = (ListView) view.findViewById(R.id.listview);
         mQueue = Volley.newRequestQueue(view.getContext());
 
-        searchResults = new ArrayList<GeneralObject>();
+        searchResults = new ArrayList<SearchObject>();
         searchListViewAdapter = new SearchListViewAdapter(view.getContext(), searchResults);
         listView.setOnItemClickListener(this);
         listView.setAdapter(searchListViewAdapter);
@@ -103,13 +102,21 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         currUserNameSelected = query;
 
         Log.v("JSON", "starting json import with username = " + currUserNameSelected + " and platform = " + currPlatformSelected);
-        //R6StatsJSONAdapter r6StatsJsonAdapter = new R6StatsJSONAdapter(currUserNameSelected, currPlatformSelected, mQueue);
-        r6DBJsonAdapter = new R6DBJSONAdapter(this, currUserNameSelected, currPlatformSelected, mQueue);
-        r6DBJsonAdapter.ParseGeneral();
-        searchResults = r6DBJsonAdapter.getSearchResults();
+        R6TabAPIAdapter.searchPlayer(getContext(), currPlatformSelected, currUserNameSelected, new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+
+            }
+
+            @Override
+            public void onResponse()
+            {
+                updateListView(R6TabAPIAdapter.getSearchResults());
+            }
+        });
+
         Log.v("Test", "Updated Search Results");
         searchView.clearFocus(); // removes the soft keyboard
-
 
         Log.v("JSON", "finished json import");
         return true;
@@ -137,12 +144,12 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         ItemClicked = searchListViewAdapter.getItem(i);
         ItemView = view;
         Log.v("CurrItem", ItemClicked.getName() + ", " + ItemClicked.getPlatform());
-        r6DBJsonAdapter.ParseDetailed(ItemClicked.getUserID());
+        //r6DBJsonAdapter.ParseDetailed(ItemClicked.getUserID());
         //DetailedObject detail = r6DBJsonAdapter.getDetailedObject();
         //ShowPopup(view, detail);
     }
 
-    public void updateListView(ArrayList<GeneralObject> newArrayList)
+    public void updateListView(ArrayList<SearchObject> newArrayList)
     {
         searchListViewAdapter.updateSearchList(newArrayList);
     }
