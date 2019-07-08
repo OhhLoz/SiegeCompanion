@@ -154,7 +154,7 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         searchListViewAdapter.updateSearchList(newArrayList);
     }
 
-    public void updateFinalResult(DetailedMainObject finalObject)
+/*    public void updateFinalResult(DetailedMainObject finalObject)
     {
         finalResult = finalObject;
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -170,5 +170,5 @@ public class Search extends Fragment implements AdapterView.OnItemSelectedListen
         //dialogFragment.currItem = finalResult;
         dialogFragment.show(ft,"dialog");
         //listView.requestFocus();
-    }
+    }*/
 }

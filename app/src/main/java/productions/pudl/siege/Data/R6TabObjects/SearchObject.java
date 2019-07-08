@@ -15,58 +15,36 @@ public class SearchObject
     private int rank;
     private double kd;
 
-    public SearchObject(String id, String userID, String platform, int level, String name, int mmr, int rank, double kd)
-    {
-        setId(id);
-        setUserID(userID);
-        setPlatform(platform);
-        setLevel(level);
-        setName(name);
-        this.kd = kd;
+    public SearchObject(String id, String userID, String platform, int level, String name, int mmr, int rank, double kd) {
+        this.id = id;
+        this.userID = userID;
+        this.platform = platform;
+        this.level = level;
+        this.name = name;
         this.mmr = mmr;
         this.rank = rank;
+        this.kd = kd;
     }
 
     private String getId() {
         return id;
     }
 
-    private void setId(String id) {
-        this.id = id;
-    }
-
     public String getUserID() {
         return userID;
-    }
-
-    private void setUserID(String userID) {
-        this.userID = userID;
     }
 
     public String getPlatform() {
         return platform;
     }
 
-    private void setPlatform(String platform) {
-        this.platform = platform;
-    }
-
     public int getLevel() {
         return level;
-    }
-
-    private void setLevel(int level) {
-        this.level = level;
     }
 
     public String getName() {
         return name;
     }
-
-    private void setName(String name) {
-        this.name = name;
-    }
-
 
     public void getUserPicture(ImageView imgView)
     {
