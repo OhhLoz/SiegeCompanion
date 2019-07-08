@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import productions.pudl.siege.Data.GeneralObjects.GeneralObject;
+import productions.pudl.siege.Data.R6TabObjects.SearchObject;
 import productions.pudl.siege.R;
 
 public class SearchListViewAdapter extends BaseAdapter {
@@ -20,14 +21,14 @@ public class SearchListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private ArrayList<GeneralObject> generalObjectsArrayList = null;
-    private ArrayList<GeneralObject> arraylist;
+    private ArrayList<SearchObject> generalObjectsArrayList = null;
+    private ArrayList<SearchObject> arraylist;
 
-    public SearchListViewAdapter(Context context, ArrayList<GeneralObject> userList) {
+    public SearchListViewAdapter(Context context, ArrayList<SearchObject> userList) {
         mContext = context;
         this.generalObjectsArrayList = userList;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<GeneralObject>();
+        this.arraylist = new ArrayList<SearchObject>();
         this.arraylist.addAll(userList);
     }
 
@@ -43,7 +44,7 @@ public class SearchListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public GeneralObject getItem(int position) {
+    public SearchObject getItem(int position) {
         return generalObjectsArrayList.get(position);
     }
 
@@ -72,7 +73,7 @@ public class SearchListViewAdapter extends BaseAdapter {
         return view;
     }
 
-    public void updateSearchList(ArrayList<GeneralObject> newArrayList)
+    public void updateSearchList(ArrayList<SearchObject> newArrayList)
     {
         this.generalObjectsArrayList = newArrayList;
         this.notifyDataSetChanged();
@@ -84,7 +85,7 @@ public class SearchListViewAdapter extends BaseAdapter {
         userName = userName.toLowerCase(Locale.getDefault());
         platformName = platformName.toLowerCase(Locale.getDefault());
         generalObjectsArrayList.clear();
-        for (GeneralObject currPrevSearch : arraylist)
+        for (SearchObject currPrevSearch : arraylist)
         {
             if (userName.length() == 0 && currPrevSearch.getPlatform().toLowerCase(Locale.getDefault()).contains(platformName))
             {
