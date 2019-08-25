@@ -157,10 +157,10 @@ public class MyUbiAPIAdapter
         append(46, new Pair<>("3:10", "Clash"));
         append(47, new Pair<>("2:11", "Nomad"));
         append(48, new Pair<>("3:11", "Kaid"));
-        append(49, new Pair<>("2:12", "Gridlock"));
-        append(50, new Pair<>("3:12", "Mozzie"));
+        append(49, new Pair<>("2:12", "Mozzie"));
+        append(50, new Pair<>("3:12", "Gridlock"));
         append(51, new Pair<>("2:13", "Nøkk"));
-        append(52, new Pair<>("3:13", "Warden"));
+        append(52, new Pair<>("2:14", "Warden"));
     }};
 
     static public void changeContext(Context context, String credentials)
@@ -248,72 +248,74 @@ public class MyUbiAPIAdapter
                 @Override
                 public void onResponse()
                 {
-                    getPlayer(platform, key, vals, null);
+                    getPlayer(platform, key, vals, listener);
                 }
             });
-
         }
-        String finalPlatform;
-
-        if (platform.equals("PC"))
-            finalPlatform = "uplay";
-        else if (platform.equals("XBOXONE"))
-            finalPlatform = "xbl";
         else
-            finalPlatform = "psn";
-
-        String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType="+ finalPlatform + "&" + key + "=" + vals;
-        //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        try
-                        {
-                            Log.v("JSONResponse", response.toString());
-                            JSONArray profilesArr = response.getJSONArray("profiles");
-                            for (int i = 0; i < profilesArr.length(); i++)
-                            {
-                                JSONObject player = profilesArr.getJSONObject(i);
-                                String userName = player.getString("nameOnPlatform");
-                                String platform = player.getString("platformType");
-                                String userID = player.getString("userId");
-                                Player temp = new Player(userName, platform, userID);
-                                Log.v("PlayerToString", temp.toString());
-                                playersResult.add(temp);
-                            }
-
-                            //printLogs();
-                            //headers.printHeaders();
-                            if (listener != null)
-                                listener.onResponse();
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        error.printStackTrace();
-                    }
-                })
         {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
+            String finalPlatform;
+
+            if (platform.equals("PC"))
+                finalPlatform = "uplay";
+            else if (platform.equals("XBOXONE"))
+                finalPlatform = "xbl";
+            else
+                finalPlatform = "psn";
+
+            String URL = "https://public-ubiservices.ubi.com/v2/profiles?platformType=" + finalPlatform + "&" + key + "=" + vals;
+            //String URL = "https://api-ubiservices.ubi.com/v2/profiles?" + key + "=" + vals + "&platformType=" + platform;
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                    new Response.Listener<JSONObject>()
+                    {
+                        @Override
+                        public void onResponse(JSONObject response)
+                        {
+                            try
+                            {
+                                Log.v("JSONResponse", response.toString());
+                                JSONArray profilesArr = response.getJSONArray("profiles");
+                                for (int i = 0; i < profilesArr.length(); i++)
+                                {
+                                    JSONObject player = profilesArr.getJSONObject(i);
+                                    String userName = player.getString("nameOnPlatform");
+                                    String platform = player.getString("platformType");
+                                    String userID = player.getString("userId");
+                                    Player temp = new Player(userName, platform, userID);
+                                    Log.v("PlayerToString", temp.toString());
+                                    playersResult.add(temp);
+                                }
+
+                                //printLogs();
+                                //headers.printHeaders();
+                                if (listener != null)
+                                    listener.onResponse();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error)
+                        {
+                            error.printStackTrace();
+                        }
+                    })
             {
-                Log.v("getHeaders", "Getting Headers");
-                return headers.getHeaders();
-            }
-        };
-        mQueue.add(request);
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError
+                {
+                    Log.v("getHeaders", "Getting Headers");
+                    return headers.getHeaders();
+                }
+            };
+            mQueue.add(request);
+        }
     }
 
     static public ArrayList<Player> getPlayersResult()
@@ -334,64 +336,67 @@ public class MyUbiAPIAdapter
 
                 @Override
                 public void onResponse() {
-                    getLevel(id, platform, null);
+                    getLevel(id, platform, listener);
                 }
             });
 
         }
-        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6playerprofile/playerprofile/progressions?profile_ids="+ id;
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        try
-                        {
-                            Log.v("JSONResponse", response.toString());
-                            JSONArray profilesArr = response.getJSONArray("player_profiles");
-                            for (int i = 0; i < profilesArr.length(); i++)
-                            {
-                                JSONObject player = profilesArr.getJSONObject(i);
-                                int xp = player.getInt("xp");
-                                String userID = player.getString("profile_id");
-                                int lootboxProbability = player.getInt("lootbox_probability");
-                                int level = player.getInt("level");
-                                Level temp = new Level(xp, userID, lootboxProbability, level);
-                                Log.v("LevelToString", temp.toString());
-                                levelsResult.add(temp);
-                            }
-
-                            //printLogs();
-                            //headers.printHeaders();
-
-                            if (listener != null)
-                                listener.onResponse();
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        error.printStackTrace();
-                    }
-                })
+        else
         {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
+            String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6playerprofile/playerprofile/progressions?profile_ids="+ id;
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                    new Response.Listener<JSONObject>()
+                    {
+                        @Override
+                        public void onResponse(JSONObject response)
+                        {
+                            try
+                            {
+                                Log.v("JSONResponse", response.toString());
+                                JSONArray profilesArr = response.getJSONArray("player_profiles");
+                                for (int i = 0; i < profilesArr.length(); i++)
+                                {
+                                    JSONObject player = profilesArr.getJSONObject(i);
+                                    int xp = player.getInt("xp");
+                                    String userID = player.getString("profile_id");
+                                    int lootboxProbability = player.getInt("lootbox_probability");
+                                    int level = player.getInt("level");
+                                    Level temp = new Level(xp, userID, lootboxProbability, level);
+                                    Log.v("LevelToString", temp.toString());
+                                    levelsResult.add(temp);
+                                }
+
+                                //printLogs();
+                                //headers.printHeaders();
+
+                                if (listener != null)
+                                    listener.onResponse();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error)
+                        {
+                            error.printStackTrace();
+                        }
+                    })
             {
-                Log.v("getHeaders", "Getting Headers");
-                return headers.getHeaders();
-            }
-        };
-        mQueue.add(request);
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError
+                {
+                    Log.v("getHeaders", "Getting Headers");
+                    return headers.getHeaders();
+                }
+            };
+            mQueue.add(request);
+        }
     }
 
     static public ArrayList<Level> getLevelsResult()
@@ -412,116 +417,119 @@ public class MyUbiAPIAdapter
 
                 @Override
                 public void onResponse() {
-                    getStats(id, platform, statsArray, null);
+                    getStats(id, platform, statsArray, listener);
                 }
             });
         }
-        String tempStats = Arrays.toString(statsArray);
-        tempStats = tempStats.substring(1, tempStats.length()-1);
-        final String stats = tempStats;
-        Log.v("ImportedOperatorsArray", stats);
-
-
-        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        try
-                        {
-                            Log.v("JSONResponse", response.toString());
-                            JSONObject resultsObj = response.getJSONObject("results");
-                            Iterator<?> keys = resultsObj.keys();
-
-                            while( keys.hasNext() )
-                            {
-                                String key = (String)keys.next();
-                                if ( resultsObj.get(key) instanceof JSONObject )
-                                {
-                                    JSONObject currObj = resultsObj.getJSONObject(key);
-                                    int generalKills = currObj.getInt("generalpvp_kills:infinite");
-                                    int generalDeaths = currObj.getInt("generalpvp_death:infinite");
-                                    int generalAssists = currObj.getInt("generalpvp_killassists:infinite");
-                                    int generalWins = currObj.getInt("generalpvp_matchwon:infinite");
-                                    int generalLosses = currObj.getInt("generalpvp_matchlost:infinite");
-                                    int generalPlayed = currObj.getInt("generalpvp_matchplayed:infinite");
-                                    int generalTimePlayed = currObj.getInt("generalpvp_timeplayed:infinite");
-                                    int casualWon = currObj.getInt("casualpvp_matchwon:infinite");
-                                    int casualLost = currObj.getInt("casualpvp_matchlost:infinite");
-                                    int casualPlayed = currObj.getInt("casualpvp_matchplayed:infinite");
-                                    int casualKills = currObj.getInt("casualpvp_kills:infinite");
-                                    int casualDeaths = currObj.getInt("casualpvp_death:infinite");
-                                    int casualTimePlayed = currObj.getInt("casualpvp_timeplayed:infinite");
-                                    int rankedWon = currObj.getInt("rankedpvp_matchwon:infinite");
-                                    int rankedLost = currObj.getInt("rankedpvp_matchlost:infinite");
-                                    int rankedPlayed = currObj.getInt("rankedpvp_matchplayed:infinite");
-                                    int rankedKills = currObj.getInt("rankedpvp_kills:infinite");
-                                    int rankedDeaths = currObj.getInt("rankedpvp_death:infinite");
-                                    int rankedTimePlayed = currObj.getInt("rankedpvp_timeplayed:infinite");
-                                    int weaponBlindKills  = currObj.getInt("generalpvp_blindkills:infinite");
-                                    int weaponMeleeKills = currObj.getInt("generalpvp_meleekills:infinite");
-                                    int weaponPenetrationKills = currObj.getInt("generalpvp_penetrationkills:infinite");
-                                    int weaponBulletsHit = currObj.getInt("generalpvp_bullethit:infinite");
-                                    int weaponBulletsFired = currObj.getInt("generalpvp_bulletfired:infinite");
-                                    int weaponHeadshots = currObj.getInt("generalpvp_headshot:infinite");
-                                    int weaponDBNO = currObj.getInt("generalpvp_dbno:infinite");
-                                    int weaponDBNOAssists = currObj.getInt("generalpvp_dbnoassists:infinite");
-                                    int miscBarricade = currObj.getInt("generalpvp_barricadedeployed:infinite");
-                                    int miscGadgetsDestroyed = currObj.getInt("generalpvp_gadgetdestroy:infinite");
-                                    int miscRappelBreach = currObj.getInt("generalpvp_rappelbreach:infinite");
-                                    int miscReinforcement = currObj.getInt("generalpvp_reinforcementdeploy:infinite");
-                                    int miscRevives = currObj.getInt("generalpvp_revive:infinite");
-                                    int miscSuicide = currObj.getInt("generalpvp_suicide:infinite");
-                                    int gamemodeSABestScore = currObj.getInt("secureareapvp_bestscore:infinite");
-                                    int gamemodeSAWins = currObj.getInt("secureareapvp_matchwon:infinite");
-                                    int gamemodeSALosses = currObj.getInt("secureareapvp_matchlost:infinite");
-                                    int gamemodeSAPlayed = currObj.getInt("secureareapvp_matchplayed:infinite");
-                                    int gamemodeSATimePlayed = currObj.getInt("secureareapvp_timeplayed:infinite");
-                                    int gamemodeHostageBestScore = currObj.getInt("rescuehostagepvp_bestscore:infinite");
-                                    int gamemodeHostageWins = currObj.getInt("rescuehostagepvp_matchwon:infinite");
-                                    int gamemodeHostageLosses = currObj.getInt("rescuehostagepvp_matchlost:infinite");
-                                    int gamemodeHostagePlayed = currObj.getInt("rescuehostagepvp_matchplayed:infinite");
-                                    int gamemodeHostageTimePlayed = currObj.getInt("rescuehostagepvp_timeplayed:infinite");
-                                    int gamemodeBombBestScore = currObj.getInt("plantbombpvp_bestscore:infinite");
-                                    int gamemodeBombWins = currObj.getInt("plantbombpvp_matchwon:infinite");
-                                    int gamemodeBombLosses = currObj.getInt("plantbombpvp_matchlost:infinite");
-                                    int gamemodeBombPlayed = currObj.getInt("plantbombpvp_matchplayed:infinite");
-                                    int gamemodeBombTimePlayed = currObj.getInt("plantbombpvp_timeplayed:infinite");
-                                    Stat temp = new Stat(generalKills, generalDeaths, generalAssists, generalWins, generalLosses, generalPlayed, 0, generalTimePlayed, casualWon, casualLost, casualPlayed, casualKills, casualDeaths, casualTimePlayed, rankedWon, rankedLost, rankedPlayed, rankedKills, rankedDeaths, rankedTimePlayed, weaponHeadshots, weaponBulletsHit, weaponBulletsFired, weaponBlindKills, weaponMeleeKills, weaponPenetrationKills, weaponDBNO, weaponDBNOAssists, miscBarricade, miscGadgetsDestroyed, miscRappelBreach, miscReinforcement, miscRevives, miscSuicide, gamemodeSABestScore, gamemodeSAWins, gamemodeSALosses, gamemodeSAPlayed, gamemodeSATimePlayed, gamemodeHostageBestScore, gamemodeHostageWins, gamemodeHostageLosses, gamemodeHostagePlayed, gamemodeHostageTimePlayed, gamemodeBombBestScore, gamemodeBombWins, gamemodeBombLosses, gamemodeBombPlayed, gamemodeBombTimePlayed);
-                                    statsResult.add(temp);
-
-                                    if (listener != null)
-                                        listener.onResponse();
-                                }
-                            }
-                            //printLogs();
-                            //headers.printHeaders();
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        error.printStackTrace();
-                    }
-                })
+        else
         {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
+            String tempStats = Arrays.toString(statsArray);
+            tempStats = tempStats.substring(1, tempStats.length()-1);
+            final String stats = tempStats;
+            Log.v("ImportedOperatorsArray", stats);
+
+
+            String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + stats;
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                    new Response.Listener<JSONObject>()
+                    {
+                        @Override
+                        public void onResponse(JSONObject response)
+                        {
+                            try
+                            {
+                                Log.v("JSONResponse", response.toString());
+                                JSONObject resultsObj = response.getJSONObject("results");
+                                Iterator<?> keys = resultsObj.keys();
+
+                                while( keys.hasNext() )
+                                {
+                                    String key = (String)keys.next();
+                                    if ( resultsObj.get(key) instanceof JSONObject )
+                                    {
+                                        JSONObject currObj = resultsObj.getJSONObject(key);
+                                        int generalKills = currObj.getInt("generalpvp_kills:infinite");
+                                        int generalDeaths = currObj.getInt("generalpvp_death:infinite");
+                                        int generalAssists = currObj.getInt("generalpvp_killassists:infinite");
+                                        int generalWins = currObj.getInt("generalpvp_matchwon:infinite");
+                                        int generalLosses = currObj.getInt("generalpvp_matchlost:infinite");
+                                        int generalPlayed = currObj.getInt("generalpvp_matchplayed:infinite");
+                                        int generalTimePlayed = currObj.getInt("generalpvp_timeplayed:infinite");
+                                        int casualWon = currObj.getInt("casualpvp_matchwon:infinite");
+                                        int casualLost = currObj.getInt("casualpvp_matchlost:infinite");
+                                        int casualPlayed = currObj.getInt("casualpvp_matchplayed:infinite");
+                                        int casualKills = currObj.getInt("casualpvp_kills:infinite");
+                                        int casualDeaths = currObj.getInt("casualpvp_death:infinite");
+                                        int casualTimePlayed = currObj.getInt("casualpvp_timeplayed:infinite");
+                                        int rankedWon = currObj.getInt("rankedpvp_matchwon:infinite");
+                                        int rankedLost = currObj.getInt("rankedpvp_matchlost:infinite");
+                                        int rankedPlayed = currObj.getInt("rankedpvp_matchplayed:infinite");
+                                        int rankedKills = currObj.getInt("rankedpvp_kills:infinite");
+                                        int rankedDeaths = currObj.getInt("rankedpvp_death:infinite");
+                                        int rankedTimePlayed = currObj.getInt("rankedpvp_timeplayed:infinite");
+                                        int weaponBlindKills  = currObj.getInt("generalpvp_blindkills:infinite");
+                                        int weaponMeleeKills = currObj.getInt("generalpvp_meleekills:infinite");
+                                        int weaponPenetrationKills = currObj.getInt("generalpvp_penetrationkills:infinite");
+                                        int weaponBulletsHit = currObj.getInt("generalpvp_bullethit:infinite");
+                                        int weaponBulletsFired = currObj.getInt("generalpvp_bulletfired:infinite");
+                                        int weaponHeadshots = currObj.getInt("generalpvp_headshot:infinite");
+                                        int weaponDBNO = currObj.getInt("generalpvp_dbno:infinite");
+                                        int weaponDBNOAssists = currObj.getInt("generalpvp_dbnoassists:infinite");
+                                        int miscBarricade = currObj.getInt("generalpvp_barricadedeployed:infinite");
+                                        int miscGadgetsDestroyed = currObj.getInt("generalpvp_gadgetdestroy:infinite");
+                                        int miscRappelBreach = currObj.getInt("generalpvp_rappelbreach:infinite");
+                                        int miscReinforcement = currObj.getInt("generalpvp_reinforcementdeploy:infinite");
+                                        int miscRevives = currObj.getInt("generalpvp_revive:infinite");
+                                        int miscSuicide = currObj.getInt("generalpvp_suicide:infinite");
+                                        int gamemodeSABestScore = currObj.getInt("secureareapvp_bestscore:infinite");
+                                        int gamemodeSAWins = currObj.getInt("secureareapvp_matchwon:infinite");
+                                        int gamemodeSALosses = currObj.getInt("secureareapvp_matchlost:infinite");
+                                        int gamemodeSAPlayed = currObj.getInt("secureareapvp_matchplayed:infinite");
+                                        int gamemodeSATimePlayed = currObj.getInt("secureareapvp_timeplayed:infinite");
+                                        int gamemodeHostageBestScore = currObj.getInt("rescuehostagepvp_bestscore:infinite");
+                                        int gamemodeHostageWins = currObj.getInt("rescuehostagepvp_matchwon:infinite");
+                                        int gamemodeHostageLosses = currObj.getInt("rescuehostagepvp_matchlost:infinite");
+                                        int gamemodeHostagePlayed = currObj.getInt("rescuehostagepvp_matchplayed:infinite");
+                                        int gamemodeHostageTimePlayed = currObj.getInt("rescuehostagepvp_timeplayed:infinite");
+                                        int gamemodeBombBestScore = currObj.getInt("plantbombpvp_bestscore:infinite");
+                                        int gamemodeBombWins = currObj.getInt("plantbombpvp_matchwon:infinite");
+                                        int gamemodeBombLosses = currObj.getInt("plantbombpvp_matchlost:infinite");
+                                        int gamemodeBombPlayed = currObj.getInt("plantbombpvp_matchplayed:infinite");
+                                        int gamemodeBombTimePlayed = currObj.getInt("plantbombpvp_timeplayed:infinite");
+                                        Stat temp = new Stat(generalKills, generalDeaths, generalAssists, generalWins, generalLosses, generalPlayed, 0, generalTimePlayed, casualWon, casualLost, casualPlayed, casualKills, casualDeaths, casualTimePlayed, rankedWon, rankedLost, rankedPlayed, rankedKills, rankedDeaths, rankedTimePlayed, weaponHeadshots, weaponBulletsHit, weaponBulletsFired, weaponBlindKills, weaponMeleeKills, weaponPenetrationKills, weaponDBNO, weaponDBNOAssists, miscBarricade, miscGadgetsDestroyed, miscRappelBreach, miscReinforcement, miscRevives, miscSuicide, gamemodeSABestScore, gamemodeSAWins, gamemodeSALosses, gamemodeSAPlayed, gamemodeSATimePlayed, gamemodeHostageBestScore, gamemodeHostageWins, gamemodeHostageLosses, gamemodeHostagePlayed, gamemodeHostageTimePlayed, gamemodeBombBestScore, gamemodeBombWins, gamemodeBombLosses, gamemodeBombPlayed, gamemodeBombTimePlayed);
+                                        statsResult.add(temp);
+
+                                        if (listener != null)
+                                            listener.onResponse();
+                                    }
+                                }
+                                //printLogs();
+                                //headers.printHeaders();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error)
+                        {
+                            error.printStackTrace();
+                        }
+                    })
             {
-                Log.v("getHeaders", "Getting Headers");
-                return headers.getHeaders();
-            }
-        };
-        mQueue.add(request);
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError
+                {
+                    Log.v("getHeaders", "Getting Headers");
+                    return headers.getHeaders();
+                }
+            };
+            mQueue.add(request);
+        }
     }
 
     static public ArrayList<Stat> getStatsResult()
@@ -542,80 +550,83 @@ public class MyUbiAPIAdapter
 
                 @Override
                 public void onResponse() {
-                    getRanked(id, platform, region, season, null);
+                    getRanked(id, platform, region, season, listener);
                 }
             });
 
         }
-        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6karma/players?board_id=pvp_ranked&season_id=" + season + "&region_id=" + region + "&profile_ids=" + id;
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        try
-                        {
-                            Log.v("JSONResponse", response.toString());
-                            JSONObject resultsObj = response.getJSONObject("players");
-                            Iterator<?> keys = resultsObj.keys();
-
-                            while( keys.hasNext() )
-                            {
-                                String key = (String)keys.next();
-                                if ( resultsObj.get(key) instanceof JSONObject )
-                                {
-                                    JSONObject currObj = resultsObj.getJSONObject(key);
-                                    String updateTime = currObj.getString("update_time");
-                                    double skillMean = currObj.getDouble("skill_mean");
-                                    int season = currObj.getInt("season");
-                                    String region = currObj.getString("region");
-                                    String userID = currObj.getString("profile_id");
-                                    int pastSeasonWins = currObj.getInt("past_seasons_wins");
-                                    int pastSeasonLosses = currObj.getInt("past_seasons_losses");
-                                    double maxmmr = currObj.getDouble("max_mmr");
-                                    double mmr = currObj.getDouble("mmr");
-                                    int wins = currObj.getInt("wins");
-                                    int losses = currObj.getInt("losses");
-                                    int abandons = currObj.getInt("abandons");
-                                    double standardDeviation = currObj.getDouble("skill_stdev");
-                                    int rank = currObj.getInt("rank");
-                                    double nextRankMMR = currObj.getDouble("next_rank_mmr");
-                                    double prevRankMMR = currObj.getDouble("previous_rank_mmr");
-                                    int maxRank = currObj.getInt("max_rank");
-                                    Ranked temp = new Ranked(updateTime, skillMean, season, region, userID, pastSeasonWins, pastSeasonLosses, maxmmr, mmr, wins, losses, abandons, standardDeviation, rank, nextRankMMR, prevRankMMR, maxRank);
-                                    rankedResult.add(temp);
-                                }
-                            }
-                            //printLogs();
-                            //headers.printHeaders();
-                            if (listener != null)
-                                listener.onResponse();
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        error.printStackTrace();
-                    }
-                })
+        else
         {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
+            String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/r6karma/players?board_id=pvp_ranked&season_id=" + season + "&region_id=" + region + "&profile_ids=" + id;
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                    new Response.Listener<JSONObject>()
+                    {
+                        @Override
+                        public void onResponse(JSONObject response)
+                        {
+                            try
+                            {
+                                Log.v("JSONResponse", response.toString());
+                                JSONObject resultsObj = response.getJSONObject("players");
+                                Iterator<?> keys = resultsObj.keys();
+
+                                while( keys.hasNext() )
+                                {
+                                    String key = (String)keys.next();
+                                    if ( resultsObj.get(key) instanceof JSONObject )
+                                    {
+                                        JSONObject currObj = resultsObj.getJSONObject(key);
+                                        String updateTime = currObj.getString("update_time");
+                                        double skillMean = currObj.getDouble("skill_mean");
+                                        int season = currObj.getInt("season");
+                                        String region = currObj.getString("region");
+                                        String userID = currObj.getString("profile_id");
+                                        int pastSeasonWins = currObj.getInt("past_seasons_wins");
+                                        int pastSeasonLosses = currObj.getInt("past_seasons_losses");
+                                        double maxmmr = currObj.getDouble("max_mmr");
+                                        double mmr = currObj.getDouble("mmr");
+                                        int wins = currObj.getInt("wins");
+                                        int losses = currObj.getInt("losses");
+                                        int abandons = currObj.getInt("abandons");
+                                        double standardDeviation = currObj.getDouble("skill_stdev");
+                                        int rank = currObj.getInt("rank");
+                                        double nextRankMMR = currObj.getDouble("next_rank_mmr");
+                                        double prevRankMMR = currObj.getDouble("previous_rank_mmr");
+                                        int maxRank = currObj.getInt("max_rank");
+                                        Ranked temp = new Ranked(updateTime, skillMean, season, region, userID, pastSeasonWins, pastSeasonLosses, maxmmr, mmr, wins, losses, abandons, standardDeviation, rank, nextRankMMR, prevRankMMR, maxRank);
+                                        rankedResult.add(temp);
+                                    }
+                                }
+                                //printLogs();
+                                //headers.printHeaders();
+                                if (listener != null)
+                                    listener.onResponse();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error)
+                        {
+                            error.printStackTrace();
+                        }
+                    })
             {
-                Log.v("getHeaders", "Getting Headers");
-                return headers.getHeaders();
-            }
-        };
-        mQueue.add(request);
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError
+                {
+                    Log.v("getHeaders", "Getting Headers");
+                    return headers.getHeaders();
+                }
+            };
+            mQueue.add(request);
+        }
     }
 
     static public ArrayList<Ranked> getRankedResult()
@@ -637,97 +648,100 @@ public class MyUbiAPIAdapter
                 @Override
                 public void onResponse()
                 {
-                    getOperators(id, platform, statArray, null);
+                    getOperators(id, platform, statArray, listener);
                 }
             });
 
         }
-        String tempOps = Arrays.toString(statArray);
-        tempOps = tempOps.substring(1, tempOps.length()-1);
-        final String operators = tempOps;
-        Log.v("ImportedOperatorsArray", operators);
-
-        String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        try
-                        {
-                            Log.v("JSONResponse", response.toString());
-                            JSONObject resultsObj = response.getJSONObject("results");
-                            Iterator<?> keys = resultsObj.keys();
-                            //String prefix = "operatorpvp_";
-                            String suffix = ":infinite";
-
-                            while( keys.hasNext() )
-                            {
-                                String key = (String) keys.next();
-                                if (resultsObj.get(key) instanceof JSONObject)
-                                {
-                                    JSONObject currObj = resultsObj.getJSONObject(key);
-                                    String userID = key;
-                                    String name = "Sledge";
-                                    ArrayList<Integer> operatorStats = new ArrayList<>();
-                                    for (int i = 0; i < operatorFinalMap.size(); i++)
-                                    {
-                                        for (int j = 0; j < statArray.length; j++)
-                                        {
-                                            int currentStat;
-                                            name = operatorFinalMap.get(i).second;
-                                            if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
-                                            {
-                                                currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix);//Log.v(name + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
-                                                operatorStats.add(currentStat);
-                                            }
-                                            else
-                                            {
-                                                currentStat = 0;//Log.v(name + " " + statArray[j], String.valueOf(currentStat = 0));
-                                                operatorStats.add(currentStat);
-                                            }
-                                        }
-                                        Operator temp = new Operator(userID, name, ctuMap.get(name), operatorStats);
-                                        // special stats here
-                                        operatorFinalResult.put(name, temp);
-                                        operatorStats.clear();
-                                    }
-
-                                    for (Operator op: operatorFinalResult.values()) {
-                                        Log.v("OpTest", op.toString());
-                                    }
-
-                                    if (listener != null)
-                                        listener.onResponse();
-                                }
-                            }
-                            //printLogs();
-                            //headers.printHeaders();
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        error.printStackTrace();
-                    }
-                })
+        else
         {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
+            String tempOps = Arrays.toString(statArray);
+            tempOps = tempOps.substring(1, tempOps.length()-1);
+            final String operators = tempOps;
+            Log.v("ImportedOperatorsArray", operators);
+
+            String URL = "https://public-ubiservices.ubi.com/v1/spaces/5172a557-50b5-4665-b7db-e3f2e8c5041d/sandboxes/OSBOR_" + platform + "_LNCH_A/playerstats2/statistics?populations=" + id + "&statistics=" + operators;
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
+                    new Response.Listener<JSONObject>()
+                    {
+                        @Override
+                        public void onResponse(JSONObject response)
+                        {
+                            try
+                            {
+                                Log.v("JSONResponse", response.toString());
+                                JSONObject resultsObj = response.getJSONObject("results");
+                                Iterator<?> keys = resultsObj.keys();
+                                //String prefix = "operatorpvp_";
+                                String suffix = ":infinite";
+
+                                while( keys.hasNext() )
+                                {
+                                    String key = (String) keys.next();
+                                    if (resultsObj.get(key) instanceof JSONObject)
+                                    {
+                                        JSONObject currObj = resultsObj.getJSONObject(key);
+                                        String userID = key;
+                                        String name = "Sledge";
+                                        ArrayList<Integer> operatorStats = new ArrayList<>();
+                                        for (int i = 0; i < operatorFinalMap.size(); i++)
+                                        {
+                                            for (int j = 0; j < statArray.length; j++)
+                                            {
+                                                int currentStat;
+                                                name = operatorFinalMap.get(i).second;
+                                                if (currObj.has(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix))
+                                                {
+                                                    currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix);//Log.v(name + " " + statArray[j], String.valueOf(currentStat = currObj.getInt(statArray[j] + ":" + operatorFinalMap.get(i).first + suffix)));
+                                                    operatorStats.add(currentStat);
+                                                }
+                                                else
+                                                {
+                                                    currentStat = 0;//Log.v(name + " " + statArray[j], String.valueOf(currentStat = 0));
+                                                    operatorStats.add(currentStat);
+                                                }
+                                            }
+                                            Operator temp = new Operator(userID, name, ctuMap.get(name), operatorStats);
+                                            // special stats here
+                                            operatorFinalResult.put(name, temp);
+                                            operatorStats.clear();
+                                        }
+
+                                        for (Operator op: operatorFinalResult.values()) {
+                                            Log.v("OpTest", op.toString());
+                                        }
+
+                                        if (listener != null)
+                                            listener.onResponse();
+                                    }
+                                }
+                                //printLogs();
+                                //headers.printHeaders();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error)
+                        {
+                            error.printStackTrace();
+                        }
+                    })
             {
-                Log.v("getHeaders", "Getting Headers");
-                return headers.getHeaders();
-            }
-        };
-        mQueue.add(request);
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError
+                {
+                    Log.v("getHeaders", "Getting Headers");
+                    return headers.getHeaders();
+                }
+            };
+            mQueue.add(request);
+        }
     }
 
     static public HashMap<String, Operator> getOperatorFinalResult()
