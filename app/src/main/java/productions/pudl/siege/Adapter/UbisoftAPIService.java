@@ -160,7 +160,7 @@ public class UbisoftAPIService extends Service
         append(49, new Pair<>("2:12", "Mozzie"));
         append(50, new Pair<>("3:12", "Gridlock"));
         append(51, new Pair<>("2:13", "Nøkk"));
-        append(52, new Pair<>("3:13", "Warden"));
+        append(52, new Pair<>("2:14", "Warden"));
     }};
     static private HashMap<String, String> platformMap = new HashMap<String, String>(){{
         put("uplay", "PC");
