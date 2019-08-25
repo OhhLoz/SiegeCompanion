@@ -157,10 +157,10 @@ public class MyUbiAPIAdapter
         append(46, new Pair<>("3:10", "Clash"));
         append(47, new Pair<>("2:11", "Nomad"));
         append(48, new Pair<>("3:11", "Kaid"));
-        append(49, new Pair<>("2:12", "Gridlock"));
-        append(50, new Pair<>("3:12", "Mozzie"));
+        append(49, new Pair<>("2:12", "Mozzie"));
+        append(50, new Pair<>("3:12", "Gridlock"));
         append(51, new Pair<>("2:13", "Nøkk"));
-        append(52, new Pair<>("3:13", "Warden"));
+        append(52, new Pair<>("2:14", "Warden"));
     }};
 
     static public void changeContext(Context context, String credentials)
