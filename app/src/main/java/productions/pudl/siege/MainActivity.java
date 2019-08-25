@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
@@ -32,12 +33,16 @@ public class MainActivity extends AppCompatActivity
     BottomBar bottomBar;
     Messenger messenger;
     Intent APIServiceIntent;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences("productions.pudl.siege", Context.MODE_PRIVATE);
+        Log.v("SharedPrefs", prefs.getAll().toString());
 
         APIServiceIntent = new Intent(MainActivity.this, UbisoftAPIService.class);
         startService(APIServiceIntent);
@@ -56,6 +61,10 @@ public class MainActivity extends AppCompatActivity
                 else if (tabId == R.id.navigation_operators){
                     Operators operators = new Operators();
                     getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, operators).commit();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("platform", prefs.getString("productions.pudl.siege.defaultPlatform", null));
+                    bundle.putString("id", "28ca710b-270d-491b-8073-42654f82745d");
+                    sendMessage(UbisoftAPIService.APIConstants.GET_OPERATORS, bundle);
                     setTitle(R.string.title_operators);
                 }
                 else if (tabId == R.id.navigation_profile) {
