@@ -143,6 +143,31 @@
             app:layout_constraintTop_toBottomOf="@+id/gsutr" />
 
         <ImageView
+            android:id="@+id/apca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sasr" />
+
+        <ImageView
+            android:id="@+id/voidedge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toStartOf="@id/centerGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/apca" />
+
+        <ImageView
             android:id="@+id/fbiswat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -267,5 +292,18 @@
             app:layout_constraintStart_toEndOf="@id/centerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gigr" />
+
+        <ImageView
+            android:id="@+id/nighthaven"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/statsMargin"
+            android:layout_marginEnd="@dimen/statsMargin"
+            android:layout_marginTop="@dimen/statsMargin"
+            android:contentDescription="@string/s1"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toEndOf="@id/centerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usssjaeg" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
