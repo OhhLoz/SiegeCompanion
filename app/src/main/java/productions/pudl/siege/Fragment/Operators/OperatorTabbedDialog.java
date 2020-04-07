@@ -62,7 +62,7 @@ public class OperatorTabbedDialog extends android.support.v4.app.DialogFragment
         viewPager = (ViewPager) rootview.findViewById(R.id.masterViewPager);
 
         ((TextView) rootview.findViewById(R.id.ctuName)).setText(CTU.toUpperCase());
-        Picasso.get().load(getResources().getIdentifier(CTU, "drawable", getContext().getPackageName())).fit().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into((ImageView) rootview.findViewById(R.id.ctuPicture));
+        Picasso.get().load(getResources().getIdentifier(CTU, "drawable", getContext().getPackageName())).fit().centerInside().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into((ImageView) rootview.findViewById(R.id.ctuPicture));
 
         TabViewAdapter adapter = new TabViewAdapter(getChildFragmentManager());
         switch(CTU)
