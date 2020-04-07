@@ -161,6 +161,12 @@ public class MyUbiAPIAdapter
         append(50, new Pair<>("3:12", "Gridlock"));
         append(51, new Pair<>("2:13", "Nøkk"));
         append(52, new Pair<>("2:14", "Warden"));
+        append(53, new Pair<>("2:15", "Goyo"));
+        append(54, new Pair<>("2:16", "Amaru"));
+        append(55, new Pair<>("2:17", "Kali"));
+        append(56, new Pair<>("3:17", "Wamai"));
+        append(57, new Pair<>("2:18", "Oryx"));
+        append(58, new Pair<>("2:19", "Iana"));
     }};
 
     static public void changeContext(Context context, String credentials)
@@ -186,7 +192,7 @@ public class MyUbiAPIAdapter
 
     static private void loginAuth(final VolleyResponseListener listener)
     {
-        String URL = "https://uplayconnect.ubi.com/ubiservices/v2/profiles/sessions";
+        String URL = "https://public-ubiservices.ubi.com/v3/profiles/sessions";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, null,
                 new Response.Listener<JSONObject>()
