@@ -133,7 +133,7 @@ public class UbisoftAPIService extends Service
 
     private void openConnection(final VolleyResponseListener listener)
     {
-        String URL = "https://uplayconnect.ubi.com/ubiservices/v2/profiles/sessions";
+        String URL = "https://public-ubiservices.ubi.com/v3/profiles/sessions";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, null,
                 new Response.Listener<JSONObject>()
