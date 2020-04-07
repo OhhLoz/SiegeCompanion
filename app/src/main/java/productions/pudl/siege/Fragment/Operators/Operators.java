@@ -393,7 +393,7 @@ public class Operators extends Fragment
                     ft.remove(prev);
                 }
                 ft.addToBackStack(null);
-                Log.v("OperatorClick", "gigr");
+                Log.v("OperatorClick", "sasr");
                 OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("sasr", temp);
                 tabbedDialog.show(ft, "sasr");
             }
@@ -411,9 +411,45 @@ public class Operators extends Fragment
                     ft.remove(prev);
                 }
                 ft.addToBackStack(null);
-                Log.v("OperatorClick", "gigr");
+                Log.v("OperatorClick", "usssjaeg");
                 OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("usssjaeg", temp);
                 tabbedDialog.show(ft, "USSS / Jaegercorps");
+            }
+        });
+
+        ImageView nighthavenImage = (ImageView) view.findViewById(R.id.nighthaven);
+        Picasso.get().load(R.drawable.nighthaven).fit().centerInside().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(nighthavenImage);
+        nighthavenImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                Log.v("OperatorClick", "nighthaven");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("nighthaven", temp);
+                tabbedDialog.show(ft, "Nighthaven");
+            }
+        });
+
+        ImageView voidedgeImage = (ImageView) view.findViewById(R.id.voidedge);
+        Picasso.get().load(R.drawable.voidedge).fit().centerInside().placeholder(R.drawable.ic_operators).error(R.drawable.ic_profile).into(voidedgeImage);
+        voidedgeImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                Log.v("OperatorClick", "voidedge");
+                OperatorTabbedDialog tabbedDialog = new OperatorTabbedDialog("voidedge", temp);
+                tabbedDialog.show(ft, "Void Edge");
             }
         });
     }
